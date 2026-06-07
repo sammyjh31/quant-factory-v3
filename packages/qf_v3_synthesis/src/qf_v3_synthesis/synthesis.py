@@ -57,7 +57,7 @@ def _summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
             methods.update(experiment["method_ids"])
 
     return {
-        "status": "non_authoritative_scaffold_summary",
+        "status": "non_authoritative_export_summary",
         "record_count": len(records),
         "schema_counts": dict(sorted(by_schema.items())),
         "labs": set(sorted(labs)),
@@ -66,7 +66,7 @@ def _summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
         "outcome_polarities": sorted(polarities),
         "statuses": sorted(statuses),
         "disclaimer": (
-            "Generated synthesis outputs summarize fixture records only and are not authority."
+            "Generated synthesis outputs summarize protocol export records and are not authority."
         ),
         "ordering_note": (
             "Lists and schema counts are sorted alphabetically by identifier for deterministic "
@@ -90,7 +90,7 @@ def _write_markdown(path: Path, summary: dict[str, Any]) -> None:
     lines = [
         "# Synthesis Summary",
         "",
-        "Status: generated non-authoritative scaffold summary",
+        "Status: generated non-authoritative export summary",
         "",
         summary["disclaimer"],
         "",

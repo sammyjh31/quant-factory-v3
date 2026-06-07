@@ -8,7 +8,7 @@
   "properties": {
     "protocol_version": { "const": "qf-v3-protocol-0.1" },
     "schema_name": { "const": "ResearchNote" },
-    "schema_version": { "const": "0.1.0" },
+    "schema_version": { "const": "0.1.1" },
     "research_note": {
       "type": "object",
       "additionalProperties": false,
@@ -23,7 +23,7 @@
         "negative_results",
         "reusable_by_other_labs",
         "do_not_repeat",
-        "scaffold_disclaimer"
+        "evidence_disclaimer"
       ],
       "properties": {
         "note_id": { "type": "string", "minLength": 1 },
@@ -59,8 +59,11 @@
           "type": "array",
           "items": { "type": "string" }
         },
-        "scaffold_disclaimer": {
-          "const": "This is a scaffold fixture for protocol validation, not real research evidence."
+        "evidence_disclaimer": {
+          "enum": [
+            "This is a scaffold fixture for protocol validation, not real research evidence.",
+            "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+          ]
         }
       }
     }

@@ -8,7 +8,7 @@
   "properties": {
     "protocol_version": { "const": "qf-v3-protocol-0.1" },
     "schema_name": { "const": "ExperimentCard" },
-    "schema_version": { "const": "0.1.0" },
+    "schema_version": { "const": "0.1.1" },
     "experiment_card": {
       "type": "object",
       "additionalProperties": false,

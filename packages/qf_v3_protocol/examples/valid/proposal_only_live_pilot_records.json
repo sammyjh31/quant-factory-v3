@@ -1,0 +1,84 @@
+[
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.1",
+    "run_record": {
+      "run_id": "long_context_judgment_live_pilot_001_run",
+      "lab_id": "long_context_judgment",
+      "experiment_id": "long_context_judgment_live_pilot_001",
+      "method_id": "long_context_judgment_live_pilot_001_method",
+      "benchmark_pack_id": "text_judgment_v0",
+      "source_refs": ["raw_corpora_sha256:example_source_segment"],
+      "artifact_ids": ["long_context_judgment_live_pilot_001_artifact"],
+      "evaluation_ids": ["long_context_judgment_live_pilot_001_eval"],
+      "run_kind": "live_llm_pilot",
+      "outcome_polarity": "proposal_only",
+      "status": "live_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.1",
+    "artifact": {
+      "artifact_id": "long_context_judgment_live_pilot_001_artifact",
+      "artifact_type": "judgment_principle_proposal",
+      "lab_id": "long_context_judgment",
+      "method_id": "long_context_judgment_live_pilot_001_method",
+      "run_id": "long_context_judgment_live_pilot_001_run",
+      "source_refs": ["raw_corpora_sha256:example_source_segment"],
+      "posture": {
+        "grounding_status": "source_linked",
+        "review_status": "self_checked",
+        "readiness_status": "study_candidate",
+        "validation_status": "none",
+        "lifecycle_status": "active"
+      },
+      "blockers": ["proposal_only_not_evaluated"],
+      "summary": "Proposal-only live pilot artifact example for schema validation.",
+      "payload": {
+        "outcome_polarity": "proposal_only",
+        "provider_id": "deepseek_api",
+        "model_id": "deepseek-v4-flash",
+        "proposal_only": true
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.1",
+    "evaluation": {
+      "evaluation_id": "long_context_judgment_live_pilot_001_eval",
+      "lab_id": "long_context_judgment",
+      "target_id": "long_context_judgment_live_pilot_001_artifact",
+      "target_type": "artifact",
+      "evaluator_id": "manual_boundary_review_v0",
+      "evaluator_type": "manual_boundary_review",
+      "benchmark_pack_id": "text_judgment_v0",
+      "score": 1.0,
+      "pass_fail": "pass",
+      "failure_tags": [],
+      "comments": "Boundary review only; output remains proposal-only."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ResearchNote",
+    "schema_version": "0.1.1",
+    "research_note": {
+      "note_id": "long_context_judgment_live_pilot_001_note",
+      "lab_id": "long_context_judgment",
+      "experiment_ids": ["long_context_judgment_live_pilot_001"],
+      "benchmark_pack_ids": ["text_judgment_v0"],
+      "summary": "Proposal-only live pilot note example for schema validation.",
+      "what_worked": ["The record shape can preserve live-pilot boundaries."],
+      "what_failed": ["No method quality claim exists in this example."],
+      "negative_results": ["A proposal-only live pilot is not validation."],
+      "reusable_by_other_labs": ["Use evidence_disclaimer for live-pilot notes."],
+      "do_not_repeat": ["Do not relabel live pilot output as a scaffold fixture."],
+      "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "RunRecord",
+  "schema_version": "0.1.1",
+  "run_record": {
+    "run_id": "invalid_scaffold_proposal_only",
+    "lab_id": "long_context_judgment",
+    "experiment_id": "long_context_judgment_experiment_v0",
+    "method_id": "long_context_judgment_method_v0",
+    "benchmark_pack_id": "text_judgment_v0",
+    "source_refs": ["source_text_judgment_placeholder"],
+    "artifact_ids": ["artifact"],
+    "evaluation_ids": ["evaluation"],
+    "run_kind": "scaffold_fixture",
+    "outcome_polarity": "proposal_only",
+    "status": "fixture_recorded"
+  }
+}

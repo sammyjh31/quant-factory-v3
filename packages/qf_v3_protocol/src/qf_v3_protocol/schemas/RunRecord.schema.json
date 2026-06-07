@@ -8,7 +8,7 @@
   "properties": {
     "protocol_version": { "const": "qf-v3-protocol-0.1" },
     "schema_name": { "const": "RunRecord" },
-    "schema_version": { "const": "0.1.0" },
+    "schema_version": { "const": "0.1.1" },
     "run_record": {
       "type": "object",
       "additionalProperties": false,
@@ -46,10 +46,42 @@
           "items": { "type": "string", "minLength": 1 },
           "minItems": 1
         },
-        "run_kind": { "enum": ["scaffold_fixture"] },
-        "outcome_polarity": { "enum": ["positive_fixture", "negative_fixture"] },
-        "status": { "enum": ["fixture_recorded"] }
-      }
+        "run_kind": { "enum": ["scaffold_fixture", "live_llm_pilot"] },
+        "outcome_polarity": {
+          "enum": ["positive_fixture", "negative_fixture", "proposal_only"]
+        },
+        "status": { "enum": ["fixture_recorded", "live_recorded", "live_failed"] }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["run_kind"],
+            "properties": {
+              "run_kind": { "const": "scaffold_fixture" }
+            }
+          },
+          "then": {
+            "properties": {
+              "outcome_polarity": { "enum": ["positive_fixture", "negative_fixture"] },
+              "status": { "const": "fixture_recorded" }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["run_kind"],
+            "properties": {
+              "run_kind": { "const": "live_llm_pilot" }
+            }
+          },
+          "then": {
+            "properties": {
+              "outcome_polarity": { "const": "proposal_only" },
+              "status": { "enum": ["live_recorded", "live_failed"] }
+            }
+          }
+        }
+      ]
     }
   }
 }

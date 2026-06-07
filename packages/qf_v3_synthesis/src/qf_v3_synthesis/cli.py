@@ -13,7 +13,7 @@ def main(argv: list[str] | None = None) -> int:
     summary = synthesize_exports(root=args.root)
     print(
         "qf-v3-synthesis: OK "
-        f"({summary['record_count']} fixture records across {len(summary['labs'])} labs)"
+        f"({summary['record_count']} export records across {len(summary['labs'])} labs)"
     )
     return 0
 

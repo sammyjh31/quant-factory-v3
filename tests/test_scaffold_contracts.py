@@ -19,6 +19,16 @@ from qf_v3_synthesis import synthesize_exports
 from qf_v3_synthesis.cli import main as synthesis_cli_main
 
 ROOT = Path(__file__).resolve().parents[1]
+CURRENT_SCHEMA_VERSION = "0.1.1"
+FIXTURE_EVIDENCE_DISCLAIMER = (
+    "This is a scaffold fixture for protocol validation, not real research evidence."
+)
+LIVE_EVIDENCE_DISCLAIMER = (
+    "This is a proposal-only live LLM pilot record, not validation, product evidence, "
+    "strategy evidence, financial advice, live-trading authority, or architecture."
+)
+PROMPT_TEMPLATE_SHA256 = "b842070956374c17ddd6d966c069c28ad4ff22dd753b20370c72cb03df79dae6"
+CONFIG_SHA256 = "390729eba63d8b3ae2364631bb98b4ab2b218683cd069ba1c84778d26f2cdfac"
 GOAL3_PILOT_DIR = (
     ROOT / "labs" / "long_context_judgment" / "PLANNING" / "live_llm_pilot_001"
 )
@@ -29,6 +39,16 @@ LIVE_PILOT_POST_RUN_EXPORTS = {
     "artifact_envelope.live_pilot_001.json",
     "evaluation_record.live_pilot_001.json",
     "research_note.live_pilot_001.json",
+}
+PROTOCOL_SCHEMA_NAMES = {
+    "ArtifactEnvelope.schema.json",
+    "BenchmarkPack.schema.json",
+    "EvaluationRecord.schema.json",
+    "ExperimentCard.schema.json",
+    "MethodCard.schema.json",
+    "ResearchNote.schema.json",
+    "RunRecord.schema.json",
+    "SourceRef.schema.json",
 }
 
 
@@ -69,6 +89,104 @@ def records_by_schema(schema_name: str):
     return [record for record in all_lab_export_records() if record["schema_name"] == schema_name]
 
 
+def live_pilot_records():
+    run_id = "long_context_judgment_live_pilot_001_run"
+    artifact_id = "long_context_judgment_live_pilot_001_artifact"
+    evaluation_id = "long_context_judgment_live_pilot_001_eval"
+    source_ref = "raw_corpora_sha256:example_source_segment"
+    return [
+        {
+            "protocol_version": "qf-v3-protocol-0.1",
+            "schema_name": "RunRecord",
+            "schema_version": CURRENT_SCHEMA_VERSION,
+            "run_record": {
+                "run_id": run_id,
+                "lab_id": "long_context_judgment",
+                "experiment_id": GOAL3_EXPERIMENT_ID,
+                "method_id": GOAL3_METHOD_ID,
+                "benchmark_pack_id": "text_judgment_v0",
+                "source_refs": [source_ref],
+                "artifact_ids": [artifact_id],
+                "evaluation_ids": [evaluation_id],
+                "run_kind": "live_llm_pilot",
+                "outcome_polarity": "proposal_only",
+                "status": "live_recorded",
+            },
+        },
+        {
+            "protocol_version": "qf-v3-protocol-0.1",
+            "schema_name": "ArtifactEnvelope",
+            "schema_version": CURRENT_SCHEMA_VERSION,
+            "artifact": {
+                "artifact_id": artifact_id,
+                "artifact_type": "judgment_principle_proposal",
+                "lab_id": "long_context_judgment",
+                "method_id": GOAL3_METHOD_ID,
+                "run_id": run_id,
+                "source_refs": [source_ref],
+                "posture": {
+                    "grounding_status": "source_linked",
+                    "review_status": "self_checked",
+                    "readiness_status": "study_candidate",
+                    "validation_status": "none",
+                    "lifecycle_status": "active",
+                },
+                "blockers": ["proposal_only_not_evaluated"],
+                "summary": "Proposal-only live pilot artifact example for schema validation.",
+                "payload": {
+                    "outcome_polarity": "proposal_only",
+                    "provider_id": "deepseek_api",
+                    "model_id": "deepseek-v4-flash",
+                    "prompt_template_sha256": PROMPT_TEMPLATE_SHA256,
+                    "config_sha256": CONFIG_SHA256,
+                    "proposal_only": True,
+                },
+            },
+        },
+        {
+            "protocol_version": "qf-v3-protocol-0.1",
+            "schema_name": "EvaluationRecord",
+            "schema_version": CURRENT_SCHEMA_VERSION,
+            "evaluation": {
+                "evaluation_id": evaluation_id,
+                "lab_id": "long_context_judgment",
+                "target_id": artifact_id,
+                "target_type": "artifact",
+                "evaluator_id": "manual_boundary_review_v0",
+                "evaluator_type": "manual_boundary_review",
+                "benchmark_pack_id": "text_judgment_v0",
+                "score": 1.0,
+                "pass_fail": "pass",
+                "failure_tags": [],
+                "comments": (
+                    "Boundary review only: raw source, provider payloads, prompts with source "
+                    "text, traces, and secrets are not committed; output remains proposal-only."
+                ),
+            },
+        },
+        {
+            "protocol_version": "qf-v3-protocol-0.1",
+            "schema_name": "ResearchNote",
+            "schema_version": CURRENT_SCHEMA_VERSION,
+            "research_note": {
+                "note_id": "long_context_judgment_live_pilot_001_note",
+                "lab_id": "long_context_judgment",
+                "experiment_ids": [GOAL3_EXPERIMENT_ID],
+                "benchmark_pack_ids": ["text_judgment_v0"],
+                "summary": "Proposal-only live pilot note example for schema validation.",
+                "what_worked": ["The record shape can preserve live-pilot boundaries."],
+                "what_failed": ["No method quality claim exists in this example."],
+                "negative_results": ["A proposal-only live pilot is not validation."],
+                "reusable_by_other_labs": [
+                    "Use evidence_disclaimer instead of fixture-only disclaimer text."
+                ],
+                "do_not_repeat": ["Do not relabel live pilot output as a scaffold fixture."],
+                "evidence_disclaimer": LIVE_EVIDENCE_DISCLAIMER,
+            },
+        },
+    ]
+
+
 def test_protocol_valid_examples_validate():
     paths = valid_example_paths(ROOT)
     assert paths, "valid protocol examples must exist"
@@ -90,6 +208,89 @@ def test_protocol_examples_only_live_in_protocol_package():
     assert not (ROOT / "examples").exists()
     for path in valid_example_paths(ROOT) + invalid_example_paths(ROOT):
         assert "packages/qf_v3_protocol/examples/" in path.as_posix()
+
+
+def test_protocol_v011_supports_proposal_only_live_pilot_records():
+    for record in live_pilot_records():
+        validate_record(record)
+
+
+def test_protocol_v011_rejects_fixture_live_semantic_mismatches():
+    [run_record, *_] = live_pilot_records()
+
+    fixture_with_live_polarity = json.loads(json.dumps(run_record))
+    fixture_with_live_polarity["run_record"].update(
+        {
+            "run_kind": "scaffold_fixture",
+            "outcome_polarity": "proposal_only",
+            "status": "fixture_recorded",
+        }
+    )
+    with pytest.raises(ValidationError):
+        validate_record(fixture_with_live_polarity)
+
+    live_with_fixture_polarity = json.loads(json.dumps(run_record))
+    live_with_fixture_polarity["run_record"].update(
+        {
+            "run_kind": "live_llm_pilot",
+            "outcome_polarity": "positive_fixture",
+            "status": "live_recorded",
+        }
+    )
+    with pytest.raises(ValidationError):
+        validate_record(live_with_fixture_polarity)
+
+    live_with_fixture_status = json.loads(json.dumps(run_record))
+    live_with_fixture_status["run_record"].update(
+        {
+            "run_kind": "live_llm_pilot",
+            "outcome_polarity": "proposal_only",
+            "status": "fixture_recorded",
+        }
+    )
+    with pytest.raises(ValidationError):
+        validate_record(live_with_fixture_status)
+
+
+def test_protocol_v011_keeps_schema_inventory_tiny_and_documented():
+    schema_dir = ROOT / "packages" / "qf_v3_protocol" / "src" / "qf_v3_protocol" / "schemas"
+    assert {path.name for path in schema_dir.glob("*.schema.json")} == PROTOCOL_SCHEMA_NAMES
+
+    protocol_current = (ROOT / "PROTOCOL_CURRENT.md").read_text()
+    graduation = (ROOT / "GRADUATION_LEDGER.md").read_text()
+    adr = ROOT / "docs" / "adr" / "0001-allow-proposal-only-live-pilot-records.md"
+    assert adr.exists()
+    adr_text = adr.read_text()
+    assert "proposal-only live LLM pilot" in adr_text
+    assert "This is not a graduation." in adr_text
+    assert "This does not add live trace, prompt, model-call, graph, product, strategy" in adr_text
+    assert "Current schema version: `0.1.1`" in protocol_current
+    assert "0.1.1 adds proposal-only live pilot record support" in protocol_current
+    assert "No other schema is part of protocol v0.1." in protocol_current
+    assert "No graduated items." in graduation
+
+
+def test_synthesis_can_import_live_exports_without_reading_planning(tmp_path):
+    root = tmp_path / "repo"
+    export_dir = root / "labs" / "long_context_judgment" / "EXPORTS"
+    planning_dir = root / "labs" / "long_context_judgment" / "PLANNING"
+    export_dir.mkdir(parents=True)
+    planning_dir.mkdir(parents=True)
+    (root / "PORTFOLIO_CURRENT.md").write_text("test root\n")
+    (root / "pyproject.toml").write_text("[project]\nname = 'tmp'\n")
+    (export_dir / "run_record.live_pilot_001.json").write_text(
+        json.dumps(live_pilot_records()[0], indent=2) + "\n"
+    )
+    (planning_dir / "run_record.live_pilot_001.json").write_text(
+        json.dumps(live_pilot_records()[0], indent=2) + "\n"
+    )
+
+    summary = synthesize_exports(root=root)
+    assert summary["record_count"] == 1
+    assert summary["outcome_polarities"] == ["proposal_only"]
+    assert summary["statuses"] == ["live_recorded"]
+    assert summary["labs"] == {"long_context_judgment"}
+    assert "fixture records only" not in summary["disclaimer"]
 
 
 def test_raw_corpora_boundary_keeps_source_material_local_only():
@@ -237,10 +438,8 @@ def test_research_notes_and_llm_judge_placeholders_are_bounded():
     notes = records_by_schema("ResearchNote")
     assert notes
     for record in notes:
-        disclaimer = record["research_note"]["scaffold_disclaimer"]
-        assert disclaimer == (
-            "This is a scaffold fixture for protocol validation, not real research evidence."
-        )
+        disclaimer = record["research_note"]["evidence_disclaimer"]
+        assert disclaimer == FIXTURE_EVIDENCE_DISCLAIMER
 
     llm_placeholder_evals = [
         record["evaluation"]
@@ -279,6 +478,13 @@ def test_synthesis_exposes_no_alternate_output_destination(tmp_path):
     assert list(inspect.signature(synthesize_exports).parameters) == ["root"]
     with pytest.raises(SystemExit):
         synthesis_cli_main(["--output-dir", str(tmp_path)])
+
+
+def test_synthesis_cli_reports_export_records_not_fixture_only(capsys):
+    assert synthesis_cli_main(["--root", str(ROOT)]) == 0
+    output = capsys.readouterr().out
+    assert "export records" in output
+    assert "fixture records" not in output
 
 
 def test_synthesis_generated_output_discloses_sorting_and_metric_limits():

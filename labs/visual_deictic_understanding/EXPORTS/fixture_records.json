@@ -2,7 +2,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "MethodCard",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "method_card": {
       "method_id": "visual_deictic_understanding_method_v0",
       "lab_id": "visual_deictic_understanding",
@@ -17,7 +17,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ExperimentCard",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "experiment_card": {
       "experiment_id": "visual_deictic_understanding_experiment_v0",
       "lab_id": "visual_deictic_understanding",
@@ -32,7 +32,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "RunRecord",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "run_record": {
       "run_id": "visual_deictic_understanding_run_positive",
       "lab_id": "visual_deictic_understanding",
@@ -50,7 +50,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "RunRecord",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "run_record": {
       "run_id": "visual_deictic_understanding_run_negative",
       "lab_id": "visual_deictic_understanding",
@@ -68,7 +68,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ArtifactEnvelope",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "artifact": {
       "artifact_id": "visual_deictic_understanding_artifact_positive",
       "artifact_type": "visual_deictic_binding_candidate",
@@ -95,7 +95,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ArtifactEnvelope",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "artifact": {
       "artifact_id": "visual_deictic_understanding_artifact_negative",
       "artifact_type": "unsupported_claim_report",
@@ -121,7 +121,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "EvaluationRecord",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "evaluation": {
       "evaluation_id": "visual_deictic_understanding_eval_positive",
       "lab_id": "visual_deictic_understanding",
@@ -139,7 +139,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "EvaluationRecord",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "evaluation": {
       "evaluation_id": "visual_deictic_understanding_eval_negative",
       "lab_id": "visual_deictic_understanding",
@@ -158,7 +158,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ResearchNote",
-    "schema_version": "0.1.0",
+    "schema_version": "0.1.1",
     "research_note": {
       "note_id": "visual_deictic_understanding_note_v0",
       "lab_id": "visual_deictic_understanding",
@@ -170,7 +170,7 @@
       "negative_results": ["Visual binding failures are useful outputs, not exceptions to hide."],
       "reusable_by_other_labs": ["Use placeholder disclaimers for any LLM judge or multimodal fixture."],
       "do_not_repeat": ["Do not imply real image, video, or model-judge execution happened."],
-      "scaffold_disclaimer": "This is a scaffold fixture for protocol validation, not real research evidence."
+      "evidence_disclaimer": "This is a scaffold fixture for protocol validation, not real research evidence."
     }
   }
 ]
