@@ -10,6 +10,8 @@ Do not add lab-specific runtime logic here.
 
 Do not add fields to the protocol just because one lab wants them.
 
+Before adding a protocol field, check whether an existing schema field, `payload`, `notes`, or a lab-local record can own the role.
+
 Protocol changes require evidence and ADR.
 
 Keep this package boring:

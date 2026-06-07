@@ -1103,6 +1103,19 @@ def test_agent_guides_encode_v3_operating_boundaries():
         "Evidence records, benchmark results, evaluations, and graduation decisions" in root_agents
     )
     assert "V3 must not become an append-only repo." in root_agents
+    for required in [
+        "Before adding new files, check whether an existing file, schema, test, prompt, "
+        "planning pattern, or fixture should be reused, edited, generalized, deleted, "
+        "or archived.",
+        "Do not create a new script, helper, doc, test, or protocol field merely "
+        "because this is a new method.",
+        "reuse existing protocol records",
+        "adapt existing lab planning structure",
+        "add only the minimum new files needed for the new lab's distinct method",
+        "If a new file is added, explain why an existing file could not own that role.",
+        "rework it instead of layering another workaround on top",
+    ]:
+        assert required in root_agents
     assert "LLM Intelligence Is Central" in root_agents
     assert "Synthesis is read-only." in root_agents
     assert (
@@ -1129,6 +1142,11 @@ def test_agent_guides_encode_v3_operating_boundaries():
     assert "canonical protocol authority is the hand-authored JSON Schema files" in protocol_agents
     assert "Python code is tooling, not truth." in protocol_agents
     assert "Do not add lab-specific runtime logic here." in protocol_agents
+    assert (
+        "Before adding a protocol field, check whether an existing schema field, "
+        "`payload`, `notes`, or a lab-local record can own the role."
+        in protocol_agents
+    )
 
     assert (
         "read-only with respect to labs, benchmarks, protocol schemas, and currentness docs"
@@ -1140,6 +1158,11 @@ def test_agent_guides_encode_v3_operating_boundaries():
 
     assert "Labs are playgrounds for methodological exploration." in labs_agents
     assert "Do not turn a lab method into shared architecture." in labs_agents
+    assert (
+        "Before adding files for a new lab method, reuse existing protocol records and "
+        "adapt existing lab planning structure where possible."
+        in labs_agents
+    )
     for required in [
         "`LAB_CARD.md`",
         "`RESEARCH_QUESTION.md`",
@@ -1174,6 +1197,11 @@ def test_agent_guides_encode_v3_operating_boundaries():
     assert "Milestone-one constraints are phase-local." in docs_agents
     assert "Superseded by:" in docs_agents
     assert "Status: historical / archived / no longer current" in docs_agents
+    assert (
+        "Do not create a new doc merely because guidance changed; first update stale text "
+        "directly, delete it, or archive it with supersession markers."
+        in docs_agents
+    )
 
 
 def test_agent_checklists_prevent_append_only_drift_and_random_experiments():
@@ -1205,6 +1233,9 @@ def test_agent_checklists_prevent_append_only_drift_and_random_experiments():
         "stop condition",
         "what result would change future behavior",
         "what stale material this experiment supersedes",
+        "which existing file, schema, test, prompt, planning pattern, or fixture can be reused",
+        "why any new file is needed instead of editing an existing owner",
+        "whether a prior hardening choice should be reworked instead of worked around",
         "why this does not require shared architecture yet",
         "why this does not require protocol changes yet",
     ]:

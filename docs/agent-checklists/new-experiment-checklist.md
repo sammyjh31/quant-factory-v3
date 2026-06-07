@@ -17,6 +17,9 @@ Before adding an experiment, define:
 * stop condition,
 * what result would change future behavior,
 * what stale material this experiment supersedes,
+* which existing file, schema, test, prompt, planning pattern, or fixture can be reused,
+* why any new file is needed instead of editing an existing owner,
+* whether a prior hardening choice should be reworked instead of worked around,
 * why this belongs in this lab,
 * why this does not require shared architecture yet,
 * and why this does not require protocol changes yet.

@@ -177,6 +177,24 @@ If the answer is unclear, stop and clarify in the work notes before adding files
 
 V3 must not become an append-only repo.
 
+Hardening / cleanup discipline:
+
+Before adding new files, check whether an existing file, schema, test, prompt, planning pattern, or fixture should be reused, edited, generalized, deleted, or archived.
+
+Do not create a new script, helper, doc, test, or protocol field merely because this is a new method.
+
+Prefer:
+
+1. reuse existing protocol records,
+2. adapt existing lab planning structure,
+3. update stale text directly,
+4. delete or archive superseded local planning material,
+5. add only the minimum new files needed for the new lab's distinct method.
+
+If a new file is added, explain why an existing file could not own that role.
+
+If a prior hardening choice is now wrong or too narrow, rework it instead of layering another workaround on top.
+
 When changing direction, do not simply add a new doc below old guidance.
 
 Prefer this order:

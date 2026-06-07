@@ -34,3 +34,11 @@ A meaningful lab change usually produces or updates:
 * stale direction cleanup
 
 If one of these is intentionally absent, explain why in the lab notes or final work summary.
+
+## New Method Hardening
+
+Before adding files for a new lab method, reuse existing protocol records and adapt existing lab planning structure where possible.
+
+Add only the minimum new files needed for the method's distinct research shape.
+
+If a new file is added, explain why an existing lab file, fixture, planning pattern, or export record could not own that role.

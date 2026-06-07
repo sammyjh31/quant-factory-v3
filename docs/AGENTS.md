@@ -33,3 +33,5 @@ Status: historical / archived / no longer current
 ```
 
 If the old text has no learning value, delete it instead of preserving it.
+
+Do not create a new doc merely because guidance changed; first update stale text directly, delete it, or archive it with supersession markers.
