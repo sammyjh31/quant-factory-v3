@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantfactory.local/qf-v3-protocol/0.1/BenchmarkPack.schema.json",
+  "title": "BenchmarkPack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "schema_name", "schema_version", "benchmark_pack"],
+  "properties": {
+    "protocol_version": { "const": "qf-v3-protocol-0.1" },
+    "schema_name": { "const": "BenchmarkPack" },
+    "schema_version": { "const": "0.1.0" },
+    "benchmark_pack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "benchmark_id",
+        "title",
+        "purpose",
+        "source_refs",
+        "known_difficulty",
+        "known_failure_modes",
+        "v2_lesson_refs",
+        "suggested_evaluators",
+        "metadata_safety",
+        "notes"
+      ],
+      "properties": {
+        "benchmark_id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "source_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "known_difficulty": { "type": "string", "minLength": 1 },
+        "known_failure_modes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "v2_lesson_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "suggested_evaluators": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "metadata_safety": { "$ref": "#/$defs/metadata_safety" },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "metadata_safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_source_material_included",
+        "private_or_provider_payload_included",
+        "synthetic_or_placeholder_only"
+      ],
+      "properties": {
+        "raw_source_material_included": { "type": "boolean" },
+        "private_or_provider_payload_included": { "type": "boolean" },
+        "synthetic_or_placeholder_only": { "type": "boolean" }
+      }
+    }
+  }
+}

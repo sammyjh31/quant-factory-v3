@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantfactory.local/qf-v3-protocol/0.1/ResearchNote.schema.json",
+  "title": "ResearchNote",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "schema_name", "schema_version", "research_note"],
+  "properties": {
+    "protocol_version": { "const": "qf-v3-protocol-0.1" },
+    "schema_name": { "const": "ResearchNote" },
+    "schema_version": { "const": "0.1.0" },
+    "research_note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "note_id",
+        "lab_id",
+        "experiment_ids",
+        "benchmark_pack_ids",
+        "summary",
+        "what_worked",
+        "what_failed",
+        "negative_results",
+        "reusable_by_other_labs",
+        "do_not_repeat",
+        "scaffold_disclaimer"
+      ],
+      "properties": {
+        "note_id": { "type": "string", "minLength": 1 },
+        "lab_id": { "type": "string", "minLength": 1 },
+        "experiment_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "benchmark_pack_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "summary": { "type": "string", "minLength": 1 },
+        "what_worked": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "what_failed": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "negative_results": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reusable_by_other_labs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "do_not_repeat": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "scaffold_disclaimer": {
+          "const": "This is a scaffold fixture for protocol validation, not real research evidence."
+        }
+      }
+    }
+  }
+}

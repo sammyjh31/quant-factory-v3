@@ -1,0 +1,13 @@
+[project]
+name = "qf-v3-synthesis"
+version = "0.1.0"
+description = "Read-only synthesis importer for QuantFactory V3 scaffold fixture records."
+requires-python = ">=3.11"
+dependencies = ["qf-v3-protocol"]
+
+[project.scripts]
+qf-v3-synthesis = "qf_v3_synthesis.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

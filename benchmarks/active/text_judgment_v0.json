@@ -1,0 +1,28 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "BenchmarkPack",
+  "schema_version": "0.1.0",
+  "benchmark_pack": {
+    "benchmark_id": "text_judgment_v0",
+    "title": "Text Judgment Fixture Pack",
+    "purpose": "Metadata-safe scaffold pack for testing whether text-centered methods can represent reusable trading judgment without claiming real evidence.",
+    "source_refs": ["source_text_judgment_placeholder"],
+    "known_difficulty": "Long-form trader language can preserve intent while losing exact source boundaries.",
+    "known_failure_modes": [
+      "over-abstracts teacher intent",
+      "weakens source grounding",
+      "turns fixture output into evidence"
+    ],
+    "v2_lesson_refs": ["weak_source_grounding", "report_only_confusion"],
+    "suggested_evaluators": ["schema_check", "fixture_assertion", "human_placeholder"],
+    "metadata_safety": {
+      "raw_source_material_included": false,
+      "private_or_provider_payload_included": false,
+      "synthetic_or_placeholder_only": true
+    },
+    "notes": [
+      "Contains placeholder identifiers only.",
+      "Does not include raw trader source text or V2 corpus material."
+    ]
+  }
+}

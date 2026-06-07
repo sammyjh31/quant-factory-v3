@@ -1,0 +1,176 @@
+[
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "MethodCard",
+    "schema_version": "0.1.0",
+    "method_card": {
+      "method_id": "visual_deictic_understanding_method_v0",
+      "lab_id": "visual_deictic_understanding",
+      "parent_question": "How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?",
+      "method_family": "visual_deictic_reader_fixture",
+      "intended_inputs": ["metadata-safe transcript phrase placeholder", "frame id placeholder"],
+      "intended_outputs": ["visual_deictic_binding_candidate", "unsupported_claim_report"],
+      "known_risks": ["hallucinates chart object", "misaligns phrase and frame"],
+      "non_goals": ["live vision-language calls", "real chart interpretation", "product authority"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ExperimentCard",
+    "schema_version": "0.1.0",
+    "experiment_card": {
+      "experiment_id": "visual_deictic_understanding_experiment_v0",
+      "lab_id": "visual_deictic_understanding",
+      "research_question": "Can a future multimodal workflow bind deictic transcript language to chart-frame context?",
+      "hypothesis": "Frame-aware methods may bind deictic phrases, but hallucination risk remains high.",
+      "benchmark_pack_ids": ["visual_deictic_v0"],
+      "method_ids": ["visual_deictic_understanding_method_v0"],
+      "evaluation_plan": "Fixture assertion and LLM-judge placeholder checks record positive binding and negative hallucination shape.",
+      "expected_artifact_types": ["visual_deictic_binding_candidate", "unsupported_claim_report"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.0",
+    "run_record": {
+      "run_id": "visual_deictic_understanding_run_positive",
+      "lab_id": "visual_deictic_understanding",
+      "experiment_id": "visual_deictic_understanding_experiment_v0",
+      "method_id": "visual_deictic_understanding_method_v0",
+      "benchmark_pack_id": "visual_deictic_v0",
+      "source_refs": ["source_visual_deictic_placeholder"],
+      "artifact_ids": ["visual_deictic_understanding_artifact_positive"],
+      "evaluation_ids": ["visual_deictic_understanding_eval_positive"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "positive_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.0",
+    "run_record": {
+      "run_id": "visual_deictic_understanding_run_negative",
+      "lab_id": "visual_deictic_understanding",
+      "experiment_id": "visual_deictic_understanding_experiment_v0",
+      "method_id": "visual_deictic_understanding_method_v0",
+      "benchmark_pack_id": "visual_deictic_v0",
+      "source_refs": ["source_visual_deictic_placeholder"],
+      "artifact_ids": ["visual_deictic_understanding_artifact_negative"],
+      "evaluation_ids": ["visual_deictic_understanding_eval_negative"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "negative_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.0",
+    "artifact": {
+      "artifact_id": "visual_deictic_understanding_artifact_positive",
+      "artifact_type": "visual_deictic_binding_candidate",
+      "lab_id": "visual_deictic_understanding",
+      "method_id": "visual_deictic_understanding_method_v0",
+      "run_id": "visual_deictic_understanding_run_positive",
+      "source_refs": ["source_visual_deictic_placeholder"],
+      "posture": {
+        "grounding_status": "source_linked",
+        "review_status": "self_checked",
+        "readiness_status": "research_candidate",
+        "validation_status": "benchmark_eval",
+        "lifecycle_status": "active"
+      },
+      "blockers": [],
+      "summary": "Positive fixture: binds a deictic phrase to a frame placeholder.",
+      "payload": {
+        "outcome_polarity": "positive_fixture",
+        "phrase_placeholder": "look here",
+        "frame_placeholder": "frame_001"
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.0",
+    "artifact": {
+      "artifact_id": "visual_deictic_understanding_artifact_negative",
+      "artifact_type": "unsupported_claim_report",
+      "lab_id": "visual_deictic_understanding",
+      "method_id": "visual_deictic_understanding_method_v0",
+      "run_id": "visual_deictic_understanding_run_negative",
+      "source_refs": ["source_visual_deictic_placeholder"],
+      "posture": {
+        "grounding_status": "disputed",
+        "review_status": "model_judged",
+        "readiness_status": "unknown",
+        "validation_status": "benchmark_eval",
+        "lifecycle_status": "blocked"
+      },
+      "blockers": ["hallucinated_chart_object", "frame_phrase_misalignment"],
+      "summary": "Negative fixture: hallucinates or misaligns a chart object reference.",
+      "payload": {
+        "outcome_polarity": "negative_fixture",
+        "fixture_value": "visual hallucination risk preserved"
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.0",
+    "evaluation": {
+      "evaluation_id": "visual_deictic_understanding_eval_positive",
+      "lab_id": "visual_deictic_understanding",
+      "target_id": "visual_deictic_understanding_artifact_positive",
+      "target_type": "artifact",
+      "evaluator_id": "fixture_assertion_v0",
+      "evaluator_type": "fixture_assertion",
+      "benchmark_pack_id": "visual_deictic_v0",
+      "score": 1.0,
+      "pass_fail": "pass",
+      "failure_tags": [],
+      "comments": "Fixture assertion only; no image or video was processed."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.0",
+    "evaluation": {
+      "evaluation_id": "visual_deictic_understanding_eval_negative",
+      "lab_id": "visual_deictic_understanding",
+      "target_id": "visual_deictic_understanding_artifact_negative",
+      "target_type": "artifact",
+      "evaluator_id": "llm_judge_placeholder_v0",
+      "evaluator_type": "llm_judge_placeholder",
+      "benchmark_pack_id": "visual_deictic_v0",
+      "score": 0.0,
+      "pass_fail": "fail",
+      "failure_tags": ["hallucinated_chart_object", "frame_phrase_misalignment"],
+      "comments": "Placeholder only; no live LLM judge was called.",
+      "placeholder_disclaimer": "No live LLM judge was called. This is a scaffold fixture only."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ResearchNote",
+    "schema_version": "0.1.0",
+    "research_note": {
+      "note_id": "visual_deictic_understanding_note_v0",
+      "lab_id": "visual_deictic_understanding",
+      "experiment_ids": ["visual_deictic_understanding_experiment_v0"],
+      "benchmark_pack_ids": ["visual_deictic_v0"],
+      "summary": "Visual/deictic fixtures show how placeholder bindings and hallucination failures should be exported.",
+      "what_worked": ["Positive fixture represents phrase-to-frame binding shape."],
+      "what_failed": ["Negative fixture records hallucinated or misaligned chart object references."],
+      "negative_results": ["Visual binding failures are useful outputs, not exceptions to hide."],
+      "reusable_by_other_labs": ["Use placeholder disclaimers for any LLM judge or multimodal fixture."],
+      "do_not_repeat": ["Do not imply real image, video, or model-judge execution happened."],
+      "scaffold_disclaimer": "This is a scaffold fixture for protocol validation, not real research evidence."
+    }
+  }
+]

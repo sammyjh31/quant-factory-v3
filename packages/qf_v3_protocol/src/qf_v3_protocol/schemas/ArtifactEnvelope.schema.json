@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantfactory.local/qf-v3-protocol/0.1/ArtifactEnvelope.schema.json",
+  "title": "ArtifactEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "schema_name", "schema_version", "artifact"],
+  "properties": {
+    "protocol_version": { "const": "qf-v3-protocol-0.1" },
+    "schema_name": { "const": "ArtifactEnvelope" },
+    "schema_version": { "const": "0.1.0" },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "artifact_type",
+        "lab_id",
+        "method_id",
+        "run_id",
+        "source_refs",
+        "posture",
+        "blockers",
+        "summary",
+        "payload"
+      ],
+      "properties": {
+        "artifact_id": { "type": "string", "minLength": 1 },
+        "artifact_type": { "type": "string", "minLength": 1 },
+        "lab_id": { "type": "string", "minLength": 1 },
+        "method_id": { "type": "string", "minLength": 1 },
+        "run_id": { "type": "string", "minLength": 1 },
+        "source_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "posture": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "grounding_status",
+            "review_status",
+            "readiness_status",
+            "validation_status",
+            "lifecycle_status"
+          ],
+          "properties": {
+            "grounding_status": {
+              "enum": ["none", "source_linked", "source_grounded", "disputed"]
+            },
+            "review_status": {
+              "enum": ["unreviewed", "self_checked", "model_judged", "human_reviewed", "rejected"]
+            },
+            "readiness_status": {
+              "enum": ["unknown", "study_candidate", "research_candidate", "formalization_candidate"]
+            },
+            "validation_status": { "enum": ["none", "benchmark_eval"] },
+            "lifecycle_status": { "enum": ["active", "blocked", "superseded", "retired"] }
+          }
+        },
+        "blockers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "summary": { "type": "string", "minLength": 1 },
+        "payload": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["outcome_polarity"],
+          "properties": {
+            "outcome_polarity": { "enum": ["positive_fixture", "negative_fixture"] }
+          }
+        }
+      }
+    }
+  }
+}

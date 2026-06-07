@@ -1,0 +1,174 @@
+[
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "MethodCard",
+    "schema_version": "0.1.0",
+    "method_card": {
+      "method_id": "long_context_judgment_method_v0",
+      "lab_id": "long_context_judgment",
+      "parent_question": "How can long-context LLM methods extract reusable trading judgment from messy trader text?",
+      "method_family": "long_context_reader_fixture",
+      "intended_inputs": ["metadata-safe placeholder trader text scope"],
+      "intended_outputs": ["judgment_principle_proposal", "study_card_candidate"],
+      "known_risks": ["over-abstracts teacher intent", "weakens exact source grounding"],
+      "non_goals": ["live LLM calls", "validated strategy evidence", "product authority"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ExperimentCard",
+    "schema_version": "0.1.0",
+    "experiment_card": {
+      "experiment_id": "long_context_judgment_experiment_v0",
+      "lab_id": "long_context_judgment",
+      "research_question": "Can a long-context method preserve teacher intent while producing reusable judgment artifacts?",
+      "hypothesis": "Long-context reading may preserve broad judgment but can weaken source specificity.",
+      "benchmark_pack_ids": ["text_judgment_v0"],
+      "method_ids": ["long_context_judgment_method_v0"],
+      "evaluation_plan": "Fixture assertion checks positive and negative posture only.",
+      "expected_artifact_types": ["judgment_principle_proposal", "unsupported_claim_report"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.0",
+    "run_record": {
+      "run_id": "long_context_judgment_run_positive",
+      "lab_id": "long_context_judgment",
+      "experiment_id": "long_context_judgment_experiment_v0",
+      "method_id": "long_context_judgment_method_v0",
+      "benchmark_pack_id": "text_judgment_v0",
+      "source_refs": ["source_text_judgment_placeholder"],
+      "artifact_ids": ["long_context_judgment_artifact_positive"],
+      "evaluation_ids": ["long_context_judgment_eval_positive"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "positive_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.0",
+    "run_record": {
+      "run_id": "long_context_judgment_run_negative",
+      "lab_id": "long_context_judgment",
+      "experiment_id": "long_context_judgment_experiment_v0",
+      "method_id": "long_context_judgment_method_v0",
+      "benchmark_pack_id": "text_judgment_v0",
+      "source_refs": ["source_text_judgment_placeholder"],
+      "artifact_ids": ["long_context_judgment_artifact_negative"],
+      "evaluation_ids": ["long_context_judgment_eval_negative"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "negative_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.0",
+    "artifact": {
+      "artifact_id": "long_context_judgment_artifact_positive",
+      "artifact_type": "judgment_principle_proposal",
+      "lab_id": "long_context_judgment",
+      "method_id": "long_context_judgment_method_v0",
+      "run_id": "long_context_judgment_run_positive",
+      "source_refs": ["source_text_judgment_placeholder"],
+      "posture": {
+        "grounding_status": "source_linked",
+        "review_status": "self_checked",
+        "readiness_status": "study_candidate",
+        "validation_status": "benchmark_eval",
+        "lifecycle_status": "active"
+      },
+      "blockers": [],
+      "summary": "Positive fixture: preserves teacher intent and produces a study candidate.",
+      "payload": {
+        "outcome_polarity": "positive_fixture",
+        "fixture_value": "teacher intent preserved without real evidence claim"
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.0",
+    "artifact": {
+      "artifact_id": "long_context_judgment_artifact_negative",
+      "artifact_type": "unsupported_claim_report",
+      "lab_id": "long_context_judgment",
+      "method_id": "long_context_judgment_method_v0",
+      "run_id": "long_context_judgment_run_negative",
+      "source_refs": ["source_text_judgment_placeholder"],
+      "posture": {
+        "grounding_status": "disputed",
+        "review_status": "rejected",
+        "readiness_status": "unknown",
+        "validation_status": "benchmark_eval",
+        "lifecycle_status": "blocked"
+      },
+      "blockers": ["over_abstracted_teacher_intent", "weak_source_grounding"],
+      "summary": "Negative fixture: over-abstracts and weakens exact source grounding.",
+      "payload": {
+        "outcome_polarity": "negative_fixture",
+        "fixture_value": "source weakness preserved as negative result"
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.0",
+    "evaluation": {
+      "evaluation_id": "long_context_judgment_eval_positive",
+      "lab_id": "long_context_judgment",
+      "target_id": "long_context_judgment_artifact_positive",
+      "target_type": "artifact",
+      "evaluator_id": "fixture_assertion_v0",
+      "evaluator_type": "fixture_assertion",
+      "benchmark_pack_id": "text_judgment_v0",
+      "score": 1.0,
+      "pass_fail": "pass",
+      "failure_tags": [],
+      "comments": "Fixture assertion only; not real research evidence."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.0",
+    "evaluation": {
+      "evaluation_id": "long_context_judgment_eval_negative",
+      "lab_id": "long_context_judgment",
+      "target_id": "long_context_judgment_artifact_negative",
+      "target_type": "artifact",
+      "evaluator_id": "fixture_assertion_v0",
+      "evaluator_type": "fixture_assertion",
+      "benchmark_pack_id": "text_judgment_v0",
+      "score": 0.0,
+      "pass_fail": "fail",
+      "failure_tags": ["weak_source_grounding", "over_abstracted_teacher_intent"],
+      "comments": "Negative fixture preserves expected failure mode."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ResearchNote",
+    "schema_version": "0.1.0",
+    "research_note": {
+      "note_id": "long_context_judgment_note_v0",
+      "lab_id": "long_context_judgment",
+      "experiment_ids": ["long_context_judgment_experiment_v0"],
+      "benchmark_pack_ids": ["text_judgment_v0"],
+      "summary": "Long-context fixture records demonstrate how positive and negative exports should look.",
+      "what_worked": ["Positive fixture carries teacher-intent summary as a study candidate."],
+      "what_failed": ["Negative fixture records weak source grounding."],
+      "negative_results": ["Over-abstraction is preserved as useful failure memory."],
+      "reusable_by_other_labs": ["Use explicit outcome_polarity and final posture facets."],
+      "do_not_repeat": ["Do not call fixture outputs real method evidence."],
+      "scaffold_disclaimer": "This is a scaffold fixture for protocol validation, not real research evidence."
+    }
+  }
+]

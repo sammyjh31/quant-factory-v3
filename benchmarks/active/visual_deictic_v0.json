@@ -1,0 +1,28 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "BenchmarkPack",
+  "schema_version": "0.1.0",
+  "benchmark_pack": {
+    "benchmark_id": "visual_deictic_v0",
+    "title": "Visual Deictic Fixture Pack",
+    "purpose": "Metadata-safe scaffold pack for testing placeholder bindings between deictic transcript language and chart-frame context.",
+    "source_refs": ["source_visual_deictic_placeholder"],
+    "known_difficulty": "Deictic phrases require visual context and can hallucinate chart objects when frame binding is weak.",
+    "known_failure_modes": [
+      "hallucinates visual object",
+      "misaligns transcript phrase and chart frame",
+      "treats placeholder binding as real multimodal evidence"
+    ],
+    "v2_lesson_refs": ["visual_deictic_blocker", "weak_temporal_alignment"],
+    "suggested_evaluators": ["schema_check", "fixture_assertion", "llm_judge_placeholder"],
+    "metadata_safety": {
+      "raw_source_material_included": false,
+      "private_or_provider_payload_included": false,
+      "synthetic_or_placeholder_only": true
+    },
+    "notes": [
+      "Contains placeholder frame and segment identifiers only.",
+      "Does not include images, screenshots, captions, or video frames."
+    ]
+  }
+}

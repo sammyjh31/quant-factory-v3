@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantfactory.local/qf-v3-protocol/0.1/EvaluationRecord.schema.json",
+  "title": "EvaluationRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "schema_name", "schema_version", "evaluation"],
+  "properties": {
+    "protocol_version": { "const": "qf-v3-protocol-0.1" },
+    "schema_name": { "const": "EvaluationRecord" },
+    "schema_version": { "const": "0.1.0" },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation_id",
+        "lab_id",
+        "target_id",
+        "target_type",
+        "evaluator_id",
+        "evaluator_type",
+        "benchmark_pack_id",
+        "score",
+        "pass_fail",
+        "failure_tags",
+        "comments"
+      ],
+      "properties": {
+        "evaluation_id": { "type": "string", "minLength": 1 },
+        "lab_id": { "type": "string", "minLength": 1 },
+        "target_id": { "type": "string", "minLength": 1 },
+        "target_type": { "enum": ["run", "artifact"] },
+        "evaluator_id": { "type": "string", "minLength": 1 },
+        "evaluator_type": {
+          "enum": ["fixture_assertion", "schema_check", "human_placeholder", "llm_judge_placeholder"]
+        },
+        "benchmark_pack_id": { "type": "string", "minLength": 1 },
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "pass_fail": { "enum": ["pass", "fail"] },
+        "failure_tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "comments": { "type": "string" },
+        "placeholder_disclaimer": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evaluator_type": { "const": "llm_judge_placeholder" }
+            },
+            "required": ["evaluator_type"]
+          },
+          "then": {
+            "required": ["placeholder_disclaimer"],
+            "properties": {
+              "placeholder_disclaimer": {
+                "const": "No live LLM judge was called. This is a scaffold fixture only."
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

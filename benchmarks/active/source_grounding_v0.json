@@ -1,0 +1,28 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "BenchmarkPack",
+  "schema_version": "0.1.0",
+  "benchmark_pack": {
+    "benchmark_id": "source_grounding_v0",
+    "title": "Source Grounding Fixture Pack",
+    "purpose": "Metadata-safe scaffold pack for testing source-linked claim export posture.",
+    "source_refs": ["source_grounding_placeholder"],
+    "known_difficulty": "Chunked approaches can preserve citation shape while losing broader trading judgment.",
+    "known_failure_modes": [
+      "citation without useful abstraction",
+      "unsupported claim leakage",
+      "source refs mistaken for source truth"
+    ],
+    "v2_lesson_refs": ["weak_source_grounding", "authority_drift"],
+    "suggested_evaluators": ["schema_check", "fixture_assertion"],
+    "metadata_safety": {
+      "raw_source_material_included": false,
+      "private_or_provider_payload_included": false,
+      "synthetic_or_placeholder_only": true
+    },
+    "notes": [
+      "Contains placeholder source and segment identifiers only.",
+      "Does not include raw source spans."
+    ]
+  }
+}

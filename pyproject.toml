@@ -1,0 +1,44 @@
+[project]
+name = "quantfactory-v3-federation"
+version = "0.1.0"
+description = "QuantFactory V3 scaffold workspace."
+requires-python = ">=3.11"
+dependencies = [
+  "qf-v3-protocol",
+  "qf-v3-synthesis",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+  "packages/qf_v3_protocol",
+  "packages/qf_v3_synthesis",
+]
+
+[tool.uv.sources]
+qf-v3-protocol = { workspace = true }
+qf-v3-synthesis = { workspace = true }
+
+[dependency-groups]
+dev = [
+  "jsonschema>=4.26.0",
+  "pytest>=9.0.0",
+  "pyyaml>=6.0.0",
+  "ruff>=0.15.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [
+  "packages/qf_v3_protocol/src",
+  "packages/qf_v3_synthesis/src",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

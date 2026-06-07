@@ -1,0 +1,26 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ArtifactEnvelope",
+  "schema_version": "0.1.0",
+  "artifact": {
+    "artifact_id": "example_artifact_positive",
+    "artifact_type": "source_grounded_claim",
+    "lab_id": "example_lab",
+    "method_id": "example_method",
+    "run_id": "example_run",
+    "source_refs": ["example_source"],
+    "posture": {
+      "grounding_status": "source_linked",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "benchmark_eval",
+      "lifecycle_status": "active"
+    },
+    "blockers": [],
+    "summary": "Valid artifact envelope fixture.",
+    "payload": {
+      "outcome_polarity": "positive_fixture",
+      "claim_shape": "placeholder only"
+    }
+  }
+}

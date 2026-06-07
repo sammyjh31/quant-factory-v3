@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantfactory.local/qf-v3-protocol/0.1/RunRecord.schema.json",
+  "title": "RunRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "schema_name", "schema_version", "run_record"],
+  "properties": {
+    "protocol_version": { "const": "qf-v3-protocol-0.1" },
+    "schema_name": { "const": "RunRecord" },
+    "schema_version": { "const": "0.1.0" },
+    "run_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "lab_id",
+        "experiment_id",
+        "method_id",
+        "benchmark_pack_id",
+        "source_refs",
+        "artifact_ids",
+        "evaluation_ids",
+        "run_kind",
+        "outcome_polarity",
+        "status"
+      ],
+      "properties": {
+        "run_id": { "type": "string", "minLength": 1 },
+        "lab_id": { "type": "string", "minLength": 1 },
+        "experiment_id": { "type": "string", "minLength": 1 },
+        "method_id": { "type": "string", "minLength": 1 },
+        "benchmark_pack_id": { "type": "string", "minLength": 1 },
+        "source_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "artifact_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "evaluation_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "run_kind": { "enum": ["scaffold_fixture"] },
+        "outcome_polarity": { "enum": ["positive_fixture", "negative_fixture"] },
+        "status": { "enum": ["fixture_recorded"] }
+      }
+    }
+  }
+}

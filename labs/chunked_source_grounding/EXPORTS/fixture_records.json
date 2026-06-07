@@ -1,0 +1,174 @@
+[
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "MethodCard",
+    "schema_version": "0.1.0",
+    "method_card": {
+      "method_id": "chunked_source_grounding_method_v0",
+      "lab_id": "chunked_source_grounding",
+      "parent_question": "How can chunked/source-span LLM methods preserve source grounding while still supporting useful abstraction?",
+      "method_family": "chunked_source_span_reader_fixture",
+      "intended_inputs": ["metadata-safe source-span placeholder scope"],
+      "intended_outputs": ["source_grounded_claim", "unsupported_claim_report"],
+      "known_risks": ["citation without useful abstraction", "loss of broader trading judgment"],
+      "non_goals": ["live LLM calls", "canonical ingestion model", "product authority"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ExperimentCard",
+    "schema_version": "0.1.0",
+    "experiment_card": {
+      "experiment_id": "chunked_source_grounding_experiment_v0",
+      "lab_id": "chunked_source_grounding",
+      "research_question": "Can chunked source-span methods preserve grounding while still supporting useful abstraction?",
+      "hypothesis": "Chunking may improve source linkage but lose broader judgment.",
+      "benchmark_pack_ids": ["source_grounding_v0"],
+      "method_ids": ["chunked_source_grounding_method_v0"],
+      "evaluation_plan": "Fixture assertion checks source-linked claim posture and negative abstraction loss.",
+      "expected_artifact_types": ["source_grounded_claim", "unsupported_claim_report"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.0",
+    "run_record": {
+      "run_id": "chunked_source_grounding_run_positive",
+      "lab_id": "chunked_source_grounding",
+      "experiment_id": "chunked_source_grounding_experiment_v0",
+      "method_id": "chunked_source_grounding_method_v0",
+      "benchmark_pack_id": "source_grounding_v0",
+      "source_refs": ["source_grounding_placeholder"],
+      "artifact_ids": ["chunked_source_grounding_artifact_positive"],
+      "evaluation_ids": ["chunked_source_grounding_eval_positive"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "positive_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.0",
+    "run_record": {
+      "run_id": "chunked_source_grounding_run_negative",
+      "lab_id": "chunked_source_grounding",
+      "experiment_id": "chunked_source_grounding_experiment_v0",
+      "method_id": "chunked_source_grounding_method_v0",
+      "benchmark_pack_id": "source_grounding_v0",
+      "source_refs": ["source_grounding_placeholder"],
+      "artifact_ids": ["chunked_source_grounding_artifact_negative"],
+      "evaluation_ids": ["chunked_source_grounding_eval_negative"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "negative_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.0",
+    "artifact": {
+      "artifact_id": "chunked_source_grounding_artifact_positive",
+      "artifact_type": "source_grounded_claim",
+      "lab_id": "chunked_source_grounding",
+      "method_id": "chunked_source_grounding_method_v0",
+      "run_id": "chunked_source_grounding_run_positive",
+      "source_refs": ["source_grounding_placeholder"],
+      "posture": {
+        "grounding_status": "source_grounded",
+        "review_status": "self_checked",
+        "readiness_status": "research_candidate",
+        "validation_status": "benchmark_eval",
+        "lifecycle_status": "active"
+      },
+      "blockers": [],
+      "summary": "Positive fixture: preserves a source-linked claim table.",
+      "payload": {
+        "outcome_polarity": "positive_fixture",
+        "fixture_value": "claim table remains source linked"
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.0",
+    "artifact": {
+      "artifact_id": "chunked_source_grounding_artifact_negative",
+      "artifact_type": "unsupported_claim_report",
+      "lab_id": "chunked_source_grounding",
+      "method_id": "chunked_source_grounding_method_v0",
+      "run_id": "chunked_source_grounding_run_negative",
+      "source_refs": ["source_grounding_placeholder"],
+      "posture": {
+        "grounding_status": "source_linked",
+        "review_status": "rejected",
+        "readiness_status": "unknown",
+        "validation_status": "benchmark_eval",
+        "lifecycle_status": "blocked"
+      },
+      "blockers": ["lost_broader_trading_judgment"],
+      "summary": "Negative fixture: preserves citation shape but loses broader trading judgment.",
+      "payload": {
+        "outcome_polarity": "negative_fixture",
+        "fixture_value": "citation shape alone is insufficient"
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.0",
+    "evaluation": {
+      "evaluation_id": "chunked_source_grounding_eval_positive",
+      "lab_id": "chunked_source_grounding",
+      "target_id": "chunked_source_grounding_artifact_positive",
+      "target_type": "artifact",
+      "evaluator_id": "schema_check_v0",
+      "evaluator_type": "schema_check",
+      "benchmark_pack_id": "source_grounding_v0",
+      "score": 1.0,
+      "pass_fail": "pass",
+      "failure_tags": [],
+      "comments": "Fixture validates final source-grounded posture facets."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.0",
+    "evaluation": {
+      "evaluation_id": "chunked_source_grounding_eval_negative",
+      "lab_id": "chunked_source_grounding",
+      "target_id": "chunked_source_grounding_artifact_negative",
+      "target_type": "artifact",
+      "evaluator_id": "fixture_assertion_v0",
+      "evaluator_type": "fixture_assertion",
+      "benchmark_pack_id": "source_grounding_v0",
+      "score": 0.0,
+      "pass_fail": "fail",
+      "failure_tags": ["lost_broader_trading_judgment"],
+      "comments": "Negative fixture preserves source-linked but low-usefulness failure mode."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ResearchNote",
+    "schema_version": "0.1.0",
+    "research_note": {
+      "note_id": "chunked_source_grounding_note_v0",
+      "lab_id": "chunked_source_grounding",
+      "experiment_ids": ["chunked_source_grounding_experiment_v0"],
+      "benchmark_pack_ids": ["source_grounding_v0"],
+      "summary": "Chunked source-grounding fixtures show how source linkage and abstraction failures are recorded.",
+      "what_worked": ["Positive fixture preserves source-grounded claim posture."],
+      "what_failed": ["Negative fixture records loss of broader judgment despite citation shape."],
+      "negative_results": ["Source linkage alone is not enough to prove usefulness."],
+      "reusable_by_other_labs": ["Keep grounding and readiness as separate posture facets."],
+      "do_not_repeat": ["Do not infer method success from citation presence."],
+      "scaffold_disclaimer": "This is a scaffold fixture for protocol validation, not real research evidence."
+    }
+  }
+]

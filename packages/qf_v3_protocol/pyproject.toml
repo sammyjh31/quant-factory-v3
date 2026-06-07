@@ -1,0 +1,13 @@
+[project]
+name = "qf-v3-protocol"
+version = "0.1.0"
+description = "Protocol schemas and validation tooling for QuantFactory V3."
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.26.0"]
+
+[project.scripts]
+qf-v3-validate = "qf_v3_protocol.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

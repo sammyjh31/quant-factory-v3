@@ -1,0 +1,25 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ArtifactEnvelope",
+  "schema_version": "0.1.0",
+  "artifact": {
+    "artifact_id": "example_artifact_invalid",
+    "artifact_type": "source_grounded_claim",
+    "lab_id": "example_lab",
+    "method_id": "example_method",
+    "run_id": "example_run",
+    "source_refs": ["example_source"],
+    "posture": {
+      "source_grounding": "source_linked",
+      "review_state": "self_checked",
+      "product_fitness": "study_candidate",
+      "validation_scope": "benchmark_eval",
+      "retirement_state": "active"
+    },
+    "blockers": [],
+    "summary": "Invalid artifact envelope using old posture facet names.",
+    "payload": {
+      "outcome_polarity": "positive_fixture"
+    }
+  }
+}

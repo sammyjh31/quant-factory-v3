@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantfactory.local/qf-v3-protocol/0.1/MethodCard.schema.json",
+  "title": "MethodCard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "schema_name", "schema_version", "method_card"],
+  "properties": {
+    "protocol_version": { "const": "qf-v3-protocol-0.1" },
+    "schema_name": { "const": "MethodCard" },
+    "schema_version": { "const": "0.1.0" },
+    "method_card": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method_id",
+        "lab_id",
+        "parent_question",
+        "method_family",
+        "intended_inputs",
+        "intended_outputs",
+        "known_risks",
+        "non_goals"
+      ],
+      "properties": {
+        "method_id": { "type": "string", "minLength": 1 },
+        "lab_id": { "type": "string", "minLength": 1 },
+        "parent_question": { "type": "string", "minLength": 1 },
+        "method_family": { "type": "string", "minLength": 1 },
+        "intended_inputs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "intended_outputs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "known_risks": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "non_goals": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}
