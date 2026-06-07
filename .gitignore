@@ -12,7 +12,8 @@ generated/*.json
 generated/*.md
 !generated/README.md
 
-raw_corpora/
+raw_corpora/*
+!raw_corpora/README.md
 private_notes/
 provider_payloads/
 model_traces/

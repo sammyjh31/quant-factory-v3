@@ -4,6 +4,7 @@ import hashlib
 import inspect
 import json
 import re
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -89,6 +90,33 @@ def test_protocol_examples_only_live_in_protocol_package():
     assert not (ROOT / "examples").exists()
     for path in valid_example_paths(ROOT) + invalid_example_paths(ROOT):
         assert "packages/qf_v3_protocol/examples/" in path.as_posix()
+
+
+def test_raw_corpora_boundary_keeps_source_material_local_only():
+    assert (ROOT / "raw_corpora" / "README.md").exists()
+
+    ignored_paths = [
+        "raw_corpora/trader_source_corpus/example.txt",
+        "raw_corpora/selected/live_llm_pilot_001/source.txt",
+    ]
+    for path in ignored_paths:
+        result = subprocess.run(
+            ["git", "check-ignore", path],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, path
+
+    readme_result = subprocess.run(
+        ["git", "check-ignore", "raw_corpora/README.md"],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert readme_result.returncode == 1
 
 
 def test_active_benchmark_packs_validate_and_preserve_v2_refs():
