@@ -11,6 +11,8 @@ When direction changes:
 3. archive only if the old text has learning value,
 4. avoid creating a second truth source.
 
+Be sure to look into the files in docs/agent-checklists/ for further direction as well.
+
 README owns project purpose.
 PORTFOLIO_CURRENT owns active portfolio state.
 PROTOCOL_CURRENT owns protocol version and schema inventory.
