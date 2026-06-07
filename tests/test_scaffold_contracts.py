@@ -32,6 +32,7 @@ CONFIG_SHA256 = "390729eba63d8b3ae2364631bb98b4ab2b218683cd069ba1c84778d26f2cdfa
 GOAL3_PILOT_DIR = (
     ROOT / "labs" / "long_context_judgment" / "PLANNING" / "live_llm_pilot_001"
 )
+GOAL6_CONTENT_REVIEW_PLAN = GOAL3_PILOT_DIR / "content_review_plan.md"
 GOAL3_METHOD_ID = "long_context_judgment_live_pilot_001_method"
 GOAL3_EXPERIMENT_ID = "long_context_judgment_live_pilot_001"
 LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
@@ -549,6 +550,7 @@ def test_goal3_live_pilot_planning_packet_is_contained_and_current():
         "stop_condition.md",
         "run_admission_update.md",
         "prompt_template.live_pilot_001.md",
+        "content_review_plan.md",
     }
     assert GOAL3_PILOT_DIR.exists()
     assert {path.name for path in GOAL3_PILOT_DIR.iterdir() if path.is_file()} == required_files
@@ -817,6 +819,57 @@ def test_goal5_live_pilot_export_set_is_protocol_valid_and_bounded():
         assert forbidden not in combined_committed
 
 
+def test_goal6_content_review_plan_is_planning_only_and_calibrates_evaluators():
+    export_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
+    plan = GOAL6_CONTENT_REVIEW_PLAN.read_text()
+    live_export_names = {path.name for path in export_dir.glob("*.live_pilot_001.json")}
+    protocol_schema_names = {
+        path.name
+        for path in (
+            ROOT / "packages" / "qf_v3_protocol" / "src" / "qf_v3_protocol" / "schemas"
+        ).glob("*.schema.json")
+    }
+
+    assert live_export_names == LIVE_PILOT_POST_RUN_EXPORTS
+    assert not list(export_dir.glob("*content_review*"))
+    assert protocol_schema_names == PROTOCOL_SCHEMA_NAMES
+
+    for required in [
+        "Status: Goal 6 planning document",
+        "Do not call an LLM.",
+        "Do not run another model.",
+        "Do not create new live-run records.",
+        "Do not create an EvaluationRecord content-review export yet.",
+        "Do not graduate anything.",
+        (
+            "Do not commit raw model output, raw provider payload, raw prompt trace, "
+            "raw source text, or secrets."
+        ),
+        "labs/long_context_judgment/EXPORTS/artifact_envelope.live_pilot_001.json",
+        "model_traces/live_llm_pilot_001/model_output.txt",
+        "provider_payloads/live_llm_pilot_001/response.json",
+        "source-grounding review",
+        "usefulness review",
+        "hallucination / unsupported-claim review",
+        "abstraction-quality review",
+        "negative-result value",
+        "manual_content_review",
+        "No protocol change is made by this plan.",
+        "The next experiment should improve evaluator quality before running a second method.",
+    ]:
+        assert required in plan
+
+    assert (
+        "Existing EvaluationRecord cannot honestly represent a completed manual content review"
+        in plan
+    )
+    assert "smallest protocol change would be adding `manual_content_review`" in plan
+    assert "raw_source_text" not in plan
+    assert "DEEPSEEK_API_KEY" not in plan
+    assert "financial advice" in plan
+    assert "architecture" in plan
+
+
 def test_authority_docs_preserve_scaffold_boundaries():
     readme = (ROOT / "README.md").read_text()
     lifecycle = (ROOT / "docs" / "research-lifecycle.md").read_text()
@@ -844,6 +897,11 @@ def test_authority_docs_preserve_scaffold_boundaries():
     assert "Current phase: `milestone-2-live-pilot-recorded`" in admission
     assert "Current milestone: scaffold-v0.1" not in admission
     assert "No graduated items." in graduation
+    assert "## Current Non-Graduation Rule" in graduation
+    assert "Nothing can graduate during scaffold milestone one." not in graduation
+    assert "A proposal-only live pilot export set is not graduation evidence by itself." in (
+        graduation
+    )
     assert (
         "The Goal 3 live pilot planning packet does not affect graduation status."
         in graduation

@@ -27,11 +27,13 @@ Graduation is a portfolio-level decision, not a lab-level decision.
 
 ---
 
-## Scaffold Rule
+## Current Non-Graduation Rule
 
-Nothing can graduate during scaffold milestone one.
+No item has graduated in the current portfolio phase.
 
 Fixture records are not evidence.
+
+A proposal-only live pilot export set is not graduation evidence by itself.
 
 Generated synthesis summaries are not evidence.
 
