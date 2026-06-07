@@ -8,7 +8,7 @@
   "properties": {
     "protocol_version": { "const": "qf-v3-protocol-0.1" },
     "schema_name": { "const": "BenchmarkPack" },
-    "schema_version": { "const": "0.1.1" },
+    "schema_version": { "const": "0.1.2" },
     "benchmark_pack": {
       "type": "object",
       "additionalProperties": false,

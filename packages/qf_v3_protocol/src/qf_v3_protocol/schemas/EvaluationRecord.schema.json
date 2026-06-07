@@ -8,7 +8,7 @@
   "properties": {
     "protocol_version": { "const": "qf-v3-protocol-0.1" },
     "schema_name": { "const": "EvaluationRecord" },
-    "schema_version": { "const": "0.1.1" },
+    "schema_version": { "const": "0.1.2" },
     "evaluation": {
       "type": "object",
       "additionalProperties": false,
@@ -37,7 +37,8 @@
             "schema_check",
             "human_placeholder",
             "llm_judge_placeholder",
-            "manual_boundary_review"
+            "manual_boundary_review",
+            "manual_content_review"
           ]
         },
         "benchmark_pack_id": { "type": "string", "minLength": 1 },

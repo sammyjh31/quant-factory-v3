@@ -144,7 +144,9 @@ Expected failure tags:
 
 ## Evaluator Representation Decision
 
-Existing EvaluationRecord cannot honestly represent a completed manual content review for this pilot without a protocol change.
+Schema 0.1.2 adds protocol support for `manual_content_review`.
+
+EvaluationRecord can now honestly represent a completed manual content review for this pilot after a separately authorized content-review export task.
 
 Reason:
 
@@ -153,14 +155,16 @@ Reason:
 * `human_placeholder` is a placeholder evaluator type, not a completed manual review.
 * `llm_judge_placeholder` is explicitly not a live judge and is not appropriate for Goal 6.
 
-The smallest protocol change would be adding `manual_content_review` to the existing EvaluationRecord `evaluator_type` enum. No new protocol object is needed for the next step unless repeated runs prove the current EvaluationRecord shape cannot carry the needed review comments, score, pass/fail status, and failure tags.
+The protocol change was adding `manual_content_review` to the existing EvaluationRecord `evaluator_type` enum. No new protocol object is needed for the next step unless repeated runs prove the current EvaluationRecord shape cannot carry the needed review comments, score, pass/fail status, and failure tags.
 
-No protocol change is made by this plan.
+The actual content-review export is still not created by Goal 6C-A.
 
 Before exporting a content-review EvaluationRecord, the next authorized task should decide whether to:
 
-1. add `manual_content_review` as an EvaluationRecord evaluator type with tests and ADR notes, or
-2. keep the review as non-exported planning notes until protocol support is explicitly authorized.
+1. inspect ignored local model/source materials without committing raw text or traces,
+2. create exactly one `manual_content_review` EvaluationRecord if authorized,
+3. keep the review proposal-only and non-authoritative,
+4. avoid creating any new RunRecord, ArtifactEnvelope, ResearchNote, protocol object, or graduation claim.
 
 ---
 

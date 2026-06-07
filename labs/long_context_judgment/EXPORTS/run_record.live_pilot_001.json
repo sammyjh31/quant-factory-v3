@@ -1,7 +1,7 @@
 {
   "protocol_version": "qf-v3-protocol-0.1",
   "schema_name": "RunRecord",
-  "schema_version": "0.1.1",
+  "schema_version": "0.1.2",
   "run_record": {
     "run_id": "long_context_judgment_live_pilot_001_run",
     "lab_id": "long_context_judgment",

@@ -2,7 +2,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "MethodCard",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "method_card": {
       "method_id": "chunked_source_grounding_method_v0",
       "lab_id": "chunked_source_grounding",
@@ -17,7 +17,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ExperimentCard",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "experiment_card": {
       "experiment_id": "chunked_source_grounding_experiment_v0",
       "lab_id": "chunked_source_grounding",
@@ -32,7 +32,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "RunRecord",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "run_record": {
       "run_id": "chunked_source_grounding_run_positive",
       "lab_id": "chunked_source_grounding",
@@ -50,7 +50,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "RunRecord",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "run_record": {
       "run_id": "chunked_source_grounding_run_negative",
       "lab_id": "chunked_source_grounding",
@@ -68,7 +68,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ArtifactEnvelope",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "artifact": {
       "artifact_id": "chunked_source_grounding_artifact_positive",
       "artifact_type": "source_grounded_claim",
@@ -94,7 +94,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ArtifactEnvelope",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "artifact": {
       "artifact_id": "chunked_source_grounding_artifact_negative",
       "artifact_type": "unsupported_claim_report",
@@ -120,7 +120,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "EvaluationRecord",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "evaluation": {
       "evaluation_id": "chunked_source_grounding_eval_positive",
       "lab_id": "chunked_source_grounding",
@@ -138,7 +138,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "EvaluationRecord",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "evaluation": {
       "evaluation_id": "chunked_source_grounding_eval_negative",
       "lab_id": "chunked_source_grounding",
@@ -156,7 +156,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ResearchNote",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "research_note": {
       "note_id": "chunked_source_grounding_note_v0",
       "lab_id": "chunked_source_grounding",

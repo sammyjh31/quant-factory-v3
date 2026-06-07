@@ -2,7 +2,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "RunRecord",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "run_record": {
       "run_id": "long_context_judgment_live_pilot_001_run",
       "lab_id": "long_context_judgment",
@@ -20,7 +20,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ArtifactEnvelope",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "artifact": {
       "artifact_id": "long_context_judgment_live_pilot_001_artifact",
       "artifact_type": "judgment_principle_proposal",
@@ -48,7 +48,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "EvaluationRecord",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "evaluation": {
       "evaluation_id": "long_context_judgment_live_pilot_001_eval",
       "lab_id": "long_context_judgment",
@@ -66,7 +66,7 @@
   {
     "protocol_version": "qf-v3-protocol-0.1",
     "schema_name": "ResearchNote",
-    "schema_version": "0.1.1",
+    "schema_version": "0.1.2",
     "research_note": {
       "note_id": "long_context_judgment_live_pilot_001_note",
       "lab_id": "long_context_judgment",

@@ -1,7 +1,7 @@
 {
   "protocol_version": "qf-v3-protocol-0.1",
   "schema_name": "EvaluationRecord",
-  "schema_version": "0.1.1",
+  "schema_version": "0.1.2",
   "evaluation": {
     "evaluation_id": "long_context_judgment_live_pilot_001_eval",
     "lab_id": "long_context_judgment",

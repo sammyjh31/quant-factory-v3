@@ -2,7 +2,7 @@
 
 Status: protocol currentness router  
 Current protocol version: `qf-v3-protocol-0.1`
-Current schema version: `0.1.1`
+Current schema version: `0.1.2`
 
 This file owns the current protocol version and schema inventory. It does not own lab results or method conclusions.
 
@@ -33,6 +33,8 @@ No other schema is part of protocol v0.1.
 
 Schema 0.1.1 adds proposal-only live pilot record support to existing record schemas. It does not add new protocol object types.
 
+Schema 0.1.2 adds `manual_content_review` as an `EvaluationRecord` evaluator type for content-quality review of proposal-only live pilot artifacts. No new protocol object type is added by schema 0.1.2.
+
 ---
 
 ## Required Version Fields
@@ -42,7 +44,7 @@ Every protocol record must include:
 ```yaml
 protocol_version: qf-v3-protocol-0.1
 schema_name: ...
-schema_version: 0.1.1
+schema_version: 0.1.2
 ```
 
 ---
@@ -84,6 +86,8 @@ A lab may propose protocol changes, but no single lab owns protocol authority.
 Protocol fields should be added only after repeated evidence from fixture or live experiments shows they are needed.
 
 ADR 0001 records the schema `0.1.1` readiness patch that lets existing records represent a proposal-only live LLM pilot without relabeling it as a scaffold fixture.
+
+ADR 0002 records the schema `0.1.2` patch that lets existing EvaluationRecord records represent completed manual content review without overloading manual boundary review or adding a new protocol object.
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "protocol_version": "qf-v3-protocol-0.1",
   "schema_name": "ArtifactEnvelope",
-  "schema_version": "0.1.1",
+  "schema_version": "0.1.2",
   "artifact": {
     "artifact_id": "long_context_judgment_live_pilot_001_artifact",
     "artifact_type": "judgment_principle_proposal",

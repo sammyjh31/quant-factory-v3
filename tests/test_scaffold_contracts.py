@@ -19,7 +19,7 @@ from qf_v3_synthesis import synthesize_exports
 from qf_v3_synthesis.cli import main as synthesis_cli_main
 
 ROOT = Path(__file__).resolve().parents[1]
-CURRENT_SCHEMA_VERSION = "0.1.1"
+CURRENT_SCHEMA_VERSION = "0.1.2"
 FIXTURE_EVIDENCE_DISCLAIMER = (
     "This is a scaffold fixture for protocol validation, not real research evidence."
 )
@@ -193,6 +193,31 @@ def live_pilot_records():
     ]
 
 
+def manual_content_review_evaluation_record():
+    return {
+        "protocol_version": "qf-v3-protocol-0.1",
+        "schema_name": "EvaluationRecord",
+        "schema_version": CURRENT_SCHEMA_VERSION,
+        "evaluation": {
+            "evaluation_id": "long_context_judgment_live_pilot_001_content_review_eval",
+            "lab_id": "long_context_judgment",
+            "target_id": LIVE_PILOT_ARTIFACT_ID,
+            "target_type": "artifact",
+            "evaluator_id": "manual_content_review_v0",
+            "evaluator_type": "manual_content_review",
+            "benchmark_pack_id": "text_judgment_v0",
+            "score": 0.5,
+            "pass_fail": "fail",
+            "failure_tags": ["weak_source_grounding", "too_generic"],
+            "comments": (
+                "Manual content review only; does not validate trading correctness, product "
+                "readiness, strategy evidence, financial advice, live-trading authority, "
+                "graduation, or architecture."
+            ),
+        },
+    }
+
+
 def test_protocol_valid_examples_validate():
     paths = valid_example_paths(ROOT)
     assert paths, "valid protocol examples must exist"
@@ -216,12 +241,39 @@ def test_protocol_examples_only_live_in_protocol_package():
         assert "packages/qf_v3_protocol/examples/" in path.as_posix()
 
 
-def test_protocol_v011_supports_proposal_only_live_pilot_records():
+def test_protocol_v012_supports_proposal_only_live_pilot_records():
     for record in live_pilot_records():
         validate_record(record)
 
 
-def test_protocol_v011_rejects_fixture_live_semantic_mismatches():
+def test_protocol_v012_supports_manual_content_review_evaluation_records():
+    record = manual_content_review_evaluation_record()
+    validate_record(record)
+    assert record["evaluation"]["target_id"] == LIVE_PILOT_ARTIFACT_ID
+    assert record["evaluation"]["evaluator_type"] == "manual_content_review"
+    assert "manual_content_review" not in {
+        evaluation["evaluator_type"]
+        for evaluation in [
+            exported["evaluation"]
+            for exported in records_by_schema("EvaluationRecord")
+        ]
+    }
+    assert not list(
+        (ROOT / "labs" / "long_context_judgment" / "EXPORTS").glob("*content_review*")
+    )
+
+
+def test_protocol_v012_rejects_content_review_specific_fields():
+    record = manual_content_review_evaluation_record()
+    record["evaluation"]["content_review_payload"] = {
+        "source_grounding": "not part of protocol v0.1.2"
+    }
+
+    with pytest.raises(ValidationError):
+        validate_record(record)
+
+
+def test_protocol_v012_rejects_fixture_live_semantic_mismatches():
     [run_record, *_] = live_pilot_records()
 
     fixture_with_live_polarity = json.loads(json.dumps(run_record))
@@ -258,7 +310,7 @@ def test_protocol_v011_rejects_fixture_live_semantic_mismatches():
         validate_record(live_with_fixture_status)
 
 
-def test_protocol_v011_keeps_schema_inventory_tiny_and_documented():
+def test_protocol_v012_keeps_schema_inventory_tiny_and_documented():
     schema_dir = ROOT / "packages" / "qf_v3_protocol" / "src" / "qf_v3_protocol" / "schemas"
     assert {path.name for path in schema_dir.glob("*.schema.json")} == PROTOCOL_SCHEMA_NAMES
 
@@ -270,10 +322,24 @@ def test_protocol_v011_keeps_schema_inventory_tiny_and_documented():
     assert "proposal-only live LLM pilot" in adr_text
     assert "This is not a graduation." in adr_text
     assert "This does not add live trace, prompt, model-call, graph, product, strategy" in adr_text
-    assert "Current schema version: `0.1.1`" in protocol_current
+    assert "Current schema version: `0.1.2`" in protocol_current
     assert "0.1.1 adds proposal-only live pilot record support" in protocol_current
+    assert "0.1.2 adds `manual_content_review` as an `EvaluationRecord` evaluator type" in (
+        protocol_current
+    )
+    assert "No new protocol object type is added by schema 0.1.2." in protocol_current
     assert "No other schema is part of protocol v0.1." in protocol_current
     assert "No graduated items." in graduation
+    adr_0002 = ROOT / "docs" / "adr" / "0002-add-manual-content-review-evaluator.md"
+    assert adr_0002.exists()
+    adr_0002_text = adr_0002.read_text()
+    assert "Add `manual_content_review` to `EvaluationRecord.evaluator_type`." in (
+        adr_0002_text
+    )
+    assert "No new protocol object." in adr_0002_text
+    assert "No LLM judge." in adr_0002_text
+    assert "No validation claim." in adr_0002_text
+    assert "No graduation." in adr_0002_text
 
 
 def test_synthesis_can_import_live_exports_without_reading_planning(tmp_path):
@@ -854,16 +920,16 @@ def test_goal6_content_review_plan_is_planning_only_and_calibrates_evaluators():
         "abstraction-quality review",
         "negative-result value",
         "manual_content_review",
-        "No protocol change is made by this plan.",
+        "Schema 0.1.2 adds protocol support for `manual_content_review`.",
         "The next experiment should improve evaluator quality before running a second method.",
     ]:
         assert required in plan
 
     assert (
-        "Existing EvaluationRecord cannot honestly represent a completed manual content review"
+        "EvaluationRecord can now honestly represent a completed manual content review"
         in plan
     )
-    assert "smallest protocol change would be adding `manual_content_review`" in plan
+    assert "The actual content-review export is still not created by Goal 6C-A." in plan
     assert "raw_source_text" not in plan
     assert "DEEPSEEK_API_KEY" not in plan
     assert "financial advice" in plan

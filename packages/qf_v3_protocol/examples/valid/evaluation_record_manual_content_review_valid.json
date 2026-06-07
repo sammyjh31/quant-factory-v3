@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "example_manual_content_review_eval",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_001_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_v0",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.5,
+    "pass_fail": "fail",
+    "failure_tags": [
+      "weak_source_grounding",
+      "too_generic"
+    ],
+    "comments": "Manual content review fixture only; not validation, product authority, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}
