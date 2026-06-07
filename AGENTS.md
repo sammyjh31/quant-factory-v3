@@ -369,7 +369,32 @@ Bad work usually does one of these:
 
 ---
 
-## 14. Before Finishing Any Change
+## 14. GitHub Update Hygiene
+
+Before ending meaningful work, agents should review repository state and consider whether the repo should be updated.
+
+Agents should:
+
+* run `git status -sb`;
+* inspect the relevant diff before staging;
+* stage only files that belong to the completed work;
+* avoid committing generated outputs, secrets, raw corpora, provider payloads, model traces, prompt traces, private notes, or unrelated user changes;
+* run the relevant verification commands before claiming success;
+* commit coherent completed work with a plain commit message;
+* consider pushing the commit to `main` when the change is intended to update the current repo state and direct-main publication is appropriate.
+
+Agents must not treat this as permission to publish unsafe or unclear work.
+
+If the worktree is mixed, the change is unfinished, checks cannot run, or publication intent is unclear, agents should leave the repo uncommitted or unpushed and clearly report:
+
+* what changed;
+* what remains uncommitted;
+* what verification did or did not run;
+* what decision is needed before commit or push.
+
+---
+
+## 15. Before Finishing Any Change
 
 Before finalizing work, check:
 
