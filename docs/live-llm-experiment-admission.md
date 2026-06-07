@@ -1,7 +1,7 @@
 # Live LLM Experiment Admission
 
-Status: future milestone guardrail  
-Current milestone: scaffold-v0.1
+Status: live LLM experiment guardrail
+Current phase: `milestone-2-planning`
 
 No live LLM experiment may run until it has satisfied this checklist.
 
@@ -208,4 +208,4 @@ Outputs from this experiment are proposals until evaluated. They do not create s
 
 A later protocol version may replace this document with a formal LiveExperimentAdmission schema.
 
-In scaffold v0.1, this document is a required guardrail only.
+This guardrail was introduced in scaffold v0.1. During milestone-2-planning, this document remains the required admission boundary until a formal schema replaces it.

@@ -10,7 +10,7 @@ No LLM call has been made. No output artifact has been produced. No evaluation r
 
 ## Prompt / Template Hash Plan
 
-Before any live call, the run admission update must record:
+The run admission update records:
 
 * prompt/template file path or construction method,
 * prompt/template hash,
@@ -24,9 +24,9 @@ Prompt text containing raw source material must remain local-only or ignored.
 
 ## Model / Config Recording Plan
 
-No provider or model is selected in this planning packet.
+The base Goal 3 planning packet did not select a provider or model. The run admission update now selects the provider/model/config for one tiny authorized pilot scope.
 
-Before any live call, the run admission update must record:
+Before any live call, the run admission update must continue to record:
 
 * provider id,
 * model id,

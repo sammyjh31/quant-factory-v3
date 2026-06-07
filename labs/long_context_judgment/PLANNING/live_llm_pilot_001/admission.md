@@ -8,7 +8,7 @@ This is a proposed live LLM pilot planning record. It is not a completed run, no
 
 No LLM call has been made. No output artifact has been produced. No evaluation result exists. No method success is claimed.
 
-This packet prepares a future admission decision only. It does not authorize execution by itself.
+This base packet prepared the future admission decision. It does not authorize execution by itself; the separate `run_admission_update.md` narrows the packet to exactly one authorized preflight run scope.
 
 ---
 
@@ -124,7 +124,7 @@ Prompt/template hash plan:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/prompt_config_recording_plan.md
 ```
 
-The future run must record hashes for the prompt template, system prompt, and any tool instructions before execution.
+The run admission update records the committed prompt template path and SHA-256 before execution.
 
 ---
 
@@ -136,7 +136,13 @@ Model/config recording plan:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/prompt_config_recording_plan.md
 ```
 
-No provider or model is selected in this planning packet. A future run admission update must record provider id, model id, sampling settings, context settings, tool routing, and config hash before any LLM call.
+Provider/model/config details are locked only in:
+
+```text
+labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
+```
+
+No LLM call has been made.
 
 ---
 
@@ -178,9 +184,9 @@ The future live pilot should stop after one approved source scope and one approv
 
 ## Budget / Secrets Handling
 
-No budget is authorized by this planning packet.
+Budget is authorized only by the run admission update.
 
-Before execution, a future admission update must record:
+Before execution, the run admission update must continue to record:
 
 * approved spend ceiling,
 * required environment variable names without values,

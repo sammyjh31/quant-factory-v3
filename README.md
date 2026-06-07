@@ -91,7 +91,7 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 Current phase: `milestone-2-planning`
 
-The scaffold baseline is accepted. Current work is limited to designing the first tiny live LLM pilot admission packet; no live LLM call has been made.
+The scaffold baseline is accepted. Current work is Milestone 2 live-run preflight for the first tiny live LLM pilot; no live LLM call has been made.
 
 Milestone one was not a limitation on V3’s ambition. It created the first safety and comparison harness.
 
@@ -112,9 +112,9 @@ The current planning packet lives under:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/
 ```
 
-It is not in `EXPORTS/`, is not imported by synthesis, and is not research evidence.
+It includes `run_admission_update.md`, which authorizes exactly one tiny live LLM pilot run under the stated scope. The packet is not in `EXPORTS/`, is not imported by synthesis, and is not research evidence.
 
-The purpose of this planning phase is still to define how future live LLM runs will be recorded, evaluated, compared, and contained.
+The purpose of this planning phase is still to define how future live LLM runs will be recorded, evaluated, compared, and contained before any model output is produced.
 
 See:
 

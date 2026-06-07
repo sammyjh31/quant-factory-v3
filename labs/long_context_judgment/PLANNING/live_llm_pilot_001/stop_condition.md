@@ -36,3 +36,7 @@ Stop immediately if:
 ## Planning Stop Condition
 
 This Goal 3 planning packet is complete when the proposed MethodCard and ExperimentCard validate, the admission checklist is present, and tests prove the packet is not in `EXPORTS/` and is ignored by synthesis.
+
+## Preflight Stop Condition
+
+The Goal 4 live-run preflight is complete when `run_admission_update.md` records the provider/model, prompt/template hash, config hash, budget, source scope, trace boundary, secret boundary, post-run export paths, and exact one-run stop condition without creating live-run exports.

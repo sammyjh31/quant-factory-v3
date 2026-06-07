@@ -26,7 +26,7 @@ How can long-context LLM methods extract reusable trading judgment from messy tr
 Current state:
 
 ```text
-scaffold fixture exports plus proposed live pilot planning packet
+scaffold fixture exports plus proposed live pilot planning packet and run admission update
 ```
 
 Required fixture posture:
@@ -50,6 +50,14 @@ long_context_judgment_live_pilot_001
 ```
 
 The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence.
+
+Run admission update:
+
+```text
+labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
+```
+
+The run admission update authorizes exactly one tiny live LLM pilot run under the stated scope. It does not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records, and no live LLM experiment has run.
 
 ---
 

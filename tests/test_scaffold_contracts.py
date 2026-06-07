@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import hashlib
 import inspect
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -21,10 +23,32 @@ GOAL3_PILOT_DIR = (
 )
 GOAL3_METHOD_ID = "long_context_judgment_live_pilot_001_method"
 GOAL3_EXPERIMENT_ID = "long_context_judgment_live_pilot_001"
+LIVE_PILOT_POST_RUN_EXPORTS = {
+    "run_record.live_pilot_001.json",
+    "artifact_envelope.live_pilot_001.json",
+    "evaluation_record.live_pilot_001.json",
+    "research_note.live_pilot_001.json",
+}
 
 
 def load_json(path: Path):
     return json.loads(path.read_text())
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def canonical_json_hash(payload) -> str:
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def extract_json_block(markdown: str, marker: str):
+    pattern = rf"## {re.escape(marker)}\n\n```json\n(.*?)\n```"
+    match = re.search(pattern, markdown, re.DOTALL)
+    assert match, f"Missing JSON block for {marker}"
+    return json.loads(match.group(1))
 
 
 def iter_records(path: Path):
@@ -261,6 +285,8 @@ def test_goal3_live_pilot_planning_packet_is_contained_and_current():
         "source_privacy_boundary.md",
         "prompt_config_recording_plan.md",
         "stop_condition.md",
+        "run_admission_update.md",
+        "prompt_template.live_pilot_001.md",
     }
     assert GOAL3_PILOT_DIR.exists()
     assert {path.name for path in GOAL3_PILOT_DIR.iterdir() if path.is_file()} == required_files
@@ -330,6 +356,118 @@ def test_goal3_live_pilot_planning_packet_is_contained_and_current():
     assert "not in `EXPORTS/`" in lab_registry
 
 
+def test_goal4_live_pilot_run_admission_update_is_executable_but_pre_run():
+    update_path = GOAL3_PILOT_DIR / "run_admission_update.md"
+    prompt_template_path = GOAL3_PILOT_DIR / "prompt_template.live_pilot_001.md"
+    exports_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
+    update = update_path.read_text()
+    prompt_template = prompt_template_path.read_text()
+
+    assert (
+        "This admission update authorizes exactly one tiny live LLM pilot run under "
+        "the stated scope."
+        in update
+    )
+    for required in [
+        "No LLM call has been made.",
+        "No output artifact has been produced.",
+        "No evaluation result exists.",
+        "No method success is claimed.",
+        "Provider: DeepSeek API",
+        "API format: OpenAI-compatible chat completions",
+        "Base URL: `https://api.deepseek.com`",
+        "Model: `deepseek-v4-flash`",
+        "Reasoning/thinking mode: non-thinking",
+        "Benchmark pack: `text_judgment_v0`",
+        "Lab: `labs/long_context_judgment`",
+        "Purpose: containment/protocol proof, not breakthrough quality.",
+        "Budget cap: `$3` hard maximum.",
+        "No retries unless the call fails before producing output.",
+        "`DEEPSEEK_API_KEY`",
+        "If `deepseek-v4-flash` is unavailable in the account, stop and report.",
+        "Do not silently substitute `deepseek-v4-pro`, `deepseek-chat`, "
+        "`deepseek-reasoner`, or any other model.",
+        "Outputs from this experiment are proposals until evaluated.",
+    ]:
+        assert required in update
+
+    assert "thinking" in update
+    assert '"type": "disabled"' in update
+    assert "tools disabled" in update
+    assert "one approved source scope" in update
+    assert "one prompt/template version" in update
+    assert "one model configuration" in update
+    assert "one model-call batch" in update
+    assert "No private/raw source material or provider payloads are committed." in update
+    assert "No validation, product authority, strategy evidence, financial advice" in update
+    assert "live-trading authority, or architecture." in update
+
+    recorded_prompt_hash = re.search(r"Prompt template SHA-256: `([0-9a-f]{64})`", update)
+    assert recorded_prompt_hash
+    assert recorded_prompt_hash.group(1) == sha256_file(prompt_template_path)
+    assert "Prompt Template" in prompt_template
+    assert "{{APPROVED_SOURCE_TEXT}}" in prompt_template
+    assert "No raw source text is committed in this template." in prompt_template
+
+    config_record = extract_json_block(update, "Canonical Model Config")
+    recorded_config_hash = re.search(r"Config SHA-256: `([0-9a-f]{64})`", update)
+    assert recorded_config_hash
+    assert recorded_config_hash.group(1) == canonical_json_hash(config_record)
+    assert config_record == {
+        "api_format": "openai_compatible_chat_completions",
+        "base_url": "https://api.deepseek.com",
+        "context_window_provider_limit": "1M",
+        "max_input_tokens": 12000,
+        "max_output_tokens": 1200,
+        "model_id": "deepseek-v4-flash",
+        "provider_id": "deepseek_api",
+        "sampling": {
+            "frequency_penalty": None,
+            "presence_penalty": None,
+            "temperature": None,
+            "top_p": None,
+        },
+        "stream": False,
+        "thinking": {"type": "disabled"},
+        "tool_routing": "none",
+    }
+
+    for expected_path in [
+        "provider_payloads/live_llm_pilot_001/",
+        "model_traces/live_llm_pilot_001/",
+        "prompt_traces/live_llm_pilot_001/",
+    ]:
+        assert expected_path in update
+
+    for expected_export in LIVE_PILOT_POST_RUN_EXPORTS:
+        assert f"labs/long_context_judgment/EXPORTS/{expected_export}" in update
+        assert not (exports_dir / expected_export).exists()
+    assert not any(
+        "live_pilot_001" in path.name
+        for path in exports_dir.glob("*.json")
+        if path.name != "fixture_records.json"
+    )
+
+    summary = synthesize_exports(root=ROOT)
+    assert summary["record_count"] == 27
+    assert GOAL3_METHOD_ID not in summary["methods"]
+
+    graduation = (ROOT / "GRADUATION_LEDGER.md").read_text()
+    assert "No graduated items." in graduation
+    assert "live-run preflight admission update does not affect graduation status" in graduation
+
+    readme = (ROOT / "README.md").read_text()
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [readme, portfolio, lab_registry]:
+        assert "run_admission_update.md" in currentness_doc
+    assert "No live LLM experiment has run." in portfolio
+    assert (
+        "authorizes exactly one tiny live LLM pilot run under the stated scope"
+        in portfolio
+    )
+
+
 def test_authority_docs_preserve_scaffold_boundaries():
     readme = (ROOT / "README.md").read_text()
     lifecycle = (ROOT / "docs" / "research-lifecycle.md").read_text()
@@ -353,6 +491,8 @@ def test_authority_docs_preserve_scaffold_boundaries():
     assert "generated synthesis metrics" not in portfolio.lower()
     assert "Current phase: `milestone-2-planning`" in graduation
     assert "Current milestone: `scaffold-v0.1`" not in graduation
+    assert "Current phase: `milestone-2-planning`" in admission
+    assert "Current milestone: scaffold-v0.1" not in admission
     assert "No graduated items." in graduation
     assert (
         "The Goal 3 live pilot planning packet does not affect graduation status."

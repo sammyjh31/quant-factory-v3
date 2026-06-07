@@ -6,6 +6,7 @@ Current phase: `milestone-2-planning`
 No methods, labs, schemas, artifacts, product surfaces, research claims, evaluators, or architectures have graduated.
 
 The Goal 3 live pilot planning packet does not affect graduation status.
+The Goal 4 live-run preflight admission update does not affect graduation status.
 
 ---
 

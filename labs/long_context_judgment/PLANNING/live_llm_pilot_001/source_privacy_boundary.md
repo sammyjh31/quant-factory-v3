@@ -22,6 +22,8 @@ Allowed in git:
 
 * protocol-valid proposed MethodCard and ExperimentCard planning records,
 * admission checklist,
+* run admission update,
+* metadata-safe prompt template with placeholders only,
 * evaluator plan,
 * source/privacy boundary,
 * prompt/config recording plan,
