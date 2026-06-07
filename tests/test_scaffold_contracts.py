@@ -38,6 +38,9 @@ GOAL3_EXPERIMENT_ID = "long_context_judgment_live_pilot_001"
 LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
 LIVE_PILOT_ARTIFACT_ID = "long_context_judgment_live_pilot_001_artifact"
 LIVE_PILOT_EVALUATION_ID = "long_context_judgment_live_pilot_001_eval"
+LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
+    "long_context_judgment_live_pilot_001_manual_content_review"
+)
 LIVE_PILOT_NOTE_ID = "long_context_judgment_live_pilot_001_note"
 LIVE_PILOT_SOURCE_REF_PREFIX = "raw_corpora_sha256:"
 LIVE_PILOT_POST_RUN_EXPORTS = {
@@ -46,6 +49,7 @@ LIVE_PILOT_POST_RUN_EXPORTS = {
     "evaluation_record.live_pilot_001.json",
     "research_note.live_pilot_001.json",
 }
+LIVE_PILOT_CONTENT_REVIEW_EXPORT = "evaluation_record.live_pilot_001_manual_content_review.json"
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
     "BenchmarkPack.schema.json",
@@ -251,16 +255,6 @@ def test_protocol_v012_supports_manual_content_review_evaluation_records():
     validate_record(record)
     assert record["evaluation"]["target_id"] == LIVE_PILOT_ARTIFACT_ID
     assert record["evaluation"]["evaluator_type"] == "manual_content_review"
-    assert "manual_content_review" not in {
-        evaluation["evaluator_type"]
-        for evaluation in [
-            exported["evaluation"]
-            for exported in records_by_schema("EvaluationRecord")
-        ]
-    }
-    assert not list(
-        (ROOT / "labs" / "long_context_judgment" / "EXPORTS").glob("*content_review*")
-    )
 
 
 def test_protocol_v012_rejects_content_review_specific_fields():
@@ -764,7 +758,7 @@ def test_goal4_live_pilot_run_admission_update_preserves_admitted_scope():
         assert f"labs/long_context_judgment/EXPORTS/{expected_export}" in update
 
     summary = synthesize_exports(root=ROOT)
-    assert summary["record_count"] == 31
+    assert summary["record_count"] == 32
     assert GOAL3_METHOD_ID in summary["methods"]
     assert summary["outcome_polarities"] == [
         "negative_fixture",
@@ -897,15 +891,15 @@ def test_goal6_content_review_plan_is_planning_only_and_calibrates_evaluators():
     }
 
     assert live_export_names == LIVE_PILOT_POST_RUN_EXPORTS
-    assert not list(export_dir.glob("*content_review*"))
+    assert (export_dir / LIVE_PILOT_CONTENT_REVIEW_EXPORT).exists()
     assert protocol_schema_names == PROTOCOL_SCHEMA_NAMES
 
     for required in [
-        "Status: Goal 6 planning document",
+        "Status: Goal 6 content-review planning record",
         "Do not call an LLM.",
         "Do not run another model.",
         "Do not create new live-run records.",
-        "Do not create an EvaluationRecord content-review export yet.",
+        "Goal 6C-B creates exactly one `manual_content_review` EvaluationRecord.",
         "Do not graduate anything.",
         (
             "Do not commit raw model output, raw provider payload, raw prompt trace, "
@@ -929,11 +923,96 @@ def test_goal6_content_review_plan_is_planning_only_and_calibrates_evaluators():
         "EvaluationRecord can now honestly represent a completed manual content review"
         in plan
     )
-    assert "The actual content-review export is still not created by Goal 6C-A." in plan
+    assert "Goal 6C-A did not create the content-review export." in plan
+    assert "Goal 6C-B is the separately authorized content-review export task." in plan
     assert "raw_source_text" not in plan
     assert "DEEPSEEK_API_KEY" not in plan
     assert "financial advice" in plan
     assert "architecture" in plan
+
+
+def test_goal6c_b_manual_content_review_export_is_single_bounded_and_current():
+    export_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
+    content_review_path = export_dir / LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    assert content_review_path.exists()
+
+    record = load_json(content_review_path)
+    validate_record(record)
+    assert record["schema_name"] == "EvaluationRecord"
+    assert record["schema_version"] == CURRENT_SCHEMA_VERSION
+
+    evaluation = record["evaluation"]
+    assert evaluation["evaluation_id"] == LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID
+    assert evaluation["lab_id"] == "long_context_judgment"
+    assert evaluation["target_id"] == LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["target_type"] == "artifact"
+    assert evaluation["evaluator_id"] == "manual_content_review_live_pilot_001"
+    assert evaluation["evaluator_type"] == "manual_content_review"
+    assert evaluation["benchmark_pack_id"] == "text_judgment_v0"
+    assert evaluation["score"] == pytest.approx(0.74)
+    assert evaluation["pass_fail"] == "pass"
+    assert evaluation["failure_tags"] == [
+        "missing_context",
+        "over_abstracted_teacher_intent",
+    ]
+
+    comments = evaluation["comments"]
+    for required in [
+        "Manual content review only",
+        "source grounding",
+        "research usefulness",
+        "hallucination / unsupported claims",
+        "abstraction quality",
+        "negative-result value",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ),
+    ]:
+        assert required in comments
+    assert "raw source text and raw model output are not committed" in comments.lower()
+
+    combined_committed = "\n".join(
+        path.read_text()
+        for path in [
+            content_review_path,
+            ROOT / "PORTFOLIO_CURRENT.md",
+            ROOT / "LAB_REGISTRY.md",
+        ]
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+    ]:
+        assert forbidden not in combined_committed
+
+    manual_content_reviews = [
+        record["evaluation"]
+        for record in records_by_schema("EvaluationRecord")
+        if record["evaluation"]["evaluator_type"] == "manual_content_review"
+    ]
+    assert [review["evaluation_id"] for review in manual_content_reviews] == [
+        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID
+    ]
+    assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
+    assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
+    assert not list(export_dir.glob("research_note.*manual_content_review*.json"))
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    assert LIVE_PILOT_CONTENT_REVIEW_EXPORT in portfolio
+    assert LIVE_PILOT_CONTENT_REVIEW_EXPORT in lab_registry
+    assert "one manual content-review EvaluationRecord" in portfolio
+    assert "one manual content-review EvaluationRecord" in lab_registry
+    assert "generated synthesis metrics" not in portfolio.lower()
+
+    graduation = (ROOT / "GRADUATION_LEDGER.md").read_text()
+    assert "No graduated items." in graduation
 
 
 def test_authority_docs_preserve_scaffold_boundaries():

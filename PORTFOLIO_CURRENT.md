@@ -12,7 +12,7 @@ This file owns the current portfolio posture. It does not own lab results, metho
 
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
-The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`.
+The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set plus one manual content-review EvaluationRecord recorded under `labs/long_context_judgment/EXPORTS/`.
 
 The accepted scaffold contains:
 
@@ -41,7 +41,7 @@ labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 
 That update authorized exactly one tiny live LLM pilot run under the stated scope. The update itself did not create run evidence, generated synthesis claims, graduation status, or architecture.
 
-The authorized run has produced one proposal-only live export set. The export set is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+The authorized run has produced one proposal-only live export set and one manual content-review EvaluationRecord. These records are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
@@ -51,7 +51,7 @@ Active scaffold-origin labs:
 
 1. `long_context_judgment`
    - Parent question: How can long-context LLM methods extract reusable trading judgment from messy trader text?
-   - Current state: scaffold fixture exports plus one admitted tiny live LLM pilot export set for `long_context_judgment_live_pilot_001`
+   - Current state: scaffold fixture exports plus one admitted tiny live LLM pilot export set and one manual content-review EvaluationRecord for `long_context_judgment_live_pilot_001`
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
@@ -85,7 +85,7 @@ They exist to prove that labs can publish comparable records and that synthesis 
 
 The `long_context_judgment_live_pilot_001` planning packet and `run_admission_update.md` are not evidence and are not synthesis exports.
 
-One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`. It is proposal-only. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`, along with one manual content-review EvaluationRecord. They are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
@@ -117,12 +117,13 @@ labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 
 It authorized exactly one tiny live LLM pilot run under the stated scope.
 
-The proposal-only live export set is:
+The proposal-only live export set and manual content-review EvaluationRecord are:
 
 ```text
 labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json
 labs/long_context_judgment/EXPORTS/artifact_envelope.live_pilot_001.json
 labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json
 labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json
 ```
 

@@ -1,13 +1,13 @@
 # Live LLM Pilot 001 Content Review Plan
 
-Status: Goal 6 planning document
+Status: Goal 6 content-review planning record
 
-This is a planning document for content-review and evaluator-calibration work after the first admitted live LLM pilot.
+This is a planning document for content-review and evaluator-calibration work after the first admitted live LLM pilot, with the Goal 6C-B export boundary recorded.
 
 Do not call an LLM.
 Do not run another model.
 Do not create new live-run records.
-Do not create an EvaluationRecord content-review export yet.
+Goal 6C-B creates exactly one `manual_content_review` EvaluationRecord.
 Do not graduate anything.
 Do not commit raw model output, raw provider payload, raw prompt trace, raw source text, or secrets.
 
@@ -157,12 +157,14 @@ Reason:
 
 The protocol change was adding `manual_content_review` to the existing EvaluationRecord `evaluator_type` enum. No new protocol object is needed for the next step unless repeated runs prove the current EvaluationRecord shape cannot carry the needed review comments, score, pass/fail status, and failure tags.
 
-The actual content-review export is still not created by Goal 6C-A.
+Goal 6C-A did not create the content-review export.
 
-Before exporting a content-review EvaluationRecord, the next authorized task should decide whether to:
+Goal 6C-B is the separately authorized content-review export task.
+
+The authorized content-review export task preserves these boundaries:
 
 1. inspect ignored local model/source materials without committing raw text or traces,
-2. create exactly one `manual_content_review` EvaluationRecord if authorized,
+2. create exactly one `manual_content_review` EvaluationRecord as authorized,
 3. keep the review proposal-only and non-authoritative,
 4. avoid creating any new RunRecord, ArtifactEnvelope, ResearchNote, protocol object, or graduation claim.
 
@@ -193,10 +195,11 @@ Rationale:
 * More model calls would create more proposal records without a reliable content-review path.
 * Manual review should come before an LLM judge because one live pilot is too early to delegate evaluation to another model.
 
-Recommended sequence:
+Current sequence:
 
 ```text
-Goal 6C: authorize and export one manual content-review EvaluationRecord if protocol support is added.
+Goal 6C-A: add protocol support for one manual content-review evaluator.
+Goal 6C-B: export exactly one manual content-review EvaluationRecord.
 Goal 7: decide whether to run a second method or improve evaluator calibration further.
 ```
 

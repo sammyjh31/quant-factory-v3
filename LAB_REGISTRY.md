@@ -26,7 +26,7 @@ How can long-context LLM methods extract reusable trading judgment from messy tr
 Current state:
 
 ```text
-scaffold fixture exports plus one admitted proposal-only live pilot export set
+scaffold fixture exports plus one admitted proposal-only live pilot export set and one manual content-review EvaluationRecord
 ```
 
 Required fixture posture:
@@ -59,16 +59,17 @@ labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 
 The run admission update authorized exactly one tiny live LLM pilot run under the stated scope. The update itself did not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
 
-The authorized live pilot has now produced one proposal-only export set:
+The authorized live pilot has now produced one proposal-only export set and one manual content-review EvaluationRecord:
 
 ```text
 labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json
 labs/long_context_judgment/EXPORTS/artifact_envelope.live_pilot_001.json
 labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json
 labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json
 ```
 
-The live export set is proposal-only and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+The live export set and manual content-review EvaluationRecord are proposal-only and do not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
