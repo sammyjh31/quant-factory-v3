@@ -2,7 +2,9 @@
 
 Status: Goal 7A live-run admission update for one future proposal-only pilot
 
-This admission update authorizes exactly one tiny live LLM pilot run under the stated scope.
+This admission update defines the executable preflight scope for exactly one future tiny live LLM pilot run.
+
+It does not by itself authorize execution. Execution requires a separate Goal 7B instruction.
 
 Goal 7A does not execute the run. No LLM call has been made for `chunked_source_grounding_live_pilot_001`.
 
@@ -60,7 +62,7 @@ This pilot tests whether a chunked/source-grounded reader can produce comparable
 
 ## Run Scope
 
-The authorized run scope is:
+The defined run scope is:
 
 * one tiny pilot,
 * one approved source scope,

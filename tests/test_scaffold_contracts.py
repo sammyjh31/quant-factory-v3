@@ -1138,8 +1138,12 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
     prompt_template = prompt_template_path.read_text()
     for required in [
         (
-            "This admission update authorizes exactly one tiny live LLM pilot run under "
-            "the stated scope."
+            "This admission update defines the executable preflight scope for exactly "
+            "one future tiny live LLM pilot run."
+        ),
+        (
+            "It does not by itself authorize execution. Execution requires a separate "
+            "Goal 7B instruction."
         ),
         "Provider: DeepSeek API",
         "API format: OpenAI-compatible chat completions",
@@ -1160,6 +1164,7 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
     assert '"type": "disabled"' in update
     assert "one model-call batch" in update
     assert "same approved excerpt as `long_context_judgment_live_pilot_001`" in update
+    assert "authorizes exactly one tiny live LLM pilot run" not in update
 
     recorded_prompt_hash = re.search(r"Prompt template SHA-256: `([0-9a-f]{64})`", update)
     assert recorded_prompt_hash

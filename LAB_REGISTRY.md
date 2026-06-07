@@ -113,7 +113,7 @@ Run admission update:
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/run_admission_update.md
 ```
 
-The run admission update authorizes exactly one tiny future live LLM pilot run under the stated scope. Goal 7A did not call a model and did not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
+The run admission update defines the executable preflight scope for exactly one future live LLM pilot run under the stated scope. It does not by itself authorize execution. Goal 7A did not call a model and did not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
 
 The planned pilot is proposal-only comparison work against `long_context_judgment_live_pilot_001` and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
