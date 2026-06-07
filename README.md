@@ -91,7 +91,7 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 Current phase: `milestone-2-live-pilot-recorded`
 
-The scaffold baseline is accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`.
+The scaffold baseline is accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`, plus a Goal 7A planning packet for the first chunked/source-grounded comparison pilot.
 
 The live export set is proposal-only. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -108,13 +108,14 @@ The accepted scaffold contains:
 * currentness docs,
 * and tests proving the scaffold boundaries.
 
-The current planning packet lives under:
+Current live-pilot planning packets live under:
 
 ```text
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
 ```
 
-It includes `run_admission_update.md`, which authorized exactly one tiny live LLM pilot run under the stated scope. The packet is not in `EXPORTS/`, is not imported by synthesis, and is not research evidence.
+The first packet includes `run_admission_update.md`, which authorized exactly one tiny live LLM pilot run under the stated scope. The chunked-source packet plans `chunked_source_grounding_live_pilot_001` for method comparison only. Planning packets are not in `EXPORTS/`, are not imported by synthesis, and are not research evidence.
 
 The purpose of the first live pilot was to prove that a real model call can be recorded, evaluated at the boundary, compared later, and contained without turning output into truth.
 

@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "chunked_source_grounding_live_pilot_001",
+    "lab_id": "chunked_source_grounding",
+    "research_question": "Can a chunked/source-grounded LLM method preserve exact source grounding better than the long-context method, and what broader trading-judgment abstraction does it lose?",
+    "hypothesis": "On the same source excerpt and benchmark as long_context_judgment_live_pilot_001, a chunked/source-grounded method may improve span traceability while weakening broad judgment abstraction and cross-segment synthesis.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "chunked_source_grounding_live_pilot_001_method"
+    ],
+    "evaluation_plan": "Validate this proposed ExperimentCard and MethodCard against protocol schemas. After a separately executed live run, create proposal-only export records and compare source grounding, abstraction loss, unsupported-claim handling, and negative-result value against long_context_judgment_live_pilot_001. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "chunked_source_grounding_proposal"
+    ]
+  }
+}

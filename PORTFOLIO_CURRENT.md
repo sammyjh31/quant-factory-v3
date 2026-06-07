@@ -12,7 +12,7 @@ This file owns the current portfolio posture. It does not own lab results, metho
 
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
-The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set plus one manual content-review EvaluationRecord recorded under `labs/long_context_judgment/EXPORTS/`.
+The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set plus one manual content-review EvaluationRecord recorded under `labs/long_context_judgment/EXPORTS/`, and one Goal 7A chunked/source-grounded comparison planning packet under `labs/chunked_source_grounding/PLANNING/`.
 
 The accepted scaffold contains:
 
@@ -25,15 +25,16 @@ The accepted scaffold contains:
 
 The scaffold exists so live LLM experiments can be measured, compared, and contained.
 
-Current planning packet:
+Current live-pilot planning packets:
 
 ```text
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
 ```
 
-The base Goal 3 planning material is proposed planning structure only. It is not in `EXPORTS/`, is not imported by synthesis, and does not authorize execution by itself.
+The base Goal 3 long-context planning material and Goal 7A chunked-source planning material are proposed planning structure only. They are not in `EXPORTS/`, are not imported by synthesis, and do not authorize execution by themselves.
 
-The packet now includes:
+The long-context packet includes:
 
 ```text
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
@@ -42,6 +43,8 @@ labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 That update authorized exactly one tiny live LLM pilot run under the stated scope. The update itself did not create run evidence, generated synthesis claims, graduation status, or architecture.
 
 The authorized run has produced one proposal-only live export set and one manual content-review EvaluationRecord. These records are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+
+The chunked-source packet plans `chunked_source_grounding_live_pilot_001` for comparison against the first pilot. No model call, export record, research evidence, generated synthesis claim, graduation status, or architecture has been created for that pilot.
 
 ---
 
@@ -55,7 +58,7 @@ Active scaffold-origin labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: scaffold fixture exports only
+   - Current state: scaffold fixture exports plus Goal 7A planning packet for `chunked_source_grounding_live_pilot_001`
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -83,7 +86,7 @@ Current scaffold-origin lab records remain fixtures for protocol validation only
 
 They exist to prove that labs can publish comparable records and that synthesis can import those records read-only.
 
-The `long_context_judgment_live_pilot_001` planning packet and `run_admission_update.md` are not evidence and are not synthesis exports.
+The `long_context_judgment_live_pilot_001` planning packet, `chunked_source_grounding_live_pilot_001` planning packet, and their `run_admission_update.md` files are not evidence and are not synthesis exports.
 
 One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`, along with one manual content-review EvaluationRecord. They are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -126,6 +129,14 @@ labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json
 labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json
 labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json
 ```
+
+The first chunked/source-grounded comparison pilot is planned under:
+
+```text
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
+```
+
+That packet contains proposed MethodCard and ExperimentCard records plus an admission update for `chunked_source_grounding_live_pilot_001`. No live call or export records exist for that pilot yet.
 
 Future live LLM experiments must pass the admission checklist in:
 

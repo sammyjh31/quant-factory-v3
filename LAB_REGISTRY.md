@@ -90,8 +90,32 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports only
+scaffold fixture exports plus Goal 7A planning packet
 ```
+
+Proposed planning packet:
+
+```text
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
+```
+
+Planning experiment id:
+
+```text
+chunked_source_grounding_live_pilot_001
+```
+
+The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence.
+
+Run admission update:
+
+```text
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/run_admission_update.md
+```
+
+The run admission update authorizes exactly one tiny future live LLM pilot run under the stated scope. Goal 7A did not call a model and did not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
+
+The planned pilot is proposal-only comparison work against `long_context_judgment_live_pilot_001` and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 

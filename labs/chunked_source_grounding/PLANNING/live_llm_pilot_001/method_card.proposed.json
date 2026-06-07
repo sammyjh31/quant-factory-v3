@@ -1,0 +1,39 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "MethodCard",
+  "schema_version": "0.1.2",
+  "method_card": {
+    "method_id": "chunked_source_grounding_live_pilot_001_method",
+    "lab_id": "chunked_source_grounding",
+    "parent_question": "How can chunked/source-span LLM methods preserve source grounding while still supporting useful abstraction?",
+    "method_family": "chunked_source_grounded_llm_reader_proposed",
+    "intended_inputs": [
+      "the same approved source excerpt used by long_context_judgment_live_pilot_001",
+      "metadata-safe benchmark pack text_judgment_v0",
+      "chunked source segments with explicit span support expectations",
+      "pre-recorded prompt and model configuration metadata"
+    ],
+    "intended_outputs": [
+      "chunked_source_grounding_proposal",
+      "source-linked claim table",
+      "segment/span support notes",
+      "unsupported-claim report",
+      "judgment abstraction notes",
+      "method-failure notes"
+    ],
+    "known_risks": [
+      "This is a proposed live LLM pilot planning record, not a completed run.",
+      "Chunking may preserve source spans while losing broader trader intent.",
+      "Segment-local claims may become too literal or fail to synthesize reusable judgment.",
+      "Prompt or trace handling may accidentally include raw source material if the privacy boundary is not followed."
+    ],
+    "non_goals": [
+      "not a completed run",
+      "not research evidence",
+      "not a synthesis export",
+      "not strategy validation",
+      "not product authority",
+      "not architecture or graduation evidence"
+    ]
+  }
+}
