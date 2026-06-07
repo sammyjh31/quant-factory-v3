@@ -1,0 +1,39 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ResearchNote",
+  "schema_version": "0.1.1",
+  "research_note": {
+    "note_id": "long_context_judgment_live_pilot_001_note",
+    "lab_id": "long_context_judgment",
+    "experiment_ids": [
+      "long_context_judgment_live_pilot_001"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "The first admitted tiny live LLM pilot completed one DeepSeek V4 Flash call and produced protocol-valid proposal-only export records. The run proves the live-recording boundary, not method quality.",
+    "what_worked": [
+      "The admitted provider/model/config produced parseable JSON output in one non-streaming batch.",
+      "The raw source excerpt, prompt trace, provider request/response, and model trace remained in ignored local paths.",
+      "The committed records can carry model, prompt, source-hash, token, cost, and proposal-count metadata without committing raw source or provider payloads."
+    ],
+    "what_failed": [
+      "No method success is claimed; method quality was not evaluated by this boundary review.",
+      "The committed record intentionally does not expose the full raw model output, so content-level review remains a future evaluation task."
+    ],
+    "negative_results": [
+      "A successful provider call is not validation, strategy evidence, product evidence, financial advice, live-trading authority, or architecture.",
+      "Proposal counts are inspection metadata only and do not imply useful trading intelligence."
+    ],
+    "reusable_by_other_labs": [
+      "Use proposal-only live records with explicit source hashes, prompt/config hashes, token/cost metadata, and trace-storage boundaries.",
+      "Keep full raw traces ignored until an explicit policy allows committing a sanitized review artifact."
+    ],
+    "do_not_repeat": [
+      "Do not treat a live proposal export as a scaffold fixture.",
+      "Do not copy generated synthesis metrics or raw model text into currentness docs.",
+      "Do not substitute models silently when the admitted model is unavailable."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

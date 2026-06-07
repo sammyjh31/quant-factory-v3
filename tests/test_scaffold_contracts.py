@@ -34,6 +34,11 @@ GOAL3_PILOT_DIR = (
 )
 GOAL3_METHOD_ID = "long_context_judgment_live_pilot_001_method"
 GOAL3_EXPERIMENT_ID = "long_context_judgment_live_pilot_001"
+LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
+LIVE_PILOT_ARTIFACT_ID = "long_context_judgment_live_pilot_001_artifact"
+LIVE_PILOT_EVALUATION_ID = "long_context_judgment_live_pilot_001_eval"
+LIVE_PILOT_NOTE_ID = "long_context_judgment_live_pilot_001_note"
+LIVE_PILOT_SOURCE_REF_PREFIX = "raw_corpora_sha256:"
 LIVE_PILOT_POST_RUN_EXPORTS = {
     "run_record.live_pilot_001.json",
     "artifact_envelope.live_pilot_001.json",
@@ -351,18 +356,25 @@ def test_future_candidate_packs_are_not_active():
 
 def test_all_lab_exports_validate_and_include_positive_and_negative_fixtures():
     export_paths = lab_export_paths(ROOT)
-    assert len(export_paths) == 3
     expected_labs = {
         "chunked_source_grounding",
         "long_context_judgment",
         "visual_deictic_understanding",
     }
     assert {path.parents[1].name for path in export_paths} == expected_labs
+    fixture_paths = {path for path in export_paths if path.name == "fixture_records.json"}
+    assert len(fixture_paths) == 3
+    live_export_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
+    assert {path.name for path in live_export_dir.glob("*.live_pilot_001.json")} == (
+        LIVE_PILOT_POST_RUN_EXPORTS
+    )
     for path in export_paths:
         records = list(iter_records(path))
         assert records
         for record in records:
             validate_record(record)
+        if path.name != "fixture_records.json":
+            continue
         run_polarities = {
             record["run_record"]["outcome_polarity"]
             for record in records
@@ -410,8 +422,16 @@ def test_artifact_envelopes_use_final_posture_facets_only():
 
 def test_run_records_link_required_protocol_ids():
     method_ids = {record["method_card"]["method_id"] for record in records_by_schema("MethodCard")}
+    planning_method_ids = {
+        load_json(GOAL3_PILOT_DIR / "method_card.proposed.json")["method_card"]["method_id"]
+    }
     experiment_ids = {
         record["experiment_card"]["experiment_id"] for record in records_by_schema("ExperimentCard")
+    }
+    planning_experiment_ids = {
+        load_json(GOAL3_PILOT_DIR / "experiment_card.proposed.json")["experiment_card"][
+            "experiment_id"
+        ]
     }
     artifact_ids = {
         record["artifact"]["artifact_id"] for record in records_by_schema("ArtifactEnvelope")
@@ -426,8 +446,12 @@ def test_run_records_link_required_protocol_ids():
 
     for record in records_by_schema("RunRecord"):
         run = record["run_record"]
-        assert run["method_id"] in method_ids
-        assert run["experiment_id"] in experiment_ids
+        if run["run_kind"] == "live_llm_pilot":
+            assert run["method_id"] in planning_method_ids
+            assert run["experiment_id"] in planning_experiment_ids
+        else:
+            assert run["method_id"] in method_ids
+            assert run["experiment_id"] in experiment_ids
         assert run["benchmark_pack_id"] in benchmark_ids
         assert run["source_refs"]
         assert set(run["artifact_ids"]).issubset(artifact_ids)
@@ -438,8 +462,12 @@ def test_research_notes_and_llm_judge_placeholders_are_bounded():
     notes = records_by_schema("ResearchNote")
     assert notes
     for record in notes:
+        note = record["research_note"]
         disclaimer = record["research_note"]["evidence_disclaimer"]
-        assert disclaimer == FIXTURE_EVIDENCE_DISCLAIMER
+        if note["note_id"] == LIVE_PILOT_NOTE_ID:
+            assert disclaimer == LIVE_EVIDENCE_DISCLAIMER
+        else:
+            assert disclaimer == FIXTURE_EVIDENCE_DISCLAIMER
 
     llm_placeholder_evals = [
         record["evaluation"]
@@ -570,43 +598,34 @@ def test_goal3_live_pilot_planning_packet_is_contained_and_current():
         assert required_heading in admission
     for required_guardrail in [
         "This is a proposed live LLM pilot planning record.",
-        "No LLM call has been made.",
-        "No output artifact has been produced.",
-        "No evaluation result exists.",
+        "The separate `run_admission_update.md` authorized exactly one tiny live LLM pilot run.",
+        "The planning packet is still not research evidence",
         "No method success is claimed.",
         "not a synthesis export",
     ]:
         assert required_guardrail in admission
 
-    summary = synthesize_exports(root=ROOT)
-    assert summary["record_count"] == 27
-    assert GOAL3_METHOD_ID not in summary["methods"]
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
 
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     assert GOAL3_EXPERIMENT_ID in portfolio
     assert GOAL3_EXPERIMENT_ID in lab_registry
-    assert "No live LLM experiment has run." in portfolio
     assert "not in `EXPORTS/`" in lab_registry
 
 
-def test_goal4_live_pilot_run_admission_update_is_executable_but_pre_run():
+def test_goal4_live_pilot_run_admission_update_preserves_admitted_scope():
     update_path = GOAL3_PILOT_DIR / "run_admission_update.md"
     prompt_template_path = GOAL3_PILOT_DIR / "prompt_template.live_pilot_001.md"
-    exports_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
     update = update_path.read_text()
     prompt_template = prompt_template_path.read_text()
 
     assert (
-        "This admission update authorizes exactly one tiny live LLM pilot run under "
+        "This admission update authorized exactly one tiny live LLM pilot run under "
         "the stated scope."
         in update
     )
     for required in [
-        "No LLM call has been made.",
-        "No output artifact has been produced.",
-        "No evaluation result exists.",
-        "No method success is claimed.",
         "Provider: DeepSeek API",
         "API format: OpenAI-compatible chat completions",
         "Base URL: `https://api.deepseek.com`",
@@ -675,31 +694,127 @@ def test_goal4_live_pilot_run_admission_update_is_executable_but_pre_run():
 
     for expected_export in LIVE_PILOT_POST_RUN_EXPORTS:
         assert f"labs/long_context_judgment/EXPORTS/{expected_export}" in update
-        assert not (exports_dir / expected_export).exists()
-    assert not any(
-        "live_pilot_001" in path.name
-        for path in exports_dir.glob("*.json")
-        if path.name != "fixture_records.json"
-    )
 
     summary = synthesize_exports(root=ROOT)
-    assert summary["record_count"] == 27
-    assert GOAL3_METHOD_ID not in summary["methods"]
+    assert summary["record_count"] == 31
+    assert GOAL3_METHOD_ID in summary["methods"]
+    assert summary["outcome_polarities"] == [
+        "negative_fixture",
+        "positive_fixture",
+        "proposal_only",
+    ]
+    assert summary["statuses"] == ["fixture_recorded", "live_recorded"]
 
     graduation = (ROOT / "GRADUATION_LEDGER.md").read_text()
     assert "No graduated items." in graduation
-    assert "live-run preflight admission update does not affect graduation status" in graduation
+    assert "first Goal 5 proposal-only live pilot export set does not affect graduation status" in (
+        graduation
+    )
 
     readme = (ROOT / "README.md").read_text()
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [readme, portfolio, lab_registry]:
         assert "run_admission_update.md" in currentness_doc
-    assert "No live LLM experiment has run." in portfolio
-    assert (
-        "authorizes exactly one tiny live LLM pilot run under the stated scope"
-        in portfolio
+        assert "no live LLM call has been made" not in currentness_doc.lower()
+        assert "No live LLM experiment has run." not in currentness_doc
+    assert "one admitted tiny live LLM pilot export set" in portfolio
+
+
+def test_goal5_live_pilot_export_set_is_protocol_valid_and_bounded():
+    export_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
+    live_exports = {path.name: load_json(path) for path in export_dir.glob("*.live_pilot_001.json")}
+    assert set(live_exports) == LIVE_PILOT_POST_RUN_EXPORTS
+    for record in live_exports.values():
+        validate_record(record)
+
+    run = live_exports["run_record.live_pilot_001.json"]
+    artifact = live_exports["artifact_envelope.live_pilot_001.json"]
+    evaluation = live_exports["evaluation_record.live_pilot_001.json"]
+    note = live_exports["research_note.live_pilot_001.json"]
+
+    assert run["schema_name"] == "RunRecord"
+    assert run["schema_version"] == CURRENT_SCHEMA_VERSION
+    run_record = run["run_record"]
+    assert run_record == {
+        "run_id": LIVE_PILOT_RUN_ID,
+        "lab_id": "long_context_judgment",
+        "experiment_id": GOAL3_EXPERIMENT_ID,
+        "method_id": GOAL3_METHOD_ID,
+        "benchmark_pack_id": "text_judgment_v0",
+        "source_refs": run_record["source_refs"],
+        "artifact_ids": [LIVE_PILOT_ARTIFACT_ID],
+        "evaluation_ids": [LIVE_PILOT_EVALUATION_ID],
+        "run_kind": "live_llm_pilot",
+        "outcome_polarity": "proposal_only",
+        "status": "live_recorded",
+    }
+    assert len(run_record["source_refs"]) == 1
+    assert run_record["source_refs"][0].startswith(LIVE_PILOT_SOURCE_REF_PREFIX)
+
+    artifact_payload = artifact["artifact"]["payload"]
+    assert artifact["artifact"]["artifact_id"] == LIVE_PILOT_ARTIFACT_ID
+    assert artifact["artifact"]["artifact_type"] == "judgment_principle_proposal"
+    assert artifact["artifact"]["run_id"] == LIVE_PILOT_RUN_ID
+    assert artifact["artifact"]["source_refs"] == run_record["source_refs"]
+    assert artifact["artifact"]["posture"] == {
+        "grounding_status": "source_linked",
+        "review_status": "self_checked",
+        "readiness_status": "study_candidate",
+        "validation_status": "none",
+        "lifecycle_status": "active",
+    }
+    assert "proposal_only_not_evaluated" in artifact["artifact"]["blockers"]
+    assert artifact_payload["outcome_polarity"] == "proposal_only"
+    assert artifact_payload["proposal_only"] is True
+    assert artifact_payload["provider_id"] == "deepseek_api"
+    assert artifact_payload["base_url"] == "https://api.deepseek.com"
+    assert artifact_payload["model_id"] == "deepseek-v4-flash"
+    assert artifact_payload["thinking"] == {"type": "disabled"}
+    assert artifact_payload["stream"] is False
+    assert artifact_payload["prompt_template_sha256"] == PROMPT_TEMPLATE_SHA256
+    assert artifact_payload["config_sha256"] == CONFIG_SHA256
+    assert artifact_payload["source_metadata"]["source_ref"] == run_record["source_refs"][0]
+    assert artifact_payload["source_metadata"]["excerpt_word_count"] >= 300
+    assert artifact_payload["source_metadata"]["excerpt_word_count"] <= 1000
+    assert artifact_payload["cost_metadata"]["budget_cap_usd"] == 3.0
+    assert artifact_payload["cost_metadata"]["estimated_cost_usd"] <= 3.0
+    assert artifact_payload["raw_source_text_committed"] is False
+    assert artifact_payload["raw_provider_payload_committed"] is False
+    assert artifact_payload["raw_prompt_trace_committed"] is False
+    assert artifact_payload["secrets_committed"] is False
+    assert "raw_source_text" not in artifact_payload
+    assert "provider_payload" not in artifact_payload
+    assert "api_key" not in json.dumps(artifact_payload).lower()
+
+    assert evaluation["evaluation"]["evaluation_id"] == LIVE_PILOT_EVALUATION_ID
+    assert evaluation["evaluation"]["target_id"] == LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["evaluation"]["evaluator_type"] == "manual_boundary_review"
+    assert evaluation["evaluation"]["pass_fail"] == "pass"
+    assert "method quality was not evaluated" in evaluation["evaluation"]["comments"]
+
+    research_note = note["research_note"]
+    assert research_note["note_id"] == LIVE_PILOT_NOTE_ID
+    assert research_note["experiment_ids"] == [GOAL3_EXPERIMENT_ID]
+    assert research_note["benchmark_pack_ids"] == ["text_judgment_v0"]
+    assert research_note["evidence_disclaimer"] == LIVE_EVIDENCE_DISCLAIMER
+    assert any("No method success is claimed" in item for item in research_note["what_failed"])
+
+    combined_committed = "\n".join(
+        path.read_text()
+        for path in [
+            export_dir / name
+            for name in sorted(LIVE_PILOT_POST_RUN_EXPORTS)
+        ]
     )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+    ]:
+        assert forbidden not in combined_committed
 
 
 def test_authority_docs_preserve_scaffold_boundaries():
@@ -717,20 +832,24 @@ def test_authority_docs_preserve_scaffold_boundaries():
     )
     assert architecture_rule in readme
     assert architecture_rule in lifecycle
-    assert "future live LLM runs" in readme
+    assert "Future live experiments must pass" in readme
     assert "Future labs may experiment" in llm_model
-    assert "There is no real research evidence in scaffold milestone one." in portfolio
+    assert "Scaffold milestone-one fixture records are not real research evidence." in portfolio
+    assert "one admitted tiny live LLM pilot export set" in portfolio
     assert "## Active federation labs" in portfolio
     assert "Milestone-one active labs" not in portfolio
     assert "generated synthesis metrics" not in portfolio.lower()
-    assert "Current phase: `milestone-2-planning`" in graduation
+    assert "Current phase: `milestone-2-live-pilot-recorded`" in graduation
     assert "Current milestone: `scaffold-v0.1`" not in graduation
-    assert "Current phase: `milestone-2-planning`" in admission
+    assert "Current phase: `milestone-2-live-pilot-recorded`" in admission
     assert "Current milestone: scaffold-v0.1" not in admission
     assert "No graduated items." in graduation
     assert (
         "The Goal 3 live pilot planning packet does not affect graduation status."
         in graduation
+    )
+    assert "first Goal 5 proposal-only live pilot export set does not affect graduation status" in (
+        graduation
     )
     for required in [
         "Active Benchmark Pack",

@@ -1,10 +1,10 @@
 # Live LLM Pilot 001 Run Admission Update
 
-Status: Milestone 2 live-run preflight admission update
+Status: Milestone 2 live-run admission update used for one completed proposal-only pilot
 
-This admission update authorizes exactly one tiny live LLM pilot run under the stated scope.
+This admission update authorized exactly one tiny live LLM pilot run under the stated scope.
 
-This update is not a completed run, not research evidence, and not a synthesis export. No LLM call has been made. No output artifact has been produced. No evaluation result exists. No method success is claimed.
+This update itself is not research evidence and not a synthesis export. The authorized run has now produced one proposal-only export set under `labs/long_context_judgment/EXPORTS/`. No method success is claimed.
 
 ---
 
@@ -188,7 +188,7 @@ labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json
 labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json
 ```
 
-Those files do not exist in this preflight update.
+Those files now exist because the authorized run has completed. They remain proposal-only export records.
 
 ---
 

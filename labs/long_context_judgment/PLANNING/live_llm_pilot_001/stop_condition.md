@@ -4,13 +4,13 @@ Status: proposed planning document
 
 This is a proposed live LLM pilot planning record. It is not a completed run, not research evidence, and not a synthesis export.
 
-No LLM call has been made. No output artifact has been produced. No evaluation result exists. No method success is claimed.
+The authorized Goal 5 live run has completed one model-call batch and produced proposal-only export records. No method success is claimed.
 
 ---
 
-## Future Run Stop Condition
+## Run Stop Condition
 
-The future live pilot must stop after:
+The authorized live pilot stopped after:
 
 * one approved source scope,
 * one approved model configuration,
@@ -39,4 +39,8 @@ This Goal 3 planning packet is complete when the proposed MethodCard and Experim
 
 ## Preflight Stop Condition
 
-The Goal 4 live-run preflight is complete when `run_admission_update.md` records the provider/model, prompt/template hash, config hash, budget, source scope, trace boundary, secret boundary, post-run export paths, and exact one-run stop condition without creating live-run exports.
+The Goal 4 live-run preflight completed when `run_admission_update.md` recorded the provider/model, prompt/template hash, config hash, budget, source scope, trace boundary, secret boundary, post-run export paths, and exact one-run stop condition without creating live-run exports.
+
+## Goal 5 Stop Condition
+
+Goal 5 is complete when exactly one live model-call batch has produced proposal-only export records, stale pre-run currentness text has been replaced, synthesis imports the records from `EXPORTS/`, and no graduation or architecture claim has been created.

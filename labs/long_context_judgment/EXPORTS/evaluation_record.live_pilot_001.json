@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.1",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_001_eval",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_001_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_v0",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: exactly one admitted model-call batch ran, raw source text and provider payloads stayed ignored, committed output is proposal-only, and method quality was not evaluated."
+  }
+}

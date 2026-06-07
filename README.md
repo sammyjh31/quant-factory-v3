@@ -89,9 +89,11 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 ## Current Phase
 
-Current phase: `milestone-2-planning`
+Current phase: `milestone-2-live-pilot-recorded`
 
-The scaffold baseline is accepted. Current work is Milestone 2 live-run preflight for the first tiny live LLM pilot; no live LLM call has been made.
+The scaffold baseline is accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`.
+
+The live export set is proposal-only. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 Milestone one was not a limitation on V3’s ambition. It created the first safety and comparison harness.
 
@@ -112,9 +114,9 @@ The current planning packet lives under:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/
 ```
 
-It includes `run_admission_update.md`, which authorizes exactly one tiny live LLM pilot run under the stated scope. The packet is not in `EXPORTS/`, is not imported by synthesis, and is not research evidence.
+It includes `run_admission_update.md`, which authorized exactly one tiny live LLM pilot run under the stated scope. The packet is not in `EXPORTS/`, is not imported by synthesis, and is not research evidence.
 
-The purpose of this planning phase is still to define how future live LLM runs will be recorded, evaluated, compared, and contained before any model output is produced.
+The purpose of the first live pilot was to prove that a real model call can be recorded, evaluated at the boundary, compared later, and contained without turning output into truth.
 
 See:
 
@@ -164,7 +166,7 @@ uv run qf-v3-synthesis
 
 Generated synthesis outputs are ignored by default and non-authoritative.
 
-Synthesis may summarize fixture records, but it does not mutate labs, declare winners, graduate methods, or become portfolio authority.
+Synthesis may summarize export records, but it does not mutate labs, declare winners, graduate methods, or become portfolio authority.
 
 ---
 

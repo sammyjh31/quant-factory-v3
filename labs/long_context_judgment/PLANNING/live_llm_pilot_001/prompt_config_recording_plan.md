@@ -4,7 +4,7 @@ Status: proposed planning document
 
 This is a proposed live LLM pilot planning record. It is not a completed run, not research evidence, and not a synthesis export.
 
-No LLM call has been made. No output artifact has been produced. No evaluation result exists. No method success is claimed.
+The authorized Goal 5 live run used the prompt/config locked in `run_admission_update.md`. No method success is claimed.
 
 ---
 
@@ -26,7 +26,7 @@ Prompt text containing raw source material must remain local-only or ignored.
 
 The base Goal 3 planning packet did not select a provider or model. The run admission update now selects the provider/model/config for one tiny authorized pilot scope.
 
-Before any live call, the run admission update must continue to record:
+For the authorized live call, the run admission update records:
 
 * provider id,
 * model id,
@@ -44,4 +44,4 @@ Config records must not include secrets.
 
 Raw model traces and provider payloads must not be committed unless a later explicit policy allows them.
 
-Any future trace storage location must be named in the admission update before execution.
+Any additional future trace storage location must be named in a separate admission update before execution.

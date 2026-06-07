@@ -1,7 +1,7 @@
 # Lab Registry
 
 Status: lab currentness router  
-Current phase: `milestone-2-planning`
+Current phase: `milestone-2-live-pilot-recorded`
 
 This file lists labs and their parent research questions. It does not claim that any method works.
 
@@ -26,7 +26,7 @@ How can long-context LLM methods extract reusable trading judgment from messy tr
 Current state:
 
 ```text
-scaffold fixture exports plus proposed live pilot planning packet and run admission update
+scaffold fixture exports plus one admitted proposal-only live pilot export set
 ```
 
 Required fixture posture:
@@ -57,7 +57,18 @@ Run admission update:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 ```
 
-The run admission update authorizes exactly one tiny live LLM pilot run under the stated scope. It does not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records, and no live LLM experiment has run.
+The run admission update authorized exactly one tiny live LLM pilot run under the stated scope. The update itself did not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
+
+The authorized live pilot has now produced one proposal-only export set:
+
+```text
+labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/artifact_envelope.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json
+```
+
+The live export set is proposal-only and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 

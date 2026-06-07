@@ -6,7 +6,9 @@ Experiment: `long_context_judgment_live_pilot_001`
 
 This is a proposed live LLM pilot planning record. It is not a completed run, not research evidence, and not a synthesis export.
 
-No LLM call has been made. No output artifact has been produced. No evaluation result exists. No method success is claimed.
+The separate `run_admission_update.md` authorized exactly one tiny live LLM pilot run. That run has now produced proposal-only export records under `labs/long_context_judgment/EXPORTS/`.
+
+The planning packet is still not research evidence, not a synthesis export, and not a method success claim. No method success is claimed.
 
 This base packet prepared the future admission decision. It does not authorize execution by itself; the separate `run_admission_update.md` narrows the packet to exactly one authorized preflight run scope.
 
@@ -98,9 +100,9 @@ labs/long_context_judgment/PLANNING/live_llm_pilot_001/evaluator_plan.md
 Planned evaluator types:
 
 * `schema_check`
-* `human_placeholder`
+* `manual_boundary_review`
 
-No evaluator has run. No evaluation result exists.
+The Goal 5 export set includes a boundary-only `manual_boundary_review` EvaluationRecord. It does not evaluate method quality.
 
 ---
 
@@ -142,7 +144,7 @@ Provider/model/config details are locked only in:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 ```
 
-No LLM call has been made.
+The authorized Goal 5 LLM call used the provider/model/config locked in that update.
 
 ---
 
@@ -154,7 +156,7 @@ Expected post-run artifact types:
 * `source_grounded_claim`
 * `unsupported_claim_report`
 
-No ArtifactEnvelope exists for this pilot yet.
+A proposal-only ArtifactEnvelope now exists for this pilot under `labs/long_context_judgment/EXPORTS/`.
 
 ---
 

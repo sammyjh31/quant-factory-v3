@@ -4,13 +4,13 @@ Status: proposed planning document
 
 This is a proposed live LLM pilot planning record. It is not a completed run, not research evidence, and not a synthesis export.
 
-No LLM call has been made. No output artifact has been produced. No evaluation result exists. No method success is claimed.
+The authorized Goal 5 live run used one ignored local source excerpt and produced proposal-only export records. No method success is claimed.
 
 ---
 
 ## Source Scope
 
-The future live pilot may use one controlled messy trader text source scope associated with `text_judgment_v0`.
+The live pilot used one controlled messy trader text source scope associated with `text_judgment_v0`.
 
 The committed planning packet contains metadata only. It does not include raw source text, private notes, provider payloads, prompt traces, model traces, secrets, or raw V2 corpus material.
 
@@ -43,6 +43,6 @@ Not allowed in git:
 
 ## Local-Only Materials
 
-If source text is used in a future run, it must remain in a local or ignored path until a later explicit policy allows committing it.
+Source text must remain in a local or ignored path until a later explicit policy allows committing it.
 
-This planning packet does not choose or store the raw source material.
+This planning packet does not store the raw source material.

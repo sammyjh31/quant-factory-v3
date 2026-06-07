@@ -1,7 +1,7 @@
 # Portfolio Current
 
 Status: scaffold currentness router  
-Current phase: `milestone-2-planning`  
+Current phase: `milestone-2-live-pilot-recorded`
 Protocol version: `qf-v3-protocol-0.1`
 
 This file owns the current portfolio posture. It does not own lab results, method success claims, generated synthesis claims, or graduation decisions.
@@ -12,7 +12,7 @@ This file owns the current portfolio posture. It does not own lab results, metho
 
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
-The scaffold baseline has been accepted. The current phase is Milestone 2 live-run preflight for the first tiny live LLM pilot without running it.
+The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`.
 
 The accepted scaffold contains:
 
@@ -23,7 +23,7 @@ The accepted scaffold contains:
 - read-only synthesis,
 - and currentness docs.
 
-The scaffold exists so future live LLM experiments can be measured, compared, and contained.
+The scaffold exists so live LLM experiments can be measured, compared, and contained.
 
 Current planning packet:
 
@@ -39,7 +39,9 @@ The packet now includes:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 ```
 
-That update authorizes exactly one tiny live LLM pilot run under the stated scope. It does not create run evidence, generated synthesis claims, graduation status, or architecture.
+That update authorized exactly one tiny live LLM pilot run under the stated scope. The update itself did not create run evidence, generated synthesis claims, graduation status, or architecture.
+
+The authorized run has produced one proposal-only live export set. The export set is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
@@ -49,7 +51,7 @@ Active scaffold-origin labs:
 
 1. `long_context_judgment`
    - Parent question: How can long-context LLM methods extract reusable trading judgment from messy trader text?
-   - Current state: scaffold fixture exports plus proposed planning packet and run admission update for `long_context_judgment_live_pilot_001`
+   - Current state: scaffold fixture exports plus one admitted tiny live LLM pilot export set for `long_context_judgment_live_pilot_001`
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
@@ -75,13 +77,15 @@ Future candidate benchmark topics are listed under `benchmarks/future_candidates
 
 ## Evidence Status
 
-There is no real research evidence in scaffold milestone one.
+Scaffold milestone-one fixture records are not real research evidence.
 
-Current lab records are fixtures for protocol validation only.
+Current scaffold-origin lab records remain fixtures for protocol validation only.
 
 They exist to prove that labs can publish comparable records and that synthesis can import those records read-only.
 
-The `long_context_judgment_live_pilot_001` planning packet and `run_admission_update.md` are not evidence, not a completed run, and not synthesis exports.
+The `long_context_judgment_live_pilot_001` planning packet and `run_admission_update.md` are not evidence and are not synthesis exports.
+
+One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`. It is proposal-only. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
@@ -97,15 +101,13 @@ Architecture changes only after repeated evidence and explicit ADR.
 
 ## Live LLM Experiment Status
 
-No live LLM experiment has run.
-
-The first proposed live pilot is being planned under:
+The first admitted tiny live LLM pilot has run under:
 
 ```text
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/
 ```
 
-It contains proposed MethodCard and ExperimentCard records only. It does not contain RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
+The planning packet contains proposed MethodCard and ExperimentCard records only. Those planning records are not in `EXPORTS/` and are not imported by synthesis.
 
 The current preflight update is:
 
@@ -113,7 +115,16 @@ The current preflight update is:
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/run_admission_update.md
 ```
 
-It authorizes exactly one tiny live LLM pilot run under the stated scope, but no live LLM experiment has run.
+It authorized exactly one tiny live LLM pilot run under the stated scope.
+
+The proposal-only live export set is:
+
+```text
+labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/artifact_envelope.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json
+labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json
+```
 
 Future live LLM experiments must pass the admission checklist in:
 
@@ -127,7 +138,7 @@ docs/live-llm-experiment-admission.md
 
 Synthesis is read-only.
 
-It may import and summarize fixture records, but it does not:
+It may import and summarize export records, but it does not:
 
 * mutate lab files,
 * mutate benchmark files,

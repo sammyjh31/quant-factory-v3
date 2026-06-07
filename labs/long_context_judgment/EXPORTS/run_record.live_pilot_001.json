@@ -1,0 +1,24 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "RunRecord",
+  "schema_version": "0.1.1",
+  "run_record": {
+    "run_id": "long_context_judgment_live_pilot_001_run",
+    "lab_id": "long_context_judgment",
+    "experiment_id": "long_context_judgment_live_pilot_001",
+    "method_id": "long_context_judgment_live_pilot_001_method",
+    "benchmark_pack_id": "text_judgment_v0",
+    "source_refs": [
+      "raw_corpora_sha256:d8392c58c3b740eb"
+    ],
+    "artifact_ids": [
+      "long_context_judgment_live_pilot_001_artifact"
+    ],
+    "evaluation_ids": [
+      "long_context_judgment_live_pilot_001_eval"
+    ],
+    "run_kind": "live_llm_pilot",
+    "outcome_polarity": "proposal_only",
+    "status": "live_recorded"
+  }
+}
