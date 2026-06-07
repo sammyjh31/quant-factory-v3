@@ -1,0 +1,23 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.0",
+  "experiment_card": {
+    "experiment_id": "long_context_judgment_live_pilot_001",
+    "lab_id": "long_context_judgment",
+    "research_question": "Can a long-context LLM method extract reusable trading judgment from messy trader text without losing grounding?",
+    "hypothesis": "A single controlled long-context read may produce a small set of reusable trading judgment proposals while preserving enough source linkage to identify unsupported or over-abstracted claims.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "long_context_judgment_live_pilot_001_method"
+    ],
+    "evaluation_plan": "Before any run, validate this proposed ExperimentCard and MethodCard against protocol schemas. After a separately approved live run, evaluate only the resulting ArtifactEnvelope records with schema_check and human_placeholder review for source grounding, teacher-intent preservation, unsupported claims, and over-abstraction. No evaluation result exists in this planning packet.",
+    "expected_artifact_types": [
+      "judgment_principle_proposal",
+      "source_grounded_claim",
+      "unsupported_claim_report"
+    ]
+  }
+}

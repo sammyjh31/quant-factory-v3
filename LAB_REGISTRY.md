@@ -1,7 +1,7 @@
 # Lab Registry
 
 Status: lab currentness router  
-Current milestone: `scaffold-v0.1`
+Current phase: `milestone-2-planning`
 
 This file lists labs and their parent research questions. It does not claim that any method works.
 
@@ -26,7 +26,7 @@ How can long-context LLM methods extract reusable trading judgment from messy tr
 Current state:
 
 ```text
-scaffold fixture exports only
+scaffold fixture exports plus proposed live pilot planning packet
 ```
 
 Required fixture posture:
@@ -36,6 +36,20 @@ Required fixture posture:
 * protocol-valid fixture artifacts,
 * evaluation records,
 * research note with scaffold disclaimer.
+
+Proposed planning packet:
+
+```text
+labs/long_context_judgment/PLANNING/live_llm_pilot_001/
+```
+
+Planning experiment id:
+
+```text
+long_context_judgment_live_pilot_001
+```
+
+The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence.
 
 ---
 

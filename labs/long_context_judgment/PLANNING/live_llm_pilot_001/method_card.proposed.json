@@ -1,0 +1,35 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "MethodCard",
+  "schema_version": "0.1.0",
+  "method_card": {
+    "method_id": "long_context_judgment_live_pilot_001_method",
+    "lab_id": "long_context_judgment",
+    "parent_question": "How can long-context LLM methods extract reusable trading judgment from messy trader text?",
+    "method_family": "long_context_llm_reader_proposed",
+    "intended_inputs": [
+      "one controlled messy trader text source scope approved by the admission packet",
+      "metadata-safe benchmark pack text_judgment_v0",
+      "pre-recorded prompt and model configuration metadata"
+    ],
+    "intended_outputs": [
+      "judgment_principle_proposal",
+      "source_grounded_claim",
+      "unsupported_claim_report"
+    ],
+    "known_risks": [
+      "This is a proposed live LLM pilot planning record, not a completed run.",
+      "Long-context reading may over-abstract teacher intent.",
+      "Generated claims may weaken exact source grounding.",
+      "Prompt or trace handling may accidentally include raw source material if the privacy boundary is not followed."
+    ],
+    "non_goals": [
+      "not a completed run",
+      "not research evidence",
+      "not a synthesis export",
+      "not strategy validation",
+      "not product authority",
+      "not architecture or graduation evidence"
+    ]
+  }
+}

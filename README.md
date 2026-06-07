@@ -87,13 +87,15 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 ---
 
-## Current Milestone
+## Current Phase
 
-Current milestone: `scaffold-v0.1`
+Current phase: `milestone-2-planning`
 
-Milestone one is not a limitation on V3’s ambition. It is the first safety and comparison harness.
+The scaffold baseline is accepted. Current work is limited to designing the first tiny live LLM pilot admission packet; no live LLM call has been made.
 
-Milestone one creates:
+Milestone one was not a limitation on V3’s ambition. It created the first safety and comparison harness.
+
+The accepted scaffold contains:
 
 * shared protocol schemas,
 * metadata-safe benchmark packs,
@@ -104,7 +106,15 @@ Milestone one creates:
 * currentness docs,
 * and tests proving the scaffold boundaries.
 
-Milestone one does not run live LLM calls because the goal is to define how future live LLM runs will be recorded, evaluated, compared, and contained.
+The current planning packet lives under:
+
+```text
+labs/long_context_judgment/PLANNING/live_llm_pilot_001/
+```
+
+It is not in `EXPORTS/`, is not imported by synthesis, and is not research evidence.
+
+The purpose of this planning phase is still to define how future live LLM runs will be recorded, evaluated, compared, and contained.
 
 See:
 

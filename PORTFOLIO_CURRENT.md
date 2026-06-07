@@ -1,7 +1,7 @@
 # Portfolio Current
 
 Status: scaffold currentness router  
-Current milestone: `scaffold-v0.1`  
+Current phase: `milestone-2-planning`  
 Protocol version: `qf-v3-protocol-0.1`
 
 This file owns the current portfolio posture. It does not own lab results, method success claims, generated synthesis claims, or graduation decisions.
@@ -12,7 +12,9 @@ This file owns the current portfolio posture. It does not own lab results, metho
 
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
-The current milestone builds the scaffold required for future LLM experiments:
+The scaffold baseline has been accepted. The current phase designs the first tiny live LLM pilot admission packet without running it.
+
+The accepted scaffold contains:
 
 - protocol schemas,
 - benchmark manifests,
@@ -23,6 +25,14 @@ The current milestone builds the scaffold required for future LLM experiments:
 
 The scaffold exists so future live LLM experiments can be measured, compared, and contained.
 
+Current planning packet:
+
+```text
+labs/long_context_judgment/PLANNING/live_llm_pilot_001/
+```
+
+That packet is proposed planning structure only. It is not in `EXPORTS/`, is not imported by synthesis, and does not authorize execution.
+
 ---
 
 ## Active Labs
@@ -31,14 +41,15 @@ Milestone-one active labs:
 
 1. `long_context_judgment`
    - Parent question: How can long-context LLM methods extract reusable trading judgment from messy trader text?
+   - Current state: scaffold fixture exports plus proposed planning packet `long_context_judgment_live_pilot_001`
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
+   - Current state: scaffold fixture exports only
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
-
-These labs currently contain fixture records only.
+   - Current state: scaffold fixture exports only
 
 ---
 
@@ -62,6 +73,8 @@ Current lab records are fixtures for protocol validation only.
 
 They exist to prove that labs can publish comparable records and that synthesis can import those records read-only.
 
+The `long_context_judgment_live_pilot_001` planning packet is not evidence, not a completed run, and not a synthesis export.
+
 ---
 
 ## Current Architecture Rule
@@ -76,7 +89,15 @@ Architecture changes only after repeated evidence and explicit ADR.
 
 ## Live LLM Experiment Status
 
-No live LLM experiments run during scaffold milestone one.
+No live LLM experiment has run.
+
+The first proposed live pilot is being planned under:
+
+```text
+labs/long_context_judgment/PLANNING/live_llm_pilot_001/
+```
+
+It contains proposed MethodCard and ExperimentCard records only. It does not contain RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
 
 Future live LLM experiments must pass the admission checklist in:
 

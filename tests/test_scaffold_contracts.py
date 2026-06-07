@@ -16,6 +16,11 @@ from qf_v3_synthesis import synthesize_exports
 from qf_v3_synthesis.cli import main as synthesis_cli_main
 
 ROOT = Path(__file__).resolve().parents[1]
+GOAL3_PILOT_DIR = (
+    ROOT / "labs" / "long_context_judgment" / "PLANNING" / "live_llm_pilot_001"
+)
+GOAL3_METHOD_ID = "long_context_judgment_live_pilot_001_method"
+GOAL3_EXPERIMENT_ID = "long_context_judgment_live_pilot_001"
 
 
 def load_json(path: Path):
@@ -245,6 +250,84 @@ def test_generated_summaries_are_ignored_by_default():
     assert "generated/*.md" in gitignore
     assert "!generated/README.md" in gitignore
     assert (ROOT / "generated" / "README.md").exists()
+
+
+def test_goal3_live_pilot_planning_packet_is_contained_and_current():
+    required_files = {
+        "admission.md",
+        "method_card.proposed.json",
+        "experiment_card.proposed.json",
+        "evaluator_plan.md",
+        "source_privacy_boundary.md",
+        "prompt_config_recording_plan.md",
+        "stop_condition.md",
+    }
+    assert GOAL3_PILOT_DIR.exists()
+    assert {path.name for path in GOAL3_PILOT_DIR.iterdir() if path.is_file()} == required_files
+
+    method_card = load_json(GOAL3_PILOT_DIR / "method_card.proposed.json")
+    experiment_card = load_json(GOAL3_PILOT_DIR / "experiment_card.proposed.json")
+    validate_record(method_card)
+    validate_record(experiment_card)
+    assert method_card["schema_name"] == "MethodCard"
+    assert method_card["method_card"]["method_id"] == GOAL3_METHOD_ID
+    assert experiment_card["schema_name"] == "ExperimentCard"
+    assert experiment_card["experiment_card"]["experiment_id"] == GOAL3_EXPERIMENT_ID
+    assert experiment_card["experiment_card"]["method_ids"] == [GOAL3_METHOD_ID]
+
+    planning_records = [method_card, experiment_card]
+    assert {record["schema_name"] for record in planning_records} == {
+        "MethodCard",
+        "ExperimentCard",
+    }
+    forbidden_live_record_schemas = {
+        "RunRecord",
+        "ArtifactEnvelope",
+        "EvaluationRecord",
+        "ResearchNote",
+    }
+    assert forbidden_live_record_schemas.isdisjoint(
+        {record["schema_name"] for record in planning_records}
+    )
+    assert "EXPORTS" not in GOAL3_PILOT_DIR.parts
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
+
+    admission = (GOAL3_PILOT_DIR / "admission.md").read_text()
+    for required_heading in [
+        "Active Benchmark Pack",
+        "MethodCard",
+        "ExperimentCard",
+        "Evaluator Plan",
+        "Source / Privacy Boundary",
+        "Prompt / Template Hash Plan",
+        "Model / Config Recording Plan",
+        "Output Artifact Types",
+        "Negative-Result Value",
+        "Stop Condition",
+        "Budget / Secrets Handling",
+        "Proposal-Only Statement",
+    ]:
+        assert required_heading in admission
+    for required_guardrail in [
+        "This is a proposed live LLM pilot planning record.",
+        "No LLM call has been made.",
+        "No output artifact has been produced.",
+        "No evaluation result exists.",
+        "No method success is claimed.",
+        "not a synthesis export",
+    ]:
+        assert required_guardrail in admission
+
+    summary = synthesize_exports(root=ROOT)
+    assert summary["record_count"] == 27
+    assert GOAL3_METHOD_ID not in summary["methods"]
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    assert GOAL3_EXPERIMENT_ID in portfolio
+    assert GOAL3_EXPERIMENT_ID in lab_registry
+    assert "No live LLM experiment has run." in portfolio
+    assert "not in `EXPORTS/`" in lab_registry
 
 
 def test_authority_docs_preserve_scaffold_boundaries():
