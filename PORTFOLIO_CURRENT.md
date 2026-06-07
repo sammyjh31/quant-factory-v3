@@ -35,9 +35,9 @@ That packet is proposed planning structure only. It is not in `EXPORTS/`, is not
 
 ---
 
-## Active Labs
+## Active federation labs
 
-Milestone-one active labs:
+Active scaffold-origin labs:
 
 1. `long_context_judgment`
    - Parent question: How can long-context LLM methods extract reusable trading judgment from messy trader text?

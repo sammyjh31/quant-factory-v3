@@ -1,9 +1,11 @@
 # Graduation Ledger
 
 Status: portfolio graduation authority  
-Current milestone: `scaffold-v0.1`
+Current phase: `milestone-2-planning`
 
 No methods, labs, schemas, artifacts, product surfaces, research claims, evaluators, or architectures have graduated.
+
+The Goal 3 live pilot planning packet does not affect graduation status.
 
 ---
 

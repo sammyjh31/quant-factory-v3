@@ -348,8 +348,16 @@ def test_authority_docs_preserve_scaffold_boundaries():
     assert "future live LLM runs" in readme
     assert "Future labs may experiment" in llm_model
     assert "There is no real research evidence in scaffold milestone one." in portfolio
+    assert "## Active federation labs" in portfolio
+    assert "Milestone-one active labs" not in portfolio
     assert "generated synthesis metrics" not in portfolio.lower()
+    assert "Current phase: `milestone-2-planning`" in graduation
+    assert "Current milestone: `scaffold-v0.1`" not in graduation
     assert "No graduated items." in graduation
+    assert (
+        "The Goal 3 live pilot planning packet does not affect graduation status."
+        in graduation
+    )
     for required in [
         "Active Benchmark Pack",
         "MethodCard",
