@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_001_eval",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_001_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_v0",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: exactly one admitted model-call batch ran, raw source text and provider payloads stayed ignored, committed output is proposal-only, and method quality was not evaluated. The provider output was truncated and content review remains a separate Goal 7C task."
+  }
+}

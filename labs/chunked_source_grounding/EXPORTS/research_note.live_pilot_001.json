@@ -1,0 +1,43 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ResearchNote",
+  "schema_version": "0.1.2",
+  "research_note": {
+    "note_id": "chunked_source_grounding_live_pilot_001_note",
+    "lab_id": "chunked_source_grounding",
+    "experiment_ids": [
+      "chunked_source_grounding_live_pilot_001"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "The first admitted chunked/source-grounding live pilot completed one DeepSeek V4 Flash call and produced protocol-valid proposal-only export records. The output reached the configured output-token cap before complete JSON parsing, so this run is a bounded negative result for prompt/output sizing as well as a live-recording proof.",
+    "what_worked": [
+      "The admitted provider/model/config produced output in one non-streaming batch on the same source excerpt and benchmark as long_context_judgment_live_pilot_001.",
+      "The raw source excerpt, prompt trace, provider request/response, and model trace remained in ignored local paths.",
+      "The committed records can carry model, prompt, source-hash, token, cost, trace-storage, and truncation metadata without committing raw source or provider payloads."
+    ],
+    "what_failed": [
+      "No method success is claimed; method quality was not evaluated by this boundary review.",
+      "The response reached the configured output-token cap and did not parse as complete JSON.",
+      "The committed record intentionally does not expose the full raw model output, so content-level review remains a future evaluation task."
+    ],
+    "negative_results": [
+      "The chunked/source-grounded prompt likely asks for too much structured output under the current output-token cap.",
+      "A provider response that contains expected section names is still not a valid artifact when the JSON is incomplete.",
+      "A successful provider call is not validation, strategy evidence, product evidence, financial advice, live-trading authority, or architecture."
+    ],
+    "reusable_by_other_labs": [
+      "Compare this run with long_context_judgment_live_pilot_001 only after manual content review records exist for both methods.",
+      "Keep chunked/source-grounded output schemas compact enough to fit the admitted output cap or explicitly admit a different cap before rerunning.",
+      "Use proposal-only live records with explicit source hashes, prompt/config hashes, token/cost metadata, and trace-storage boundaries."
+    ],
+    "do_not_repeat": [
+      "Do not retry or expand output caps silently after a truncation.",
+      "Do not treat section-name detection as complete JSON parsing.",
+      "Do not copy generated synthesis metrics or raw model text into currentness docs.",
+      "Do not substitute models silently when the admitted model is unavailable."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

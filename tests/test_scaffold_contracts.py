@@ -55,6 +55,16 @@ LIVE_PILOT_POST_RUN_EXPORTS = {
     "research_note.live_pilot_001.json",
 }
 LIVE_PILOT_CONTENT_REVIEW_EXPORT = "evaluation_record.live_pilot_001_manual_content_review.json"
+CHUNKED_LIVE_PILOT_RUN_ID = "chunked_source_grounding_live_pilot_001_run"
+CHUNKED_LIVE_PILOT_ARTIFACT_ID = "chunked_source_grounding_live_pilot_001_artifact"
+CHUNKED_LIVE_PILOT_EVALUATION_ID = "chunked_source_grounding_live_pilot_001_eval"
+CHUNKED_LIVE_PILOT_NOTE_ID = "chunked_source_grounding_live_pilot_001_note"
+CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS = {
+    "run_record.live_pilot_001.json",
+    "artifact_envelope.live_pilot_001.json",
+    "evaluation_record.live_pilot_001.json",
+    "research_note.live_pilot_001.json",
+}
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
     "BenchmarkPack.schema.json",
@@ -489,7 +499,10 @@ def test_artifact_envelopes_use_final_posture_facets_only():
 def test_run_records_link_required_protocol_ids():
     method_ids = {record["method_card"]["method_id"] for record in records_by_schema("MethodCard")}
     planning_method_ids = {
-        load_json(GOAL3_PILOT_DIR / "method_card.proposed.json")["method_card"]["method_id"]
+        load_json(GOAL3_PILOT_DIR / "method_card.proposed.json")["method_card"]["method_id"],
+        load_json(GOAL7A_PILOT_DIR / "method_card.proposed.json")["method_card"][
+            "method_id"
+        ],
     }
     experiment_ids = {
         record["experiment_card"]["experiment_id"] for record in records_by_schema("ExperimentCard")
@@ -497,7 +510,10 @@ def test_run_records_link_required_protocol_ids():
     planning_experiment_ids = {
         load_json(GOAL3_PILOT_DIR / "experiment_card.proposed.json")["experiment_card"][
             "experiment_id"
-        ]
+        ],
+        load_json(GOAL7A_PILOT_DIR / "experiment_card.proposed.json")["experiment_card"][
+            "experiment_id"
+        ],
     }
     artifact_ids = {
         record["artifact"]["artifact_id"] for record in records_by_schema("ArtifactEnvelope")
@@ -530,7 +546,7 @@ def test_research_notes_and_llm_judge_placeholders_are_bounded():
     for record in notes:
         note = record["research_note"]
         disclaimer = record["research_note"]["evidence_disclaimer"]
-        if note["note_id"] == LIVE_PILOT_NOTE_ID:
+        if note["note_id"] in {LIVE_PILOT_NOTE_ID, CHUNKED_LIVE_PILOT_NOTE_ID}:
             assert disclaimer == LIVE_EVIDENCE_DISCLAIMER
         else:
             assert disclaimer == FIXTURE_EVIDENCE_DISCLAIMER
@@ -763,7 +779,7 @@ def test_goal4_live_pilot_run_admission_update_preserves_admitted_scope():
         assert f"labs/long_context_judgment/EXPORTS/{expected_export}" in update
 
     summary = synthesize_exports(root=ROOT)
-    assert summary["record_count"] == 32
+    assert summary["record_count"] == sum(1 for _ in all_lab_export_records())
     assert GOAL3_METHOD_ID in summary["methods"]
     assert summary["outcome_polarities"] == [
         "negative_fixture",
@@ -1078,11 +1094,6 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
     )
     assert "EXPORTS" not in GOAL7A_PILOT_DIR.parts
     assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
-    assert not list(
-        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
-            "*.live_pilot_001.json"
-        )
-    )
 
     admission = (GOAL7A_PILOT_DIR / "admission.md").read_text()
     for required_heading in [
@@ -1207,8 +1218,7 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
         assert forbidden not in combined
 
     summary = synthesize_exports(root=ROOT)
-    assert summary["record_count"] == 32
-    assert GOAL7A_METHOD_ID not in summary["methods"]
+    assert summary["record_count"] == sum(1 for _ in all_lab_export_records())
 
     readme = (ROOT / "README.md").read_text()
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
@@ -1216,8 +1226,157 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
     for currentness_doc in [readme, portfolio, lab_registry]:
         assert GOAL7A_EXPERIMENT_ID in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
-    assert "fixture exports plus Goal 7A planning packet" in portfolio
-    assert "fixture exports plus Goal 7A planning packet" in lab_registry
+    assert "one admitted proposal-only chunked/source-grounded live pilot export set" in (
+        portfolio
+    )
+    assert "one admitted proposal-only chunked/source-grounded live pilot export set" in (
+        lab_registry
+    )
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal7b_chunked_source_grounding_live_export_set_is_protocol_valid_and_bounded():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    live_exports = {path.name: load_json(path) for path in export_dir.glob("*.live_pilot_001.json")}
+    assert set(live_exports) == CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS
+    for record in live_exports.values():
+        validate_record(record)
+
+    run = live_exports["run_record.live_pilot_001.json"]
+    artifact = live_exports["artifact_envelope.live_pilot_001.json"]
+    evaluation = live_exports["evaluation_record.live_pilot_001.json"]
+    note = live_exports["research_note.live_pilot_001.json"]
+
+    assert run["schema_name"] == "RunRecord"
+    assert run["schema_version"] == CURRENT_SCHEMA_VERSION
+    run_record = run["run_record"]
+    assert run_record == {
+        "run_id": CHUNKED_LIVE_PILOT_RUN_ID,
+        "lab_id": "chunked_source_grounding",
+        "experiment_id": GOAL7A_EXPERIMENT_ID,
+        "method_id": GOAL7A_METHOD_ID,
+        "benchmark_pack_id": "text_judgment_v0",
+        "source_refs": ["raw_corpora_sha256:d8392c58c3b740eb"],
+        "artifact_ids": [CHUNKED_LIVE_PILOT_ARTIFACT_ID],
+        "evaluation_ids": [CHUNKED_LIVE_PILOT_EVALUATION_ID],
+        "run_kind": "live_llm_pilot",
+        "outcome_polarity": "proposal_only",
+        "status": "live_recorded",
+    }
+
+    artifact_payload = artifact["artifact"]["payload"]
+    assert artifact["artifact"]["artifact_id"] == CHUNKED_LIVE_PILOT_ARTIFACT_ID
+    assert artifact["artifact"]["artifact_type"] == "chunked_source_grounding_proposal"
+    assert artifact["artifact"]["lab_id"] == "chunked_source_grounding"
+    assert artifact["artifact"]["method_id"] == GOAL7A_METHOD_ID
+    assert artifact["artifact"]["run_id"] == CHUNKED_LIVE_PILOT_RUN_ID
+    assert artifact["artifact"]["source_refs"] == run_record["source_refs"]
+    assert artifact["artifact"]["posture"] == {
+        "grounding_status": "source_linked",
+        "review_status": "self_checked",
+        "readiness_status": "study_candidate",
+        "validation_status": "none",
+        "lifecycle_status": "active",
+    }
+    assert "proposal_only_not_evaluated" in artifact["artifact"]["blockers"]
+    assert "content_review_not_yet_completed" in artifact["artifact"]["blockers"]
+    assert artifact_payload["outcome_polarity"] == "proposal_only"
+    assert artifact_payload["proposal_only"] is True
+    assert artifact_payload["provider_id"] == "deepseek_api"
+    assert artifact_payload["base_url"] == "https://api.deepseek.com"
+    assert artifact_payload["model_id"] == "deepseek-v4-flash"
+    assert artifact_payload["requested_model_id"] == "deepseek-v4-flash"
+    assert artifact_payload["thinking"] == {"type": "disabled"}
+    assert artifact_payload["stream"] is False
+    assert artifact_payload["prompt_template_sha256"] == sha256_file(
+        GOAL7A_PILOT_DIR / "prompt_template.live_pilot_001.md"
+    )
+    assert artifact_payload["config_sha256"] == CONFIG_SHA256
+    assert artifact_payload["source_metadata"] == {
+        "source_ref": "raw_corpora_sha256:d8392c58c3b740eb",
+        "source_scope": (
+            "same operator-approved ignored local trader education transcript excerpt "
+            "used by long_context_judgment_live_pilot_001"
+        ),
+        "source_path_scope": (
+            "raw_corpora/trader_source_corpus/transcripts/"
+            "how-to-use-market-profile-start-now-trading-tutorials.txt"
+        ),
+        "source_file_sha256": (
+            "dca704a5010abf9b56498a325702c895fd6ab2ae7815b26021b20f8f89dcdd95"
+        ),
+        "source_file_word_count": 8849,
+        "excerpt_sha256": (
+            "d8392c58c3b740eb87efd9488fd72da35ef3d09f6a4ee766a9816f672d9b03ee"
+        ),
+        "excerpt_word_count": 650,
+        "raw_source_text_committed": False,
+    }
+    assert artifact_payload["cost_metadata"]["budget_cap_usd"] == 3.0
+    assert artifact_payload["cost_metadata"]["estimated_cost_usd"] <= 3.0
+    assert artifact_payload["raw_source_text_committed"] is False
+    assert artifact_payload["raw_provider_payload_committed"] is False
+    assert artifact_payload["raw_prompt_trace_committed"] is False
+    assert artifact_payload["raw_model_trace_committed"] is False
+    assert artifact_payload["secrets_committed"] is False
+    assert "raw_source_text" not in artifact_payload
+    assert "provider_payload" not in artifact_payload
+    assert "api_key" not in json.dumps(artifact_payload).lower()
+
+    model_output_metadata = artifact_payload["model_output_metadata"]
+    assert model_output_metadata["parsed_json_success"] is False
+    assert model_output_metadata["finish_reason"] == "length"
+    assert model_output_metadata["model_output_truncated"] is True
+    assert set(model_output_metadata["expected_top_level_keys_detected"]) == {
+        "source_linked_claim_table",
+        "segment_span_support_notes",
+        "unsupported_claim_report",
+        "judgment_abstraction_notes",
+        "method_failure_notes",
+    }
+    assert "did not parse as complete JSON" in model_output_metadata["sanitized_output_summary"]
+
+    assert evaluation["evaluation"]["evaluation_id"] == CHUNKED_LIVE_PILOT_EVALUATION_ID
+    assert evaluation["evaluation"]["target_id"] == CHUNKED_LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["evaluation"]["evaluator_type"] == "manual_boundary_review"
+    assert evaluation["evaluation"]["pass_fail"] == "pass"
+    assert "method quality was not evaluated" in evaluation["evaluation"]["comments"]
+
+    research_note = note["research_note"]
+    assert research_note["note_id"] == CHUNKED_LIVE_PILOT_NOTE_ID
+    assert research_note["experiment_ids"] == [GOAL7A_EXPERIMENT_ID]
+    assert research_note["benchmark_pack_ids"] == ["text_judgment_v0"]
+    assert research_note["evidence_disclaimer"] == LIVE_EVIDENCE_DISCLAIMER
+    assert any("No method success is claimed" in item for item in research_note["what_failed"])
+    assert any(
+        "long_context_judgment_live_pilot_001" in item
+        for item in research_note["reusable_by_other_labs"]
+    )
+
+    combined_committed = "\n".join(
+        path.read_text()
+        for path in [
+            export_dir / name
+            for name in sorted(CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS)
+        ]
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+    ]:
+        assert forbidden not in combined_committed
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    readme = (ROOT / "README.md").read_text()
+    for currentness_doc in [portfolio, lab_registry, readme]:
+        assert "one admitted proposal-only chunked/source-grounded live pilot export set" in (
+            currentness_doc
+        )
+        assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 

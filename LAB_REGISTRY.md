@@ -90,7 +90,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports plus Goal 7A planning packet
+scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set
 ```
 
 Proposed planning packet:
@@ -113,9 +113,18 @@ Run admission update:
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/run_admission_update.md
 ```
 
-The run admission update defines the executable preflight scope for exactly one future live LLM pilot run under the stated scope. It does not by itself authorize execution. Goal 7A did not call a model and did not create RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote records.
+The run admission update defined the executable preflight scope for exactly one future live LLM pilot run under the stated scope. Goal 7B executed that admitted one-call scope and created one proposal-only export set.
 
-The planned pilot is proposal-only comparison work against `long_context_judgment_live_pilot_001` and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+The authorized live pilot has now produced one proposal-only export set:
+
+```text
+labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json
+labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_001.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001.json
+labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_001.json
+```
+
+The live export set is proposal-only comparison work against `long_context_judgment_live_pilot_001` and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture. The model output reached the configured output-token cap before complete JSON parsing, so content review remains a separate Goal 7C task.
 
 ---
 
