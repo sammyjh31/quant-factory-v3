@@ -2005,7 +2005,21 @@ def test_agent_guides_encode_v3_operating_boundaries():
         "graduation candidate -> ADR-approved architecture"
         in root_agents
     )
-    assert "Nothing graduates during scaffold milestone one." in root_agents
+    assert "Nothing graduates during scaffold milestone one." not in root_agents
+    for required in [
+        (
+            "No item graduates merely because a scaffold fixture, planning packet, "
+            "proposal-only live run, manual review, or generated synthesis summary exists."
+        ),
+        "Future graduation is portfolio-level, not lab-level.",
+        (
+            "Graduation requires repeated evidence, evaluations, negative-result analysis, "
+            "benchmark coverage, known failure modes, cross-lab comparison when applicable, "
+            "and explicit ADR."
+        ),
+        "Until then, methods are experiments, not architecture.",
+    ]:
+        assert required in root_agents
     assert "Before finalizing work, check:" in root_agents
     assert "Before changing files, agents must read:" in root_agents
     assert "every `AGENTS.md` on the path to each file they will touch" in root_agents
@@ -2084,6 +2098,65 @@ def test_agent_guides_encode_v3_operating_boundaries():
         "directly, delete it, or archive it with supersession markers."
         in docs_agents
     )
+
+
+def test_lab_cards_match_current_live_pilot_posture_without_stale_fixture_language():
+    long_context_card = (ROOT / "labs" / "long_context_judgment" / "LAB_CARD.md").read_text()
+    chunked_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    visual_card = (
+        ROOT / "labs" / "visual_deictic_understanding" / "LAB_CARD.md"
+    ).read_text()
+
+    for active_card in [long_context_card, chunked_card]:
+        assert "Status: scaffold fixture exports only" not in active_card
+        assert "During scaffold milestone one" not in active_card
+        assert "- no live LLM calls" not in active_card
+        assert "proposal-only" in active_card
+        assert (
+            "no validation, product authority, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ) in active_card
+        assert (
+            "future live runs require live LLM admission and an explicit execution instruction"
+            in active_card
+        )
+
+    for required in [
+        "Status: active live-pilot lab",
+        "`long_context_judgment_live_pilot_001`",
+        "DeepSeek V4 Flash",
+        "manual boundary review passed",
+        "manual content review passed with caveats",
+    ]:
+        assert required in long_context_card
+
+    for required in [
+        "Status: active live-pilot lab",
+        "`chunked_source_grounding_live_pilot_001`",
+        "DeepSeek V4 Flash",
+        "bounded negative result",
+        "truncated output, incomplete JSON, and output contract too large",
+        "manual content review failed for pilot 001 with score 0.2",
+        "`chunked_source_grounding_live_pilot_002`",
+        "DeepSeek V4 Pro",
+        "narrower output contract",
+        "complete parseable JSON structurally",
+        "manual content review remains pending for Goal 7F",
+    ]:
+        assert required in chunked_card
+
+    assert "Status: scaffold fixture exports only" in visual_card
+    assert "During scaffold milestone one" not in visual_card
+    assert "- no live LLM calls" not in visual_card
+    assert "no live visual/deictic pilot has been admitted or run yet" in visual_card
+    assert (
+        "future live visual/deictic runs require live LLM admission and an explicit "
+        "execution instruction"
+    ) in visual_card
+    assert (
+        "no validation, product authority, strategy evidence, financial advice, "
+        "live-trading authority, graduation, or architecture"
+    ) in visual_card
 
 
 def test_agent_checklists_prevent_append_only_drift_and_random_experiments():

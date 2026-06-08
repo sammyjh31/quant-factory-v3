@@ -331,11 +331,11 @@ Generated files may help humans inspect the scaffold, but they do not decide wha
 
 ## 11. Graduation
 
-Nothing graduates during scaffold milestone one.
+No item graduates merely because a scaffold fixture, planning packet, proposal-only live run, manual review, or generated synthesis summary exists.
 
 Future graduation is portfolio-level, not lab-level.
 
-Graduation requires repeated evidence, evaluations, negative-result analysis, benchmark coverage, known failure modes, and explicit ADR.
+Graduation requires repeated evidence, evaluations, negative-result analysis, benchmark coverage, known failure modes, cross-lab comparison when applicable, and explicit ADR.
 
 Until then, methods are experiments, not architecture.
 

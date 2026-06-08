@@ -2,11 +2,14 @@
 
 Status: scaffold fixture exports only
 
-This lab explores the future method family of visual/deictic readers. During scaffold milestone one, it exports only protocol fixtures.
+This lab explores visual/deictic readers. It currently has only protocol fixtures.
 
-Non-goals:
+Current records:
 
-- no live LLM calls
-- no product authority
-- no strategy evidence
-- no graduation claims
+- scaffold fixture exports for protocol shape only
+- no live visual/deictic pilot has been admitted or run yet
+
+Current boundaries:
+
+- future live visual/deictic runs require live LLM admission and an explicit execution instruction
+- no validation, product authority, strategy evidence, financial advice, live-trading authority, graduation, or architecture

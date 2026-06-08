@@ -1,12 +1,18 @@
 # Lab Card: long_context_judgment
 
-Status: scaffold fixture exports only
+Status: active live-pilot lab
 
-This lab explores the future method family of long-context LLM readers. During scaffold milestone one, it exports only protocol fixtures.
+This lab explores long-context LLM readers for messy trader educational text.
 
-Non-goals:
+Current records:
 
-- no live LLM calls
-- no product authority
-- no strategy evidence
-- no graduation claims
+- scaffold fixture exports for protocol shape only
+- `long_context_judgment_live_pilot_001`: proposal-only DeepSeek V4 Flash live pilot on `text_judgment_v0`
+- manual boundary review passed
+- manual content review passed with caveats
+
+Current boundaries:
+
+- live output is proposal-only, not source truth
+- no validation, product authority, strategy evidence, financial advice, live-trading authority, graduation, or architecture
+- future live runs require live LLM admission and an explicit execution instruction
