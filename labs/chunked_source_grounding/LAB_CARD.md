@@ -21,11 +21,11 @@ labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_
 
 ## Current Active Research Thread
 
-The active thread is Goal 10C comparison-note compression after strict source-span re-review: whether source-span precision still repeats under canonical offsets, line ranges, and quote hashes, and what the next output contract should request.
+The active thread is Goal 11A source-span locator output contract planning: whether the model can emit canonical line-range, character-offset, and quote-hash locator candidates directly instead of relying on reviewer reconstruction.
 
 The current comparison note records the second-source source-span precision repeat as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
 
-The current next comparison surface is:
+The current comparison surface is:
 
 ```text
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md

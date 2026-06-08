@@ -22,7 +22,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained. The current next step is comparison-note compression of strict span-review findings, not another live model call.
+The scaffold exists so live LLM experiments can be measured, compared, and contained. The current next step is Goal 11A source-span locator output contract planning, not another live model call.
 
 ---
 
@@ -120,7 +120,7 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Use the strict source-span re-review records to update the local comparison note.
+Use the updated local comparison note to plan a source-span locator output contract.
 
 The owning comparison note is:
 
@@ -128,4 +128,4 @@ The owning comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-Goal 10C should answer whether source-span precision still repeated under stricter review, whether exact labels were overclaimed, whether broad segment refs remain the bottleneck, and whether the next live-run output contract should request line-range or quote-hash candidates. Any future live run still requires admission, explicit execution instruction, protocol-valid exports, and proposal-only boundaries.
+Goal 11A should plan whether the model can emit canonical locator candidates directly, including line-range candidates, character-offset candidates, and quote-hash candidates, instead of relying on reviewer reconstruction after the fact. Any future live run still requires admission, explicit execution instruction, protocol-valid exports, and proposal-only boundaries.

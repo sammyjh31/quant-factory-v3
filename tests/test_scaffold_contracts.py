@@ -2165,10 +2165,10 @@ def test_goal8e_comparison_note_includes_source_span_precision_without_authority
         "content_review_passed_with_caveats",
         "exact/approximate labels were warranted",
         "score `0.86`",
-        "still lacks canonical offsets",
+        "model artifacts do not yet emit canonical line/offset/hash locators",
         "limited_abstraction",
         "Next Research Direction",
-        "Use this comparison note to choose the next bounded research fork",
+        "The leading next bounded fork is Goal 11A",
     ]:
         assert required in note
 
@@ -2237,7 +2237,7 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "product evidence, strategy evidence, financial advice, live-trading "
             "authority, graduation, or architecture."
         ),
-        "Use the strict source-span re-review records to update the local comparison note.",
+        "Use the updated local comparison note to plan a source-span locator output contract.",
     ]:
         assert required in portfolio
 
@@ -2549,10 +2549,96 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "strict source-span re-review" in currentness_doc
-        assert "Goal 10C" in currentness_doc
+        assert "Goal 11A" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "The current next step is evaluator planning" not in portfolio
     assert "The active thread is source-span evaluator planning" not in lab_card
+    assert "current next step is comparison-note compression" not in portfolio
+    assert "The active thread is Goal 10C comparison-note compression" not in lab_card
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal10c_comparison_note_compresses_strict_span_review_findings():
+    comparisons_dir = (
+        ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "comparisons"
+    )
+    comparison_files = sorted(path.name for path in comparisons_dir.glob("*.md"))
+    assert comparison_files == ["live_pilot_method_comparison_001.md"]
+
+    note = GOAL7G_COMPARISON_NOTE.read_text()
+    for required in [
+        "strict source-span re-review findings",
+        "chunked_source_grounding_live_pilot_003_strict_span_review",
+        "chunked_source_grounding_live_pilot_004_strict_span_review",
+        "pilot 003 strict-span review",
+        "score `0.88`",
+        "reviewed hints `5`",
+        "exact `3`",
+        "approximate `2`",
+        "broad `0`",
+        "missing `0`",
+        "quote hashes `5`",
+        "overclaimed exactness `0`",
+        "pilot 004 strict-span review",
+        "score `0.82`",
+        "reviewed hints `6`",
+        "exact `4`",
+        "approximate `2`",
+        "quote hashes `6`",
+        "overclaimed exactness `1`",
+        "one model-labeled exact case was better treated as approximate",
+        "source-span precision improvement repeated under stricter review",
+        "model artifacts do not yet emit canonical line/offset/hash locators",
+        "manual reviewers can locate support",
+        "broad segment refs remain a model-output limitation",
+        "limited abstraction remains a tradeoff",
+        "source-span locator output contract",
+        "emit canonical locator candidates directly",
+        "line-range candidates",
+        "quote-hash candidates",
+    ]:
+        assert required in note
+
+    for stale_or_forbidden in [
+        "Use this comparison note to choose the next bounded research fork.",
+        (
+            "Reasonable next forks include a stricter evaluator for canonical offsets, "
+            "a third-source repeat, or a grounded long-context variant"
+        ),
+        "still needs canonical offsets or a stricter evaluator before stronger claims",
+        "A third-source repeat is the leading next fork",
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "wins",
+        "validated trading",
+        "generated synthesis metrics",
+    ]:
+        assert stale_or_forbidden not in note
+
+    assert all("comparisons" not in path.parts for path in lab_export_paths(ROOT))
+    assert not list(
+        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
+            "*locator_output_contract*"
+        )
+    )
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
+    )
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    for currentness_doc in [portfolio, lab_card]:
+        assert "source-span locator output contract" in currentness_doc
+        assert "Goal 11A" in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert "current next step is comparison-note compression" not in portfolio
+    assert "The active thread is Goal 10C comparison-note compression" not in lab_card
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
