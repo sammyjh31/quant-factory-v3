@@ -47,6 +47,13 @@ GOAL9A_PILOT_DIR = (
 GOAL10A_EVALUATOR_DIR = (
     ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "source_span_evaluator_001"
 )
+GOAL11A_LOCATOR_CONTRACT_DIR = (
+    ROOT
+    / "labs"
+    / "chunked_source_grounding"
+    / "PLANNING"
+    / "source_span_locator_contract_001"
+)
 GOAL9A_SOURCE_PATH = (
     ROOT / "raw_corpora" / "selected" / "source_span_precision_repeat_001" / "source.txt"
 )
@@ -2639,6 +2646,162 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "current next step is comparison-note compression" not in portfolio
     assert "The active thread is Goal 10C comparison-note compression" not in lab_card
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
+    required_files = {
+        "contract_plan.md",
+        "prompt_delta_plan.md",
+        "evaluator_plan.md",
+        "source_locator_boundary.md",
+        "pilot_003_004_lessons.md",
+        "non_effects.md",
+    }
+    assert GOAL11A_LOCATOR_CONTRACT_DIR.exists()
+    assert {
+        path.name for path in GOAL11A_LOCATOR_CONTRACT_DIR.iterdir() if path.is_file()
+    } == required_files
+    assert "EXPORTS" not in GOAL11A_LOCATOR_CONTRACT_DIR.parts
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
+
+    forbidden_planning_files = {
+        "admission.md",
+        "method_card.proposed.json",
+        "experiment_card.proposed.json",
+        "run_admission_update.md",
+        "prompt_template.live_pilot_005.md",
+    }
+    assert forbidden_planning_files.isdisjoint(
+        {path.name for path in GOAL11A_LOCATOR_CONTRACT_DIR.iterdir() if path.is_file()}
+    )
+    assert not list(
+        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
+            "*source_span_locator_contract_001*"
+        )
+    )
+    assert not list(
+        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
+            "*live_pilot_005*"
+        )
+    )
+
+    contract_plan = (GOAL11A_LOCATOR_CONTRACT_DIR / "contract_plan.md").read_text()
+    for required in [
+        "Goal 11A source-span locator output contract planning",
+        "planning only",
+        "Can the model emit canonical locator candidates directly",
+        "source_ref",
+        "candidate_line_start",
+        "candidate_line_end",
+        "candidate_char_start",
+        "candidate_char_end",
+        "quote_hash_candidate",
+        "locator_confidence",
+        "locator_label: exact | approximate | broad | missing",
+        "every claim must have at least one locator candidate",
+        "every locator candidate must have one claim id",
+        "unsupported claims must explain why no valid locator exists",
+        "source-linked claim table",
+        "locator candidate table",
+        "unsupported-claim report",
+        "brief method-failure notes",
+        "ArtifactEnvelope.payload",
+        "no protocol change",
+    ]:
+        assert required in contract_plan
+
+    prompt_delta = (GOAL11A_LOCATOR_CONTRACT_DIR / "prompt_delta_plan.md").read_text()
+    for required in [
+        "Do not add broad judgment abstraction notes.",
+        "Do not add comparison commentary.",
+        "Do not add product-like study card fields.",
+        "Do not ask for strategy, validation, trading advice, or playbook content.",
+        "line-range candidates",
+        "character-offset candidates",
+        "quote-hash candidates",
+    ]:
+        assert required in prompt_delta
+
+    evaluator_plan = (GOAL11A_LOCATOR_CONTRACT_DIR / "evaluator_plan.md").read_text()
+    for required in [
+        "manual_content_review",
+        "exact if line/offset/hash directly supports the claim",
+        "approximate if support is local but not exact",
+        "broad if support points to a general region only",
+        "missing if no source support is found",
+        "overclaimed_exactness",
+        "no new evaluator type",
+    ]:
+        assert required in evaluator_plan
+
+    boundary = (GOAL11A_LOCATOR_CONTRACT_DIR / "source_locator_boundary.md").read_text()
+    for required in [
+        "metadata-safe",
+        "source text stays ignored/local",
+        "no raw source text is committed",
+        "raw_corpora_sha256:d8392c58c3b740eb",
+        "raw_corpora_sha256:9f9e143429f5842a",
+        "raw_corpora/selected/live_llm_pilot_001/source.txt",
+        "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+    ]:
+        assert required in boundary
+
+    lessons = (GOAL11A_LOCATOR_CONTRACT_DIR / "pilot_003_004_lessons.md").read_text()
+    for required in [
+        "pilots 003/004 emitted support hints",
+        "strict reviewers reconstructed canonical locators after the fact",
+        "Goal 11 should test whether the model can emit locator candidates directly",
+        "chunked_source_grounding_live_pilot_003_strict_span_review",
+        "chunked_source_grounding_live_pilot_004_strict_span_review",
+        "one model-labeled exact case was better treated as approximate",
+    ]:
+        assert required in lessons
+
+    non_effects = (GOAL11A_LOCATOR_CONTRACT_DIR / "non_effects.md").read_text()
+    for required in [
+        "No LLM call has been made.",
+        "No model has been run.",
+        "No EXPORTS records are created.",
+        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote is created.",
+        "No protocol change is made.",
+        "No synthesis feature is added.",
+        "No shared script or helper is added.",
+        "No benchmark pack is added.",
+        "No graduation occurs.",
+    ]:
+        assert required in non_effects
+
+    combined = "\n".join(path.read_text() for path in GOAL11A_LOCATOR_CONTRACT_DIR.iterdir())
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "validated trading",
+    ]:
+        assert forbidden not in combined
+
+    protocol_schema_names = {
+        path.name
+        for path in (
+            ROOT / "packages" / "qf_v3_protocol" / "src" / "qf_v3_protocol" / "schemas"
+        ).glob("*.schema.json")
+    }
+    assert protocol_schema_names == PROTOCOL_SCHEMA_NAMES
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
+    )
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    for currentness_doc in [portfolio, lab_card]:
+        assert "source-span locator output contract" in currentness_doc
+        assert "Goal 11A" in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+        assert "run_record.live_pilot_005" not in currentness_doc
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
