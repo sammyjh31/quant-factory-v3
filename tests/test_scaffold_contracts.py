@@ -54,6 +54,9 @@ GOAL11A_LOCATOR_CONTRACT_DIR = (
     / "PLANNING"
     / "source_span_locator_contract_001"
 )
+GOAL11B_PILOT_DIR = (
+    ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "live_llm_pilot_005"
+)
 GOAL9A_SOURCE_PATH = (
     ROOT / "raw_corpora" / "selected" / "source_span_precision_repeat_001" / "source.txt"
 )
@@ -76,6 +79,8 @@ GOAL8B_METHOD_ID = "chunked_source_grounding_live_pilot_003_method"
 GOAL8B_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_003"
 GOAL9A_METHOD_ID = "chunked_source_grounding_live_pilot_004_method"
 GOAL9A_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_004"
+GOAL11B_METHOD_ID = "chunked_source_grounding_live_pilot_005_method"
+GOAL11B_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_005"
 CHUNKED_PRO_LIVE_PILOT_RUN_ID = "chunked_source_grounding_live_pilot_002_run"
 CHUNKED_PRO_LIVE_PILOT_ARTIFACT_ID = (
     "chunked_source_grounding_live_pilot_002_artifact"
@@ -2172,10 +2177,11 @@ def test_goal8e_comparison_note_includes_source_span_precision_without_authority
         "content_review_passed_with_caveats",
         "exact/approximate labels were warranted",
         "score `0.86`",
-        "model artifacts do not yet emit canonical line/offset/hash locators",
+        "model artifacts do not yet emit canonical line/offset locator candidates",
         "limited_abstraction",
         "Next Research Direction",
-        "The leading next bounded fork is Goal 11A",
+        "completed Goal 11A source-span locator output contract plan",
+        "Goal 11B live-run admission planning",
     ]:
         assert required in note
 
@@ -2184,6 +2190,7 @@ def test_goal8e_comparison_note_includes_source_span_precision_without_authority
         "The tentative next step is to improve source-span precision for chunked Pro",
         "A later comparison can test whether canonical span IDs",
         "The leading next research direction is to repeat source-span precision",
+        "The leading next bounded fork is Goal 11A",
         "BEGIN RAW SOURCE",
         "DEEPSEEK_API_KEY",
         "sk-",
@@ -2244,7 +2251,11 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "product evidence, strategy evidence, financial advice, live-trading "
             "authority, graduation, or architecture."
         ),
-        "Use the updated local comparison note to plan a source-span locator output contract.",
+        (
+            "Use the completed Goal 11A locator contract plan (the source-span locator "
+            "output contract plan) and the Goal 11B live-run admission packet to prepare "
+            "the source-span locator candidate pilot."
+        ),
     ]:
         assert required in portfolio
 
@@ -2595,14 +2606,15 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
         "overclaimed exactness `1`",
         "one model-labeled exact case was better treated as approximate",
         "source-span precision improvement repeated under stricter review",
-        "model artifacts do not yet emit canonical line/offset/hash locators",
+        "model artifacts do not yet emit canonical line/offset locator candidates",
         "manual reviewers can locate support",
         "broad segment refs remain a model-output limitation",
         "limited abstraction remains a tradeoff",
         "source-span locator output contract",
         "emit canonical locator candidates directly",
         "line-range candidates",
-        "quote-hash candidates",
+        "character-offset candidates",
+        "locally computed quote hashes",
     ]:
         assert required in note
 
@@ -2613,6 +2625,7 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
             "a third-source repeat, or a grounded long-context variant"
         ),
         "still needs canonical offsets or a stricter evaluator before stronger claims",
+        "The leading next bounded fork is Goal 11A",
         "A third-source repeat is the leading next fork",
         "BEGIN RAW SOURCE",
         "DEEPSEEK_API_KEY",
@@ -2696,9 +2709,11 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
         "candidate_line_end",
         "candidate_char_start",
         "candidate_char_end",
-        "quote_hash_candidate",
         "locator_confidence",
         "locator_label: exact | approximate | broad | missing",
+        "The model should not emit quote hashes.",
+        "The local runner/reviewer computes quote hashes",
+        "committed records may include metadata-safe computed quote hashes",
         "every claim must have at least one locator candidate",
         "every locator candidate must have one claim id",
         "unsupported claims must explain why no valid locator exists",
@@ -2719,14 +2734,21 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
         "Do not ask for strategy, validation, trading advice, or playbook content.",
         "line-range candidates",
         "character-offset candidates",
-        "quote-hash candidates",
+        "Do not ask the model to emit quote hashes.",
+        "Local runner/reviewer computes quote hashes",
     ]:
         assert required in prompt_delta
+    for forbidden in [
+        "quote-hash candidates",
+        "quote_hash_candidate",
+    ]:
+        assert forbidden not in contract_plan
+        assert forbidden not in prompt_delta
 
     evaluator_plan = (GOAL11A_LOCATOR_CONTRACT_DIR / "evaluator_plan.md").read_text()
     for required in [
         "manual_content_review",
-        "exact if line/offset/hash directly supports the claim",
+        "exact if line/offset and locally computed quote hash directly support the claim",
         "approximate if support is local but not exact",
         "broad if support points to a general region only",
         "missing if no source support is found",
@@ -2744,6 +2766,8 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
         "raw_corpora_sha256:9f9e143429f5842a",
         "raw_corpora/selected/live_llm_pilot_001/source.txt",
         "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "The model should not emit quote hashes.",
+        "Quote hashes should be computed locally after the model response",
     ]:
         assert required in boundary
 
@@ -2802,6 +2826,264 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
         assert "Goal 11A" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_current():
+    required_files = {
+        "admission.md",
+        "method_card.proposed.json",
+        "experiment_card.proposed.json",
+        "evaluator_plan.md",
+        "source_privacy_boundary.md",
+        "prompt_template.live_pilot_005.md",
+        "run_admission_update.md",
+        "stop_condition.md",
+    }
+    assert GOAL9A_SOURCE_PATH.exists()
+    source_text = GOAL9A_SOURCE_PATH.read_text()
+    source_word_count = len(source_text.split())
+    source_hash = sha256_file(GOAL9A_SOURCE_PATH)
+    source_ref = f"raw_corpora_sha256:{source_hash[:16]}"
+
+    assert GOAL11B_PILOT_DIR.exists()
+    assert {path.name for path in GOAL11B_PILOT_DIR.iterdir() if path.is_file()} == (
+        required_files
+    )
+
+    method_card = load_json(GOAL11B_PILOT_DIR / "method_card.proposed.json")
+    experiment_card = load_json(GOAL11B_PILOT_DIR / "experiment_card.proposed.json")
+    validate_record(method_card)
+    validate_record(experiment_card)
+
+    method = method_card["method_card"]
+    assert method_card["schema_name"] == "MethodCard"
+    assert method_card["schema_version"] == CURRENT_SCHEMA_VERSION
+    assert method["method_id"] == GOAL11B_METHOD_ID
+    assert method["lab_id"] == "chunked_source_grounding"
+    assert method["method_family"] == "chunked_source_grounded_llm_reader_proposed"
+    assert "same approved source as pilot 004" in " ".join(method["intended_inputs"])
+    assert "line/offset locator candidates" in " ".join(method["intended_outputs"])
+    assert "locally computed quote hashes" in " ".join(method["intended_outputs"])
+    assert "broad judgment abstraction notes" not in method["intended_outputs"]
+    assert "cryptographic hashes" in " ".join(method["known_risks"])
+    assert "not a completed run" in method["non_goals"]
+    assert "not architecture or graduation evidence" in method["non_goals"]
+
+    experiment = experiment_card["experiment_card"]
+    assert experiment_card["schema_name"] == "ExperimentCard"
+    assert experiment_card["schema_version"] == CURRENT_SCHEMA_VERSION
+    assert experiment["experiment_id"] == GOAL11B_EXPERIMENT_ID
+    assert experiment["lab_id"] == "chunked_source_grounding"
+    assert experiment["benchmark_pack_ids"] == ["text_judgment_v0"]
+    assert experiment["method_ids"] == [GOAL11B_METHOD_ID]
+    assert experiment["expected_artifact_types"] == [
+        "chunked_source_span_locator_candidate_proposal"
+    ]
+    assert "canonical locator candidates directly" in experiment["research_question"]
+    assert "local review can compute quote hashes" in experiment["research_question"]
+
+    planning_records = [method_card, experiment_card]
+    forbidden_live_record_schemas = {
+        "RunRecord",
+        "ArtifactEnvelope",
+        "EvaluationRecord",
+        "ResearchNote",
+    }
+    assert forbidden_live_record_schemas.isdisjoint(
+        {record["schema_name"] for record in planning_records}
+    )
+    assert "EXPORTS" not in GOAL11B_PILOT_DIR.parts
+    assert not list(
+        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
+            "*live_pilot_005*"
+        )
+    )
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
+
+    admission = (GOAL11B_PILOT_DIR / "admission.md").read_text()
+    for required_heading in [
+        "Hardening / Cleanup Discipline",
+        "Goal 11A Cleanup",
+        "Active Benchmark Pack",
+        "MethodCard",
+        "ExperimentCard",
+        "Evaluator Plan",
+        "Source / Privacy Boundary",
+        "Prompt / Template Hash Plan",
+        "Model / Config Recording Plan",
+        "Output Artifact Types",
+        "Negative-Result Value",
+        "Stop Condition",
+        "Budget / Secrets Handling",
+        "Proposal-Only Statement",
+    ]:
+        assert required_heading in admission
+    for required_guardrail in [
+        "This is planning/admission only. No LLM call has been made.",
+        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        "Do not ask the model to emit quote hashes.",
+        "local runner/reviewer computes quote hashes",
+        "Do not add broad judgment abstraction notes.",
+        "Do not add full comparison commentary.",
+        "Do not ask for a product-like study card.",
+        "Do not add strategy, validation, trading advice, or playbook content.",
+    ]:
+        assert required_guardrail in admission
+
+    evaluator_plan = (GOAL11B_PILOT_DIR / "evaluator_plan.md").read_text()
+    for required in [
+        "schema_check",
+        "manual_boundary_review",
+        "manual_content_review",
+        "line/offset locator candidates",
+        "exact | approximate | broad | missing",
+        "computed quote hash",
+        "overclaimed_exactness",
+    ]:
+        assert required in evaluator_plan
+
+    source_boundary = (GOAL11B_PILOT_DIR / "source_privacy_boundary.md").read_text()
+    for required in [
+        source_ref,
+        f"Full selected excerpt SHA-256: `{source_hash}`",
+        f"Selected excerpt word count: `{source_word_count}`",
+        "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt",
+        "same approved source as `chunked_source_grounding_live_pilot_004`",
+        "Do not commit raw source text.",
+        "Do not fall back to the full corpus path.",
+        "Quote hashes are computed locally after the model response",
+    ]:
+        assert required in source_boundary
+
+    update = (GOAL11B_PILOT_DIR / "run_admission_update.md").read_text()
+    prompt_template_path = GOAL11B_PILOT_DIR / "prompt_template.live_pilot_005.md"
+    prompt_template = prompt_template_path.read_text()
+    for required in [
+        (
+            "This admission update defines the executable preflight scope for exactly "
+            "one future tiny live LLM pilot run."
+        ),
+        (
+            "It does not by itself authorize execution. Execution requires a separate "
+            "Goal 11C instruction."
+        ),
+        "Provider: DeepSeek API",
+        "API format: OpenAI-compatible chat completions",
+        "Base URL: `https://api.deepseek.com`",
+        "Model: `deepseek-v4-pro`",
+        "Reasoning/thinking mode: non-thinking",
+        "Tool routing: tools disabled",
+        "Benchmark pack: `text_judgment_v0`",
+        "Lab: `labs/chunked_source_grounding`",
+        "Budget cap: `$3` hard maximum.",
+        "No retries unless the call fails before producing output.",
+        "Do not silently substitute `deepseek-v4-flash`, `deepseek-chat`, "
+        "`deepseek-reasoner`, or any other model.",
+        "Outputs from this experiment are proposals until evaluated.",
+        "No private/raw source material or provider payloads are committed.",
+        "Do not ask the model to emit quote hashes.",
+        "Local runner/reviewer computes quote hashes",
+        source_ref,
+        f"Selected excerpt word count: `{source_word_count}`",
+    ]:
+        assert required in update
+    assert "thinking" in update
+    assert '"type": "disabled"' in update
+    assert "one model-call batch" in update
+    assert "Do not fall back to the full corpus path." in update
+    assert "authorizes exactly one tiny live LLM pilot run" not in update
+
+    recorded_prompt_hash = re.search(r"Prompt template SHA-256: `([0-9a-f]{64})`", update)
+    assert recorded_prompt_hash
+    assert recorded_prompt_hash.group(1) == sha256_file(prompt_template_path)
+    assert "Prompt Template" in prompt_template
+    assert "{{APPROVED_SOURCE_TEXT}}" in prompt_template
+    assert "No raw source text is committed in this template." in prompt_template
+    assert "source_linked_claim_table" in prompt_template
+    assert "locator_candidate_table" in prompt_template
+    assert "unsupported_claim_report" in prompt_template
+    assert "brief_method_failure_notes" in prompt_template
+    for required_field in [
+        "claim_id",
+        "source_ref",
+        "candidate_line_start",
+        "candidate_line_end",
+        "candidate_char_start",
+        "candidate_char_end",
+        "locator_confidence",
+        "locator_label",
+        "exact | approximate | broad | missing",
+    ]:
+        assert required_field in prompt_template
+    assert "Do not emit quote hashes." in prompt_template
+    assert "Local runner/reviewer computes quote hashes" in prompt_template
+    assert "quote_hash_candidate" not in prompt_template
+    assert "judgment_abstraction_notes" not in prompt_template
+    assert "full comparison commentary" not in prompt_template
+    assert "study card" not in prompt_template.lower()
+
+    config_record = extract_json_block(update, "Canonical Model Config")
+    recorded_config_hash = re.search(r"Config SHA-256: `([0-9a-f]{64})`", update)
+    assert recorded_config_hash
+    assert recorded_config_hash.group(1) == canonical_json_hash(config_record)
+    assert config_record == {
+        "api_format": "openai_compatible_chat_completions",
+        "base_url": "https://api.deepseek.com",
+        "context_window_provider_limit": "1M",
+        "max_input_tokens": 12000,
+        "max_output_tokens": 1200,
+        "model_id": "deepseek-v4-pro",
+        "provider_id": "deepseek_api",
+        "sampling": {
+            "frequency_penalty": None,
+            "presence_penalty": None,
+            "temperature": None,
+            "top_p": None,
+        },
+        "stream": False,
+        "thinking": {"type": "disabled"},
+        "tool_routing": "none",
+    }
+
+    stop_condition = (GOAL11B_PILOT_DIR / "stop_condition.md").read_text()
+    for required in [
+        "selected pilot 004 source excerpt is missing",
+        "source file is not ignored by git",
+        "source file is staged or tracked",
+        "`deepseek-v4-pro` is unavailable",
+        "the output contract expands beyond locator candidates",
+        "the prompt asks the model to emit quote hashes",
+        "the run attempts to fall back to the full corpus path",
+    ]:
+        assert required in stop_condition
+
+    combined = "\n".join(path.read_text() for path in GOAL11B_PILOT_DIR.iterdir())
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY=",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "quote_hash_candidate",
+    ]:
+        assert forbidden not in combined
+
+    summary = synthesize_exports(root=ROOT)
+    assert summary["record_count"] == sum(1 for _ in all_lab_export_records())
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    for currentness_doc in [portfolio, lab_card]:
+        assert "Goal 11B live-run admission planning" in currentness_doc
+        assert "completed Goal 11A locator contract plan" in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+        assert "run_record.live_pilot_005" not in currentness_doc
+    assert "current next step is Goal 11A" not in portfolio
+    assert "The active thread is Goal 11A" not in lab_card
+    assert "quote-hash candidates" not in portfolio
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 

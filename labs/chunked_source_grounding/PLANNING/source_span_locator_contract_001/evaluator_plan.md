@@ -14,7 +14,7 @@ Do not create a second evaluator framework.
 
 ## Review Labels
 
-Use exact if line/offset/hash directly supports the claim.
+Use exact if line/offset and locally computed quote hash directly support the claim.
 
 Use approximate if support is local but not exact.
 
@@ -30,7 +30,7 @@ For each locator candidate, the reviewer should ask:
 
 - Does the source ref match the approved local source?
 - Do line start and line end identify the same local span as the character offsets?
-- Does the quote hash candidate match the local span selected by the offsets?
+- Does the locally computed quote hash match the local span selected by the offsets?
 - Does the locator label match the strict source-span rubric?
 - Does the claim add meaning that is not present in the located span?
 

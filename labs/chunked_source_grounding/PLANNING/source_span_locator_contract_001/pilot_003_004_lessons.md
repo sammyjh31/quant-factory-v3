@@ -8,7 +8,7 @@ Goal 11A reuses the lesson from pilots 003 and 004 instead of creating a new met
 
 pilots 003/004 emitted support hints rather than canonical locator candidates.
 
-The support hints were reviewable and useful, but the model artifacts did not emit line ranges, character offsets, or quote hashes directly.
+The support hints were reviewable and useful, but the model artifacts did not emit line ranges or character offsets that local reviewers could use directly for quote-hash computation.
 
 ## What Goal 10B Added
 

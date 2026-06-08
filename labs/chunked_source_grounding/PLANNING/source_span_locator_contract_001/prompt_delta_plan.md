@@ -12,9 +12,14 @@ The model should emit:
 
 - line-range candidates,
 - character-offset candidates,
-- quote-hash candidates,
 - locator confidence,
 - locator label.
+
+Do not ask the model to emit quote hashes.
+
+Local runner/reviewer computes quote hashes from the exact local source spans selected by the model-proposed line ranges and character offsets.
+
+Committed records may include metadata-safe computed quote hashes after local computation, but the prompt must not treat model-generated hash strings as reliable.
 
 The model should not rely only on segment labels such as `opening segment` or `drawing boxes segment`.
 

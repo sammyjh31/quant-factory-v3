@@ -31,7 +31,7 @@ Committed future records may include metadata-safe locator candidates:
 - source ref,
 - line start and line end,
 - character offset start and character offset end,
-- quote hash candidate,
+- locally computed quote hash,
 - locator label,
 - locator confidence.
 
@@ -39,8 +39,10 @@ Committed future records must not include raw source text, raw model traces, raw
 
 ## Quote Hash Boundary
 
-Quote hashes should be computed from the exact local source span selected by the candidate offsets.
+The model should not emit quote hashes.
 
-A quote hash candidate is not source truth by itself. It is a reproducibility handle for local review.
+Quote hashes should be computed locally after the model response from the exact local source span selected by the candidate offsets.
 
-If line ranges, offsets, and quote hash disagree, the future review should mark the locator candidate as approximate, broad, missing, or failed according to the review evidence.
+A computed quote hash is not source truth by itself. It is a reproducibility handle for local review.
+
+If line ranges, offsets, and locally computed quote hash disagree, the future review should mark the locator candidate as approximate, broad, missing, or failed according to the review evidence.

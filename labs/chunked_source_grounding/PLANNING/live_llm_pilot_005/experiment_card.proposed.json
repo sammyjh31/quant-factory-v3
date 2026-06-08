@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "chunked_source_grounding_live_pilot_005",
+    "lab_id": "chunked_source_grounding",
+    "research_question": "Can the model emit canonical locator candidates directly -- line ranges and character offsets -- so local review can compute quote hashes from the proposed spans instead of reconstructing support after the fact?",
+    "hypothesis": "On the same approved second-source excerpt and text_judgment_v0 benchmark as pilot 004, a narrowed locator-candidate output contract may reduce reviewer reconstruction work by producing line ranges and character offsets directly, while preserving proposal-only boundaries and leaving quote-hash computation to local review.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "chunked_source_grounding_live_pilot_005_method"
+    ],
+    "evaluation_plan": "Validate this proposed ExperimentCard and MethodCard against protocol schemas. After a separately authorized live run, create proposal-only export records and evaluate whether source-linked claims include usable line ranges, character offsets, locator confidence, exact/approximate/broad/missing labels, unsupported-claim handling, and metadata-safe locally computed quote hashes. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "chunked_source_span_locator_candidate_proposal"
+    ]
+  }
+}

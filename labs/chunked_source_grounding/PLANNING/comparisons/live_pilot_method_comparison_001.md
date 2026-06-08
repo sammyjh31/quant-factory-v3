@@ -62,12 +62,12 @@ Chunked Pro source-span precision improved over pilot 002. The manual content re
 
 The second-source source-span precision repeat passed manual content review with caveats, then survived strict source-span re-review. The strongest finding is repeatability: source-span precision improvement repeated under stricter review on a different source excerpt while preserving parseability and support-label reviewability.
 
-The main remaining gap is not whether manual reviewers can locate support. The strict reviews showed manual reviewers can locate support and record line/offset/hash evidence without committing raw source text. The main remaining gap is that model artifacts do not yet emit canonical line/offset/hash locators themselves. Also, broad segment refs remain a model-output limitation, and limited abstraction remains a tradeoff.
+The main remaining gap is not whether manual reviewers can locate support. The strict reviews showed manual reviewers can locate support and record line/offset/hash evidence without committing raw source text. The main remaining gap is that model artifacts do not yet emit canonical line/offset locator candidates that local reviewers can use for quote-hash computation. Also, broad segment refs remain a model-output limitation, and limited abstraction remains a tradeoff.
 
 ## Next Research Direction
 
 The source-span precision repeat supports one narrow conclusion: the pilot 003 pattern generalized to a second source excerpt as a proposal-only, manually reviewed method signal, and the pattern survived strict source-span re-review. It does not validate the method, graduate it, or prove trading usefulness.
 
-The leading next bounded fork is Goal 11A: plan a source-span locator output contract. The research question should be whether the model can emit canonical locator candidates directly instead of producing broad segment refs that manual reviewers must reconstruct after the fact.
+The bounded fork from this comparison is now the completed Goal 11A source-span locator output contract plan, followed by Goal 11B live-run admission planning. The research question is whether a future model call can emit canonical locator candidates directly instead of producing broad segment refs that manual reviewers must reconstruct after the fact.
 
-That future contract should test line-range candidates, character-offset candidates, and quote-hash candidates. It should remain a lab-local method experiment until repeated evidence and explicit ADR justify any protocol change. This note does not choose any direction as architecture.
+The admitted future contract should test line-range candidates and character-offset candidates so local runner/reviewer code can produce locally computed quote hashes. It should remain a lab-local method experiment until repeated evidence and explicit ADR justify any protocol change. This note does not choose any direction as architecture.

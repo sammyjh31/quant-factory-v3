@@ -18,7 +18,7 @@ Do not graduate anything.
 
 ## Purpose
 
-Goal 10C found that source-span precision improved and repeated under strict manual review, but the model artifacts still do not emit canonical line/offset/hash locators directly. Goal 11A plans a narrow output contract that asks the model to produce those locator candidates itself.
+Goal 10C found that source-span precision improved and repeated under strict manual review, but the model artifacts still do not emit canonical line/offset locator candidates directly. Goal 11A plans a narrow output contract that asks the model to produce locator candidates that local review can use to compute quote hashes.
 
 Research question:
 
@@ -35,11 +35,14 @@ Each locator candidate should include:
 - `candidate_line_end`
 - `candidate_char_start`
 - `candidate_char_end`
-- `quote_hash_candidate`
 - `locator_confidence`
 - `locator_label: exact | approximate | broad | missing`
 
 These fields are lab-local artifact payload fields for a future proposal-only artifact. They are not protocol fields in Goal 11A.
+
+The model should not emit quote hashes. The local runner/reviewer computes quote hashes from the exact local source spans selected by the candidate line ranges and character offsets.
+
+Future committed records may include metadata-safe computed quote hashes after local computation, but they must not treat model-generated hash strings as source truth.
 
 ## Relationship To Claims
 
@@ -64,7 +67,7 @@ Do not add broad judgment abstraction notes. Do not add comparison commentary. D
 
 ## Protocol Fit
 
-Existing `ArtifactEnvelope.payload` can honestly hold locator candidates as lab-local proposal payload data because the ArtifactEnvelope schema allows additional payload properties and already requires `outcome_polarity`.
+Existing `ArtifactEnvelope.payload` can honestly hold locator candidates and locally computed quote hashes as lab-local proposal payload data because the ArtifactEnvelope schema allows additional payload properties and already requires `outcome_polarity`.
 
 No protocol change is needed for Goal 11A; no protocol change is part of this planning packet.
 
