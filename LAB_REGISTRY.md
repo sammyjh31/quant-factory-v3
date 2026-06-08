@@ -99,6 +99,7 @@ Proposed planning packets:
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_003/
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/
 ```
 
 Planning experiment ids:
@@ -107,9 +108,10 @@ Planning experiment ids:
 chunked_source_grounding_live_pilot_001
 chunked_source_grounding_live_pilot_002
 chunked_source_grounding_live_pilot_003
+chunked_source_grounding_live_pilot_004
 ```
 
-The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence. The second packet defined the preflight scope for a DeepSeek V4 Pro rerun with a smaller output contract. The third packet defined the source-span precision scope for the DeepSeek V4 Pro pilot 003 run.
+The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence. The second packet defined the preflight scope for a DeepSeek V4 Pro rerun with a smaller output contract. The third packet defined the source-span precision scope for the DeepSeek V4 Pro pilot 003 run. The fourth packet defines the second-source source-span precision scope for `chunked_source_grounding_live_pilot_004`; no model call or export records exist for that pilot yet.
 
 Run admission update:
 
@@ -166,6 +168,14 @@ labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_manual_co
 ```
 
 The source-span precision run produced complete parseable JSON under the narrowed output contract and kept raw source, prompt, provider response, and model output in ignored local traces. The manual content review passed with caveats: source-span precision improved relative to pilot 002, exact/approximate labels were warranted for the reviewed claims, and the artifact still lacks canonical offsets and broader abstraction. It creates no protocol change, no synthesis feature, no graduation status, and no method-quality conclusion beyond this proposal-only manual review.
+
+The second-source source-span precision planning packet lives at:
+
+```text
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/
+```
+
+Goal 9A created a planning/admission packet for `chunked_source_grounding_live_pilot_004` using an operator-approved second-source excerpt. It is planning structure only: no LLM call, no export records, no research evidence, no synthesis import, no graduation status, and no architecture.
 
 ---
 

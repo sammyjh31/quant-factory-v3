@@ -1,0 +1,44 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "MethodCard",
+  "schema_version": "0.1.2",
+  "method_card": {
+    "method_id": "chunked_source_grounding_live_pilot_004_method",
+    "lab_id": "chunked_source_grounding",
+    "parent_question": "How can chunked/source-span LLM methods preserve source grounding while still supporting useful abstraction?",
+    "method_family": "chunked_source_grounded_llm_reader_proposed",
+    "intended_inputs": [
+      "second operator-approved source excerpt selected from the local pharm box-trades transcript",
+      "metadata-safe source hash and source ref for the selected excerpt",
+      "metadata-safe benchmark pack text_judgment_v0",
+      "chunked source segments with the pilot 003 source-span precision expectations",
+      "DeepSeek V4 Pro with thinking disabled",
+      "pre-recorded prompt and model configuration metadata"
+    ],
+    "intended_outputs": [
+      "chunked_source_span_precision_proposal",
+      "source-linked claim table",
+      "tighter source-span support hints",
+      "support hint precision labels",
+      "unsupported-claim report",
+      "brief method-failure notes"
+    ],
+    "known_risks": [
+      "This is a proposed live LLM pilot planning record, not a completed run.",
+      "The second source may expose repeatability limits that were hidden by the first source.",
+      "Source selection can bias the repeat if the operator-approved excerpt is unusually clean or unusually fragmented.",
+      "Tighter source-span hints may create false precision if broad support is not labeled honestly.",
+      "The narrowed contract may preserve grounding while retaining limited abstraction.",
+      "Prompt or trace handling may accidentally include raw source material if the privacy boundary is not followed."
+    ],
+    "non_goals": [
+      "not a completed run",
+      "not research evidence",
+      "not a synthesis export",
+      "not broader judgment abstraction notes",
+      "not strategy validation",
+      "not product authority",
+      "not architecture or graduation evidence"
+    ]
+  }
+}

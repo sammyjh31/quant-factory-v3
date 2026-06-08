@@ -19,7 +19,9 @@ The scaffold baseline has been accepted. The portfolio now has one tiny method-c
 - `chunked_source_grounding_live_pilot_002`
 - `chunked_source_grounding_live_pilot_003`
 
-The fourth pilot produced one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord.
+`chunked_source_grounding_live_pilot_003` produced one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord.
+
+A second-source source-span precision repeat is now planned as `chunked_source_grounding_live_pilot_004`; no model call, export records, research evidence, generated synthesis claim, graduation status, or architecture exists for that repeat.
 
 The accepted scaffold contains protocol schemas, benchmark manifests, lab fixture exports, validation, read-only synthesis, currentness docs, and tests proving the boundaries.
 
@@ -80,13 +82,14 @@ The current records include one manual content-review EvaluationRecord for the l
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
-The current source-span precision planning packet is:
+The current source-span precision planning packets are:
 
 ```text
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_003/
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/
 ```
 
-It narrowed the chunked Pro question to tighter source-span hints and honest exact/approximate/broad/missing support labels. The corresponding manual content review passed with caveats: source-span precision improved relative to pilot 002, exact/approximate labels were warranted for the reviewed claims, and the artifact still lacks canonical offsets and broader abstraction. Planning packets remain planning structure only. They are not in `EXPORTS/`, are not imported by synthesis, and do not authorize future execution by themselves.
+Pilot 003 narrowed the chunked Pro question to tighter source-span hints and honest exact/approximate/broad/missing support labels. The corresponding manual content review passed with caveats: source-span precision improved relative to pilot 002, exact/approximate labels were warranted for the reviewed claims, and the artifact still lacks canonical offsets and broader abstraction. Pilot 004 plans a second-source repeat of that source-span precision contract. Planning packets remain planning structure only. They are not in `EXPORTS/`, are not imported by synthesis, and do not authorize future execution by themselves.
 
 Future live LLM experiments must pass the admission checklist in:
 
@@ -138,6 +141,6 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Repeat source-span precision on a second source excerpt before choosing another live-method fork.
+Execute the admitted `chunked_source_grounding_live_pilot_004` second-source source-span precision repeat only after a separate Goal 9B instruction.
 
-The next likely planning task is a contained `chunked_source_grounding` plan for a second-source source-span precision repeat. It must stay proposal-only, avoid declaring a winner, avoid copying generated summaries, and avoid product, strategy, validation, financial-advice, live-trading, graduation, or architecture claims.
+That next execution must stay within the admitted source, prompt, model, budget, and trace boundaries; create only proposal-only protocol records if the run succeeds; avoid declaring a winner; avoid copying generated summaries; and avoid product, strategy, validation, financial-advice, live-trading, graduation, or architecture claims.

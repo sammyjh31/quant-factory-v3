@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "chunked_source_grounding_live_pilot_004",
+    "lab_id": "chunked_source_grounding",
+    "research_question": "Can the chunked/source-grounded source-span precision method that improved on pilot 003 generalize to a second source excerpt while staying complete, parseable, source-linked, and reviewable?",
+    "hypothesis": "On a second source excerpt and the same text_judgment_v0 benchmark, the pilot 003 source-span precision contract may preserve complete parseable output and honest exact/approximate/broad/missing labels, while revealing whether the improvement repeats outside the first source.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "chunked_source_grounding_live_pilot_004_method"
+    ],
+    "evaluation_plan": "Validate this proposed ExperimentCard and MethodCard against protocol schemas. After a separately authorized live run, create proposal-only export records and evaluate source-span precision, honest exact/approximate/broad/missing support labels, unsupported claims, parseability, output-contract fit, and repeatability value against chunked_source_grounding_live_pilot_003 and the first approved source excerpt. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "chunked_source_span_precision_proposal"
+    ]
+  }
+}

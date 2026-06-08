@@ -19,6 +19,9 @@ Current records:
 - source-span precision pilot 003 produced complete parseable JSON structurally
 - `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_manual_content_review.json`: one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord
 - manual content review passed for pilot 003 with caveats: source-span precision improved, exact/approximate labels were warranted for reviewed claims, no canonical offsets, limited broader abstraction
+- `chunked_source_grounding_live_pilot_004`: second-source source-span precision planning packet only
+- `labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/`: proposed MethodCard/ExperimentCard and admission scope for the second-source repeat
+- pilot 004 has no model call, export records, manual review, research evidence, synthesis claim, graduation status, or architecture
 
 Current boundaries:
 
