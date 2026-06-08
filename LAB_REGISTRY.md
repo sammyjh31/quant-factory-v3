@@ -90,7 +90,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set
+scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord
 ```
 
 Proposed planning packet:
@@ -115,16 +115,17 @@ labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/run_admission_update.m
 
 The run admission update defined the executable preflight scope for exactly one future live LLM pilot run under the stated scope. Goal 7B executed that admitted one-call scope and created one proposal-only export set.
 
-The authorized live pilot has now produced one proposal-only export set:
+The authorized live pilot has now produced one proposal-only export set and one failure-focused manual content-review EvaluationRecord:
 
 ```text
 labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json
 labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_001.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json
 labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_001.json
 ```
 
-The live export set is proposal-only comparison work against `long_context_judgment_live_pilot_001` and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture. The model output reached the configured output-token cap before complete JSON parsing, so content review remains a separate Goal 7C task.
+The live export set is proposal-only comparison work against `long_context_judgment_live_pilot_001` and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture. The model output reached the configured output-token cap before complete JSON parsing. The manual content review records that as a failure of this admitted Flash run/config/output contract, not a global method-quality conclusion.
 
 ---
 

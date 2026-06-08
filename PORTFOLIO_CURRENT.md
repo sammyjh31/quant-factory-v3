@@ -12,7 +12,7 @@ This file owns the current portfolio posture. It does not own lab results, metho
 
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
-The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set plus one manual content-review EvaluationRecord recorded under `labs/long_context_judgment/EXPORTS/`, and one admitted proposal-only chunked/source-grounded live pilot export set recorded under `labs/chunked_source_grounding/EXPORTS/`.
+The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set plus one manual content-review EvaluationRecord recorded under `labs/long_context_judgment/EXPORTS/`, and one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord recorded under `labs/chunked_source_grounding/EXPORTS/`.
 
 The accepted scaffold contains:
 
@@ -44,7 +44,7 @@ That update authorized exactly one tiny live LLM pilot run under the stated scop
 
 The authorized run has produced one proposal-only live export set and one manual content-review EvaluationRecord. These records are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
-The chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_001`, which has now produced one proposal-only live export set. That run recorded a truncated-output limitation. It does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+The chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_001`, which has now produced one proposal-only live export set and one failure-focused manual content-review EvaluationRecord. That review records a truncated-output / incomplete-JSON content-review failure for this admitted Flash run/config/output contract. It does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
@@ -58,7 +58,7 @@ Active scaffold-origin labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set for `chunked_source_grounding_live_pilot_001`
+   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_001`
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -88,7 +88,7 @@ They exist to prove that labs can publish comparable records and that synthesis 
 
 The `long_context_judgment_live_pilot_001` planning packet, `chunked_source_grounding_live_pilot_001` planning packet, and their `run_admission_update.md` files are not evidence and are not synthesis exports.
 
-One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`, along with one manual content-review EvaluationRecord. One admitted proposal-only chunked/source-grounded live pilot export set now exists for `chunked_source_grounding_live_pilot_001`. These are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`, along with one manual content-review EvaluationRecord. One admitted proposal-only chunked/source-grounded live pilot export set now exists for `chunked_source_grounding_live_pilot_001`, along with one failure-focused manual content-review EvaluationRecord. These are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
@@ -144,10 +144,11 @@ The chunked/source-grounded proposal-only live export set is:
 labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json
 labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_001.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json
 labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_001.json
 ```
 
-The chunked live pilot reached the configured output-token cap before complete JSON parsing. This is a recorded limitation, not a method-quality conclusion.
+The chunked live pilot reached the configured output-token cap before complete JSON parsing. The manual content review records this as a failure of the admitted Flash run/config/output contract, not a global method-quality conclusion.
 
 Future live LLM experiments must pass the admission checklist in:
 

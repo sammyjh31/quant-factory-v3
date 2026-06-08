@@ -1,0 +1,23 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_001_manual_content_review",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_001_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_live_pilot_001",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.2,
+    "pass_fail": "fail",
+    "failure_tags": [
+      "model_output_truncated",
+      "incomplete_json",
+      "output_contract_too_large",
+      "content_review_blocked"
+    ],
+    "comments": "Manual content review only: the artifact is not content-reviewable as a completed source-grounded proposal because the provider response ended at the configured output-token cap and did not parse as complete JSON. The primary finding is that truncation blocks source-grounding review, and the prompt/output contract asked for too much for this Flash run. The partial output is usable only as failure evidence for the admitted run/config/output contract and supports narrowing the next rerun. This is not a global judgment on chunked/source-grounded reading or DeepSeek V4. Raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

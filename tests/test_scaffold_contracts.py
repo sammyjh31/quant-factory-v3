@@ -58,6 +58,9 @@ LIVE_PILOT_CONTENT_REVIEW_EXPORT = "evaluation_record.live_pilot_001_manual_cont
 CHUNKED_LIVE_PILOT_RUN_ID = "chunked_source_grounding_live_pilot_001_run"
 CHUNKED_LIVE_PILOT_ARTIFACT_ID = "chunked_source_grounding_live_pilot_001_artifact"
 CHUNKED_LIVE_PILOT_EVALUATION_ID = "chunked_source_grounding_live_pilot_001_eval"
+CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_001_manual_content_review"
+)
 CHUNKED_LIVE_PILOT_NOTE_ID = "chunked_source_grounding_live_pilot_001_note"
 CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS = {
     "run_record.live_pilot_001.json",
@@ -65,6 +68,9 @@ CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS = {
     "evaluation_record.live_pilot_001.json",
     "research_note.live_pilot_001.json",
 }
+CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
+    "evaluation_record.live_pilot_001_manual_content_review.json"
+)
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
     "BenchmarkPack.schema.json",
@@ -1017,8 +1023,8 @@ def test_goal6c_b_manual_content_review_export_is_single_bounded_and_current():
         for record in records_by_schema("EvaluationRecord")
         if record["evaluation"]["evaluator_type"] == "manual_content_review"
     ]
-    assert [review["evaluation_id"] for review in manual_content_reviews] == [
-        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID
+    assert LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID in [
+        review["evaluation_id"] for review in manual_content_reviews
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
     assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
@@ -1377,6 +1383,91 @@ def test_goal7b_chunked_source_grounding_live_export_set_is_protocol_valid_and_b
             currentness_doc
         )
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_only():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    content_review_path = export_dir / CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    assert content_review_path.exists()
+
+    record = load_json(content_review_path)
+    validate_record(record)
+    assert record["schema_name"] == "EvaluationRecord"
+    assert record["schema_version"] == CURRENT_SCHEMA_VERSION
+
+    evaluation = record["evaluation"]
+    assert evaluation["evaluation_id"] == CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID
+    assert evaluation["lab_id"] == "chunked_source_grounding"
+    assert evaluation["target_id"] == CHUNKED_LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["target_type"] == "artifact"
+    assert evaluation["evaluator_id"] == "manual_content_review_live_pilot_001"
+    assert evaluation["evaluator_type"] == "manual_content_review"
+    assert evaluation["benchmark_pack_id"] == "text_judgment_v0"
+    assert evaluation["score"] == pytest.approx(0.2)
+    assert evaluation["pass_fail"] == "fail"
+    assert evaluation["failure_tags"] == [
+        "model_output_truncated",
+        "incomplete_json",
+        "output_contract_too_large",
+        "content_review_blocked",
+    ]
+
+    comments = evaluation["comments"]
+    for required in [
+        "Manual content review only",
+        "content-reviewable",
+        "truncation blocks source-grounding review",
+        "prompt/output contract asked for too much",
+        "partial output is usable only as failure evidence",
+        "not a global judgment on chunked/source-grounded reading",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ),
+    ]:
+        assert required in comments
+    assert "raw source text and raw model output are not committed" in comments.lower()
+
+    manual_content_reviews = [
+        record["evaluation"]
+        for record in records_by_schema("EvaluationRecord")
+        if record["evaluation"]["evaluator_type"] == "manual_content_review"
+    ]
+    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
+        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    ]
+    assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
+    assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
+    assert not list(export_dir.glob("research_note.*manual_content_review*.json"))
+
+    combined_committed = "\n".join(
+        path.read_text()
+        for path in [
+            content_review_path,
+            ROOT / "PORTFOLIO_CURRENT.md",
+            ROOT / "LAB_REGISTRY.md",
+        ]
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+    ]:
+        assert forbidden not in combined_committed
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    assert CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT in portfolio
+    assert CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT in lab_registry
+    assert "failure-focused manual content-review EvaluationRecord" in portfolio
+    assert "failure-focused manual content-review EvaluationRecord" in lab_registry
+    assert "generated synthesis metrics" not in portfolio.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
