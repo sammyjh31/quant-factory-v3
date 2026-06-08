@@ -1,0 +1,206 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ArtifactEnvelope",
+  "artifact": {
+    "artifact_id": "chunked_source_grounding_live_pilot_005_artifact",
+    "artifact_type": "chunked_source_span_locator_candidate_proposal",
+    "lab_id": "chunked_source_grounding",
+    "method_id": "chunked_source_grounding_live_pilot_005_method",
+    "run_id": "chunked_source_grounding_live_pilot_005_run",
+    "source_refs": [
+      "raw_corpora_sha256:9f9e143429f5842a"
+    ],
+    "posture": {
+      "grounding_status": "source_linked",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "manual_strict_locator_review_not_yet_completed",
+      "raw_output_local_only"
+    ],
+    "summary": "One admitted DeepSeek V4 Pro source-span locator candidate live pilot produced complete parseable proposal-only JSON. The model emitted locator coordinates and local code computed metadata-safe quote hashes from usable candidate offsets; strict manual locator review is still pending.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "disabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/chunked_source_grounding/PLANNING/live_llm_pilot_005/prompt_template.live_pilot_005.md",
+      "prompt_template_sha256": "74ad3e97e88e0dc9782f50668fc9e0669fdc95443837532f67d10d05d074a1d3",
+      "config_sha256": "a8a8daccf08254a827fd5d68203d41f56b25c295e14e4005f9671fd0bd46a9cb",
+      "source_metadata": {
+        "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+        "source_scope": "operator-approved second-source excerpt from the local pharm box-trades transcript",
+        "source_path_scope": "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "source_origin_scope": "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt",
+        "source_file_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "source_file_word_count": 945,
+        "excerpt_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "excerpt_word_count": 945,
+        "raw_source_text_committed": false
+      },
+      "token_metadata": {
+        "prompt_tokens": 1894,
+        "completion_tokens": 724,
+        "total_tokens": 2618
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.002618,
+        "estimated_cost_usd_upper_bound": 0.002618,
+        "pricing_basis": "Conservative metadata-safe upper bound of $1 per million prompt tokens and $1 per million completion tokens for budget containment; not billing authority."
+      },
+      "model_output_metadata": {
+        "artifact_type": "chunked_source_span_locator_candidate_proposal",
+        "raw_model_output_sha256": "a1a237fa12a51f01a2c685e5ded7d7b31c7972eca95a4ef9f861ef8228fae6fa",
+        "raw_response_sha256": "3af7f3fc90c223cbcdd7a2682e0c066a119880059a33336ea243984c354a0b0d",
+        "parsed_json_success": true,
+        "finish_reason": "stop",
+        "model_output_truncated": false,
+        "expected_top_level_keys": [
+          "source_linked_claim_table",
+          "locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "expected_top_level_keys_detected": [
+          "source_linked_claim_table",
+          "locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "missing_expected_top_level_keys": [],
+        "parsed_output_counts": {
+          "source_linked_claim_table": 3,
+          "locator_candidate_table": 3,
+          "unsupported_claim_report": 1,
+          "brief_method_failure_notes": 1
+        },
+        "locator_candidate_count": 3,
+        "model_emitted_locator_coordinates": true,
+        "model_emitted_quote_hash_count": 0,
+        "sanitized_output_summary": "The model returned complete parseable JSON with 3 source-linked claim entries, 3 locator candidates, 1 unsupported-claim report, and 1 brief method-failure note. Locator labels were {'approximate': 2, 'broad': 1}. Strict manual locator review has not judged whether the proposed coordinates point to the right spans."
+      },
+      "locator_candidate_metadata": {
+        "locator_candidates": [
+          {
+            "claim_id": "SLC-001",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 14,
+            "candidate_line_end": 17,
+            "candidate_char_start": 218,
+            "candidate_char_end": 280,
+            "locator_confidence": 0.85,
+            "locator_label": "approximate"
+          },
+          {
+            "claim_id": "SLC-002",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 27,
+            "candidate_line_end": 34,
+            "candidate_char_start": 468,
+            "candidate_char_end": 592,
+            "locator_confidence": 0.88,
+            "locator_label": "approximate"
+          },
+          {
+            "claim_id": "SLC-003",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 46,
+            "candidate_line_end": 68,
+            "candidate_char_start": 825,
+            "candidate_char_end": 1248,
+            "locator_confidence": 0.82,
+            "locator_label": "broad"
+          }
+        ],
+        "locator_label_counts": {
+          "approximate": 2,
+          "broad": 1
+        },
+        "local_quote_hash_computation_attempted": true,
+        "quote_hashes_computed_by": "local_runner_from_candidate_offsets",
+        "offset_basis": "model-proposed zero-based Python string character offsets",
+        "model_asked_to_emit_quote_hashes": false,
+        "model_emitted_quote_hash_count": 0,
+        "model_emitted_quote_hashes_ignored": false,
+        "computed_quote_hash_count": 3,
+        "invalid_locator_candidate_count": 0,
+        "computed_quote_hashes": [
+          {
+            "claim_id": "SLC-001",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 14,
+            "candidate_line_end": 17,
+            "candidate_char_start": 218,
+            "candidate_char_end": 280,
+            "locator_confidence": 0.85,
+            "locator_label": "approximate",
+            "quote_sha256": "aa1c4a4d9123c3edc6181631661dab1a136e98db5ac3eb5763f5689b66d46a33",
+            "quote_hash_computed_locally": true,
+            "quote_text_committed": false
+          },
+          {
+            "claim_id": "SLC-002",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 27,
+            "candidate_line_end": 34,
+            "candidate_char_start": 468,
+            "candidate_char_end": 592,
+            "locator_confidence": 0.88,
+            "locator_label": "approximate",
+            "quote_sha256": "5f0e1de0ae75a0815f9b3b33ec8ac3a145dfddf0d1e61a8010e3e7b676cfa577",
+            "quote_hash_computed_locally": true,
+            "quote_text_committed": false
+          },
+          {
+            "claim_id": "SLC-003",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 46,
+            "candidate_line_end": 68,
+            "candidate_char_start": 825,
+            "candidate_char_end": 1248,
+            "locator_confidence": 0.82,
+            "locator_label": "broad",
+            "quote_sha256": "b68bd9fe88e732e44a1ba2176db1f86ef0ab7a4789a58bf619ab4021c03a0023",
+            "quote_hash_computed_locally": true,
+            "quote_text_committed": false
+          }
+        ],
+        "invalid_locator_candidates": []
+      },
+      "trace_storage_boundary": {
+        "provider_request_trace": "provider_payloads/chunked_source_grounding_live_pilot_005/request.json",
+        "provider_response_trace": "provider_payloads/chunked_source_grounding_live_pilot_005/response.json",
+        "prompt_trace": "prompt_traces/chunked_source_grounding_live_pilot_005/prompt.txt",
+        "model_output_trace": "model_traces/chunked_source_grounding_live_pilot_005/model_output.txt",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "This record captures one admitted DeepSeek V4 Pro source-span locator candidate call only.",
+        "The model emitted line/offset locator candidates, but strict manual locator review has not checked their correctness.",
+        "Local code computed quote hashes from model-proposed candidate offsets; those hashes are not model-generated.",
+        "Method quality, trading correctness, strategy value, product readiness, and source-truth authority were not evaluated by this boundary record.",
+        "Full output text remains in ignored local trace storage and is not a committed authority surface."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

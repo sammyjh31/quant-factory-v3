@@ -1,7 +1,7 @@
 # Lab Registry
 
 Status: lab currentness router  
-Current phase: `milestone-2-live-pilot-recorded`
+Current phase: `milestone-3-method-comparison-recorded`
 
 This file lists labs, parent research questions, and phase-appropriate export status. It does not claim that any method works.
 
@@ -48,7 +48,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-active live-pilot lab with scaffold fixtures, proposal-only live export records, manual review records, and one second-source source-span precision repeat
+active live-pilot lab with scaffold fixtures, proposal-only live export records, manual review records, one second-source source-span precision repeat, and one proposal-only source-span locator candidate pilot export set awaiting Goal 11D manual strict locator review
 ```
 
 Current details live in protocol export records and the lab-local comparison note:

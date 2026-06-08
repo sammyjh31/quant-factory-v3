@@ -111,6 +111,18 @@ CHUNKED_SPAN_REPEAT_LIVE_PILOT_EVALUATION_ID = (
 CHUNKED_SPAN_REPEAT_LIVE_PILOT_NOTE_ID = (
     "chunked_source_grounding_live_pilot_004_note"
 )
+CHUNKED_LOCATOR_LIVE_PILOT_RUN_ID = (
+    "chunked_source_grounding_live_pilot_005_run"
+)
+CHUNKED_LOCATOR_LIVE_PILOT_ARTIFACT_ID = (
+    "chunked_source_grounding_live_pilot_005_artifact"
+)
+CHUNKED_LOCATOR_LIVE_PILOT_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_005_eval"
+)
+CHUNKED_LOCATOR_LIVE_PILOT_NOTE_ID = (
+    "chunked_source_grounding_live_pilot_005_note"
+)
 LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
 LIVE_PILOT_ARTIFACT_ID = "long_context_judgment_live_pilot_001_artifact"
 LIVE_PILOT_EVALUATION_ID = "long_context_judgment_live_pilot_001_eval"
@@ -159,6 +171,12 @@ CHUNKED_SPAN_REPEAT_LIVE_PILOT_POST_RUN_EXPORTS = {
     "artifact_envelope.live_pilot_004.json",
     "evaluation_record.live_pilot_004.json",
     "research_note.live_pilot_004.json",
+}
+CHUNKED_LOCATOR_LIVE_PILOT_POST_RUN_EXPORTS = {
+    "run_record.live_pilot_005.json",
+    "artifact_envelope.live_pilot_005.json",
+    "evaluation_record.live_pilot_005.json",
+    "research_note.live_pilot_005.json",
 }
 CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
     "evaluation_record.live_pilot_002_manual_content_review.json"
@@ -631,6 +649,9 @@ def test_run_records_link_required_protocol_ids():
         load_json(GOAL9A_PILOT_DIR / "method_card.proposed.json")["method_card"][
             "method_id"
         ],
+        load_json(GOAL11B_PILOT_DIR / "method_card.proposed.json")["method_card"][
+            "method_id"
+        ],
     }
     experiment_ids = {
         record["experiment_card"]["experiment_id"] for record in records_by_schema("ExperimentCard")
@@ -649,6 +670,9 @@ def test_run_records_link_required_protocol_ids():
             "experiment_card"
         ]["experiment_id"],
         load_json(GOAL9A_PILOT_DIR / "experiment_card.proposed.json")[
+            "experiment_card"
+        ]["experiment_id"],
+        load_json(GOAL11B_PILOT_DIR / "experiment_card.proposed.json")[
             "experiment_card"
         ]["experiment_id"],
     }
@@ -689,6 +713,7 @@ def test_research_notes_and_llm_judge_placeholders_are_bounded():
             CHUNKED_PRO_LIVE_PILOT_NOTE_ID,
             CHUNKED_SPAN_LIVE_PILOT_NOTE_ID,
             CHUNKED_SPAN_REPEAT_LIVE_PILOT_NOTE_ID,
+            CHUNKED_LOCATOR_LIVE_PILOT_NOTE_ID,
         }:
             assert disclaimer == LIVE_EVIDENCE_DISCLAIMER
         else:
@@ -2253,8 +2278,8 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "authority, graduation, or architecture."
         ),
         (
-            "Goal 11B admission planning is complete. The next proposed step is Goal 11C "
-            "execution of the admitted source-span locator candidate pilot."
+            "Goal 11C source-span locator candidate pilot has produced a proposal-only "
+            "export set. The next proposed step is Goal 11D manual strict locator review."
         ),
     ]:
         assert required in portfolio
@@ -2567,9 +2592,10 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "strict source-span re-review" in currentness_doc
-        assert "completed Goal 11A locator contract plan" in currentness_doc
-        assert "Goal 11B admission planning is complete" in currentness_doc
-        assert "Goal 11C execution" in currentness_doc
+        assert "source-span locator candidate pilot has produced a proposal-only" in (
+            currentness_doc
+        )
+        assert "Goal 11D manual strict locator review" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "The current next step is evaluator planning" not in portfolio
     assert "The active thread is source-span evaluator planning" not in lab_card
@@ -2657,9 +2683,10 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator output contract" in currentness_doc
-        assert "completed Goal 11A locator contract plan" in currentness_doc
-        assert "Goal 11B admission planning is complete" in currentness_doc
-        assert "Goal 11C execution" in currentness_doc
+        assert "source-span locator candidate pilot has produced a proposal-only" in (
+            currentness_doc
+        )
+        assert "Goal 11D manual strict locator review" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "current next step is comparison-note compression" not in portfolio
     assert "The active thread is Goal 10C comparison-note compression" not in lab_card
@@ -2695,11 +2722,6 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
     assert not list(
         (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
             "*source_span_locator_contract_001*"
-        )
-    )
-    assert not list(
-        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
-            "*live_pilot_005*"
         )
     )
 
@@ -2827,9 +2849,10 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator output contract" in currentness_doc
-        assert "completed Goal 11A locator contract plan" in currentness_doc
-        assert "Goal 11B admission planning is complete" in currentness_doc
-        assert "Goal 11C execution" in currentness_doc
+        assert "source-span locator candidate pilot has produced a proposal-only" in (
+            currentness_doc
+        )
+        assert "Goal 11D manual strict locator review" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
@@ -2900,11 +2923,6 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
         {record["schema_name"] for record in planning_records}
     )
     assert "EXPORTS" not in GOAL11B_PILOT_DIR.parts
-    assert not list(
-        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
-            "*live_pilot_005*"
-        )
-    )
     assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
 
     admission = (GOAL11B_PILOT_DIR / "admission.md").read_text()
@@ -3083,11 +3101,10 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert "Goal 11B admission planning is complete" in currentness_doc
-        assert "Goal 11C execution of the admitted source-span locator candidate pilot" in (
+        assert "Goal 11C source-span locator candidate pilot has produced a proposal-only" in (
             currentness_doc
         )
-        assert "completed Goal 11A locator contract plan" in currentness_doc
+        assert "Goal 11D manual strict locator review" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "current next step is Goal 11A" not in portfolio
@@ -3095,6 +3112,200 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     assert "current bounded planning packet is Goal 11B" not in portfolio
     assert "The active thread is Goal 11B live-run admission planning" not in lab_card
     assert "quote-hash candidates" not in portfolio
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal11c_source_span_locator_live_export_set_is_protocol_valid_and_bounded():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    live_exports = {
+        path.name: load_json(path) for path in export_dir.glob("*.live_pilot_005.json")
+    }
+    assert set(live_exports) == CHUNKED_LOCATOR_LIVE_PILOT_POST_RUN_EXPORTS
+    for record in live_exports.values():
+        validate_record(record)
+
+    run = live_exports["run_record.live_pilot_005.json"]
+    artifact = live_exports["artifact_envelope.live_pilot_005.json"]
+    evaluation = live_exports["evaluation_record.live_pilot_005.json"]
+    note = live_exports["research_note.live_pilot_005.json"]
+
+    source_hash = sha256_file(GOAL9A_SOURCE_PATH)
+    source_ref = f"raw_corpora_sha256:{source_hash[:16]}"
+    prompt_template_path = GOAL11B_PILOT_DIR / "prompt_template.live_pilot_005.md"
+
+    assert run["schema_name"] == "RunRecord"
+    assert run["schema_version"] == CURRENT_SCHEMA_VERSION
+    assert run["run_record"] == {
+        "run_id": CHUNKED_LOCATOR_LIVE_PILOT_RUN_ID,
+        "lab_id": "chunked_source_grounding",
+        "experiment_id": GOAL11B_EXPERIMENT_ID,
+        "method_id": GOAL11B_METHOD_ID,
+        "benchmark_pack_id": "text_judgment_v0",
+        "source_refs": [source_ref],
+        "artifact_ids": [CHUNKED_LOCATOR_LIVE_PILOT_ARTIFACT_ID],
+        "evaluation_ids": [CHUNKED_LOCATOR_LIVE_PILOT_EVALUATION_ID],
+        "run_kind": "live_llm_pilot",
+        "outcome_polarity": "proposal_only",
+        "status": "live_recorded",
+    }
+
+    artifact_body = artifact["artifact"]
+    artifact_payload = artifact_body["payload"]
+    assert artifact_body["artifact_id"] == CHUNKED_LOCATOR_LIVE_PILOT_ARTIFACT_ID
+    assert artifact_body["artifact_type"] == (
+        "chunked_source_span_locator_candidate_proposal"
+    )
+    assert artifact_body["lab_id"] == "chunked_source_grounding"
+    assert artifact_body["method_id"] == GOAL11B_METHOD_ID
+    assert artifact_body["run_id"] == CHUNKED_LOCATOR_LIVE_PILOT_RUN_ID
+    assert artifact_body["source_refs"] == [source_ref]
+    assert artifact_body["posture"] == {
+        "grounding_status": "source_linked",
+        "review_status": "self_checked",
+        "readiness_status": "study_candidate",
+        "validation_status": "none",
+        "lifecycle_status": "active",
+    }
+    for blocker in [
+        "proposal_only_not_evaluated",
+        "manual_strict_locator_review_not_yet_completed",
+        "raw_output_local_only",
+    ]:
+        assert blocker in artifact_body["blockers"]
+
+    assert artifact_payload["outcome_polarity"] == "proposal_only"
+    assert artifact_payload["proposal_only"] is True
+    assert artifact_payload["provider_id"] == "deepseek_api"
+    assert artifact_payload["api_format"] == "openai_compatible_chat_completions"
+    assert artifact_payload["base_url"] == "https://api.deepseek.com"
+    assert artifact_payload["model_id"] == "deepseek-v4-pro"
+    assert artifact_payload["requested_model_id"] == "deepseek-v4-pro"
+    assert artifact_payload["thinking"] == {"type": "disabled"}
+    assert artifact_payload["stream"] is False
+    assert artifact_payload["tool_routing"] == "none"
+    assert artifact_payload["prompt_template_path"] == (
+        "labs/chunked_source_grounding/PLANNING/live_llm_pilot_005/"
+        "prompt_template.live_pilot_005.md"
+    )
+    assert artifact_payload["prompt_template_sha256"] == sha256_file(prompt_template_path)
+    assert artifact_payload["config_sha256"] == (
+        "a8a8daccf08254a827fd5d68203d41f56b25c295e14e4005f9671fd0bd46a9cb"
+    )
+    assert artifact_payload["source_metadata"] == {
+        "source_ref": source_ref,
+        "source_scope": (
+            "operator-approved second-source excerpt from the local pharm box-trades "
+            "transcript"
+        ),
+        "source_path_scope": (
+            "raw_corpora/selected/source_span_precision_repeat_001/source.txt"
+        ),
+        "source_origin_scope": (
+            "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt"
+        ),
+        "source_file_sha256": source_hash,
+        "source_file_word_count": 945,
+        "excerpt_sha256": source_hash,
+        "excerpt_word_count": 945,
+        "raw_source_text_committed": False,
+    }
+    assert artifact_payload["cost_metadata"]["budget_cap_usd"] == 3.0
+    assert artifact_payload["cost_metadata"]["estimated_cost_usd"] <= 3.0
+    assert artifact_payload["raw_source_text_committed"] is False
+    assert artifact_payload["raw_provider_payload_committed"] is False
+    assert artifact_payload["raw_prompt_trace_committed"] is False
+    assert artifact_payload["raw_model_trace_committed"] is False
+    assert artifact_payload["secrets_committed"] is False
+    assert "raw_source_text" not in artifact_payload
+    assert "provider_payload" not in artifact_payload
+    assert "api_key" not in json.dumps(artifact_payload).lower()
+
+    model_output_metadata = artifact_payload["model_output_metadata"]
+    assert model_output_metadata["parsed_json_success"] is True
+    assert model_output_metadata["finish_reason"] == "stop"
+    assert model_output_metadata["model_output_truncated"] is False
+    assert model_output_metadata["expected_top_level_keys"] == [
+        "source_linked_claim_table",
+        "locator_candidate_table",
+        "unsupported_claim_report",
+        "brief_method_failure_notes",
+    ]
+    assert model_output_metadata["missing_expected_top_level_keys"] == []
+    assert model_output_metadata["locator_candidate_count"] >= 1
+    assert model_output_metadata["model_emitted_locator_coordinates"] is True
+
+    locator_metadata = artifact_payload["locator_candidate_metadata"]
+    assert locator_metadata["local_quote_hash_computation_attempted"] is True
+    assert locator_metadata["quote_hashes_computed_by"] == (
+        "local_runner_from_candidate_offsets"
+    )
+    assert locator_metadata["model_asked_to_emit_quote_hashes"] is False
+    assert locator_metadata["model_emitted_quote_hashes_ignored"] in {False, True}
+    assert locator_metadata["computed_quote_hash_count"] >= 1
+    assert locator_metadata["computed_quote_hash_count"] <= (
+        model_output_metadata["locator_candidate_count"]
+    )
+    for item in locator_metadata["computed_quote_hashes"]:
+        assert item["claim_id"]
+        assert item["source_ref"] == source_ref
+        assert re.fullmatch(r"[0-9a-f]{64}", item["quote_sha256"])
+        assert item["quote_hash_computed_locally"] is True
+        assert item["quote_text_committed"] is False
+
+    assert evaluation["evaluation"]["evaluation_id"] == (
+        CHUNKED_LOCATOR_LIVE_PILOT_EVALUATION_ID
+    )
+    assert evaluation["evaluation"]["target_id"] == CHUNKED_LOCATOR_LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["evaluation"]["evaluator_type"] == "manual_boundary_review"
+    assert evaluation["evaluation"]["pass_fail"] == "pass"
+    for required in [
+        "method quality was not evaluated",
+        "prompt asked for line/offset locator candidates, not quote hashes",
+        "quote hashes were computed locally where offsets were usable",
+        (
+            "raw source text, provider payloads, prompt traces, model traces, and "
+            "secrets are not committed"
+        ),
+    ]:
+        assert required in evaluation["evaluation"]["comments"]
+
+    research_note = note["research_note"]
+    assert research_note["note_id"] == CHUNKED_LOCATOR_LIVE_PILOT_NOTE_ID
+    assert research_note["experiment_ids"] == [GOAL11B_EXPERIMENT_ID]
+    assert research_note["benchmark_pack_ids"] == ["text_judgment_v0"]
+    assert research_note["evidence_disclaimer"] == LIVE_EVIDENCE_DISCLAIMER
+    assert any(
+        "No method success is claimed" in item for item in research_note["what_failed"]
+    )
+    assert any("Goal 11D" in item for item in research_note["do_not_repeat"])
+
+    combined_committed = "\n".join(
+        (export_dir / name).read_text()
+        for name in sorted(CHUNKED_LOCATOR_LIVE_PILOT_POST_RUN_EXPORTS)
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+    ]:
+        assert forbidden not in combined_committed
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [portfolio, lab_card, lab_registry]:
+        assert "source-span locator candidate pilot" in currentness_doc
+        assert "Goal 11D manual strict locator review" in currentness_doc
+        assert "proposal-only" in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+        assert "run_record.live_pilot_005" not in currentness_doc
+    assert (
+        "Goal 11B admission planning is complete. The next proposed step is Goal 11C"
+        not in portfolio
+    )
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 

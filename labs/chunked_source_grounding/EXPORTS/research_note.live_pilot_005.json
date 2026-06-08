@@ -1,0 +1,44 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ResearchNote",
+  "research_note": {
+    "note_id": "chunked_source_grounding_live_pilot_005_note",
+    "lab_id": "chunked_source_grounding",
+    "experiment_ids": [
+      "chunked_source_grounding_live_pilot_005"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "The admitted source-span locator candidate pilot completed one DeepSeek V4 Pro non-streaming call on the approved second-source excerpt. The model emitted locator coordinates and local code computed quote hashes from usable candidate offsets, but strict locator review is still pending.",
+    "what_worked": [
+      "DeepSeek V4 Pro with thinking disabled produced parseable compact JSON in one admitted source-span locator candidate batch.",
+      "The output included the four expected top-level sections and three locator candidates.",
+      "All three model-proposed character offset ranges were usable for local quote-hash computation without committing source text.",
+      "The committed records preserve provider/model, prompt/config, source-hash, token/cost, trace-storage, locator-coordinate, and local quote-hash metadata without committing raw source or provider payloads."
+    ],
+    "what_failed": [
+      "No method success is claimed; locator correctness was not evaluated by this boundary review.",
+      "Manual strict locator review has not yet judged whether approximate or broad locator labels are warranted by the local source.",
+      "The run intentionally omitted broad judgment abstraction and cross-method comparison prose, so those dimensions remain outside this artifact."
+    ],
+    "negative_results": [
+      "A structurally complete locator-candidate artifact is still proposal-only and does not validate trading claims or source interpretation quality.",
+      "Model-proposed line and character offsets are candidates until manually checked.",
+      "Locally computed quote hashes only prove what local span was hashed; they do not prove the model selected the right support span."
+    ],
+    "reusable_by_other_labs": [
+      "A future strict locator review can compare model-proposed offsets with reviewer-reconstructed offsets from pilots 003 and 004.",
+      "Artifact payloads can carry lab-local locator candidate metadata and locally computed quote hashes without changing protocol.",
+      "Use explicit model_asked_to_emit_quote_hashes=false and quote_hashes_computed_by=local_runner_from_candidate_offsets when separating model output from local verification."
+    ],
+    "do_not_repeat": [
+      "Do not treat parseable JSON, locator coordinates, or locally computed quote hashes as method success before Goal 11D manual strict locator review.",
+      "Do not ask the model to emit cryptographic quote hashes in a future locator-candidate run.",
+      "Do not copy raw source text, raw model output, provider payloads, prompt traces, or generated synthesis metrics into currentness docs.",
+      "Do not substitute models or expand output contracts without a separate admission update."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

@@ -22,7 +22,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 11B admission planning is complete. The next proposed step is Goal 11C execution of the admitted source-span locator candidate pilot. This currentness router does not authorize a live model call.
+The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 11C source-span locator candidate pilot has produced a proposal-only export set. The next proposed step is Goal 11D manual strict locator review.
 
 ---
 
@@ -36,7 +36,7 @@ Active federation labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, and strict source-span re-review records.
+   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, strict source-span re-review records, and one proposal-only source-span locator candidate export set awaiting strict manual locator review.
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -67,6 +67,7 @@ Current preliminary read:
 - long-context preserved broader judgment abstraction with missing-context and teacher-intent compression caveats;
 - chunked/source-grounded methods have one bounded negative Flash result and later Pro results showing better parseability under narrower contracts;
 - source-span precision pattern repeated beyond the first source, while strict source-span re-review with canonical offsets found one overclaimed exactness caveat and broad segment refs / limited abstraction remain open tradeoffs.
+- the source-span locator candidate pilot produced proposal-only locator coordinates and locally computed quote hashes, but strict manual locator review has not judged locator correctness.
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -120,7 +121,7 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Goal 11B admission planning is complete. The next proposed step is Goal 11C execution of the admitted source-span locator candidate pilot.
+Goal 11C source-span locator candidate pilot has produced a proposal-only export set. The next proposed step is Goal 11D manual strict locator review.
 
 The owning comparison note is:
 
@@ -128,4 +129,4 @@ The owning comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The completed Goal 11A locator contract plan (the source-span locator output contract plan) and the completed Goal 11B admission packet define the planned source-span locator candidate pilot. Any future live run still requires explicit Goal 11C execution instruction, protocol-valid exports, and proposal-only boundaries.
+The completed Goal 11A locator contract plan (the source-span locator output contract plan) and the completed Goal 11B admission packet define the recorded source-span locator candidate pilot. Goal 11D should review whether the model-proposed line ranges and character offsets actually identify the right local source spans. Any future live run still requires separate admission, protocol-valid exports, and proposal-only boundaries.

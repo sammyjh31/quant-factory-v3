@@ -1,0 +1,24 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "RunRecord",
+  "run_record": {
+    "run_id": "chunked_source_grounding_live_pilot_005_run",
+    "lab_id": "chunked_source_grounding",
+    "experiment_id": "chunked_source_grounding_live_pilot_005",
+    "method_id": "chunked_source_grounding_live_pilot_005_method",
+    "benchmark_pack_id": "text_judgment_v0",
+    "source_refs": [
+      "raw_corpora_sha256:9f9e143429f5842a"
+    ],
+    "artifact_ids": [
+      "chunked_source_grounding_live_pilot_005_artifact"
+    ],
+    "evaluation_ids": [
+      "chunked_source_grounding_live_pilot_005_eval"
+    ],
+    "run_kind": "live_llm_pilot",
+    "outcome_polarity": "proposal_only",
+    "status": "live_recorded"
+  }
+}
