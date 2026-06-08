@@ -84,6 +84,18 @@ CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
     "chunked_source_grounding_live_pilot_003_manual_content_review"
 )
 CHUNKED_SPAN_LIVE_PILOT_NOTE_ID = "chunked_source_grounding_live_pilot_003_note"
+CHUNKED_SPAN_REPEAT_LIVE_PILOT_RUN_ID = (
+    "chunked_source_grounding_live_pilot_004_run"
+)
+CHUNKED_SPAN_REPEAT_LIVE_PILOT_ARTIFACT_ID = (
+    "chunked_source_grounding_live_pilot_004_artifact"
+)
+CHUNKED_SPAN_REPEAT_LIVE_PILOT_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_004_eval"
+)
+CHUNKED_SPAN_REPEAT_LIVE_PILOT_NOTE_ID = (
+    "chunked_source_grounding_live_pilot_004_note"
+)
 LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
 LIVE_PILOT_ARTIFACT_ID = "long_context_judgment_live_pilot_001_artifact"
 LIVE_PILOT_EVALUATION_ID = "long_context_judgment_live_pilot_001_eval"
@@ -126,6 +138,12 @@ CHUNKED_SPAN_LIVE_PILOT_POST_RUN_EXPORTS = {
     "artifact_envelope.live_pilot_003.json",
     "evaluation_record.live_pilot_003.json",
     "research_note.live_pilot_003.json",
+}
+CHUNKED_SPAN_REPEAT_LIVE_PILOT_POST_RUN_EXPORTS = {
+    "run_record.live_pilot_004.json",
+    "artifact_envelope.live_pilot_004.json",
+    "evaluation_record.live_pilot_004.json",
+    "research_note.live_pilot_004.json",
 }
 CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
     "evaluation_record.live_pilot_002_manual_content_review.json"
@@ -577,6 +595,9 @@ def test_run_records_link_required_protocol_ids():
         load_json(GOAL8B_PILOT_DIR / "method_card.proposed.json")["method_card"][
             "method_id"
         ],
+        load_json(GOAL9A_PILOT_DIR / "method_card.proposed.json")["method_card"][
+            "method_id"
+        ],
     }
     experiment_ids = {
         record["experiment_card"]["experiment_id"] for record in records_by_schema("ExperimentCard")
@@ -592,6 +613,9 @@ def test_run_records_link_required_protocol_ids():
             "experiment_card"
         ]["experiment_id"],
         load_json(GOAL8B_PILOT_DIR / "experiment_card.proposed.json")[
+            "experiment_card"
+        ]["experiment_id"],
+        load_json(GOAL9A_PILOT_DIR / "experiment_card.proposed.json")[
             "experiment_card"
         ]["experiment_id"],
     }
@@ -631,6 +655,7 @@ def test_research_notes_and_llm_judge_placeholders_are_bounded():
             CHUNKED_LIVE_PILOT_NOTE_ID,
             CHUNKED_PRO_LIVE_PILOT_NOTE_ID,
             CHUNKED_SPAN_LIVE_PILOT_NOTE_ID,
+            CHUNKED_SPAN_REPEAT_LIVE_PILOT_NOTE_ID,
         }:
             assert disclaimer == LIVE_EVIDENCE_DISCLAIMER
         else:
@@ -2193,8 +2218,8 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "authority, graduation, or architecture."
         ),
         (
-            "Execute the admitted `chunked_source_grounding_live_pilot_004` second-source "
-            "source-span precision repeat only after a separate Goal 9B instruction."
+            "Manually review the admitted `chunked_source_grounding_live_pilot_004` "
+            "second-source source-span precision output in Goal 9C."
         ),
     ]:
         assert required in portfolio
@@ -2696,11 +2721,7 @@ def test_goal9a_second_source_span_precision_repeat_planning_packet_is_contained
 
     summary = synthesize_exports(root=ROOT)
     assert summary["record_count"] == sum(1 for _ in all_lab_export_records())
-    assert not list(
-        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
-            "*live_pilot_004*.json"
-        )
-    )
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
 
     readme = (ROOT / "README.md").read_text()
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
@@ -2894,6 +2915,206 @@ def test_goal8c_source_span_precision_live_export_set_is_protocol_valid_and_boun
             currentness_doc
         )
         assert "Goal 8C instruction" not in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal9b_second_source_span_precision_live_export_set_is_protocol_valid_and_bounded():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    live_exports = {
+        path.name: load_json(path) for path in export_dir.glob("*.live_pilot_004.json")
+    }
+    assert set(live_exports) == CHUNKED_SPAN_REPEAT_LIVE_PILOT_POST_RUN_EXPORTS
+    for record in live_exports.values():
+        validate_record(record)
+
+    source_hash = sha256_file(GOAL9A_SOURCE_PATH)
+    source_ref = f"raw_corpora_sha256:{source_hash[:16]}"
+    source_word_count = len(GOAL9A_SOURCE_PATH.read_text().split())
+
+    run = live_exports["run_record.live_pilot_004.json"]
+    artifact = live_exports["artifact_envelope.live_pilot_004.json"]
+    evaluation = live_exports["evaluation_record.live_pilot_004.json"]
+    note = live_exports["research_note.live_pilot_004.json"]
+
+    assert run["schema_name"] == "RunRecord"
+    assert run["schema_version"] == CURRENT_SCHEMA_VERSION
+    run_record = run["run_record"]
+    assert run_record == {
+        "run_id": CHUNKED_SPAN_REPEAT_LIVE_PILOT_RUN_ID,
+        "lab_id": "chunked_source_grounding",
+        "experiment_id": GOAL9A_EXPERIMENT_ID,
+        "method_id": GOAL9A_METHOD_ID,
+        "benchmark_pack_id": "text_judgment_v0",
+        "source_refs": [source_ref],
+        "artifact_ids": [CHUNKED_SPAN_REPEAT_LIVE_PILOT_ARTIFACT_ID],
+        "evaluation_ids": [CHUNKED_SPAN_REPEAT_LIVE_PILOT_EVALUATION_ID],
+        "run_kind": "live_llm_pilot",
+        "outcome_polarity": "proposal_only",
+        "status": "live_recorded",
+    }
+
+    artifact_payload = artifact["artifact"]["payload"]
+    assert artifact["artifact"]["artifact_id"] == (
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_ARTIFACT_ID
+    )
+    assert artifact["artifact"]["artifact_type"] == (
+        "chunked_source_span_precision_proposal"
+    )
+    assert artifact["artifact"]["lab_id"] == "chunked_source_grounding"
+    assert artifact["artifact"]["method_id"] == GOAL9A_METHOD_ID
+    assert artifact["artifact"]["run_id"] == CHUNKED_SPAN_REPEAT_LIVE_PILOT_RUN_ID
+    assert artifact["artifact"]["source_refs"] == run_record["source_refs"]
+    assert artifact["artifact"]["posture"]["grounding_status"] == "source_linked"
+    assert artifact["artifact"]["posture"]["review_status"] == "self_checked"
+    assert artifact["artifact"]["posture"]["validation_status"] == "none"
+    assert "proposal_only_not_evaluated" in artifact["artifact"]["blockers"]
+    assert "content_review_not_yet_completed" in artifact["artifact"]["blockers"]
+
+    assert artifact_payload["outcome_polarity"] == "proposal_only"
+    assert artifact_payload["proposal_only"] is True
+    assert artifact_payload["provider_id"] == "deepseek_api"
+    assert artifact_payload["api_format"] == "openai_compatible_chat_completions"
+    assert artifact_payload["base_url"] == "https://api.deepseek.com"
+    assert artifact_payload["model_id"] == "deepseek-v4-pro"
+    assert artifact_payload["requested_model_id"] == "deepseek-v4-pro"
+    assert artifact_payload["thinking"] == {"type": "disabled"}
+    assert artifact_payload["stream"] is False
+    assert artifact_payload["tool_routing"] == "none"
+    assert artifact_payload["prompt_template_path"] == (
+        "labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/"
+        "prompt_template.live_pilot_004.md"
+    )
+    assert artifact_payload["prompt_template_sha256"] == sha256_file(
+        GOAL9A_PILOT_DIR / "prompt_template.live_pilot_004.md"
+    )
+    assert artifact_payload["config_sha256"] == canonical_json_hash(
+        extract_json_block(
+            (GOAL9A_PILOT_DIR / "run_admission_update.md").read_text(),
+            "Canonical Model Config",
+        )
+    )
+    assert artifact_payload["source_metadata"]["source_ref"] == source_ref
+    assert artifact_payload["source_metadata"]["excerpt_sha256"] == source_hash
+    assert artifact_payload["source_metadata"]["excerpt_word_count"] == source_word_count
+    assert artifact_payload["source_metadata"]["source_path_scope"] == (
+        "raw_corpora/selected/source_span_precision_repeat_001/source.txt"
+    )
+    assert artifact_payload["source_metadata"]["source_origin_scope"] == (
+        "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt"
+    )
+    assert artifact_payload["source_metadata"]["raw_source_text_committed"] is False
+
+    assert artifact_payload["token_metadata"]["prompt_tokens"] > 0
+    assert artifact_payload["token_metadata"]["completion_tokens"] > 0
+    assert artifact_payload["token_metadata"]["total_tokens"] == (
+        artifact_payload["token_metadata"]["prompt_tokens"]
+        + artifact_payload["token_metadata"]["completion_tokens"]
+    )
+    assert artifact_payload["cost_metadata"]["budget_cap_usd"] == 3.0
+    assert artifact_payload["cost_metadata"]["estimated_cost_usd"] <= 3.0
+    assert "billing authority" in artifact_payload["cost_metadata"]["pricing_basis"]
+
+    output_metadata = artifact_payload["model_output_metadata"]
+    assert output_metadata["artifact_type"] == "chunked_source_span_precision_proposal"
+    assert len(output_metadata["raw_model_output_sha256"]) == 64
+    assert len(output_metadata["raw_response_sha256"]) == 64
+    assert output_metadata["finish_reason"] in {"stop", "length"}
+    assert output_metadata["model_output_truncated"] is (
+        output_metadata["finish_reason"] == "length"
+    )
+    assert set(output_metadata["expected_top_level_keys"]) == {
+        "source_linked_claim_table",
+        "tighter_source_span_support_hints",
+        "unsupported_claim_report",
+        "brief_method_failure_notes",
+    }
+    assert set(output_metadata["expected_top_level_keys_detected"]).issubset(
+        set(output_metadata["expected_top_level_keys"])
+    )
+    if output_metadata["parsed_json_success"]:
+        assert set(output_metadata["expected_top_level_keys_detected"]) == set(
+            output_metadata["expected_top_level_keys"]
+        )
+        assert output_metadata["missing_expected_top_level_keys"] == []
+        assert "source_span_hint_quality_counts" in output_metadata
+        assert set(output_metadata["source_span_hint_quality_counts"]).issubset(
+            {"exact", "approximate", "broad", "missing"}
+        )
+    else:
+        assert output_metadata["missing_expected_top_level_keys"] or output_metadata[
+            "model_output_truncated"
+        ]
+
+    trace_boundary = artifact_payload["trace_storage_boundary"]
+    assert trace_boundary == {
+        "provider_request_trace": (
+            "provider_payloads/chunked_source_grounding_live_pilot_004/request.json"
+        ),
+        "provider_response_trace": (
+            "provider_payloads/chunked_source_grounding_live_pilot_004/response.json"
+        ),
+        "prompt_trace": "prompt_traces/chunked_source_grounding_live_pilot_004/prompt.txt",
+        "model_output_trace": (
+            "model_traces/chunked_source_grounding_live_pilot_004/model_output.txt"
+        ),
+        "traces_committed": False,
+    }
+    assert artifact_payload["raw_source_text_committed"] is False
+    assert artifact_payload["raw_provider_payload_committed"] is False
+    assert artifact_payload["raw_prompt_trace_committed"] is False
+    assert artifact_payload["raw_model_trace_committed"] is False
+    assert artifact_payload["secrets_committed"] is False
+
+    assert evaluation["evaluation"]["evaluation_id"] == (
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_EVALUATION_ID
+    )
+    assert evaluation["evaluation"]["target_id"] == (
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_ARTIFACT_ID
+    )
+    assert evaluation["evaluation"]["evaluator_type"] == "manual_boundary_review"
+    assert evaluation["evaluation"]["pass_fail"] == "pass"
+    assert "second-source" in evaluation["evaluation"]["comments"]
+    assert "method quality was not evaluated" in evaluation["evaluation"]["comments"]
+
+    research_note = note["research_note"]
+    assert research_note["note_id"] == CHUNKED_SPAN_REPEAT_LIVE_PILOT_NOTE_ID
+    assert research_note["experiment_ids"] == [GOAL9A_EXPERIMENT_ID]
+    assert research_note["benchmark_pack_ids"] == ["text_judgment_v0"]
+    assert research_note["evidence_disclaimer"] == LIVE_EVIDENCE_DISCLAIMER
+    assert any("second-source" in item for item in research_note["what_worked"])
+    assert any("Goal 9C" in item for item in research_note["do_not_repeat"])
+
+    combined_committed = "\n".join(
+        path.read_text()
+        for path in [
+            export_dir / name
+            for name in sorted(CHUNKED_SPAN_REPEAT_LIVE_PILOT_POST_RUN_EXPORTS)
+        ]
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+    ]:
+        assert forbidden not in combined_committed
+    assert "study card" not in combined_committed.lower()
+    assert "validated trading" not in combined_committed.lower()
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    readme = (ROOT / "README.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    for currentness_doc in [portfolio, lab_registry, readme, lab_card]:
+        assert "one admitted DeepSeek V4 Pro second-source source-span precision" in (
+            currentness_doc
+        )
+        assert "no model call or export records exist for that pilot yet" not in (
+            currentness_doc
+        )
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
