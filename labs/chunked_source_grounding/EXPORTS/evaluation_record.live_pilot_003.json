@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "EvaluationRecord",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_003_eval",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_003_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_live_pilot_003",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: one admitted DeepSeek V4 Pro source-span precision call used the same source hash, thinking disabled, stream false, no tools, and the narrow output contract. Raw source, prompt traces, provider request/response, model output, and secrets are not committed; method quality was not evaluated."
+  }
+}

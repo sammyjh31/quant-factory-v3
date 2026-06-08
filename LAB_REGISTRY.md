@@ -90,7 +90,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord, plus one source-span precision planning packet
+scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro source-span precision live pilot export set
 ```
 
 Proposed planning packets:
@@ -109,7 +109,7 @@ chunked_source_grounding_live_pilot_002
 chunked_source_grounding_live_pilot_003
 ```
 
-The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence. The second packet defined the preflight scope for a DeepSeek V4 Pro rerun with a smaller output contract. The third packet defines the Goal 8B source-span precision planning scope and requires a separate Goal 8C instruction before execution.
+The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence. The second packet defined the preflight scope for a DeepSeek V4 Pro rerun with a smaller output contract. The third packet defined the source-span precision scope for the DeepSeek V4 Pro pilot 003 run.
 
 Run admission update:
 
@@ -155,7 +155,16 @@ The source-span precision planning packet lives at:
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_003/
 ```
 
-It proposes `chunked_source_grounding_live_pilot_003`, using DeepSeek V4 Pro and the same approved excerpt/hash to test tighter source-span hints without re-expanding the narrowed output contract. It has not executed a model call and has not created RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exports.
+Goal 8C executed the admitted `chunked_source_grounding_live_pilot_003` one-call scope and created one admitted DeepSeek V4 Pro source-span precision live pilot export set:
+
+```text
+labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_003.json
+labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_003.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003.json
+labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_003.json
+```
+
+The source-span precision run produced complete parseable JSON under the narrowed output contract and kept raw source, prompt, provider response, and model output in ignored local traces. It has only a manual boundary review so far; manual content review is still required before any method-quality conclusion.
 
 ---
 
