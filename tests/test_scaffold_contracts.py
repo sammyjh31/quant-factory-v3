@@ -844,11 +844,14 @@ def test_goal4_live_pilot_run_admission_update_preserves_admitted_scope():
     readme = (ROOT / "README.md").read_text()
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
-    for currentness_doc in [readme, portfolio, lab_registry]:
+    for currentness_doc in [readme, lab_registry]:
         assert "run_admission_update.md" in currentness_doc
         assert "no live LLM call has been made" not in currentness_doc.lower()
         assert "No live LLM experiment has run." not in currentness_doc
-    assert "one admitted tiny live LLM pilot export set" in portfolio
+    assert "run_admission_update.md" not in portfolio
+    assert "no live LLM call has been made" not in portfolio.lower()
+    assert "No live LLM experiment has run." not in portfolio
+    assert "one tiny method-comparison loop on `text_judgment_v0`" in portfolio
 
 
 def test_goal5_live_pilot_export_set_is_protocol_valid_and_bounded():
@@ -1073,7 +1076,6 @@ def test_goal6c_b_manual_content_review_export_is_single_bounded_and_current():
 
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
-    assert LIVE_PILOT_CONTENT_REVIEW_EXPORT in portfolio
     assert LIVE_PILOT_CONTENT_REVIEW_EXPORT in lab_registry
     assert "one manual content-review EvaluationRecord" in portfolio
     assert "one manual content-review EvaluationRecord" in lab_registry
@@ -1505,7 +1507,6 @@ def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_on
 
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
-    assert CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT in portfolio
     assert CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT in lab_registry
     assert "failure-focused manual content-review EvaluationRecord" in portfolio
     assert "failure-focused manual content-review EvaluationRecord" in lab_registry
@@ -1722,11 +1723,15 @@ def test_goal7d_deepseek_v4_pro_rerun_planning_packet_is_contained_and_narrower(
     readme = (ROOT / "README.md").read_text()
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
-    for currentness_doc in [readme, portfolio, lab_registry]:
+    for currentness_doc in [readme, lab_registry]:
         assert GOAL7D_EXPERIMENT_ID in currentness_doc
         assert "live_llm_pilot_002" in currentness_doc
         assert "DeepSeek V4 Pro" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert GOAL7D_EXPERIMENT_ID in portfolio
+    assert "live_llm_pilot_002" not in portfolio
+    assert "DeepSeek V4 Pro" in portfolio
+    assert "generated synthesis metrics" not in portfolio.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
@@ -2002,13 +2007,16 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     readme = (ROOT / "README.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
-    for currentness_doc in [portfolio, lab_registry, readme, lab_card]:
+    for currentness_doc in [lab_registry, readme, lab_card]:
         assert CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT in currentness_doc
         assert "one DeepSeek V4 Pro manual content-review EvaluationRecord" in (
             currentness_doc
         )
         assert "manual content review remains" not in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert "one DeepSeek V4 Pro manual content-review EvaluationRecord" in portfolio
+    assert CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT not in portfolio
+    assert "generated synthesis metrics" not in portfolio.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
@@ -2087,8 +2095,9 @@ def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritativ
 
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     readme = (ROOT / "README.md").read_text()
+    assert "live_pilot_method_comparison_001.md" in portfolio
+    assert "live_pilot_method_comparison_001.md" not in readme
     for currentness_doc in [portfolio, readme]:
-        assert "live_pilot_method_comparison_001.md" not in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
 
     assert all("comparisons" not in path.parts for path in lab_export_paths(ROOT))
@@ -2096,6 +2105,66 @@ def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritativ
         1 for _ in all_lab_export_records()
     )
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_portfolio_current_is_router_not_live_export_ledger():
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+
+    for required_heading in [
+        "Current phase: `milestone-2-live-pilot-recorded`",
+        "## Current Portfolio Purpose",
+        "## Active federation labs",
+        "## Active Benchmark Packs",
+        "## Current Evidence Posture",
+        "## Current Architecture Rule",
+        "## Synthesis Status",
+        "## Graduation Status",
+        "## Next Recommended Research Direction",
+    ]:
+        assert required_heading in portfolio
+
+    for required in [
+        "The portfolio has completed one tiny method-comparison loop on `text_judgment_v0`.",
+        "labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md",
+        "long-context preserved broader judgment abstraction",
+        "chunked Flash is a bounded negative result",
+        "chunked Pro with the narrowed contract produced reviewable claim-level source grounding",
+        (
+            "These records are proposal-only research records. They are not validation, "
+            "product evidence, strategy evidence, financial advice, live-trading "
+            "authority, graduation, or architecture."
+        ),
+        (
+            "Improve source-span precision for chunked Pro before making any method-quality "
+            "claim."
+        ),
+    ]:
+        assert required in portfolio
+
+    for removed_ledger_text in [
+        "## Live LLM Experiment Status",
+        "The proposal-only live export set and manual content-review EvaluationRecord are:",
+        "The chunked/source-grounded proposal-only live export set is:",
+        "The DeepSeek V4 Pro proposal-only live export set is:",
+        "labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json",
+        "labs/long_context_judgment/EXPORTS/artifact_envelope.live_pilot_001.json",
+        "labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json",
+        "labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json",
+        "labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json",
+        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json",
+        "labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_001.json",
+        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001.json",
+        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json",
+        "labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_001.json",
+        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_002.json",
+        "labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_002.json",
+        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002.json",
+        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json",
+        "labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_002.json",
+    ]:
+        assert removed_ledger_text not in portfolio
+
+    assert "generated synthesis metrics" not in portfolio.lower()
 
 
 def test_authority_docs_preserve_scaffold_boundaries():
@@ -2115,8 +2184,9 @@ def test_authority_docs_preserve_scaffold_boundaries():
     assert architecture_rule in lifecycle
     assert "Future live experiments must pass" in readme
     assert "Future labs may experiment" in llm_model
-    assert "Scaffold milestone-one fixture records are not real research evidence." in portfolio
-    assert "one admitted tiny live LLM pilot export set" in portfolio
+    assert "Scaffold fixture records are not real research evidence." in portfolio
+    assert "one tiny method-comparison loop on `text_judgment_v0`" in portfolio
+    assert "live_pilot_method_comparison_001.md" in portfolio
     assert "## Active federation labs" in portfolio
     assert "Milestone-one active labs" not in portfolio
     assert "generated synthesis metrics" not in portfolio.lower()
