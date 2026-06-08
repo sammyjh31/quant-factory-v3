@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "chunked_source_grounding_live_pilot_002",
+    "lab_id": "chunked_source_grounding",
+    "research_question": "Can a chunked/source-grounded LLM method produce a complete parseable source-grounding artifact when using DeepSeek V4 Pro and a smaller output contract, and what does it preserve or lose compared with the long-context judgment pilot?",
+    "hypothesis": "On the same source excerpt and benchmark as long_context_judgment_live_pilot_001 and chunked_source_grounding_live_pilot_001, DeepSeek V4 Pro plus a smaller output contract may avoid the output_contract_too_large failure while preserving source-grounding value for later comparison.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "chunked_source_grounding_live_pilot_002_method"
+    ],
+    "evaluation_plan": "Validate this proposed ExperimentCard and MethodCard against protocol schemas. After a separately authorized live run, create proposal-only export records and evaluate whether the artifact is complete, parseable, source-grounded, and useful for comparison against long_context_judgment_live_pilot_001 and chunked_source_grounding_live_pilot_001. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "chunked_source_grounding_proposal"
+    ]
+  }
+}

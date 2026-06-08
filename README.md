@@ -91,7 +91,7 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 Current phase: `milestone-2-live-pilot-recorded`
 
-The scaffold baseline is accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`, plus one admitted proposal-only chunked/source-grounded live pilot export set recorded under `labs/chunked_source_grounding/EXPORTS/`.
+The scaffold baseline is accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`, plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord recorded under `labs/chunked_source_grounding/EXPORTS/`.
 
 The live export set is proposal-only. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -113,9 +113,10 @@ Current live-pilot planning packets live under:
 ```text
 labs/long_context_judgment/PLANNING/live_llm_pilot_001/
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/
 ```
 
-The first packet includes `run_admission_update.md`, which authorized exactly one tiny live LLM pilot run under the stated scope. The chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_001`, which has now produced proposal-only export records. Planning packets are not in `EXPORTS/`, are not imported by synthesis, and are not research evidence.
+The first packet includes `run_admission_update.md`, which authorized exactly one tiny live LLM pilot run under the stated scope. The first chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_001`, which has now produced proposal-only export records and a failure-focused manual content-review EvaluationRecord. The second chunked-source packet plans `chunked_source_grounding_live_pilot_002`, a DeepSeek V4 Pro rerun with a smaller output contract. Planning packets are not in `EXPORTS/`, are not imported by synthesis, and are not research evidence.
 
 The purpose of these live pilots is to prove that real model calls can be recorded, evaluated at the boundary, compared later, and contained without turning output into truth.
 

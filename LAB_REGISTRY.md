@@ -90,22 +90,24 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord
+scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one DeepSeek V4 Pro narrow-contract planning packet
 ```
 
-Proposed planning packet:
+Proposed planning packets:
 
 ```text
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/
 ```
 
-Planning experiment id:
+Planning experiment ids:
 
 ```text
 chunked_source_grounding_live_pilot_001
+chunked_source_grounding_live_pilot_002
 ```
 
-The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence.
+The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence. The second packet plans a DeepSeek V4 Pro rerun with a smaller output contract.
 
 Run admission update:
 
@@ -126,6 +128,14 @@ labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_001.json
 ```
 
 The live export set is proposal-only comparison work against `long_context_judgment_live_pilot_001` and does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture. The model output reached the configured output-token cap before complete JSON parsing. The manual content review records that as a failure of this admitted Flash run/config/output contract, not a global method-quality conclusion.
+
+The Pro/narrow-contract planning packet lives at:
+
+```text
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/
+```
+
+It defines `chunked_source_grounding_live_pilot_002` for a future separately authorized run. It creates no EXPORTS records, no protocol change, no synthesis feature, and no graduation status.
 
 ---
 
