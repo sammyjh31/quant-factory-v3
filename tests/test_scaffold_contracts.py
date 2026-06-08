@@ -151,6 +151,12 @@ CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
 CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
     "evaluation_record.live_pilot_003_manual_content_review.json"
 )
+CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_004_manual_content_review"
+)
+CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
+    "evaluation_record.live_pilot_004_manual_content_review.json"
+)
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
     "BenchmarkPack.schema.json",
@@ -1544,6 +1550,7 @@ def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_on
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -2040,6 +2047,7 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -2212,14 +2220,16 @@ def test_portfolio_current_is_router_not_live_export_ledger():
         "chunked Flash is a bounded negative result",
         "chunked Pro with the narrowed contract produced reviewable claim-level source grounding",
         "chunked Pro source-span precision improved over pilot 002",
+        "source-span precision pattern repeated beyond the first source",
         (
             "These records are proposal-only research records. They are not validation, "
             "product evidence, strategy evidence, financial advice, live-trading "
             "authority, graduation, or architecture."
         ),
         (
-            "Manually review the admitted `chunked_source_grounding_live_pilot_004` "
-            "second-source source-span precision output in Goal 9C."
+            "Update the local method-comparison note to include the reviewed "
+            "`chunked_source_grounding_live_pilot_004` second-source source-span "
+            "precision repeat."
         ),
     ]:
         assert required in portfolio
@@ -3119,6 +3129,132 @@ def test_goal9b_second_source_span_precision_live_export_set_is_protocol_valid_a
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
+def test_goal9c_second_source_span_precision_content_review_is_bounded():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    content_review_path = (
+        export_dir / CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    )
+    assert content_review_path.exists()
+
+    record = load_json(content_review_path)
+    validate_record(record)
+    assert record["schema_name"] == "EvaluationRecord"
+    assert record["schema_version"] == CURRENT_SCHEMA_VERSION
+
+    evaluation = record["evaluation"]
+    assert (
+        evaluation["evaluation_id"]
+        == CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID
+    )
+    assert evaluation["lab_id"] == "chunked_source_grounding"
+    assert evaluation["target_id"] == CHUNKED_SPAN_REPEAT_LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["target_type"] == "artifact"
+    assert evaluation["evaluator_id"] == "manual_content_review_live_pilot_004"
+    assert evaluation["evaluator_type"] == "manual_content_review"
+    assert evaluation["benchmark_pack_id"] == "text_judgment_v0"
+    assert evaluation["score"] == pytest.approx(0.86)
+    assert evaluation["pass_fail"] == "pass"
+    assert evaluation["failure_tags"] == [
+        "source_span_precision_repeated",
+        "content_review_passed_with_caveats",
+        "broad_segment_refs",
+        "limited_abstraction",
+    ]
+
+    comments = evaluation["comments"]
+    for required in [
+        "Manual content review only",
+        "source grounding",
+        "source-span precision",
+        "exact/approximate/broad/missing labels",
+        "research usefulness",
+        "hallucination / unsupported claims",
+        "abstraction quality",
+        "negative-result value",
+        "repeatability value against chunked_source_grounding_live_pilot_003",
+        "comparison value against long_context_judgment_live_pilot_001",
+        "comparison value against chunked_source_grounding_live_pilot_001",
+        "comparison value against chunked_source_grounding_live_pilot_002",
+        "comparison value against chunked_source_grounding_live_pilot_003",
+        "source-span precision repeated on a second source excerpt",
+        "complete parseable JSON",
+        "exact labels are warranted for direct source phrasing",
+        "the approximate label is warranted for the composite span",
+        "unsupported-claim report flags overstatement risks without adding them as claims",
+        "still uses broad segment refs rather than canonical offsets",
+        "limited broader judgment abstraction",
+        "raw source text and raw model output are not committed",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ),
+    ]:
+        assert required in comments
+
+    manual_content_reviews = [
+        record["evaluation"]
+        for record in records_by_schema("EvaluationRecord")
+        if record["evaluation"]["evaluator_type"] == "manual_content_review"
+    ]
+    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
+        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    ]
+    assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
+    assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
+    assert not list(export_dir.glob("research_note.*manual_content_review*.json"))
+
+    combined_committed = "\n".join(
+        path.read_text()
+        for path in [
+            content_review_path,
+            ROOT / "PORTFOLIO_CURRENT.md",
+            ROOT / "LAB_REGISTRY.md",
+            ROOT / "README.md",
+            ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md",
+        ]
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+        "{{APPROVED_SOURCE_TEXT}}",
+    ]:
+        assert forbidden not in combined_committed
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    readme = (ROOT / "README.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    for currentness_doc in [lab_registry, readme, lab_card]:
+        assert CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT in (
+            currentness_doc
+        )
+        assert (
+            "one DeepSeek V4 Pro second-source source-span precision manual "
+            "content-review EvaluationRecord"
+        ) in currentness_doc
+        assert "manual content review has not been completed for pilot 004 yet" not in (
+            currentness_doc
+        )
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert (
+        "one DeepSeek V4 Pro second-source source-span precision manual "
+        "content-review EvaluationRecord"
+    ) in portfolio
+    assert CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT not in portfolio
+    assert "Goal 9C" not in portfolio
+    assert "generated synthesis metrics" not in portfolio.lower()
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
 def test_goal8d_source_span_precision_manual_content_review_records_precision_result_only():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
     content_review_path = export_dir / CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EXPORT
@@ -3182,6 +3318,7 @@ def test_goal8d_source_span_precision_manual_content_review_records_precision_re
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))

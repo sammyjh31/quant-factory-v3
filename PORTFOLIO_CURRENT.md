@@ -21,7 +21,7 @@ The scaffold baseline has been accepted. The portfolio now has one tiny method-c
 
 `chunked_source_grounding_live_pilot_003` produced one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord.
 
-`chunked_source_grounding_live_pilot_004` has produced one admitted DeepSeek V4 Pro second-source source-span precision live pilot export set. Manual content review has not been completed for that pilot yet.
+`chunked_source_grounding_live_pilot_004` has produced one admitted DeepSeek V4 Pro second-source source-span precision live pilot export set and one DeepSeek V4 Pro second-source source-span precision manual content-review EvaluationRecord.
 
 The accepted scaffold contains protocol schemas, benchmark manifests, lab fixture exports, validation, read-only synthesis, currentness docs, and tests proving the boundaries.
 
@@ -39,7 +39,7 @@ Active scaffold-origin labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_001`; one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_002`; one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_003`; one admitted DeepSeek V4 Pro second-source source-span precision live pilot export set for `chunked_source_grounding_live_pilot_004`
+   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_001`; one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_002`; one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_003`; one admitted DeepSeek V4 Pro second-source source-span precision live pilot export set and one DeepSeek V4 Pro second-source source-span precision manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_004`
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -77,8 +77,9 @@ Current preliminary read:
 - chunked Flash is a bounded negative result for output-contract size / incomplete JSON;
 - chunked Pro with the narrowed contract produced reviewable claim-level source grounding, with broad segment refs and limited abstraction;
 - chunked Pro source-span precision improved over pilot 002, with warranted exact/approximate labels for reviewed claims, while still lacking canonical offsets and broader abstraction.
+- source-span precision pattern repeated beyond the first source, with broad segment refs and limited abstraction still present.
 
-The current records include one manual content-review EvaluationRecord for the long-context pilot, one failure-focused manual content-review EvaluationRecord for the chunked Flash pilot, one DeepSeek V4 Pro manual content-review EvaluationRecord for the chunked Pro pilot, one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord, and one boundary-reviewed DeepSeek V4 Pro second-source source-span precision export set awaiting manual content review.
+The current records include one manual content-review EvaluationRecord for the long-context pilot, one failure-focused manual content-review EvaluationRecord for the chunked Flash pilot, one DeepSeek V4 Pro manual content-review EvaluationRecord for the chunked Pro pilot, one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord, and one DeepSeek V4 Pro second-source source-span precision manual content-review EvaluationRecord.
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -89,7 +90,7 @@ labs/chunked_source_grounding/PLANNING/live_llm_pilot_003/
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/
 ```
 
-Pilot 003 narrowed the chunked Pro question to tighter source-span hints and honest exact/approximate/broad/missing support labels. The corresponding manual content review passed with caveats: source-span precision improved relative to pilot 002, exact/approximate labels were warranted for the reviewed claims, and the artifact still lacks canonical offsets and broader abstraction. Pilot 004 executed a second-source repeat of that source-span precision contract and now awaits manual content review. Planning packets remain planning structure only. They are not in `EXPORTS/`, are not imported by synthesis, and do not authorize future execution by themselves.
+Pilot 003 narrowed the chunked Pro question to tighter source-span hints and honest exact/approximate/broad/missing support labels. The corresponding manual content review passed with caveats: source-span precision improved relative to pilot 002, exact/approximate labels were warranted for the reviewed claims, and the artifact still lacks canonical offsets and broader abstraction. Pilot 004 executed a second-source repeat of that source-span precision contract. Its manual content review passed with caveats: source-span precision repeated on a second source excerpt, exact/approximate labels were warranted for the reviewed claims, and the artifact still uses broad segment refs rather than canonical offsets with limited broader abstraction. Planning packets remain planning structure only. They are not in `EXPORTS/`, are not imported by synthesis, and do not authorize future execution by themselves.
 
 Future live LLM experiments must pass the admission checklist in:
 
@@ -141,6 +142,6 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Manually review the admitted `chunked_source_grounding_live_pilot_004` second-source source-span precision output in Goal 9C.
+Update the local method-comparison note to include the reviewed `chunked_source_grounding_live_pilot_004` second-source source-span precision repeat.
 
-That review must judge source-span precision, unsupported claims, parseability, output-contract fit, and repeatability value against `chunked_source_grounding_live_pilot_003`; avoid declaring a winner; avoid copying generated summaries; and avoid product, strategy, validation, financial-advice, live-trading, graduation, or architecture claims.
+That update should judge whether the source-span precision pattern repeated beyond the first source, keep the comparison preliminary and non-authoritative, avoid declaring a winner, avoid copying generated summaries, and avoid product, strategy, validation, financial-advice, live-trading, graduation, or architecture claims.

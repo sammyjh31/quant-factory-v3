@@ -23,7 +23,8 @@ Current records:
 - `labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/`: admission scope for pilot 004
 - pilot 004 produced complete parseable JSON structurally
 - `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_004.json`: one DeepSeek V4 Pro second-source source-span precision manual boundary-review EvaluationRecord
-- manual content review has not been completed for pilot 004 yet
+- `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_004_manual_content_review.json`: one DeepSeek V4 Pro second-source source-span precision manual content-review EvaluationRecord
+- manual content review passed for pilot 004 with caveats: source-span precision repeated on a second source excerpt, exact/approximate labels were warranted for reviewed claims, broad segment refs remain, no canonical offsets, limited broader abstraction
 
 Current boundaries:
 

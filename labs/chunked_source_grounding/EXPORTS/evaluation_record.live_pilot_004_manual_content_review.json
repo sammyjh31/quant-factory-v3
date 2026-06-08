@@ -1,0 +1,23 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_004_manual_content_review",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_004_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_live_pilot_004",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.86,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "source_span_precision_repeated",
+      "content_review_passed_with_caveats",
+      "broad_segment_refs",
+      "limited_abstraction"
+    ],
+    "comments": "Manual content review only: inspected local ignored source, model output, prompt trace, and provider response metadata for source grounding, source-span precision, exact/approximate/broad/missing labels, research usefulness, hallucination / unsupported claims, abstraction quality, negative-result value, repeatability value against chunked_source_grounding_live_pilot_003, comparison value against long_context_judgment_live_pilot_001, comparison value against chunked_source_grounding_live_pilot_001, comparison value against chunked_source_grounding_live_pilot_002, and comparison value against chunked_source_grounding_live_pilot_003. The artifact is content-reviewable: source-span precision repeated on a second source excerpt, the output is complete parseable JSON, exact labels are warranted for direct source phrasing, the approximate label is warranted for the composite span, and the unsupported-claim report flags overstatement risks without adding them as claims. Caveats: the artifact still uses broad segment refs rather than canonical offsets, it has limited broader judgment abstraction by design, and the support labels remain proposal-only review findings rather than validation. raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}
