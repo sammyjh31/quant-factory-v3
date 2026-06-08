@@ -22,7 +22,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained. The current next step is evaluator planning, not another live model call.
+The scaffold exists so live LLM experiments can be measured, compared, and contained. The current next step is comparison-note compression of strict span-review findings, not another live model call.
 
 ---
 
@@ -36,7 +36,7 @@ Active federation labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, and a lab-local source-span evaluator plan.
+   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, and strict source-span re-review records.
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -66,7 +66,7 @@ Current preliminary read:
 
 - long-context preserved broader judgment abstraction with missing-context and teacher-intent compression caveats;
 - chunked/source-grounded methods have one bounded negative Flash result and later Pro results showing better parseability under narrower contracts;
-- source-span precision pattern repeated beyond the first source, while broad segment refs and limited abstraction remain open tradeoffs.
+- source-span precision pattern repeated beyond the first source, while strict source-span re-review with canonical offsets found one overclaimed exactness caveat and broad segment refs / limited abstraction remain open tradeoffs.
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -120,12 +120,12 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Use the source-span evaluator plan to perform a stricter manual re-review of the existing source-span precision pilots.
+Use the strict source-span re-review records to update the local comparison note.
 
-The evaluator plan is:
+The owning comparison note is:
 
 ```text
-labs/chunked_source_grounding/PLANNING/source_span_evaluator_001/
+labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The next likely task is a stricter manual re-review of pilots 003 and 004 using canonical offsets, line ranges, and quote hashes. Any future live run still requires admission, explicit execution instruction, protocol-valid exports, and proposal-only boundaries.
+Goal 10C should answer whether source-span precision still repeated under stricter review, whether exact labels were overclaimed, whether broad segment refs remain the bottleneck, and whether the next live-run output contract should request line-range or quote-hash candidates. Any future live run still requires admission, explicit execution instruction, protocol-valid exports, and proposal-only boundaries.

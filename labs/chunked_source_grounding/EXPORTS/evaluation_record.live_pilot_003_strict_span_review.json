@@ -1,0 +1,22 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_003_strict_span_review",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_003_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_strict_span_pilot_003",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.88,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "source_span_precision_improved",
+      "content_review_passed_with_caveats",
+      "broad_segment_refs"
+    ],
+    "comments": "Manual strict source-span re-review only: inspected the existing committed artifact, existing manual content-review record, ignored local source excerpt, and ignored local model output trace for pilot 003. The existing EvaluationRecord schema represented this stricter review honestly through evaluator_type=manual_content_review, failure_tags, and metadata-safe comments; no protocol change was needed. Counts: reviewed_hint_count=5; exact_count=3; approximate_count=2; broad_count=0; missing_count=0; line_range_count=5; character_offset_count=5; quote_hash_count=5; overclaimed_exactness_count=0; canonical_offsets_missing=false_for_strict_review; original_artifact_canonical_offsets_missing=true. Locators use zero-based character offsets and committed quote hashes only: SLC-001 source_ref=raw_corpora_sha256:d8392c58c3b740eb line_range=1-1 char_offsets=605-731 quote_sha256=6ab9f783f79727e4e8cbfb39bbd24d3bca38370c442e51e0d1f0ac16a5de0a89 strict_label=exact; SLC-002 source_ref=raw_corpora_sha256:d8392c58c3b740eb line_range=1-1 char_offsets=790-861 quote_sha256=5761050d54dea52240d0e7d9294b9f9009ef6f59420b361c651ae7cc88d35c41 strict_label=approximate; SLC-003 source_ref=raw_corpora_sha256:d8392c58c3b740eb line_range=1-1 char_offsets=1026-1250 quote_sha256=2d262e31aaa1f5cdf2fbf4f5d51c254dc2b64b2feff6ae6495d29baaf72dc6ca strict_label=exact; TSH-001 source_ref=raw_corpora_sha256:d8392c58c3b740eb line_range=1-1 char_offsets=790-861 quote_sha256=5761050d54dea52240d0e7d9294b9f9009ef6f59420b361c651ae7cc88d35c41 strict_label=approximate; TSH-002 source_ref=raw_corpora_sha256:d8392c58c3b740eb line_range=1-1 char_offsets=1026-1250 quote_sha256=2d262e31aaa1f5cdf2fbf4f5d51c254dc2b64b2feff6ae6495d29baaf72dc6ca strict_label=exact. The earlier manual review conclusion survives stricter checking: source-span precision improved relative to the failed oversized-contract run, but the model artifact itself still used broad segment refs rather than canonical locators. Raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

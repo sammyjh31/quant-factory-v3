@@ -11,7 +11,7 @@ This lab explores chunked source-span readers for messy trader educational text.
 - one bounded negative result showed that an oversized Flash output contract can truncate before content review
 - narrowed Pro source-grounding runs produced complete parseable artifacts under proposal-only boundaries
 - the source-span precision repeat generalized to a second-source excerpt with caveats
-- source-span evaluator planning now targets canonical offsets, line ranges, and quote hashes before another model call
+- strict source-span re-review records now add canonical offsets, line ranges, and quote hashes for pilots 003 and 004 without changing protocol
 
 current details live in protocol export records and the comparison note:
 
@@ -21,14 +21,14 @@ labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_
 
 ## Current Active Research Thread
 
-The active thread is source-span evaluator planning: whether stricter manual review can replace broad segment refs with canonical offsets, line ranges, and quote hashes for existing source-span precision pilots.
+The active thread is Goal 10C comparison-note compression after strict source-span re-review: whether source-span precision still repeats under canonical offsets, line ranges, and quote hashes, and what the next output contract should request.
 
 The current comparison note records the second-source source-span precision repeat as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
 
-The current evaluator plan is:
+The current next comparison surface is:
 
 ```text
-labs/chunked_source_grounding/PLANNING/source_span_evaluator_001/
+labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
 ## Current Boundaries

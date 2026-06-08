@@ -160,6 +160,18 @@ CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
 CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
     "evaluation_record.live_pilot_004_manual_content_review.json"
 )
+CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_003_strict_span_review"
+)
+CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_004_strict_span_review"
+)
+CHUNKED_SPAN_STRICT_REVIEW_003_EXPORT = (
+    "evaluation_record.live_pilot_003_strict_span_review.json"
+)
+CHUNKED_SPAN_STRICT_REVIEW_004_EXPORT = (
+    "evaluation_record.live_pilot_004_strict_span_review.json"
+)
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
     "BenchmarkPack.schema.json",
@@ -1546,7 +1558,9 @@ def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_on
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -2036,7 +2050,9 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -2221,7 +2237,7 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "product evidence, strategy evidence, financial advice, live-trading "
             "authority, graduation, or architecture."
         ),
-        "Use the source-span evaluator plan to perform a stricter manual re-review",
+        "Use the strict source-span re-review records to update the local comparison note.",
     ]:
         assert required in portfolio
 
@@ -2389,14 +2405,155 @@ def test_goal10a_source_span_evaluator_planning_packet_is_contained():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     assert "Current phase: `milestone-3-method-comparison-recorded`" in portfolio
     assert "Current phase: `milestone-2-live-pilot-recorded`" not in portfolio
-    assert "source_span_evaluator_001" in portfolio
-    assert "source_span_evaluator_001" in lab_card
     assert "canonical offsets" in portfolio
     assert "canonical offsets" in lab_card
     for currentness_doc in [portfolio, lab_card]:
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
         assert "No graduated items." not in currentness_doc
+
+
+def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    strict_review_paths = {
+        "003": export_dir / CHUNKED_SPAN_STRICT_REVIEW_003_EXPORT,
+        "004": export_dir / CHUNKED_SPAN_STRICT_REVIEW_004_EXPORT,
+    }
+
+    for path in strict_review_paths.values():
+        assert path.exists()
+        record = load_json(path)
+        validate_record(record)
+        assert record["protocol_version"] == "qf-v3-protocol-0.1"
+        assert record["schema_name"] == "EvaluationRecord"
+        assert record["schema_version"] == CURRENT_SCHEMA_VERSION
+        assert record["evaluation"]["lab_id"] == "chunked_source_grounding"
+        assert record["evaluation"]["target_type"] == "artifact"
+        assert record["evaluation"]["evaluator_type"] == "manual_content_review"
+        assert record["evaluation"]["benchmark_pack_id"] == "text_judgment_v0"
+        assert "strict source-span re-review" in record["evaluation"]["comments"]
+        assert "line_range_count=" in record["evaluation"]["comments"]
+        assert "character_offset_count=" in record["evaluation"]["comments"]
+        assert "quote_hash_count=" in record["evaluation"]["comments"]
+        assert "quote_sha256=" in record["evaluation"]["comments"]
+        assert "zero-based character offsets" in record["evaluation"]["comments"]
+        assert "Raw source text and raw model output are not committed." in (
+            record["evaluation"]["comments"]
+        )
+        assert (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ) in record["evaluation"]["comments"]
+
+    pilot_003 = load_json(strict_review_paths["003"])["evaluation"]
+    assert pilot_003["evaluation_id"] == CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID
+    assert pilot_003["target_id"] == CHUNKED_SPAN_LIVE_PILOT_ARTIFACT_ID
+    assert pilot_003["evaluator_id"] == "manual_content_review_strict_span_pilot_003"
+    assert pilot_003["score"] == pytest.approx(0.88)
+    assert pilot_003["pass_fail"] == "pass"
+    assert pilot_003["failure_tags"] == [
+        "source_span_precision_improved",
+        "content_review_passed_with_caveats",
+        "broad_segment_refs",
+    ]
+    for required in [
+        "reviewed_hint_count=5",
+        "exact_count=3",
+        "approximate_count=2",
+        "broad_count=0",
+        "missing_count=0",
+        "overclaimed_exactness_count=0",
+        "canonical_offsets_missing=false_for_strict_review",
+        "original_artifact_canonical_offsets_missing=true",
+        "SLC-001 source_ref=raw_corpora_sha256:d8392c58c3b740eb",
+        "SLC-002 source_ref=raw_corpora_sha256:d8392c58c3b740eb",
+        "SLC-003 source_ref=raw_corpora_sha256:d8392c58c3b740eb",
+        "TSH-001 source_ref=raw_corpora_sha256:d8392c58c3b740eb",
+        "TSH-002 source_ref=raw_corpora_sha256:d8392c58c3b740eb",
+    ]:
+        assert required in pilot_003["comments"]
+
+    pilot_004 = load_json(strict_review_paths["004"])["evaluation"]
+    assert pilot_004["evaluation_id"] == CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID
+    assert pilot_004["target_id"] == CHUNKED_SPAN_REPEAT_LIVE_PILOT_ARTIFACT_ID
+    assert pilot_004["evaluator_id"] == "manual_content_review_strict_span_pilot_004"
+    assert pilot_004["score"] == pytest.approx(0.82)
+    assert pilot_004["pass_fail"] == "pass"
+    assert pilot_004["failure_tags"] == [
+        "source_span_precision_repeated",
+        "source_span_precision_improved",
+        "content_review_passed_with_caveats",
+        "broad_segment_refs",
+        "overclaimed_exactness",
+    ]
+    for required in [
+        "reviewed_hint_count=6",
+        "exact_count=4",
+        "approximate_count=2",
+        "broad_count=0",
+        "missing_count=0",
+        "overclaimed_exactness_count=1",
+        "canonical_offsets_missing=false_for_strict_review",
+        "original_artifact_canonical_offsets_missing=true",
+        "source-span precision repeated under stricter review",
+        "SLC-001 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "SLC-002 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "SLC-003 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "TSH-001 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "TSH-002 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "TSH-003 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+    ]:
+        assert required in pilot_004["comments"]
+
+    strict_review_text = "\n".join(path.read_text() for path in strict_review_paths.values())
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+    ]:
+        assert forbidden not in strict_review_text
+    assert not list(export_dir.glob("run_record.*strict_span_review*.json"))
+    assert not list(export_dir.glob("artifact_envelope.*strict_span_review*.json"))
+    assert not list(export_dir.glob("research_note.*strict_span_review*.json"))
+
+    protocol_schema_names = {
+        path.name
+        for path in (
+            ROOT / "packages" / "qf_v3_protocol" / "src" / "qf_v3_protocol" / "schemas"
+        ).glob("*.schema.json")
+    }
+    assert protocol_schema_names == PROTOCOL_SCHEMA_NAMES
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
+    )
+
+    manual_content_reviews = [
+        record["evaluation"]
+        for record in records_by_schema("EvaluationRecord")
+        if record["evaluation"]["evaluator_type"] == "manual_content_review"
+    ]
+    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
+        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
+        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
+        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    ]
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    for currentness_doc in [portfolio, lab_card]:
+        assert "strict source-span re-review" in currentness_doc
+        assert "Goal 10C" in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert "The current next step is evaluator planning" not in portfolio
+    assert "The active thread is source-span evaluator planning" not in lab_card
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
 def test_goal9e_currentness_docs_are_compressed_routers_not_ledgers():
@@ -3401,7 +3558,9 @@ def test_goal9c_second_source_span_precision_content_review_is_bounded():
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -3512,7 +3671,9 @@ def test_goal8d_source_span_precision_manual_content_review_records_precision_re
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
