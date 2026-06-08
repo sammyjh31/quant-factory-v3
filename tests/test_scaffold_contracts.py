@@ -196,11 +196,17 @@ CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID = (
 CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID = (
     "chunked_source_grounding_live_pilot_004_strict_span_review"
 )
+CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_005_strict_locator_review"
+)
 CHUNKED_SPAN_STRICT_REVIEW_003_EXPORT = (
     "evaluation_record.live_pilot_003_strict_span_review.json"
 )
 CHUNKED_SPAN_STRICT_REVIEW_004_EXPORT = (
     "evaluation_record.live_pilot_004_strict_span_review.json"
+)
+CHUNKED_LOCATOR_STRICT_REVIEW_005_EXPORT = (
+    "evaluation_record.live_pilot_005_strict_locator_review.json"
 )
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
@@ -1598,6 +1604,7 @@ def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_on
         CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
+        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -2090,6 +2097,7 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
         CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
+        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -2278,8 +2286,8 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "authority, graduation, or architecture."
         ),
         (
-            "Goal 11C source-span locator candidate pilot has produced a proposal-only "
-            "export set. The next proposed step is Goal 11D manual strict locator review."
+            "Goal 11D manual strict locator review is complete. The next proposed step "
+            "is Goal 11E comparison-note update."
         ),
     ]:
         assert required in portfolio
@@ -2585,6 +2593,7 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
         CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
+        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
 
@@ -2592,10 +2601,8 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "strict source-span re-review" in currentness_doc
-        assert "source-span locator candidate pilot has produced a proposal-only" in (
-            currentness_doc
-        )
-        assert "Goal 11D manual strict locator review" in currentness_doc
+        assert "Goal 11D manual strict locator review is complete" in currentness_doc
+        assert "Goal 11E comparison-note update" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "The current next step is evaluator planning" not in portfolio
     assert "The active thread is source-span evaluator planning" not in lab_card
@@ -2683,10 +2690,8 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator output contract" in currentness_doc
-        assert "source-span locator candidate pilot has produced a proposal-only" in (
-            currentness_doc
-        )
-        assert "Goal 11D manual strict locator review" in currentness_doc
+        assert "Goal 11D manual strict locator review is complete" in currentness_doc
+        assert "Goal 11E comparison-note update" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "current next step is comparison-note compression" not in portfolio
     assert "The active thread is Goal 10C comparison-note compression" not in lab_card
@@ -2849,10 +2854,8 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator output contract" in currentness_doc
-        assert "source-span locator candidate pilot has produced a proposal-only" in (
-            currentness_doc
-        )
-        assert "Goal 11D manual strict locator review" in currentness_doc
+        assert "Goal 11D manual strict locator review is complete" in currentness_doc
+        assert "Goal 11E comparison-note update" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
@@ -3101,10 +3104,8 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert "Goal 11C source-span locator candidate pilot has produced a proposal-only" in (
-            currentness_doc
-        )
-        assert "Goal 11D manual strict locator review" in currentness_doc
+        assert "Goal 11D manual strict locator review is complete" in currentness_doc
+        assert "Goal 11E comparison-note update" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "current next step is Goal 11A" not in portfolio
@@ -3297,14 +3298,118 @@ def test_goal11c_source_span_locator_live_export_set_is_protocol_valid_and_bound
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [portfolio, lab_card, lab_registry]:
-        assert "source-span locator candidate pilot" in currentness_doc
-        assert "Goal 11D manual strict locator review" in currentness_doc
+        assert "Goal 11D manual strict locator review is complete" in currentness_doc
+        assert "Goal 11E comparison-note update" in currentness_doc
         assert "proposal-only" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert (
         "Goal 11B admission planning is complete. The next proposed step is Goal 11C"
         not in portfolio
+    )
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal11d_strict_locator_review_records_coordinate_failure_only():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    review_path = export_dir / CHUNKED_LOCATOR_STRICT_REVIEW_005_EXPORT
+    assert review_path.exists()
+
+    record = load_json(review_path)
+    validate_record(record)
+    assert record["protocol_version"] == "qf-v3-protocol-0.1"
+    assert record["schema_name"] == "EvaluationRecord"
+    assert record["schema_version"] == CURRENT_SCHEMA_VERSION
+
+    evaluation = record["evaluation"]
+    assert evaluation["evaluation_id"] == CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID
+    assert evaluation["lab_id"] == "chunked_source_grounding"
+    assert evaluation["target_id"] == CHUNKED_LOCATOR_LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["target_type"] == "artifact"
+    assert evaluation["evaluator_id"] == "manual_content_review_strict_locator_pilot_005"
+    assert evaluation["evaluator_type"] == "manual_content_review"
+    assert evaluation["benchmark_pack_id"] == "text_judgment_v0"
+    assert evaluation["score"] == pytest.approx(0.58)
+    assert evaluation["pass_fail"] == "fail"
+    assert evaluation["failure_tags"] == [
+        "line_ranges_valid",
+        "quote_hashes_computed_locally",
+        "source_span_locator_improved",
+        "char_offsets_inaccurate",
+        "quote_hashes_not_evidence_valid",
+        "canonical_locator_candidates_failed",
+    ]
+
+    comments = evaluation["comments"]
+    for required in [
+        "Manual strict locator review only",
+        "reviewed_locator_candidate_count=3",
+        "line_range_valid_count=3",
+        "char_offset_syntax_valid_count=3",
+        "char_offset_support_valid_count=0",
+        "quote_hash_count=3",
+        "quote_hash_support_valid_count=0",
+        "exact_count=0",
+        "approximate_count=2",
+        "broad_count=1",
+        "missing_count=0",
+        "overclaimed_exactness_count=0",
+        "direct_locator_emission_improved_over_reconstruction=partial",
+        "line ranges reduced reviewer reconstruction",
+        "character offsets did not align with the intended supporting spans",
+        "computed quote hashes are mechanically valid but not evidence-valid support handles",
+        "SLC-001 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "SLC-002 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "SLC-003 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "raw source text and raw model output are not committed",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ),
+    ]:
+        assert required in comments
+    for quote_hash in [
+        "aa1c4a4d9123c3edc6181631661dab1a136e98db5ac3eb5763f5689b66d46a33",
+        "5f0e1de0ae75a0815f9b3b33ec8ac3a145dfddf0d1e61a8010e3e7b676cfa577",
+        "b68bd9fe88e732e44a1ba2176db1f86ef0ab7a4789a58bf619ab4021c03a0023",
+    ]:
+        assert quote_hash in comments
+
+    review_text = review_path.read_text()
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "raw_source_text",
+        "raw_model_output",
+    ]:
+        assert forbidden not in review_text
+    assert not list(export_dir.glob("run_record.*strict_locator_review*.json"))
+    assert not list(export_dir.glob("artifact_envelope.*strict_locator_review*.json"))
+    assert not list(export_dir.glob("research_note.*strict_locator_review*.json"))
+
+    manual_content_reviews = [
+        review["evaluation"]["evaluation_id"]
+        for review in records_by_schema("EvaluationRecord")
+        if review["evaluation"]["evaluator_type"] == "manual_content_review"
+    ]
+    assert CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID in manual_content_reviews
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [portfolio, lab_card, lab_registry]:
+        assert "Goal 11D manual strict locator review is complete" in currentness_doc
+        assert "Goal 11E comparison-note update" in currentness_doc
+        assert "char offsets" in currentness_doc
+        assert "proposal-only" in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+        assert "run_record.live_pilot_005" not in currentness_doc
+    assert "The next proposed step is Goal 11D manual strict locator review" not in (
+        portfolio
     )
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
@@ -4314,6 +4419,7 @@ def test_goal9c_second_source_span_precision_content_review_is_bounded():
         CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
+        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -4427,6 +4533,7 @@ def test_goal8d_source_span_precision_manual_content_review_records_precision_re
         CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
         CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
+        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))

@@ -1,0 +1,25 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_005_strict_locator_review",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_005_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_strict_locator_pilot_005",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.58,
+    "pass_fail": "fail",
+    "failure_tags": [
+      "line_ranges_valid",
+      "quote_hashes_computed_locally",
+      "source_span_locator_improved",
+      "char_offsets_inaccurate",
+      "quote_hashes_not_evidence_valid",
+      "canonical_locator_candidates_failed"
+    ],
+    "comments": "Manual strict locator review only: inspected the existing committed pilot 005 artifact and boundary review, the ignored local selected source excerpt, and the ignored local model output trace. The existing EvaluationRecord schema represented this stricter review honestly through evaluator_type=manual_content_review, failure_tags, and metadata-safe comments; no protocol change was needed. Counts: reviewed_locator_candidate_count=3; line_range_valid_count=3; char_offset_syntax_valid_count=3; char_offset_support_valid_count=0; quote_hash_count=3; quote_hash_support_valid_count=0; exact_count=0; approximate_count=2; broad_count=1; missing_count=0; overclaimed_exactness_count=0; direct_locator_emission_improved_over_reconstruction=partial. The line ranges reduced reviewer reconstruction and pointed to useful local support regions, but character offsets did not align with the intended supporting spans. The computed quote hashes are mechanically valid but not evidence-valid support handles because they hash the model-proposed character spans, not the reviewed supporting spans. Locator details: SLC-001 source_ref=raw_corpora_sha256:9f9e143429f5842a line_range=14-17 char_offsets=218-280 quote_sha256=aa1c4a4d9123c3edc6181631661dab1a136e98db5ac3eb5763f5689b66d46a33 model_label=approximate strict_label=approximate line_range_support_valid=true char_offset_support_valid=false quote_hash_support_valid=false; SLC-002 source_ref=raw_corpora_sha256:9f9e143429f5842a line_range=27-34 char_offsets=468-592 quote_sha256=5f0e1de0ae75a0815f9b3b33ec8ac3a145dfddf0d1e61a8010e3e7b676cfa577 model_label=approximate strict_label=approximate line_range_support_valid=true char_offset_support_valid=false quote_hash_support_valid=false; SLC-003 source_ref=raw_corpora_sha256:9f9e143429f5842a line_range=46-68 char_offsets=825-1248 quote_sha256=b68bd9fe88e732e44a1ba2176db1f86ef0ab7a4789a58bf619ab4021c03a0023 model_label=broad strict_label=broad line_range_support_valid=true char_offset_support_valid=false quote_hash_support_valid=false. Direct locator emission improved over pilots 003/004 by giving reviewer-usable line ranges directly, but it did not yet remove the need for local reviewer reconstruction because the character offsets failed as canonical locators. raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}
