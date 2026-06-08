@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "chunked_source_grounding_live_pilot_003",
+    "lab_id": "chunked_source_grounding",
+    "research_question": "Can a chunked/source-grounded LLM method improve source-span precision from broad segment references to tighter source-span hints while keeping the narrowed output contract complete and parseable?",
+    "hypothesis": "On the same source excerpt and benchmark as long_context_judgment_live_pilot_001 and chunked_source_grounding_live_pilot_002, DeepSeek V4 Pro plus a source-span precision contract may reduce broad segment references into tighter source-span hints while preserving the narrowed output contract.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "chunked_source_grounding_live_pilot_003_method"
+    ],
+    "evaluation_plan": "Validate this proposed ExperimentCard and MethodCard against protocol schemas. After a separately authorized live run, create proposal-only export records and evaluate source-span precision, honest exact/approximate/broad/missing support labels, unsupported claims, parseability, output-contract fit, and comparison value against chunked_source_grounding_live_pilot_002 and long_context_judgment_live_pilot_001. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "chunked_source_span_precision_proposal"
+    ]
+  }
+}

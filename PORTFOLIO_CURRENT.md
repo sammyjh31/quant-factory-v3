@@ -18,6 +18,8 @@ The scaffold baseline has been accepted. The portfolio now has one tiny method-c
 - `chunked_source_grounding_live_pilot_001`
 - `chunked_source_grounding_live_pilot_002`
 
+It also has one contained source-span precision planning packet for `chunked_source_grounding_live_pilot_003`.
+
 The accepted scaffold contains protocol schemas, benchmark manifests, lab fixture exports, validation, read-only synthesis, currentness docs, and tests proving the boundaries.
 
 The scaffold exists so live LLM experiments can be measured, compared, and contained.
@@ -34,7 +36,7 @@ Active scaffold-origin labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_001`; one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_002`
+   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_001`; one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_002`; one source-span precision planning packet for `chunked_source_grounding_live_pilot_003`
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -76,7 +78,13 @@ The current records include one manual content-review EvaluationRecord for the l
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
-Planning packets remain planning structure only. They are not in `EXPORTS/`, are not imported by synthesis, and do not authorize future execution by themselves.
+The current source-span precision planning packet is:
+
+```text
+labs/chunked_source_grounding/PLANNING/live_llm_pilot_003/
+```
+
+It narrows the next chunked Pro question to tighter source-span hints and honest exact/approximate/broad/missing support labels. Planning packets remain planning structure only. They are not in `EXPORTS/`, are not imported by synthesis, and do not authorize future execution by themselves.
 
 Future live LLM experiments must pass the admission checklist in:
 
@@ -130,4 +138,6 @@ GRADUATION_LEDGER.md
 
 Improve source-span precision for chunked Pro before making any method-quality claim.
 
-The next likely planning task is a contained `chunked_source_grounding` pilot 003 plan that tests whether tighter span hints or canonical segment references improve grounding without re-expanding the narrowed output contract.
+Keep `chunked_source_grounding_live_pilot_003` planning-only until a separate execution instruction exists.
+
+The next likely execution task, if authorized, is exactly one tiny source-span precision live pilot under the Goal 8B admission scope. It must not make a method-quality claim, graduate anything, or re-expand the narrowed output contract.
