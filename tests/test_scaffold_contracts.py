@@ -2210,12 +2210,13 @@ def test_goal8e_comparison_note_includes_source_span_precision_without_authority
         "content_review_passed_with_caveats",
         "exact/approximate labels were warranted",
         "score `0.86`",
-        "model artifacts do not yet emit canonical line/offset locator candidates",
         "limited_abstraction",
+        "chunked_source_grounding_live_pilot_005",
+        "Line-range locator candidates are useful",
+        "char-offset and quote-hash candidate workflow is not yet reliable",
         "Next Research Direction",
-        "completed Goal 11A source-span locator output contract plan",
-        "Goal 11B admission planning is complete",
-        "Goal 11C execution of the admitted source-span locator candidate pilot",
+        "Goal 12A",
+        "line-range-first locator contract",
     ]:
         assert required in note
 
@@ -2286,8 +2287,8 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "authority, graduation, or architecture."
         ),
         (
-            "Goal 11D manual strict locator review is complete. The next proposed step "
-            "is Goal 11E comparison-note update."
+            "Goal 11E comparison-note update is complete. The next proposed step is "
+            "Goal 12A planning for a line-range-first locator contract."
         ),
     ]:
         assert required in portfolio
@@ -2601,8 +2602,9 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "strict source-span re-review" in currentness_doc
-        assert "Goal 11D manual strict locator review is complete" in currentness_doc
-        assert "Goal 11E comparison-note update" in currentness_doc
+        assert "Goal 11E comparison-note update is complete" in currentness_doc
+        assert "Goal 12A" in currentness_doc
+        assert "line-range-first locator contract" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "The current next step is evaluator planning" not in portfolio
     assert "The active thread is source-span evaluator planning" not in lab_card
@@ -2641,15 +2643,17 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
         "overclaimed exactness `1`",
         "one model-labeled exact case was better treated as approximate",
         "source-span precision improvement repeated under stricter review",
-        "model artifacts do not yet emit canonical line/offset locator candidates",
-        "manual reviewers can locate support",
-        "broad segment refs remain a model-output limitation",
-        "limited abstraction remains a tradeoff",
-        "source-span locator output contract",
-        "emit canonical locator candidates directly",
-        "line-range candidates",
-        "character-offset candidates",
-        "locally computed quote hashes",
+        "the original model artifact did not emit canonical locators",
+        (
+            "reviewers could map the support hints to canonical line ranges, "
+            "character offsets, and quote hashes"
+        ),
+        "broad_segment_refs",
+        "limited_abstraction",
+        "source-span locator candidate pilot 005",
+        "Direct locator emission improved only partially",
+        "line-range-first locator contract",
+        "local review computes offsets/hashes only after line-range validation",
     ]:
         assert required in note
 
@@ -2689,9 +2693,10 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert "source-span locator output contract" in currentness_doc
-        assert "Goal 11D manual strict locator review is complete" in currentness_doc
-        assert "Goal 11E comparison-note update" in currentness_doc
+        assert "source-span locator candidate pilot" in currentness_doc
+        assert "Goal 11E comparison-note update is complete" in currentness_doc
+        assert "Goal 12A" in currentness_doc
+        assert "line-range-first locator contract" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "current next step is comparison-note compression" not in portfolio
     assert "The active thread is Goal 10C comparison-note compression" not in lab_card
@@ -2853,9 +2858,10 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert "source-span locator output contract" in currentness_doc
-        assert "Goal 11D manual strict locator review is complete" in currentness_doc
-        assert "Goal 11E comparison-note update" in currentness_doc
+        assert "source-span locator candidate pilot" in currentness_doc
+        assert "Goal 11E comparison-note update is complete" in currentness_doc
+        assert "Goal 12A" in currentness_doc
+        assert "line-range-first locator contract" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
@@ -3104,8 +3110,9 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert "Goal 11D manual strict locator review is complete" in currentness_doc
-        assert "Goal 11E comparison-note update" in currentness_doc
+        assert "Goal 11E comparison-note update is complete" in currentness_doc
+        assert "Goal 12A" in currentness_doc
+        assert "line-range-first locator contract" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "current next step is Goal 11A" not in portfolio
@@ -3298,8 +3305,9 @@ def test_goal11c_source_span_locator_live_export_set_is_protocol_valid_and_bound
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [portfolio, lab_card, lab_registry]:
-        assert "Goal 11D manual strict locator review is complete" in currentness_doc
-        assert "Goal 11E comparison-note update" in currentness_doc
+        assert "Goal 11E comparison-note update is complete" in currentness_doc
+        assert "Goal 12A" in currentness_doc
+        assert "line-range-first locator contract" in currentness_doc
         assert "proposal-only" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
@@ -3402,14 +3410,87 @@ def test_goal11d_strict_locator_review_records_coordinate_failure_only():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [portfolio, lab_card, lab_registry]:
-        assert "Goal 11D manual strict locator review is complete" in currentness_doc
-        assert "Goal 11E comparison-note update" in currentness_doc
+        assert "Goal 11E comparison-note update is complete" in currentness_doc
+        assert "Goal 12A" in currentness_doc
+        assert "line-range-first locator contract" in currentness_doc
         assert "char offsets" in currentness_doc
         assert "proposal-only" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "The next proposed step is Goal 11D manual strict locator review" not in (
         portfolio
+    )
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal11e_comparison_note_records_locator_findings_and_next_fork():
+    note = GOAL7G_COMPARISON_NOTE.read_text()
+
+    for required in [
+        "chunked_source_grounding_live_pilot_005",
+        "chunked_source_grounding_live_pilot_005_strict_locator_review",
+        "score `0.58`",
+        "pass_fail `fail`",
+        "locator candidates reviewed `3`",
+        "line ranges `3/3` valid and reviewer-useful",
+        "char offsets `3/3` syntactically valid but `0/3` evidence-valid",
+        "quote hashes `3` computed locally and mechanically valid but not support-valid",
+        "labels: exact `0`, approximate `2`, broad `1`, missing `0`",
+        "overclaimed exactness `0`",
+        "direct locator emission improved only partially over pilots 003/004",
+        "Line-range locator candidates are useful",
+        "char-offset and quote-hash candidate workflow is not yet reliable",
+        "source-span precision did repeat under strict review in pilots 003/004",
+        "direct locator emission is promising only at the line-range level",
+        "the next bottleneck is reliable locator granularity, not model parseability",
+        "Goal 12A",
+        "line-range-first locator contract",
+        (
+            "model emits line ranges and local review computes offsets/hashes only "
+            "after line-range validation"
+        ),
+    ]:
+        assert required in note
+
+    for stale_or_forbidden in [
+        "model artifacts do not yet emit canonical line/offset locator candidates",
+        "The bounded fork from this comparison is now the completed Goal 11A",
+        "Goal 11B admission planning is complete",
+        "Goal 11C execution of the admitted source-span locator candidate pilot",
+        "whether a future model call can emit canonical locator candidates directly",
+        (
+            "The admitted future contract should test line-range candidates and "
+            "character-offset candidates"
+        ),
+        "method wins",
+        "validated trading",
+        "generated synthesis metrics",
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+        "{{APPROVED_SOURCE_TEXT}}",
+    ]:
+        assert stale_or_forbidden not in note
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [portfolio, lab_card, lab_registry]:
+        assert "Goal 11E comparison-note update is complete" in currentness_doc
+        assert "Goal 12A" in currentness_doc
+        assert "line-range-first locator contract" in currentness_doc
+        assert "proposal-only" in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+        assert "run_record.live_pilot_005" not in currentness_doc
+
+    assert "The next proposed step is Goal 11E comparison-note update" not in portfolio
+    assert all("comparisons" not in path.parts for path in lab_export_paths(ROOT))
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
     )
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
