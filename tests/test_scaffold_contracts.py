@@ -44,6 +44,9 @@ GOAL8B_PILOT_DIR = (
 GOAL9A_PILOT_DIR = (
     ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "live_llm_pilot_004"
 )
+GOAL10A_EVALUATOR_DIR = (
+    ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "source_span_evaluator_001"
+)
 GOAL9A_SOURCE_PATH = (
     ROOT / "raw_corpora" / "selected" / "source_span_precision_repeat_001" / "source.txt"
 )
@@ -2193,7 +2196,7 @@ def test_portfolio_current_is_router_not_live_export_ledger():
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
 
     for required_heading in [
-        "Current phase: `milestone-2-live-pilot-recorded`",
+        "Current phase: `milestone-3-method-comparison-recorded`",
         "## Current Portfolio Purpose",
         "## Active federation labs",
         "## Active Benchmark Packs",
@@ -2218,7 +2221,7 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "product evidence, strategy evidence, financial advice, live-trading "
             "authority, graduation, or architecture."
         ),
-        "Use the comparison note to choose the next bounded research fork.",
+        "Use the source-span evaluator plan to perform a stricter manual re-review",
     ]:
         assert required in portfolio
 
@@ -2250,6 +2253,150 @@ def test_portfolio_current_is_router_not_live_export_ledger():
         assert removed_ledger_text not in portfolio
 
     assert "generated synthesis metrics" not in portfolio.lower()
+
+
+def test_goal10a_source_span_evaluator_planning_packet_is_contained():
+    required_files = {
+        "evaluator_plan.md",
+        "source_offset_boundary.md",
+        "review_rubric.md",
+        "pilot_003_004_recheck_plan.md",
+        "non_effects.md",
+    }
+    assert GOAL10A_EVALUATOR_DIR.exists()
+    assert {path.name for path in GOAL10A_EVALUATOR_DIR.iterdir() if path.is_file()} == (
+        required_files
+    )
+    assert "EXPORTS" not in GOAL10A_EVALUATOR_DIR.parts
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
+
+    forbidden_planning_files = {
+        "admission.md",
+        "method_card.proposed.json",
+        "experiment_card.proposed.json",
+        "run_admission_update.md",
+        "prompt_template.live_pilot_005.md",
+    }
+    assert forbidden_planning_files.isdisjoint(
+        {path.name for path in GOAL10A_EVALUATOR_DIR.iterdir() if path.is_file()}
+    )
+    assert not list(
+        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
+            "*source_span_evaluator_001*"
+        )
+    )
+
+    evaluator_plan = (GOAL10A_EVALUATOR_DIR / "evaluator_plan.md").read_text()
+    for required in [
+        "Goal 10A source-span evaluator planning",
+        "planning only",
+        "Do not call an LLM.",
+        "Do not run another model.",
+        "Do not create EXPORTS records.",
+        "manual_content_review",
+        "canonical source-span precision",
+        "line ranges",
+        "character offsets",
+        "quote hashes",
+        "pilots 003 and 004",
+        "existing EvaluationRecord can hold",
+        "future protocol change",
+    ]:
+        assert required in evaluator_plan
+
+    source_boundary = (GOAL10A_EVALUATOR_DIR / "source_offset_boundary.md").read_text()
+    for required in [
+        "raw_corpora_sha256:d8392c58c3b740eb",
+        "raw_corpora_sha256:9f9e143429f5842a",
+        "raw_corpora/selected/live_llm_pilot_001/source.txt",
+        "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "line range",
+        "character offset",
+        "quote hash",
+        "Do not commit raw source text.",
+        "local-only",
+    ]:
+        assert required in source_boundary
+
+    rubric = (GOAL10A_EVALUATOR_DIR / "review_rubric.md").read_text()
+    for required in [
+        "exact",
+        "approximate",
+        "broad",
+        "missing",
+        "overclaimed exactness",
+        "broad_segment_refs",
+        "weak_source_span_precision",
+        "overclaimed_exactness",
+        "canonical_offsets_missing",
+        "source_span_precision_repeated",
+    ]:
+        assert required in rubric
+
+    recheck_plan = (
+        GOAL10A_EVALUATOR_DIR / "pilot_003_004_recheck_plan.md"
+    ).read_text()
+    for required in [
+        "chunked_source_grounding_live_pilot_003",
+        "chunked_source_grounding_live_pilot_004",
+        "manual re-review",
+        "without copying raw source text",
+        "without copying raw model output",
+        "compare existing support labels against canonical offsets",
+        "Goal 10B",
+    ]:
+        assert required in recheck_plan
+
+    non_effects = (GOAL10A_EVALUATOR_DIR / "non_effects.md").read_text()
+    for required in [
+        "No LLM call has been made.",
+        "No model has been run.",
+        "No EXPORTS records are created.",
+        "No protocol change is made.",
+        "No synthesis feature is added.",
+        "No benchmark pack is added.",
+        "No graduation occurs.",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, or architecture"
+        ),
+    ]:
+        assert required in non_effects
+
+    combined = "\n".join(path.read_text() for path in GOAL10A_EVALUATOR_DIR.iterdir())
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+    ]:
+        assert forbidden not in combined
+
+    protocol_schema_names = {
+        path.name
+        for path in (
+            ROOT / "packages" / "qf_v3_protocol" / "src" / "qf_v3_protocol" / "schemas"
+        ).glob("*.schema.json")
+    }
+    assert protocol_schema_names == PROTOCOL_SCHEMA_NAMES
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
+    )
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    assert "Current phase: `milestone-3-method-comparison-recorded`" in portfolio
+    assert "Current phase: `milestone-2-live-pilot-recorded`" not in portfolio
+    assert "source_span_evaluator_001" in portfolio
+    assert "source_span_evaluator_001" in lab_card
+    assert "canonical offsets" in portfolio
+    assert "canonical offsets" in lab_card
+    for currentness_doc in [portfolio, lab_card]:
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+        assert "run_record.live_pilot_005" not in currentness_doc
+        assert "No graduated items." not in currentness_doc
 
 
 def test_goal9e_currentness_docs_are_compressed_routers_not_ledgers():

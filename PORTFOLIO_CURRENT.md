@@ -1,7 +1,7 @@
 # Portfolio Current
 
 Status: portfolio currentness router
-Current phase: `milestone-2-live-pilot-recorded`
+Current phase: `milestone-3-method-comparison-recorded`
 Protocol version: `qf-v3-protocol-0.1`
 
 This file owns the current portfolio posture. It routes agents to current evidence surfaces, but it does not own lab results, method success claims, generated synthesis claims, or graduation decisions.
@@ -22,7 +22,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained.
+The scaffold exists so live LLM experiments can be measured, compared, and contained. The current next step is evaluator planning, not another live model call.
 
 ---
 
@@ -36,7 +36,7 @@ Active federation labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, and a second-source source-span precision repeat.
+   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, and a lab-local source-span evaluator plan.
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -120,6 +120,12 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Use the comparison note to choose the next bounded research fork.
+Use the source-span evaluator plan to perform a stricter manual re-review of the existing source-span precision pilots.
 
-Likely forks include a stricter evaluator for canonical offsets, a third-source repeat, or a grounded long-context variant. Any future live run still requires admission, explicit execution instruction, protocol-valid exports, and proposal-only boundaries.
+The evaluator plan is:
+
+```text
+labs/chunked_source_grounding/PLANNING/source_span_evaluator_001/
+```
+
+The next likely task is a stricter manual re-review of pilots 003 and 004 using canonical offsets, line ranges, and quote hashes. Any future live run still requires admission, explicit execution instruction, protocol-valid exports, and proposal-only boundaries.
