@@ -17,10 +17,9 @@ The scaffold baseline has been accepted. The portfolio now has one tiny method-c
 - `long_context_judgment_live_pilot_001`
 - `chunked_source_grounding_live_pilot_001`
 - `chunked_source_grounding_live_pilot_002`
+- `chunked_source_grounding_live_pilot_003`
 
-It also has one contained source-span precision planning packet for `chunked_source_grounding_live_pilot_003`.
-
-That packet has now produced one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord.
+The fourth pilot produced one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord.
 
 The accepted scaffold contains protocol schemas, benchmark manifests, lab fixture exports, validation, read-only synthesis, currentness docs, and tests proving the boundaries.
 
@@ -74,7 +73,8 @@ Current preliminary read:
 
 - long-context preserved broader judgment abstraction but had missing-context / teacher-intent compression caveats;
 - chunked Flash is a bounded negative result for output-contract size / incomplete JSON;
-- chunked Pro with the narrowed contract produced reviewable claim-level source grounding, with broad segment refs and limited abstraction.
+- chunked Pro with the narrowed contract produced reviewable claim-level source grounding, with broad segment refs and limited abstraction;
+- chunked Pro source-span precision improved over pilot 002, with warranted exact/approximate labels for reviewed claims, while still lacking canonical offsets and broader abstraction.
 
 The current records include one manual content-review EvaluationRecord for the long-context pilot, one failure-focused manual content-review EvaluationRecord for the chunked Flash pilot, one DeepSeek V4 Pro manual content-review EvaluationRecord for the chunked Pro pilot, and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord.
 
@@ -138,8 +138,6 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Improve source-span precision for chunked Pro before making any method-quality claim.
+Repeat source-span precision on a second source excerpt before choosing another live-method fork.
 
-Update the local non-authoritative comparison note before choosing another live call.
-
-The next likely task is Goal 8E: update the local comparison note to include `chunked_source_grounding_live_pilot_003`. It must stay non-authoritative, avoid declaring a winner, avoid copying generated summaries, and avoid product, strategy, validation, financial-advice, live-trading, graduation, or architecture claims.
+The next likely planning task is a contained `chunked_source_grounding` plan for a second-source source-span precision repeat. It must stay proposal-only, avoid declaring a winner, avoid copying generated summaries, and avoid product, strategy, validation, financial-advice, live-trading, graduation, or architecture claims.

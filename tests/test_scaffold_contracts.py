@@ -2052,7 +2052,7 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
-def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritative():
+def test_goal8e_comparison_note_includes_source_span_precision_without_authority():
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     assert "During scaffold, labs export only protocol fixture records." not in lab_registry
     assert (
@@ -2074,7 +2074,7 @@ def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritativ
 
     note = GOAL7G_COMPARISON_NOTE.read_text()
     for required in [
-        "# Preliminary Method Comparison: Live Pilot 001",
+        "# Preliminary Method Comparison: Long-Context vs Chunked Source Grounding",
         "Status: preliminary / non-authoritative comparison note",
         "This note is not a synthesis export, not a protocol object, and not portfolio authority.",
         "Only tiny pilots exist.",
@@ -2089,12 +2089,18 @@ def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritativ
         "long_context_judgment_live_pilot_001",
         "chunked_source_grounding_live_pilot_001",
         "chunked_source_grounding_live_pilot_002",
+        "chunked_source_grounding_live_pilot_003",
         "The Flash chunked run was a bounded negative result.",
         (
             "The Pro run is a method/config variant with a narrowed output contract, "
             "not a replacement for the Flash result."
         ),
+        (
+            "The source-span precision run is a refinement of the Pro narrowed-contract "
+            "variant, not a replacement for pilot 002."
+        ),
         "source grounding",
+        "source-span precision",
         "research usefulness",
         "hallucination / unsupported claims",
         "abstraction quality",
@@ -2106,12 +2112,20 @@ def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritativ
         "output_contract_too_large",
         "incomplete_json",
         "broad_segment_refs",
+        "source_span_precision_improved",
+        "content_review_passed_with_caveats",
+        "exact/approximate labels were warranted",
+        "still lacks canonical offsets",
         "limited_abstraction",
-        "Tentative next step",
+        "Next Research Direction",
+        "repeat source-span precision on a second source excerpt",
     ]:
         assert required in note
 
     for forbidden in [
+        "# Preliminary Method Comparison: Live Pilot 001",
+        "The tentative next step is to improve source-span precision for chunked Pro",
+        "A later comparison can test whether canonical span IDs",
         "BEGIN RAW SOURCE",
         "DEEPSEEK_API_KEY",
         "sk-",
@@ -2122,12 +2136,15 @@ def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritativ
         "{{APPROVED_SOURCE_TEXT}}",
         "wins",
         "validated trading",
+        "generated synthesis metrics",
     ]:
         assert forbidden not in note
 
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     readme = (ROOT / "README.md").read_text()
     assert "live_pilot_method_comparison_001.md" in portfolio
+    assert "chunked_source_grounding_live_pilot_003" in portfolio
+    assert "Goal 8E" not in portfolio
     assert "live_pilot_method_comparison_001.md" not in readme
     for currentness_doc in [portfolio, readme]:
         assert "generated synthesis metrics" not in currentness_doc.lower()
@@ -2161,14 +2178,15 @@ def test_portfolio_current_is_router_not_live_export_ledger():
         "long-context preserved broader judgment abstraction",
         "chunked Flash is a bounded negative result",
         "chunked Pro with the narrowed contract produced reviewable claim-level source grounding",
+        "chunked Pro source-span precision improved over pilot 002",
         (
             "These records are proposal-only research records. They are not validation, "
             "product evidence, strategy evidence, financial advice, live-trading "
             "authority, graduation, or architecture."
         ),
         (
-            "Improve source-span precision for chunked Pro before making any method-quality "
-            "claim."
+            "Repeat source-span precision on a second source excerpt before choosing another "
+            "live-method fork."
         ),
     ]:
         assert required in portfolio
