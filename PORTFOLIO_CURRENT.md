@@ -22,7 +22,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained. The current bounded planning packet is Goal 11B live-run admission planning, based on the completed Goal 11A locator contract plan (the source-span locator output contract plan). It is not another live model call.
+The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 11B admission planning is complete. The next proposed step is Goal 11C execution of the admitted source-span locator candidate pilot. This currentness router does not authorize a live model call.
 
 ---
 
@@ -120,7 +120,7 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Use the completed Goal 11A locator contract plan (the source-span locator output contract plan) and the Goal 11B live-run admission packet to prepare the source-span locator candidate pilot.
+Goal 11B admission planning is complete. The next proposed step is Goal 11C execution of the admitted source-span locator candidate pilot.
 
 The owning comparison note is:
 
@@ -128,4 +128,4 @@ The owning comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The Goal 11B packet should remain planning/admission only. It tests whether a future model call can emit line-range and character-offset locator candidates directly so local review can compute quote hashes from selected spans. Any future live run still requires explicit Goal 11C execution instruction, protocol-valid exports, and proposal-only boundaries.
+The completed Goal 11A locator contract plan (the source-span locator output contract plan) and the completed Goal 11B admission packet define the planned source-span locator candidate pilot. Any future live run still requires explicit Goal 11C execution instruction, protocol-valid exports, and proposal-only boundaries.

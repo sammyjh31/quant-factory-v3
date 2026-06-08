@@ -2181,7 +2181,8 @@ def test_goal8e_comparison_note_includes_source_span_precision_without_authority
         "limited_abstraction",
         "Next Research Direction",
         "completed Goal 11A source-span locator output contract plan",
-        "Goal 11B live-run admission planning",
+        "Goal 11B admission planning is complete",
+        "Goal 11C execution of the admitted source-span locator candidate pilot",
     ]:
         assert required in note
 
@@ -2252,9 +2253,8 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "authority, graduation, or architecture."
         ),
         (
-            "Use the completed Goal 11A locator contract plan (the source-span locator "
-            "output contract plan) and the Goal 11B live-run admission packet to prepare "
-            "the source-span locator candidate pilot."
+            "Goal 11B admission planning is complete. The next proposed step is Goal 11C "
+            "execution of the admitted source-span locator candidate pilot."
         ),
     ]:
         assert required in portfolio
@@ -2567,7 +2567,9 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "strict source-span re-review" in currentness_doc
-        assert "Goal 11A" in currentness_doc
+        assert "completed Goal 11A locator contract plan" in currentness_doc
+        assert "Goal 11B admission planning is complete" in currentness_doc
+        assert "Goal 11C execution" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "The current next step is evaluator planning" not in portfolio
     assert "The active thread is source-span evaluator planning" not in lab_card
@@ -2655,7 +2657,9 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator output contract" in currentness_doc
-        assert "Goal 11A" in currentness_doc
+        assert "completed Goal 11A locator contract plan" in currentness_doc
+        assert "Goal 11B admission planning is complete" in currentness_doc
+        assert "Goal 11C execution" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "current next step is comparison-note compression" not in portfolio
     assert "The active thread is Goal 10C comparison-note compression" not in lab_card
@@ -2823,7 +2827,9 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator output contract" in currentness_doc
-        assert "Goal 11A" in currentness_doc
+        assert "completed Goal 11A locator contract plan" in currentness_doc
+        assert "Goal 11B admission planning is complete" in currentness_doc
+        assert "Goal 11C execution" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
@@ -3077,12 +3083,17 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert "Goal 11B live-run admission planning" in currentness_doc
+        assert "Goal 11B admission planning is complete" in currentness_doc
+        assert "Goal 11C execution of the admitted source-span locator candidate pilot" in (
+            currentness_doc
+        )
         assert "completed Goal 11A locator contract plan" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "current next step is Goal 11A" not in portfolio
     assert "The active thread is Goal 11A" not in lab_card
+    assert "current bounded planning packet is Goal 11B" not in portfolio
+    assert "The active thread is Goal 11B live-run admission planning" not in lab_card
     assert "quote-hash candidates" not in portfolio
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
@@ -4556,3 +4567,32 @@ def test_agent_checklists_prevent_append_only_drift_and_random_experiments():
         "why this does not require protocol changes yet",
     ]:
         assert required in new_experiment
+
+
+def test_recursive_contextual_meaning_plan_remains_future_only():
+    plan = (
+        ROOT / "docs" / "research-plans" / "recursive-contextual-meaning-loop.md"
+    ).read_text()
+
+    for required in [
+        "Status: future method plan",
+        "not active lab",
+        "not protocol",
+        "not architecture",
+        "not current milestone",
+        "not export evidence",
+        "not graduation",
+        "not current portfolio authority",
+    ]:
+        assert required in plan
+
+    for forbidden in [
+        "active Goal 9 work",
+        "supersede active Goal 9 work",
+        "Current state: active",
+        "Status: active",
+        "is protocol authority",
+        "is export evidence",
+        "graduation evidence",
+    ]:
+        assert forbidden not in plan

@@ -5,7 +5,7 @@ Origin: operator freeform sketch plus research synthesis
 Current state: not active lab, not protocol, not architecture, not current milestone, not export evidence, not graduation
 Candidate future lab: `labs/recursive_contextual_meaning_loop/`
 
-This document preserves a future V3 methodology plan. It is not current portfolio authority and does not change the active Goal 9 work.
+This document preserves a future V3 methodology plan. It is not current portfolio authority and does not change the active portfolio work.
 
 The raw FreeForm PDF and research PDF are source materials for this plan but should not be committed as project authority or raw source truth.
 
@@ -1057,7 +1057,7 @@ This plan does not:
 * create live-trading authority,
 * create architecture,
 * graduate anything,
-* supersede active Goal 9 work.
+* supersede active portfolio work.
 
 ---
 

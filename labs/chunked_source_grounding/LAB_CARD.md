@@ -21,7 +21,7 @@ labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_
 
 ## Current Active Research Thread
 
-The active thread is Goal 11B live-run admission planning, based on the completed Goal 11A locator contract plan (the source-span locator output contract plan): whether a future model call can emit canonical line-range and character-offset locator candidates directly so local review can compute quote hashes instead of reconstructing support after the fact.
+Goal 11B admission planning is complete. The next proposed step is Goal 11C execution of the admitted source-span locator candidate pilot, based on the completed Goal 11A locator contract plan (the source-span locator output contract plan): whether a future model call can emit canonical line-range and character-offset locator candidates directly so local review can compute quote hashes instead of reconstructing support after the fact.
 
 The current comparison note records the second-source source-span precision repeat as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
 
