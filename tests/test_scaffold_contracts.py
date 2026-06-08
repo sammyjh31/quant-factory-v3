@@ -38,6 +38,14 @@ GOAL7A_PILOT_DIR = (
 GOAL7D_PILOT_DIR = (
     ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "live_llm_pilot_002"
 )
+GOAL7G_COMPARISON_NOTE = (
+    ROOT
+    / "labs"
+    / "chunked_source_grounding"
+    / "PLANNING"
+    / "comparisons"
+    / "live_pilot_method_comparison_001.md"
+)
 GOAL6_CONTENT_REVIEW_PLAN = GOAL3_PILOT_DIR / "content_review_plan.md"
 GOAL3_METHOD_ID = "long_context_judgment_live_pilot_001_method"
 GOAL3_EXPERIMENT_ID = "long_context_judgment_live_pilot_001"
@@ -2001,6 +2009,92 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
         )
         assert "manual content review remains" not in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal7g_preliminary_method_comparison_note_is_local_and_non_authoritative():
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    assert "During scaffold, labs export only protocol fixture records." not in lab_registry
+    assert (
+        "Labs export protocol-valid records appropriate to their current phase. "
+        "Scaffold fixtures, proposal-only live runs, manual reviews, and future "
+        "experiment records must remain clearly labeled and must not claim protocol "
+        "authority, graduation, validation, product evidence, strategy evidence, "
+        "financial advice, live-trading authority, or architecture."
+    ) in lab_registry
+
+    assert GOAL7G_COMPARISON_NOTE.exists()
+    assert GOAL7G_COMPARISON_NOTE.parts[-4:] == (
+        "chunked_source_grounding",
+        "PLANNING",
+        "comparisons",
+        "live_pilot_method_comparison_001.md",
+    )
+    assert "EXPORTS" not in GOAL7G_COMPARISON_NOTE.parts
+
+    note = GOAL7G_COMPARISON_NOTE.read_text()
+    for required in [
+        "# Preliminary Method Comparison: Live Pilot 001",
+        "Status: preliminary / non-authoritative comparison note",
+        "This note is not a synthesis export, not a protocol object, and not portfolio authority.",
+        "Only tiny pilots exist.",
+        "No method has graduated.",
+        "No winner is declared.",
+        (
+            "No product, strategy, validation, financial-advice, live-trading, or "
+            "architecture claim is made."
+        ),
+        "Why this file exists",
+        "Existing currentness docs could not own this comparison",
+        "long_context_judgment_live_pilot_001",
+        "chunked_source_grounding_live_pilot_001",
+        "chunked_source_grounding_live_pilot_002",
+        "The Flash chunked run was a bounded negative result.",
+        (
+            "The Pro run is a method/config variant with a narrowed output contract, "
+            "not a replacement for the Flash result."
+        ),
+        "source grounding",
+        "research usefulness",
+        "hallucination / unsupported claims",
+        "abstraction quality",
+        "negative-result value",
+        "output-contract fit",
+        "comparison value for future method design",
+        "missing_context",
+        "over_abstracted_teacher_intent",
+        "output_contract_too_large",
+        "incomplete_json",
+        "broad_segment_refs",
+        "limited_abstraction",
+        "Tentative next step",
+    ]:
+        assert required in note
+
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "wins",
+        "validated trading",
+    ]:
+        assert forbidden not in note
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    readme = (ROOT / "README.md").read_text()
+    for currentness_doc in [portfolio, readme]:
+        assert "live_pilot_method_comparison_001.md" not in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+
+    assert all("comparisons" not in path.parts for path in lab_export_paths(ROOT))
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
+    )
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 

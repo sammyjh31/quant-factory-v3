@@ -175,7 +175,7 @@ scaffold fixture exports only
 
 Labs may use different internal methods, assumptions, prompts, models, dependencies, and artifact formats in future milestones.
 
-During scaffold, labs export only protocol fixture records.
+Labs export protocol-valid records appropriate to their current phase. Scaffold fixtures, proposal-only live runs, manual reviews, and future experiment records must remain clearly labeled and must not claim protocol authority, graduation, validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture.
 
 Labs do not define protocol authority.
 
