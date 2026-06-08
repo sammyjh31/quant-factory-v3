@@ -13,7 +13,8 @@ Current records:
 - manual content review failed for pilot 001 with score 0.2
 - `chunked_source_grounding_live_pilot_002`: proposal-only DeepSeek V4 Pro live pilot with a narrower output contract
 - Pro pilot 002 produced complete parseable JSON structurally
-- manual content review remains pending for Goal 7F
+- `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json`: one DeepSeek V4 Pro manual content-review EvaluationRecord
+- manual content review passed for pilot 002 with caveats: source-linked at a claim level, broad segment refs, limited abstraction
 
 Current boundaries:
 

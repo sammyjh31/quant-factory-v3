@@ -50,6 +50,9 @@ CHUNKED_PRO_LIVE_PILOT_ARTIFACT_ID = (
     "chunked_source_grounding_live_pilot_002_artifact"
 )
 CHUNKED_PRO_LIVE_PILOT_EVALUATION_ID = "chunked_source_grounding_live_pilot_002_eval"
+CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_002_manual_content_review"
+)
 CHUNKED_PRO_LIVE_PILOT_NOTE_ID = "chunked_source_grounding_live_pilot_002_note"
 LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
 LIVE_PILOT_ARTIFACT_ID = "long_context_judgment_live_pilot_001_artifact"
@@ -88,6 +91,9 @@ CHUNKED_PRO_LIVE_PILOT_POST_RUN_EXPORTS = {
     "evaluation_record.live_pilot_002.json",
     "research_note.live_pilot_002.json",
 }
+CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
+    "evaluation_record.live_pilot_002_manual_content_review.json"
+)
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
     "BenchmarkPack.schema.json",
@@ -1463,6 +1469,7 @@ def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_on
     ]
     assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
         CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
         LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
     ]
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
@@ -1897,6 +1904,106 @@ def test_goal7e_deepseek_v4_pro_live_export_set_is_protocol_valid_and_bounded():
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
+def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    content_review_path = export_dir / CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    assert content_review_path.exists()
+
+    record = load_json(content_review_path)
+    validate_record(record)
+    assert record["schema_name"] == "EvaluationRecord"
+    assert record["schema_version"] == CURRENT_SCHEMA_VERSION
+
+    evaluation = record["evaluation"]
+    assert evaluation["evaluation_id"] == CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID
+    assert evaluation["lab_id"] == "chunked_source_grounding"
+    assert evaluation["target_id"] == CHUNKED_PRO_LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["target_type"] == "artifact"
+    assert evaluation["evaluator_id"] == "manual_content_review_live_pilot_002"
+    assert evaluation["evaluator_type"] == "manual_content_review"
+    assert evaluation["benchmark_pack_id"] == "text_judgment_v0"
+    assert evaluation["score"] == pytest.approx(0.82)
+    assert evaluation["pass_fail"] == "pass"
+    assert evaluation["failure_tags"] == [
+        "missing_context",
+        "broad_segment_refs",
+        "limited_abstraction",
+    ]
+
+    comments = evaluation["comments"]
+    for required in [
+        "Manual content review only",
+        "source grounding",
+        "research usefulness",
+        "hallucination / unsupported claims",
+        "abstraction quality",
+        "negative-result value",
+        "comparison value against long_context_judgment_live_pilot_001",
+        "comparison value against chunked_source_grounding_live_pilot_001",
+        "content-reviewable",
+        "complete parseable JSON",
+        "source-linked claims match the approved excerpt",
+        "failure note correctly identifies the excerpt boundary",
+        "segment refs are broad labels rather than canonical offsets",
+        "narrowed contract intentionally gives limited broader judgment abstraction",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ),
+    ]:
+        assert required in comments
+    assert "raw source text and raw model output are not committed" in comments.lower()
+
+    manual_content_reviews = [
+        record["evaluation"]
+        for record in records_by_schema("EvaluationRecord")
+        if record["evaluation"]["evaluator_type"] == "manual_content_review"
+    ]
+    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
+        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    ]
+    assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
+    assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
+    assert not list(export_dir.glob("research_note.*manual_content_review*.json"))
+
+    combined_committed = "\n".join(
+        path.read_text()
+        for path in [
+            content_review_path,
+            ROOT / "PORTFOLIO_CURRENT.md",
+            ROOT / "LAB_REGISTRY.md",
+            ROOT / "README.md",
+            ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md",
+        ]
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+        "{{APPROVED_SOURCE_TEXT}}",
+    ]:
+        assert forbidden not in combined_committed
+
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    readme = (ROOT / "README.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    for currentness_doc in [portfolio, lab_registry, readme, lab_card]:
+        assert CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT in currentness_doc
+        assert "one DeepSeek V4 Pro manual content-review EvaluationRecord" in (
+            currentness_doc
+        )
+        assert "manual content review remains" not in currentness_doc
+        assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
 def test_authority_docs_preserve_scaffold_boundaries():
     readme = (ROOT / "README.md").read_text()
     lifecycle = (ROOT / "docs" / "research-lifecycle.md").read_text()
@@ -2141,7 +2248,8 @@ def test_lab_cards_match_current_live_pilot_posture_without_stale_fixture_langua
         "DeepSeek V4 Pro",
         "narrower output contract",
         "complete parseable JSON structurally",
-        "manual content review remains pending for Goal 7F",
+        "one DeepSeek V4 Pro manual content-review EvaluationRecord",
+        "manual content review passed for pilot 002 with caveats",
     ]:
         assert required in chunked_card
 

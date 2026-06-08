@@ -90,7 +90,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set
+scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord
 ```
 
 Proposed planning packets:
@@ -141,10 +141,11 @@ Goal 7E executed the admitted `chunked_source_grounding_live_pilot_002` one-call
 labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_002.json
 labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_002.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json
 labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_002.json
 ```
 
-The Pro run produced complete parseable JSON under the smaller output contract. It creates no protocol change, no synthesis feature, no graduation status, and no method-quality conclusion before manual content review.
+The Pro run produced complete parseable JSON under the smaller output contract. The manual content review passed with caveats: the artifact was content-reviewable and source-linked at a claim level, while segment refs remained broad and the narrowed contract limited broader abstraction. It creates no protocol change, no synthesis feature, no graduation status, and no method-quality conclusion beyond this proposal-only manual review.
 
 ---
 

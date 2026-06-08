@@ -1,0 +1,22 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_002_manual_content_review",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_002_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_live_pilot_002",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.82,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "missing_context",
+      "broad_segment_refs",
+      "limited_abstraction"
+    ],
+    "comments": "Manual content review only: inspected local ignored model output, prompt trace, provider response metadata, and source excerpt for source grounding, research usefulness, hallucination / unsupported claims, abstraction quality, negative-result value, comparison value against long_context_judgment_live_pilot_001, and comparison value against chunked_source_grounding_live_pilot_001. The artifact is content-reviewable: it is complete parseable JSON, the source-linked claims match the approved excerpt at a claim level, the unsupported-claim report does not add unsupported material, and the failure note correctly identifies the excerpt boundary. Caveats: segment refs are broad labels rather than canonical offsets, the narrowed contract intentionally gives limited broader judgment abstraction, and the zero unsupported-claim report is plausible for the narrow output but not proof of comprehensive hallucination filtering. Raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}
