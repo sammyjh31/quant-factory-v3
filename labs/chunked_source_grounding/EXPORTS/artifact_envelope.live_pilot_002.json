@@ -1,0 +1,112 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ArtifactEnvelope",
+  "schema_version": "0.1.2",
+  "artifact": {
+    "artifact_id": "chunked_source_grounding_live_pilot_002_artifact",
+    "artifact_type": "chunked_source_grounding_proposal",
+    "lab_id": "chunked_source_grounding",
+    "method_id": "chunked_source_grounding_live_pilot_002_method",
+    "run_id": "chunked_source_grounding_live_pilot_002_run",
+    "source_refs": [
+      "raw_corpora_sha256:d8392c58c3b740eb"
+    ],
+    "posture": {
+      "grounding_status": "source_linked",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "content_review_not_yet_completed",
+      "raw_output_local_only"
+    ],
+    "summary": "One admitted DeepSeek V4 Pro chunked/source-grounding live pilot produced complete parseable proposal-only JSON under the narrowed output contract. The committed record stores only hashes, counts, model/config metadata, and boundary notes.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "disabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/prompt_template.live_pilot_002.md",
+      "prompt_template_sha256": "0c0701f1474f806c60cb3dcac6ed43a54dd19088475033e84af5565fb48342f4",
+      "config_sha256": "a8a8daccf08254a827fd5d68203d41f56b25c295e14e4005f9671fd0bd46a9cb",
+      "source_metadata": {
+        "source_ref": "raw_corpora_sha256:d8392c58c3b740eb",
+        "source_scope": "same operator-approved ignored local trader education transcript excerpt used by long_context_judgment_live_pilot_001 and chunked_source_grounding_live_pilot_001",
+        "source_path_scope": "raw_corpora/trader_source_corpus/transcripts/how-to-use-market-profile-start-now-trading-tutorials.txt",
+        "source_file_sha256": "dca704a5010abf9b56498a325702c895fd6ab2ae7815b26021b20f8f89dcdd95",
+        "source_file_word_count": 8849,
+        "excerpt_sha256": "d8392c58c3b740eb87efd9488fd72da35ef3d09f6a4ee766a9816f672d9b03ee",
+        "excerpt_word_count": 650,
+        "raw_source_text_committed": false
+      },
+      "token_metadata": {
+        "prompt_tokens": 1392,
+        "completion_tokens": 521,
+        "total_tokens": 1913
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.00105879,
+        "estimated_cost_usd_upper_bound": 0.00105879,
+        "pricing_basis": "DeepSeek V4 Pro public cache-miss input and output rates checked against official docs on 2026-06-08; not billing authority."
+      },
+      "model_output_metadata": {
+        "raw_model_output_sha256": "908c602897119e02e900946dea0e9f3f6719b90583374252abbcee8740d2b600",
+        "raw_response_sha256": "38d86e0317887d638c6b2784e103a135dbb69cd7c7c542df314ae6001433ceec",
+        "parsed_json_success": true,
+        "finish_reason": "stop",
+        "model_output_truncated": false,
+        "expected_top_level_keys": [
+          "source_linked_claim_table",
+          "segment_span_support_notes",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "expected_top_level_keys_detected": [
+          "source_linked_claim_table",
+          "segment_span_support_notes",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "missing_expected_top_level_keys": [],
+        "parsed_output_counts": {
+          "source_linked_claim_table": 3,
+          "segment_span_support_notes": 2,
+          "unsupported_claim_report": 0,
+          "brief_method_failure_notes": 1
+        },
+        "sanitized_output_summary": "The model returned complete parseable JSON with all four expected narrowed-contract sections: three source-linked claim entries, two segment/span support notes, zero unsupported-claim reports, and one brief method-failure note. The raw model output is stored only in ignored local trace storage."
+      },
+      "trace_storage_boundary": {
+        "provider_request_trace": "provider_payloads/chunked_source_grounding_live_pilot_002/request.json",
+        "provider_response_trace": "provider_payloads/chunked_source_grounding_live_pilot_002/response.json",
+        "prompt_trace": "prompt_traces/chunked_source_grounding_live_pilot_002/prompt.txt",
+        "model_output_trace": "model_traces/chunked_source_grounding_live_pilot_002/model_output.txt",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "This record captures one admitted DeepSeek V4 Pro chunked/source-grounded live pilot call only.",
+        "The narrowed output contract produced complete parseable JSON in this run, but method quality and source-grounding quality still require manual content review.",
+        "Method quality, trading correctness, strategy value, product readiness, and source-truth authority were not evaluated by this boundary record.",
+        "Full output text remains in ignored local trace storage and is not a committed authority surface."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

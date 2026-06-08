@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_002_eval",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_002_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_v0",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: exactly one admitted DeepSeek V4 Pro model-call batch ran, thinking was disabled, tools were not used, the same source excerpt/hash and benchmark were used, raw source text and provider payloads stayed ignored, committed output is proposal-only, and method quality was not evaluated. The provider output was complete parseable JSON under the narrowed contract, and content review remains a separate Goal 7F task."
+  }
+}

@@ -90,7 +90,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one DeepSeek V4 Pro narrow-contract planning packet
+scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set
 ```
 
 Proposed planning packets:
@@ -107,7 +107,7 @@ chunked_source_grounding_live_pilot_001
 chunked_source_grounding_live_pilot_002
 ```
 
-The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence. The second packet plans a DeepSeek V4 Pro rerun with a smaller output contract.
+The proposed MethodCard and ExperimentCard planning records are not in `EXPORTS/`, are not imported by synthesis, and are not live-run evidence. The second packet defined the preflight scope for a DeepSeek V4 Pro rerun with a smaller output contract.
 
 Run admission update:
 
@@ -135,7 +135,16 @@ The Pro/narrow-contract planning packet lives at:
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/
 ```
 
-It defines `chunked_source_grounding_live_pilot_002` for a future separately authorized run. It creates no EXPORTS records, no protocol change, no synthesis feature, and no graduation status.
+Goal 7E executed the admitted `chunked_source_grounding_live_pilot_002` one-call scope and created one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set:
+
+```text
+labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_002.json
+labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_002.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002.json
+labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_002.json
+```
+
+The Pro run produced complete parseable JSON under the smaller output contract. It creates no protocol change, no synthesis feature, no graduation status, and no method-quality conclusion before manual content review.
 
 ---
 

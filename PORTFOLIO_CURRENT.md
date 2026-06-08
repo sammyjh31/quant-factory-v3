@@ -12,7 +12,7 @@ This file owns the current portfolio posture. It does not own lab results, metho
 
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
-The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set plus one manual content-review EvaluationRecord recorded under `labs/long_context_judgment/EXPORTS/`, and one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord recorded under `labs/chunked_source_grounding/EXPORTS/`.
+The scaffold baseline has been accepted. Milestone 2 now has one admitted tiny live LLM pilot export set plus one manual content-review EvaluationRecord recorded under `labs/long_context_judgment/EXPORTS/`, and one admitted proposal-only chunked/source-grounded live pilot export set, one failure-focused manual content-review EvaluationRecord, and one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set recorded under `labs/chunked_source_grounding/EXPORTS/`.
 
 The accepted scaffold contains:
 
@@ -47,7 +47,7 @@ The authorized run has produced one proposal-only live export set and one manual
 
 The chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_001`, which has now produced one proposal-only live export set and one failure-focused manual content-review EvaluationRecord. That review records a truncated-output / incomplete-JSON content-review failure for this admitted Flash run/config/output contract. It does not create validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
-The second chunked-source packet plans `chunked_source_grounding_live_pilot_002`, a DeepSeek V4 Pro rerun with a smaller output contract. Goal 7D is planning/admission only; it creates no live-run exports and does not change synthesis, protocol, graduation, product, strategy, validation, financial-advice, live-trading, or architecture status.
+The second chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_002`, a DeepSeek V4 Pro rerun with a smaller output contract. Goal 7E executed that admitted one-call scope and created one proposal-only live export set. It does not change protocol, graduation, product, strategy, validation, financial-advice, live-trading, or architecture status.
 
 ---
 
@@ -61,7 +61,7 @@ Active scaffold-origin labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_001`; one planning/admission packet for `chunked_source_grounding_live_pilot_002` using DeepSeek V4 Pro and a smaller output contract
+   - Current state: scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set and one failure-focused manual content-review EvaluationRecord for `chunked_source_grounding_live_pilot_001`; one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set for `chunked_source_grounding_live_pilot_002`
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -91,7 +91,7 @@ They exist to prove that labs can publish comparable records and that synthesis 
 
 The `long_context_judgment_live_pilot_001` planning packet, `chunked_source_grounding_live_pilot_001` planning packet, `chunked_source_grounding_live_pilot_002` planning packet, and their `run_admission_update.md` files are not evidence and are not synthesis exports.
 
-One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`, along with one manual content-review EvaluationRecord. One admitted proposal-only chunked/source-grounded live pilot export set now exists for `chunked_source_grounding_live_pilot_001`, along with one failure-focused manual content-review EvaluationRecord. These are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+One admitted tiny live LLM pilot export set now exists for `long_context_judgment_live_pilot_001`, along with one manual content-review EvaluationRecord. One admitted proposal-only chunked/source-grounded live pilot export set now exists for `chunked_source_grounding_live_pilot_001`, along with one failure-focused manual content-review EvaluationRecord. One admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set now exists for `chunked_source_grounding_live_pilot_002`. These are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 ---
 
@@ -153,13 +153,24 @@ labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_001.json
 
 The chunked live pilot reached the configured output-token cap before complete JSON parsing. The manual content review records this as a failure of the admitted Flash run/config/output contract, not a global method-quality conclusion.
 
-The DeepSeek V4 Pro narrowed-contract rerun is planned under:
+The DeepSeek V4 Pro narrowed-contract rerun was planned under:
 
 ```text
 labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/
 ```
 
-That packet contains proposed MethodCard and ExperimentCard records plus an admission update for `chunked_source_grounding_live_pilot_002`. It does not create EXPORTS records.
+That packet contains proposed MethodCard and ExperimentCard records plus an admission update for `chunked_source_grounding_live_pilot_002`.
+
+The DeepSeek V4 Pro proposal-only live export set is:
+
+```text
+labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_002.json
+labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_002.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002.json
+labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_002.json
+```
+
+The Pro narrowed-contract live pilot produced complete parseable JSON under the smaller output contract. This is a structural result only; manual content review remains a separate Goal 7F task.
 
 Future live LLM experiments must pass the admission checklist in:
 
