@@ -90,7 +90,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro source-span precision live pilot export set
+scaffold fixture exports plus one admitted proposal-only chunked/source-grounded live pilot export set plus one failure-focused manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set and one DeepSeek V4 Pro manual content-review EvaluationRecord, plus one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord
 ```
 
 Proposed planning packets:
@@ -162,9 +162,10 @@ labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_003.json
 labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_003.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003.json
 labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_003.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_manual_content_review.json
 ```
 
-The source-span precision run produced complete parseable JSON under the narrowed output contract and kept raw source, prompt, provider response, and model output in ignored local traces. It has only a manual boundary review so far; manual content review is still required before any method-quality conclusion.
+The source-span precision run produced complete parseable JSON under the narrowed output contract and kept raw source, prompt, provider response, and model output in ignored local traces. The manual content review passed with caveats: source-span precision improved relative to pilot 002, exact/approximate labels were warranted for the reviewed claims, and the artifact still lacks canonical offsets and broader abstraction. It creates no protocol change, no synthesis feature, no graduation status, and no method-quality conclusion beyond this proposal-only manual review.
 
 ---
 

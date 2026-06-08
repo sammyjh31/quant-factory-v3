@@ -15,6 +15,10 @@ Current records:
 - Pro pilot 002 produced complete parseable JSON structurally
 - `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json`: one DeepSeek V4 Pro manual content-review EvaluationRecord
 - manual content review passed for pilot 002 with caveats: source-linked at a claim level, broad segment refs, limited abstraction
+- `chunked_source_grounding_live_pilot_003`: proposal-only DeepSeek V4 Pro source-span precision live pilot
+- source-span precision pilot 003 produced complete parseable JSON structurally
+- `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_manual_content_review.json`: one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord
+- manual content review passed for pilot 003 with caveats: source-span precision improved, exact/approximate labels were warranted for reviewed claims, no canonical offsets, limited broader abstraction
 
 Current boundaries:
 

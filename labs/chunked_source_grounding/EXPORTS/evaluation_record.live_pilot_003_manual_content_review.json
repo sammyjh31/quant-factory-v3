@@ -1,0 +1,22 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_003_manual_content_review",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_003_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_live_pilot_003",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.88,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "source_span_precision_improved",
+      "content_review_passed_with_caveats",
+      "limited_abstraction"
+    ],
+    "comments": "Manual content review only: inspected local ignored model output, prompt trace, provider response metadata, and source excerpt for source grounding, source-span precision, whether exact/approximate labels are warranted, research usefulness, hallucination / unsupported claims, abstraction quality, negative-result value, comparison value against long_context_judgment_live_pilot_001, comparison value against chunked_source_grounding_live_pilot_001, and comparison value against chunked_source_grounding_live_pilot_002. The artifact is content-reviewable: it is complete parseable JSON, source-span precision improved relative to chunked_source_grounding_live_pilot_002, exact labels are supported by direct source phrasing, approximate labels are honestly marked where the hint omits the full subject, and no unsupported-claim report was needed for the narrow claims reviewed. Caveats: it still lacks canonical offsets, the contract keeps limited broader judgment abstraction, and the support labels remain proposal-only review findings rather than validation. Raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}
