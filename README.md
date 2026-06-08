@@ -78,12 +78,12 @@ quantfactory-v3-federation/
   tests/
 ```
 
-Only two installable packages exist in milestone one:
+Only two installable shared packages exist today:
 
 * `qf_v3_protocol`
 * `qf_v3_synthesis`
 
-Labs are intentionally not installable packages yet. They are isolated research workspaces that export fixture records through the protocol.
+Labs are intentionally not installable packages yet. They are isolated research workspaces that export protocol-valid export records appropriate to their current phase.
 
 ---
 
@@ -91,9 +91,13 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 Current phase: `milestone-2-live-pilot-recorded`
 
-The scaffold baseline is accepted. Milestone 2 now has one admitted tiny live LLM pilot export set recorded under `labs/long_context_judgment/EXPORTS/`, plus one admitted proposal-only chunked/source-grounded live pilot export set, one failure-focused manual content-review EvaluationRecord, one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set, one DeepSeek V4 Pro manual content-review EvaluationRecord, one admitted DeepSeek V4 Pro source-span precision live pilot export set, one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord, one admitted DeepSeek V4 Pro second-source source-span precision live pilot export set, and one DeepSeek V4 Pro second-source source-span precision manual content-review EvaluationRecord recorded under `labs/chunked_source_grounding/EXPORTS/`.
+The scaffold baseline is accepted. Milestone 2 now has proposal-only live LLM pilot export records and manual reviews under `labs/long_context_judgment/EXPORTS/` and `labs/chunked_source_grounding/EXPORTS/`.
 
-The live export set is proposal-only. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+Detailed pilot-level evidence lives in protocol export records and lab-local comparison notes. Current portfolio posture is routed through `PORTFOLIO_CURRENT.md`, `LAB_REGISTRY.md`, and the active lab cards.
+
+The active comparison thread includes source-span precision and a second-source repeat, but the README does not own that evidence.
+
+The live records are proposal-only. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 Milestone one was not a limitation on V3’s ambition. It created the first safety and comparison harness.
 
@@ -108,19 +112,9 @@ The accepted scaffold contains:
 * currentness docs,
 * and tests proving the scaffold boundaries.
 
-Current live-pilot planning packets live under:
+Live-pilot planning packets remain under each lab's `PLANNING/` directory. Planning packets are not in `EXPORTS/`, are not imported by synthesis, and are not research evidence.
 
-```text
-labs/long_context_judgment/PLANNING/live_llm_pilot_001/
-labs/chunked_source_grounding/PLANNING/live_llm_pilot_001/
-labs/chunked_source_grounding/PLANNING/live_llm_pilot_002/
-labs/chunked_source_grounding/PLANNING/live_llm_pilot_003/
-labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/
-```
-
-The first packet includes `run_admission_update.md`, which authorized exactly one tiny live LLM pilot run under the stated scope. The first chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_001`, which has now produced proposal-only export records and a failure-focused manual content-review EvaluationRecord. The second chunked-source packet defined the preflight scope for `chunked_source_grounding_live_pilot_002`, which has now produced one admitted DeepSeek V4 Pro chunked/source-grounded live pilot export set under the smaller output contract and one DeepSeek V4 Pro manual content-review EvaluationRecord at `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json`. The third chunked-source packet defined the source-span precision scope for `chunked_source_grounding_live_pilot_003`, which has now produced one admitted DeepSeek V4 Pro source-span precision live pilot export set and one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord at `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_manual_content_review.json`. The fourth chunked-source packet defined the second-source source-span precision scope for `chunked_source_grounding_live_pilot_004`, which has now produced one admitted DeepSeek V4 Pro second-source source-span precision live pilot export set and one DeepSeek V4 Pro second-source source-span precision manual content-review EvaluationRecord at `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_004_manual_content_review.json`. Planning packets are not in `EXPORTS/`, are not imported by synthesis, and are not research evidence.
-
-The purpose of these live pilots is to prove that real model calls can be recorded, evaluated at the boundary, compared later, and contained without turning output into truth.
+The purpose of these live pilots is to prove that real model calls can be recorded, evaluated at the boundary, compared, and contained without turning output into truth.
 
 See:
 

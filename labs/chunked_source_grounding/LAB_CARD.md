@@ -4,29 +4,27 @@ Status: active live-pilot lab
 
 This lab explores chunked source-span readers for messy trader educational text.
 
-Current records:
+## Current Evidence State
 
-- scaffold fixture exports for protocol shape only
-- `chunked_source_grounding_live_pilot_001`: proposal-only DeepSeek V4 Flash live pilot on `text_judgment_v0`
-- Flash pilot 001 records a bounded negative result: truncated output, incomplete JSON, and output contract too large
-- manual boundary review passed for pilot 001
-- manual content review failed for pilot 001 with score 0.2
-- `chunked_source_grounding_live_pilot_002`: proposal-only DeepSeek V4 Pro live pilot with a narrower output contract
-- Pro pilot 002 produced complete parseable JSON structurally
-- `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json`: one DeepSeek V4 Pro manual content-review EvaluationRecord
-- manual content review passed for pilot 002 with caveats: source-linked at a claim level, broad segment refs, limited abstraction
-- `chunked_source_grounding_live_pilot_003`: proposal-only DeepSeek V4 Pro source-span precision live pilot
-- source-span precision pilot 003 produced complete parseable JSON structurally
-- `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_manual_content_review.json`: one DeepSeek V4 Pro source-span precision manual content-review EvaluationRecord
-- manual content review passed for pilot 003 with caveats: source-span precision improved, exact/approximate labels were warranted for reviewed claims, no canonical offsets, limited broader abstraction
-- `chunked_source_grounding_live_pilot_004`: one admitted DeepSeek V4 Pro second-source source-span precision live pilot export set
-- `labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/`: admission scope for pilot 004
-- pilot 004 produced complete parseable JSON structurally
-- `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_004.json`: one DeepSeek V4 Pro second-source source-span precision manual boundary-review EvaluationRecord
-- `labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_004_manual_content_review.json`: one DeepSeek V4 Pro second-source source-span precision manual content-review EvaluationRecord
-- manual content review passed for pilot 004 with caveats: source-span precision repeated on a second source excerpt, exact/approximate labels were warranted for reviewed claims, broad segment refs remain, no canonical offsets, limited broader abstraction
+- scaffold fixture exports exist for protocol shape only
+- proposal-only live export records and manual reviews exist under `EXPORTS/`
+- one bounded negative result showed that an oversized Flash output contract can truncate before content review
+- narrowed Pro source-grounding runs produced complete parseable artifacts under proposal-only boundaries
+- the source-span precision repeat generalized to a second-source excerpt with caveats
 
-Current boundaries:
+current details live in protocol export records and the comparison note:
+
+```text
+labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
+```
+
+## Current Active Research Thread
+
+The active thread is source-span precision repeatability: whether chunked/source-grounded methods can preserve inspectable source support across multiple messy trader excerpts while retaining enough abstraction to be useful.
+
+The current comparison note records the second-source source-span precision repeat as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
+
+## Current Boundaries
 
 - live outputs are proposal-only, not source truth
 - no validation, product authority, strategy evidence, financial advice, live-trading authority, graduation, or architecture

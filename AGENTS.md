@@ -225,7 +225,7 @@ Use:
 * `README.md` for project purpose and commands.
 * `PORTFOLIO_CURRENT.md` for active protocol version, active labs, active benchmark packs, and current scaffold status.
 * `PROTOCOL_CURRENT.md` for protocol version and schema inventory.
-* `LAB_REGISTRY.md` for lab ids, parent questions, and fixture-export status.
+* `LAB_REGISTRY.md` for lab ids, parent questions, and phase-appropriate export status.
 * `GRADUATION_LEDGER.md` for graduation status only.
 
 Do not duplicate generated synthesis metrics into currentness docs.
