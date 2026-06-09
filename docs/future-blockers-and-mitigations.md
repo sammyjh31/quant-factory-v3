@@ -1,6 +1,6 @@
 # Future Blockers And Mitigations
 
-This document names likely V3 failure modes before they occur.
+This document names likely V3 failure modes before they create repo drift.
 
 ---
 
@@ -15,7 +15,7 @@ The scaffold passes tests but teaches nothing.
 Mitigation:
 
 ```text
-Milestone two should run one tiny live LLM pilot, not ten labs.
+Use the admission gate, proposal-only exports, manual reviews, and comparison notes to turn bounded live runs into reviewable records instead of vague progress claims.
 ```
 
 ---
