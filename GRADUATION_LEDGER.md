@@ -1,11 +1,11 @@
 # Graduation Ledger
 
 Status: portfolio graduation authority  
-Current phase: `milestone-2-live-pilot-recorded`
+Current phase: `milestone-3-method-comparison-recorded`
 
 No methods, labs, schemas, artifacts, product surfaces, research claims, evaluators, or architectures have graduated.
 
-Planning packets, run admission updates, proposal-only live export sets, manual reviews, comparison notes, and research plans do not affect graduation status by themselves.
+Planning packets, run admission updates, proposal-only live export sets, manual reviews, comparison notes, strict reviews, locator-thread decision reviews, and research plans do not affect graduation status by themselves.
 
 ---
 
