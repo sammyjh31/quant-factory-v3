@@ -1,7 +1,7 @@
 # Live LLM Experiment Admission
 
 Status: live LLM experiment guardrail
-Current phase: `milestone-3-method-comparison-recorded`
+Current phase: `milestone-4-first-graduation-candidate`
 
 No live LLM experiment may run until it has satisfied this checklist.
 

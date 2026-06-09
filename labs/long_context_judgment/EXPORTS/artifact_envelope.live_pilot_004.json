@@ -1,0 +1,146 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ArtifactEnvelope",
+  "artifact": {
+    "artifact_id": "long_context_judgment_live_pilot_004_artifact",
+    "artifact_type": "grounded_long_context_judgment_proposal",
+    "lab_id": "long_context_judgment",
+    "method_id": "long_context_judgment_live_pilot_004_method",
+    "run_id": "long_context_judgment_live_pilot_004_run",
+    "source_refs": [
+      "raw_corpora_sha256:9f9e143429f5842a"
+    ],
+    "posture": {
+      "grounding_status": "source_linked",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "entry_caps_exceeded_nine_claims_against_four_allowed",
+      "flat_locator_confidence_calibration",
+      "raw_output_local_only"
+    ],
+    "summary": "One admitted DeepSeek V4 Pro thinking-enabled grounded long-context call completed naturally (finish_reason=stop) with reasoning headroom. The output parsed as complete JSON: three judgment principle proposals, nine source-linked claims, nine line-range locator candidates, zero unsupported-claim entries, two method-failure notes. The model exceeded the at-most-four entry cap for claims and locators. Strict review found eight of nine line ranges support-valid with five overclaimed exact labels.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "enabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/long_context_judgment/PLANNING/live_llm_pilot_004/prompt_template.live_pilot_004.md",
+      "prompt_template_sha256": "162b8ab50f960183776d48ff4d2032fb7d022a1e537137d247f8d0bd8c409c5e",
+      "config_sha256": "3e90c8b504372ad6e23be3258ad1c06a243cf60bec54de521c1cd332ffca4243",
+      "source_metadata": {
+        "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+        "source_scope": "operator-approved second-source excerpt from the local pharm box-trades transcript, same as pilots 002/003 and chunked 004-006",
+        "source_path_scope": "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "source_origin_scope": "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt",
+        "source_file_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "source_file_word_count": 945,
+        "source_file_line_count": 140,
+        "raw_source_text_committed": false
+      },
+      "token_metadata": {
+        "prompt_tokens": 2109,
+        "completion_tokens": 7584,
+        "reasoning_tokens": 4696,
+        "content_tokens": 2888,
+        "total_tokens": 9693
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.009693,
+        "estimated_cost_usd_upper_bound": 0.009693,
+        "pricing_basis": "Conservative metadata-safe upper bound of $1 per million total tokens for budget containment; not billing authority."
+      },
+      "model_output_metadata": {
+        "artifact_type": "grounded_long_context_judgment_proposal",
+        "raw_model_output_sha256": "6637286fe6307b8bb2a21da0734773e023dd0260d648004b938de31eb33d6f1c",
+        "raw_response_sha256": "920df68760190a4b61b491636680020a5d97d2f6214f5dbd2d494e8d29ee4213",
+        "raw_request_sha256": "05c1dd1e7e7c684c8f4c9e8be647bc79553fe2952726b37468804918db5baa9f",
+        "prompt_trace_sha256": "928ca8a4ce8c8e05aa567aca7b335f3207cafee79e445f482c9957457b7cd79c",
+        "model_call_succeeded": true,
+        "parsed_json_success": true,
+        "parse_error": null,
+        "finish_reason": "stop",
+        "model_output_truncated": false,
+        "expected_top_level_keys": [
+          "judgment_principle_proposals",
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "emitted_top_level_keys": [
+          "judgment_principle_proposals",
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "section_counts": {
+          "judgment_principle_proposals": 3,
+          "source_linked_claim_table": 9,
+          "line_range_locator_candidate_table": 9,
+          "unsupported_claim_report": 0,
+          "brief_method_failure_notes": 2
+        },
+        "entry_cap_violations": {
+          "source_linked_claim_table": "9 emitted against an at-most-4 cap",
+          "line_range_locator_candidate_table": "9 emitted against the one-per-claim rule applied to an at-most-4 claim table"
+        },
+        "model_emitted_locator_label_counts": {
+          "exact": 8,
+          "approximate": 1
+        },
+        "model_asked_to_emit_character_offsets": false,
+        "model_asked_to_emit_quote_hashes": false,
+        "model_emitted_disallowed_locator_fields": [],
+        "model_emitted_disallowed_fields_ignored": false
+      },
+      "local_postprocessing_metadata": {
+        "line_range_validation_completed": true,
+        "emitted_line_range_count": 9,
+        "emitted_line_range_support_valid_count": 8,
+        "character_offset_computation_attempted": true,
+        "quote_hash_computation_attempted": true,
+        "computed_character_offset_count": 9,
+        "computed_quote_hash_count": 9,
+        "offsets_and_hashes_computed_only_for": "the eight accepted model-emitted ranges plus the reviewer-corrected range for the rejected candidate"
+      },
+      "trace_storage_boundary": {
+        "provider_request_trace": "provider_payloads/long_context_judgment_live_pilot_004/request.json",
+        "provider_response_trace": "provider_payloads/long_context_judgment_live_pilot_004/response.json",
+        "prompt_trace": "prompt_traces/long_context_judgment_live_pilot_004/prompt.txt",
+        "model_output_trace": "model_traces/long_context_judgment_live_pilot_004/model_output.txt",
+        "reasoning_trace": "model_traces/long_context_judgment_live_pilot_004/reasoning_content.txt",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "This record captures one admitted thinking-enabled grounded long-context call only.",
+        "The model exceeded the at-most-four entry caps for claims and locators (nine each); completeness was favored over contract adherence under thinking mode.",
+        "All locator confidences were emitted as 1.0 or 0.9 with no calibration spread; strict review demoted five exact labels to approximate.",
+        "The zero-entry unsupported-claim report is not comprehensive hallucination filtering.",
+        "Method quality, trading correctness, strategy value, product readiness, and source-truth authority were not evaluated by this boundary record.",
+        "Full output and reasoning text remain in ignored local trace storage and are not committed authority surfaces."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

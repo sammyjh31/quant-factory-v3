@@ -1,0 +1,46 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ResearchNote",
+  "research_note": {
+    "note_id": "long_context_judgment_live_pilot_004_note",
+    "lab_id": "long_context_judgment",
+    "experiment_ids": [
+      "long_context_judgment_live_pilot_004"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "With thinking enabled and a reasoning-aware 12000-token cap, the grounded long-context contract completed naturally and answered the pilot 002 question positively: locator support validity recovered from 0/4 to 8/9 while abstraction breadth grew to three conditional principles over nine faithful claims. Residual weaknesses are entry-cap adherence, flat confidence calibration, and one off-by-one locator.",
+    "what_worked": [
+      "Reasoning headroom converted the grounded long-context contract from structurally failing (pilots 002/003) to complete and naturally finished.",
+      "Locator pointing recovered to 8/9 support-valid at finer claim granularity than pilot 006's 3/3 on the same source.",
+      "Abstraction quality held while breadth improved: three principles with preserved conditionality, supported-claim citations, and self-declared limitations.",
+      "The model's own method-failure notes identified real source pathologies (repeated transcript lines, mid-sentence excerpt ending) confirmed independently by strict review.",
+      "One accepted span (SLC-001, lines 12-18) reproduced pilot 006's accepted span byte-for-byte, giving cross-pilot locator consistency."
+    ],
+    "what_failed": [
+      "Entry caps were ignored: nine claims and locators against an at-most-four contract; thinking mode favored completeness over contract adherence.",
+      "Locator confidence calibration is unusable: near-flat 1.0 values while strict review demoted five exact labels to approximate.",
+      "One locator missed by one line (the look-below-and-fail symmetry claim), showing exact boundary emission is still imperfect.",
+      "The zero-entry unsupported-claim report cannot be distinguished from an unexamined one."
+    ],
+    "negative_results": [
+      "The pilot 002 cap-pressure confound is resolved in the practical sense: with headroom and thinking, single-pass grounded long-context works; the earlier locator collapse was a budget phenomenon, not an inherent single-pass limit on this excerpt.",
+      "Pilot 003's empty-content lesson stands: the gains here required the reasoning-aware cap."
+    ],
+    "reusable_by_other_labs": [
+      "Thinking-enabled runs need caps sized for reasoning plus contract; record reasoning and content tokens separately.",
+      "Treat emitted locator confidence as decoration until calibration is demonstrated; strict review labels are the usable signal.",
+      "Entry caps in prompt contracts are soft constraints under thinking mode; enforce them in local validation rather than relying on the model.",
+      "Line-range-first plus local offset/hash computation transferred cleanly from the chunked lab to the long-context lab, supporting the method lesson's cross-method generality."
+    ],
+    "do_not_repeat": [
+      "Do not treat 8/9 on one excerpt as repeated evidence; this is one run on one source in one lab.",
+      "Do not use emitted confidence values as acceptance criteria.",
+      "Do not relax local entry-cap validation because content quality was high this time.",
+      "Do not copy raw source text, raw model output, reasoning traces, provider payloads, or prompt traces into committed records or currentness docs."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

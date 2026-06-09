@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "EvaluationRecord",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_003_eval",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_003_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_live_pilot_003",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: one admitted DeepSeek V4 Pro call was made with thinking enabled per the Goal 14A admission update, stream=false, no tools, no model substitution, no retry, and the approved source hash. The provider counted reasoning tokens against the 4000-token cap and returned empty content; per the locked run scope no retry was made because the call produced output. Spend stayed far below the $3 cap. Raw source text, provider payloads, prompt traces, model traces, reasoning traces, and secrets are not committed. The empty-content outcome is recorded honestly as a bounded negative; method quality was not evaluated by this boundary record."
+  }
+}

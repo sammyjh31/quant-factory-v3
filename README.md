@@ -89,7 +89,7 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 ## Current Phase
 
-Current phase: `milestone-3-method-comparison-recorded`
+Current phase: `milestone-4-first-graduation-candidate`
 
 The scaffold baseline is accepted, and the portfolio has moved from isolated live-pilot recording into method-comparison work. README owns the project purpose, commands, and routing. It does not own pilot-level evidence or method conclusions.
 

@@ -1,0 +1,24 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_004_strict_line_range_review",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_004_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_strict_line_range_pilot_004",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.8,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "line_ranges_mostly_support_valid",
+      "overclaimed_exactness",
+      "flat_confidence_calibration",
+      "one_off_by_one_miss",
+      "locator_recovery_vs_pilot_002_confirmed"
+    ],
+    "comments": "Manual strict line-range review reusing the pilot 006 rubric: inspected the committed pilot 004 artifact, the ignored local source excerpt (140 lines), and the ignored local model output trace. Counts: reviewed_line_range_candidate_count=9; line_range_support_valid_count=8; exact_count_model=8; approximate_count_model=1; strict_exact_count=3; strict_approximate_count=5 (accepted with boundary imprecision); strict_invalid_count=1; overclaimed_exactness_count=5. Accepted locators (offsets and quote hashes computed locally from accepted full-line spans only): SLC-001 range=12-18 offsets=478-709 sha=fc261f465e11a6f6d5e65f9675fb1fc30b5c56d79fe019f5e2b8b12f6c00595f strict_label=exact (matches the pilot 006 accepted span byte-for-byte, independent cross-pilot consistency); SLC-002 range=19-30 offsets=709-1215 sha=23984c0f7fd85d7d92c7c61748ec5cc9466aa4b591e49f4e869bd04ab1beacfd strict_label=exact; SLC-003 range=33-43 offsets=1285-1730 sha=72a787a6d2d3bc56d1633d95bc369f899523f8fc78a1bf1569c213efd1146560 strict_label=exact; SLC-004 range=45-86 offsets=1759-3343 sha=6047c2f3733d0524b440ea7ff94ed911e8da54e5b76e93b37d5ff2c611245c9e strict_label=approximate as the model itself labeled, honest for a distributed multi-element claim; SLC-006 range=89-99 offsets=3392-3728 sha=c5af62692c34527b1b695bc212ad1868d71c5b2b6928fe48a7b87e54f7c3b1ab strict_label=approximate (one extraneous leading line, misses the weak-move tail); SLC-007 range=100-107 offsets=3728-3990 sha=1804036d64efbf258b0aff5f2c2802c9ec7ccaa5509183735600f4f45ce81014 strict_label=approximate (clips the assessment predicate's object); SLC-008 range=108-127 offsets=3990-4630 sha=6584eb09190bc0590930cedbf1b5f3dfb04fe846f0f5728b3fe61aa3c03e0ead strict_label=approximate (extraneous lead-in, misses the chopped-up tail); SLC-009 range=128-137 offsets=4630-4905 sha=c6a08c9a0e7e386fe3b2b9e2c1cf081cb477ff2596b165de22ad958648d79b03 strict_label=approximate (misses the closing why-questions). Rejected: SLC-005 model_range=87-88 model_label=exact confidence=1.0 strict_label=missing support_valid=false reason=off-by-one, the look-below-and-fail mention is on line 89; reviewer-corrected range=88-89 offsets=3367-3414 sha=dbe343b36c95e4bbd98357bbd33a8ca6bf6988cb43347d7987a990eaf995aefe. Comparison value: locator support validity recovered from pilot 002's 0/4 to 8/9 with thinking enabled and reasoning headroom, at finer claim granularity than pilot 006's 3/3, on the same source under the same rubric. Confidence calibration is the remaining weakness: near-flat 1.0 confidences with five demotions means emitted confidence is not yet a usable review signal. raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "MethodCard",
+  "schema_version": "0.1.2",
+  "method_card": {
+    "method_id": "long_context_judgment_live_pilot_004_method",
+    "lab_id": "long_context_judgment",
+    "parent_question": "How can long-context LLM methods extract reusable trading judgment from messy trader text?",
+    "method_family": "grounded_long_context_llm_reader_proposed",
+    "intended_inputs": [
+      "same selected second-source excerpt as pilots 002/003 and chunked 004-006",
+      "metadata-safe source hash and source ref for the selected excerpt",
+      "metadata-safe benchmark pack text_judgment_v0",
+      "the pilots 002/003 grounded contract unchanged, with a 12000-token output cap sized for reasoning plus contract",
+      "DeepSeek V4 Pro with thinking enabled by operator direction",
+      "pre-recorded prompt and model configuration metadata"
+    ],
+    "intended_outputs": [
+      "grounded_long_context_judgment_proposal",
+      "judgment principle proposals with supporting claim references",
+      "source-linked claim table",
+      "line-range locator candidates",
+      "locator confidence labels",
+      "character offsets after line-range validation",
+      "locally computed quote hashes from validated spans",
+      "unsupported-claim report",
+      "brief method-failure notes"
+    ],
+    "known_risks": [
+      "This is a proposed live LLM pilot planning record, not a completed run.",
+      "Reasoning may still consume the cap; 12000 is sized from the pilot 003 trace but is not guaranteed.",
+      "The model may repeat pilot 002's grounded-but-mislocated failure even with reasoning headroom.",
+      "The model must not emit character offsets or quote hashes; local review computes them only after line-range validation.",
+      "Prompt or trace handling may accidentally include raw source material if the privacy boundary is not followed."
+    ],
+    "non_goals": [
+      "not a completed run",
+      "not research evidence",
+      "not a synthesis export",
+      "not a replacement for the chunked_source_grounding method family",
+      "not strategy validation",
+      "not product authority",
+      "not architecture or graduation evidence"
+    ]
+  }
+}

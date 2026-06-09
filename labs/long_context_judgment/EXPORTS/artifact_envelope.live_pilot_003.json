@@ -1,0 +1,114 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ArtifactEnvelope",
+  "artifact": {
+    "artifact_id": "long_context_judgment_live_pilot_003_artifact",
+    "artifact_type": "grounded_long_context_judgment_proposal",
+    "lab_id": "long_context_judgment",
+    "method_id": "long_context_judgment_live_pilot_003_method",
+    "run_id": "long_context_judgment_live_pilot_003_run",
+    "source_refs": [
+      "raw_corpora_sha256:9f9e143429f5842a"
+    ],
+    "posture": {
+      "grounding_status": "ungrounded",
+      "review_status": "self_checked",
+      "readiness_status": "raw",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "empty_content_reasoning_consumed_entire_output_cap",
+      "no_reviewable_artifact_content",
+      "raw_output_local_only"
+    ],
+    "summary": "Bounded negative result: the first thinking-enabled run in the portfolio returned zero content tokens. The provider counts reasoning tokens against max_tokens; the model's reasoning alone consumed the entire 4000-token cap (finish_reason=length, reasoning_tokens=4000, content empty). The local reasoning trace shows on-task drafting of the full contract, including line-range estimation, cut off before emission. The lesson is budget sizing for thinking-enabled contracts, not method failure.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "enabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/long_context_judgment/PLANNING/live_llm_pilot_003/prompt_template.live_pilot_003.md",
+      "prompt_template_sha256": "1ad7a5625086b952cc4f10de0c2dae10281293d6e162a8a9f13c9c0d80db393a",
+      "config_sha256": "9b1194ff8121ba8dbdb2afcab0c58b7b54aa5e566ef352fad160a8903745d1b9",
+      "source_metadata": {
+        "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+        "source_scope": "operator-approved second-source excerpt from the local pharm box-trades transcript, same as pilots 002 and chunked 004-006",
+        "source_path_scope": "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "source_origin_scope": "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt",
+        "source_file_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "source_file_word_count": 945,
+        "source_file_line_count": 140,
+        "raw_source_text_committed": false
+      },
+      "token_metadata": {
+        "prompt_tokens": 2109,
+        "completion_tokens": 4000,
+        "reasoning_tokens": 4000,
+        "content_tokens": 0,
+        "total_tokens": 6109
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.006109,
+        "estimated_cost_usd_upper_bound": 0.006109,
+        "pricing_basis": "Conservative metadata-safe upper bound of $1 per million total tokens for budget containment; not billing authority."
+      },
+      "model_output_metadata": {
+        "artifact_type": "grounded_long_context_judgment_proposal",
+        "raw_model_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw_model_output_is_empty_string": true,
+        "reasoning_content_present_in_local_trace": true,
+        "reasoning_content_chars_local_trace": 15904,
+        "raw_response_sha256": "4a532a098f4f176e9ed24f95f931082bc549f5da8dc419e7dddc4b9576a14293",
+        "raw_request_sha256": "9d128522c47ae15fd448a32f950ac0f4ca8ad251111234fc650e4a2bf45d4ab4",
+        "prompt_trace_sha256": "61304e4275eed9e020326bec71800fd528c9eeb90ced5ac5f5418dc11e09666c",
+        "model_call_succeeded": true,
+        "parsed_json_success": false,
+        "parse_error": "content empty: provider counted 4000 reasoning tokens against max_tokens and emitted zero content tokens",
+        "finish_reason": "length",
+        "model_output_truncated": true,
+        "model_asked_to_emit_character_offsets": false,
+        "model_asked_to_emit_quote_hashes": false
+      },
+      "local_postprocessing_metadata": {
+        "line_range_validation_completed": false,
+        "character_offset_computation_attempted": false,
+        "quote_hash_computation_attempted": false,
+        "computed_character_offset_count": 0,
+        "computed_quote_hash_count": 0
+      },
+      "trace_storage_boundary": {
+        "provider_request_trace": "provider_payloads/long_context_judgment_live_pilot_003/request.json",
+        "provider_response_trace": "provider_payloads/long_context_judgment_live_pilot_003/response.json",
+        "prompt_trace": "prompt_traces/long_context_judgment_live_pilot_003/prompt.txt",
+        "model_output_trace": "model_traces/long_context_judgment_live_pilot_003/model_output.txt",
+        "reasoning_trace": "model_traces/long_context_judgment_live_pilot_003/reasoning_content.txt",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "First thinking-enabled run: the provider counts reasoning tokens against max_tokens, so a 4000-token cap left zero budget for content after reasoning.",
+        "The local reasoning trace shows on-task contract drafting including line-range estimation, cut before emission; this is a budget-sizing lesson, not evidence about locator quality.",
+        "No reviewable artifact content exists, so content review and strict line-range review record non-reviewability only.",
+        "Per the locked run scope no retry was made; a cap sized for reasoning plus contract requires a new admission packet.",
+        "Method quality, trading correctness, strategy value, product readiness, and source-truth authority were not evaluated."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

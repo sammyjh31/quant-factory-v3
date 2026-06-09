@@ -1,7 +1,7 @@
 # Graduation Ledger
 
 Status: portfolio graduation authority  
-Current phase: `milestone-3-method-comparison-recorded`
+Current phase: `milestone-4-first-graduation-candidate`
 
 No methods, labs, schemas, artifacts, product surfaces, research claims, evaluators, or architectures have graduated.
 

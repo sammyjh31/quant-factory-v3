@@ -1,7 +1,7 @@
 # Portfolio Current
 
 Status: portfolio currentness router
-Current phase: `milestone-3-method-comparison-recorded`
+Current phase: `milestone-4-first-graduation-candidate`
 Protocol version: `qf-v3-protocol-0.1`
 
 This file owns the current portfolio posture. It routes agents to current evidence surfaces, but it does not own lab results, method success claims, generated synthesis claims, or graduation decisions.
@@ -13,6 +13,8 @@ This file owns the current portfolio posture. It routes agents to current eviden
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
 The scaffold baseline has been accepted, and the portfolio has moved into method-comparison work. Detailed pilot-level evidence lives in protocol export records and lab-local comparison notes.
+
+Milestone 4 goal, set by operator decision: take one method — line-range-first source grounding — through the full evidence ladder to an ADR-approved graduation decision, the first graduation question the portfolio has ever put to its own gates. The milestone ends with an explicit ADR that either graduates the method or records why it did not graduate. Evidence items on the path: a cap-relieved grounded long-context comparison, a thinking-enabled config repeat, and a third-source repeat. A negative or failed nomination still completes the milestone.
 
 The current local comparison note is:
 

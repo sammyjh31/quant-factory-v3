@@ -1,0 +1,39 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ResearchNote",
+  "research_note": {
+    "note_id": "long_context_judgment_live_pilot_003_note",
+    "lab_id": "long_context_judgment",
+    "experiment_ids": [
+      "long_context_judgment_live_pilot_003"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "Bounded negative: the portfolio's first thinking-enabled run returned empty content because the provider counts reasoning tokens against max_tokens and the model's reasoning alone consumed the 4000-token cap. The local reasoning trace shows on-task contract drafting cut before emission. The cap-confound question from pilot 002 remains open and moves to the next admission with a reasoning-aware cap.",
+    "what_worked": [
+      "Preflight, containment, trace boundaries, and no-retry discipline all held on a novel configuration.",
+      "The reasoning trace (local-only) demonstrates the model approaches the task sensibly under thinking mode, including explicit line-range estimation."
+    ],
+    "what_failed": [
+      "max_tokens=4000 was consumed entirely by reasoning (reasoning_tokens=4000, content_tokens=0, finish_reason=length).",
+      "No reviewable artifact was produced, so the pilot contributes no evidence about locator quality or abstraction quality."
+    ],
+    "negative_results": [
+      "DeepSeek V4 Pro thinking mode shares the max_tokens budget between reasoning and content; caps sized for content-only contracts produce empty artifacts.",
+      "A thinking-enabled grounded contract on this excerpt needs a cap well above 4000; the reasoning trace alone was about 4000 tokens and unfinished."
+    ],
+    "reusable_by_other_labs": [
+      "When enabling thinking on OpenAI-compatible providers, verify whether reasoning tokens count against max_tokens before sizing the cap.",
+      "Record reasoning_tokens and content_tokens separately in export metadata for thinking-enabled runs.",
+      "An empty-content completion still satisfies 'produced output' for no-retry purposes; plan caps so this cannot happen silently."
+    ],
+    "do_not_repeat": [
+      "Do not run thinking-enabled contracts with content-sized caps.",
+      "Do not treat an on-task reasoning trace as evidence of method quality; only emitted, reviewed artifacts count.",
+      "Do not copy raw reasoning traces into committed records or currentness docs."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

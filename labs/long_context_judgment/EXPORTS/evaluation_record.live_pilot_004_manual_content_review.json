@@ -1,0 +1,22 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_004_manual_content_review",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_004_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_live_pilot_004",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.84,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "entry_caps_exceeded",
+      "zero_count_unsupported_report_not_comprehensive",
+      "flat_confidence_calibration"
+    ],
+    "comments": "Manual content review of the abstraction half, performed against the complete parsed output and the local source excerpt. Abstraction quality matched or exceeded pilot 002 while covering more of the excerpt: three principles spanning the failed-breakout logic, the boundary-trading-plus-learning-discipline cluster, and box construction, each preserving conditional logic, citing supporting claim ids that genuinely support them, declaring abstraction confidence with spread (0.5-0.7), and self-stating limitations including an anecdotal-statistic caveat on the source's 90% remark. All nine source-linked claims were verified against the source and are faithful paraphrases; the two method-failure notes correctly identified real source pathologies (repeated transcript lines; the excerpt ending mid-sentence) that strict review independently confirmed affect locator boundaries. Caveats: the model emitted nine claims against an at-most-four cap, so contract adherence failed even though content quality held; the empty unsupported-claim report is plausible for this excerpt but a zero count is not comprehensive hallucination filtering; and locator confidence values were emitted nearly flat at 1.0, which the strict review contradicts. Compared with pilot 002, breadth improved (three principles vs two, nine claims vs four) without losing conditionality, which answers the abstraction half of the grounded long-context question positively for this configuration. This review judges research utility only. Raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

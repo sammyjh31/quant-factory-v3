@@ -1,7 +1,7 @@
 # Lab Registry
 
 Status: lab currentness router  
-Current phase: `milestone-3-method-comparison-recorded`
+Current phase: `milestone-4-first-graduation-candidate`
 
 This file lists labs, parent research questions, and phase-appropriate export status. It does not claim that any method works.
 

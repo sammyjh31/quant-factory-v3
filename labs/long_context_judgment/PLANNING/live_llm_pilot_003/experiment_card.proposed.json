@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "long_context_judgment_live_pilot_003",
+    "lab_id": "long_context_judgment",
+    "research_question": "With the output cap relieved and thinking enabled, can the grounded long-context contract produce support-valid line-range locators while preserving the abstraction quality pilot 002 demonstrated?",
+    "hypothesis": "On the same excerpt and unchanged contract, raising the output cap to 4000 tokens and enabling thinking removes the budget pressure recorded as a confound in pilot 002 and may specifically improve line-range pointing, which failed 0/4 under strict review while claim faithfulness and abstraction quality held.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "long_context_judgment_live_pilot_003_method"
+    ],
+    "evaluation_plan": "Validate the proposed cards against protocol schemas. After the separately authorized run, create proposal-only export records and evaluate with the same three evaluators as pilot 002: boundary review, content review of the abstraction half against pilots 001/002, and strict line-range review under the pilot 006 rubric with local offset and quote-hash computation only after line-range validation. Comparison value must be preserved against pilots 002 and chunked 006. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "grounded_long_context_judgment_proposal"
+    ]
+  }
+}

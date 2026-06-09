@@ -1,0 +1,22 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_003_manual_content_review",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_003_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_live_pilot_003",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.0,
+    "pass_fail": "fail",
+    "failure_tags": [
+      "not_content_reviewable",
+      "empty_content",
+      "reasoning_consumed_output_cap"
+    ],
+    "comments": "Content review attempted and recorded as not reviewable: the artifact content is an empty string because the provider counted 4000 reasoning tokens against max_tokens and emitted zero content tokens. Inspection of the ignored local reasoning trace shows on-task drafting of the grounded contract (principles, claims, and line-range estimation in progress) cut off before any emission, so the failure is budget sizing for thinking-enabled runs, not contract design or method quality. No strict line-range review was created because there are no locator candidates to review. The negative-result value is the configuration lesson: thinking-enabled runs must size max_tokens for reasoning plus the full contract, or disable thinking. raw source text and raw traces are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "EvaluationRecord",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_004_eval",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_004_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_live_pilot_004",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: one admitted DeepSeek V4 Pro call was made with thinking enabled per the Goal 14C admission update, stream=false, no tools, no model substitution, no retry, the approved source hash, and the 12000-token cap. The completion finished naturally (finish_reason=stop) with reasoning and content tokens recorded separately. The model emitted line ranges only and did not emit character offsets or quote hashes. The model exceeded the prompt's at-most-four entry caps for claims and locators; this is recorded as a contract-adherence deviation in the artifact and content reviews, not an admission-boundary violation, because the five approved sections and all containment rules held. Spend stayed far below the $3 cap. Raw source text, provider payloads, prompt traces, model traces, reasoning traces, and secrets are not committed. The output is proposal-only and method quality was not evaluated by this boundary record."
+  }
+}
