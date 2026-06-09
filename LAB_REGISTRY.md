@@ -95,7 +95,7 @@ Labs do not define portfolio architecture.
 
 ## Shared Code Rule
 
-Labs should not share lab-runtime code in milestone one.
+Shared lab-runtime code is not part of the current approved architecture.
 
 Shared code is limited to protocol validation and read-only synthesis.
 
