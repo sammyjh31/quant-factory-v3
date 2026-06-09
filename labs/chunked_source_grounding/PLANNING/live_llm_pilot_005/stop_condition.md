@@ -1,6 +1,7 @@
 # Chunked Source Grounding Live Pilot 005 Stop Condition
 
 Status: Goal 11B planning/admission record
+Historical status: pre-run admission record; current run status is owned by `labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_005.json`.
 
 Goal 11B stops after admission packet creation and verification.
 

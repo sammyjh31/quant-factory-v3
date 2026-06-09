@@ -1,6 +1,7 @@
 # Stop Condition
 
 Status: proposed planning document
+Historical status: pre-run admission record; current run status is owned by `labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json`.
 
 This is a proposed live LLM pilot planning record. It is not a completed run, not research evidence, and not a synthesis export.
 

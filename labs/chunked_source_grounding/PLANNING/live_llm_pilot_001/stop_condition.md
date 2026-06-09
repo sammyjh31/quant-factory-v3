@@ -1,6 +1,7 @@
 # Chunked Source Grounding Live Pilot 001 Stop Condition
 
 Status: Goal 7A planning/admission record
+Historical status: pre-run admission record; current run status is owned by `labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json`.
 
 Goal 7A stops after creating the planning/admission packet and validating the proposed MethodCard and ExperimentCard.
 
