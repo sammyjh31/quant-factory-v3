@@ -1,12 +1,17 @@
 # visual_deictic_understanding
 
-Status: scaffold lab fixture workspace
+Status: scaffold fixture exports only
 
 Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
 
-This lab contains scaffold fixture records only. It does not run live LLM calls, does not claim method success, and does not create real research evidence.
+This lab explores visual/deictic readers. It currently has only protocol fixtures.
 
-Fixture posture:
+Current records:
 
-- positive fixture: a method binds a deictic phrase to a frame/segment placeholder.
-- negative fixture: a method hallucinates or misaligns a chart object reference.
+- scaffold fixture exports for protocol shape only
+- no live visual/deictic pilot has been admitted or run yet
+
+Current boundaries:
+
+- future live visual/deictic runs require live LLM admission and an explicit execution instruction
+- no validation, product authority, strategy evidence, financial advice, live-trading authority, graduation, or architecture

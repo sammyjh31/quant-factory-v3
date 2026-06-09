@@ -1,12 +1,20 @@
 # long_context_judgment
 
-Status: scaffold lab fixture workspace
+Status: active live-pilot lab
 
 Parent question: How can long-context LLM methods extract reusable trading judgment from messy trader text?
 
-This lab contains scaffold fixture records only. It does not run live LLM calls, does not claim method success, and does not create real research evidence.
+This lab explores long-context LLM readers for messy trader educational text.
 
-Fixture posture:
+Current records:
 
-- positive fixture: a long-context method preserves teacher intent and produces a useful study candidate.
-- negative fixture: a long-context method over-abstracts and weakens exact source grounding.
+- scaffold fixture exports for protocol shape only
+- proposal-only live export records for `long_context_judgment_live_pilot_001`
+- manual boundary review passed
+- manual content review passed with caveats
+
+Current boundaries:
+
+- live output is proposal-only, not source truth
+- no validation, product authority, strategy evidence, financial advice, live-trading authority, graduation, or architecture
+- future live runs require live LLM admission and an explicit execution instruction

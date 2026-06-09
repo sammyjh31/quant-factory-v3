@@ -1,7 +1,7 @@
 [project]
 name = "qf-v3-synthesis"
 version = "0.1.0"
-description = "Read-only synthesis importer for QuantFactory V3 scaffold fixture records."
+description = "Read-only synthesis importer for QuantFactory V3 protocol export records."
 requires-python = ">=3.11"
 dependencies = ["qf-v3-protocol"]
 

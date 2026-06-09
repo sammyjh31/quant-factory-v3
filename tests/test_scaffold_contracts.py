@@ -4464,8 +4464,8 @@ def test_goal9e_currentness_docs_are_compressed_routers_not_ledgers():
     )
     assert (
         "Planning packets, run admission updates, proposal-only live export sets, "
-        "manual reviews, comparison notes, and research plans do not affect graduation "
-        "status by themselves."
+        "manual reviews, comparison notes, strict reviews, locator-thread decision "
+        "reviews, and research plans do not affect graduation status by themselves."
     ) in graduation
     assert "No graduated items." in graduation
 
@@ -5602,16 +5602,20 @@ def test_authority_docs_preserve_scaffold_boundaries():
     assert architecture_rule in readme
     assert architecture_rule in lifecycle
     assert "Future live experiments must pass" in readme
-    assert "Future labs may experiment" in llm_model
+    assert "## Candidate LLM Methods" in llm_model
+    assert "Labs may experiment" in llm_model
+    assert "Future labs may experiment" not in llm_model
     assert "Scaffold fixture records are not real research evidence." in portfolio
     assert "one tiny method-comparison loop on `text_judgment_v0`" in portfolio
     assert "live_pilot_method_comparison_001.md" in portfolio
     assert "## Active federation labs" in portfolio
     assert "Milestone-one active labs" not in portfolio
     assert "generated synthesis metrics" not in portfolio.lower()
-    assert "Current phase: `milestone-2-live-pilot-recorded`" in graduation
+    assert f"Current phase: `{CURRENT_PHASE}`" in graduation
+    assert "Current phase: `milestone-2-live-pilot-recorded`" not in graduation
     assert "Current milestone: `scaffold-v0.1`" not in graduation
-    assert "Current phase: `milestone-2-live-pilot-recorded`" in admission
+    assert f"Current phase: `{CURRENT_PHASE}`" in admission
+    assert "Current phase: `milestone-2-live-pilot-recorded`" not in admission
     assert "Current milestone: scaffold-v0.1" not in admission
     assert "No graduated items." in graduation
     assert "## Current Non-Graduation Rule" in graduation
@@ -5621,8 +5625,8 @@ def test_authority_docs_preserve_scaffold_boundaries():
     )
     assert (
         "Planning packets, run admission updates, proposal-only live export sets, "
-        "manual reviews, comparison notes, and research plans do not affect graduation "
-        "status by themselves."
+        "manual reviews, comparison notes, strict reviews, locator-thread decision "
+        "reviews, and research plans do not affect graduation status by themselves."
         in graduation
     )
     assert "first Goal 5 proposal-only live pilot export set" not in graduation
@@ -5857,6 +5861,40 @@ def test_lab_cards_match_current_live_pilot_posture_without_stale_fixture_langua
         "no validation, product authority, strategy evidence, financial advice, "
         "live-trading authority, graduation, or architecture"
     ) in visual_card
+
+
+def test_lab_readmes_and_package_metadata_match_current_phase_language():
+    synthesis_pyproject = (
+        ROOT / "packages" / "qf_v3_synthesis" / "pyproject.toml"
+    ).read_text()
+    long_context_readme = (
+        ROOT / "labs" / "long_context_judgment" / "README.md"
+    ).read_text()
+    chunked_readme = (
+        ROOT / "labs" / "chunked_source_grounding" / "README.md"
+    ).read_text()
+    visual_readme = (
+        ROOT / "labs" / "visual_deictic_understanding" / "README.md"
+    ).read_text()
+
+    assert "protocol export records" in synthesis_pyproject
+    assert "scaffold fixture records" not in synthesis_pyproject
+
+    for active_readme in [long_context_readme, chunked_readme]:
+        assert "Status: active live-pilot lab" in active_readme
+        assert "proposal-only live export records" in active_readme
+        assert "This lab contains scaffold fixture records only." not in active_readme
+        assert "It does not run live LLM calls" not in active_readme
+        assert "future live runs require live LLM admission" in active_readme
+        assert (
+            "no validation, product authority, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ) in active_readme
+
+    assert "Status: scaffold fixture exports only" in visual_readme
+    assert "no live visual/deictic pilot has been admitted or run yet" in visual_readme
+    assert "future live visual/deictic runs require live LLM admission" in visual_readme
+    assert "It does not run live LLM calls" not in visual_readme
 
 
 def test_agent_checklists_prevent_append_only_drift_and_random_experiments():
