@@ -1,7 +1,7 @@
 # Live LLM Experiment Admission
 
 Status: live LLM experiment guardrail
-Current phase: `milestone-2-live-pilot-recorded`
+Current phase: `milestone-3-method-comparison-recorded`
 
 No live LLM experiment may run until it has satisfied this checklist.
 
@@ -11,7 +11,7 @@ Passing this checklist does not mean the method works. It only means the experim
 
 ## Required Checklist
 
-A future live LLM experiment must define:
+A live LLM experiment must define:
 
 1. Active benchmark pack
 2. MethodCard
@@ -208,4 +208,4 @@ Outputs from this experiment are proposals until evaluated. They do not create s
 
 A later protocol version may replace this document with a formal LiveExperimentAdmission schema.
 
-This guardrail was introduced in scaffold v0.1. During milestone-2-live-pilot-recorded, this document remains the required admission boundary until a formal schema replaces it.
+This guardrail was introduced in scaffold v0.1 and remains the required admission boundary until a formal schema replaces it.
