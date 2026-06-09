@@ -7,7 +7,7 @@ from qf_v3_synthesis import synthesize_exports
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Import V3 scaffold lab exports read-only.")
+    parser = argparse.ArgumentParser(description="Import V3 protocol export records read-only.")
     parser.add_argument("--root", type=Path, default=Path.cwd(), help="Repository root.")
     args = parser.parse_args(argv)
     summary = synthesize_exports(root=args.root)
