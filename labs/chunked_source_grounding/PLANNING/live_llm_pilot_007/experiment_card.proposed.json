@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "chunked_source_grounding_live_pilot_007",
+    "lab_id": "chunked_source_grounding",
+    "research_question": "Does the line-range-first locator contract repeat on a third, messier source under the thinking-enabled configuration?",
+    "hypothesis": "The line-range-first lesson — model emits line ranges only, local tooling validates and computes offsets and quote hashes — is a method property rather than a source-two artifact, and will produce mostly support-valid locator candidates on a 950-word ASR-degraded volatility-regime teaching excerpt with thinking enabled and a reasoning-aware cap.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "chunked_source_grounding_live_pilot_007_method"
+    ],
+    "evaluation_plan": "Validate the proposed cards against protocol schemas. After the separately authorized run, create proposal-only export records and evaluate with boundary review and manual content review including the strict line-range review under the pilot 006 rubric, with local offsets and quote hashes computed only after line-range validation. Record reasoning and content tokens separately and entry-cap adherence explicitly. Comparison value must be preserved against chunked pilot 006 and long-context pilot 004. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "chunked_source_line_range_locator_candidate_proposal"
+    ]
+  }
+}

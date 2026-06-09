@@ -1,0 +1,138 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ArtifactEnvelope",
+  "artifact": {
+    "artifact_id": "chunked_source_grounding_live_pilot_007_artifact",
+    "artifact_type": "chunked_source_line_range_locator_candidate_proposal",
+    "lab_id": "chunked_source_grounding",
+    "method_id": "chunked_source_grounding_live_pilot_007_method",
+    "run_id": "chunked_source_grounding_live_pilot_007_run",
+    "source_refs": [
+      "raw_corpora_sha256:1d5e041e35b40b84"
+    ],
+    "posture": {
+      "grounding_status": "source_linked",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "raw_output_local_only"
+    ],
+    "summary": "One admitted DeepSeek V4 Pro thinking-enabled line-range-first locator call on the operator-authorized third source excerpt completed naturally with parseable compact JSON, three source-linked claims, three line-range locator candidates within entry caps, an empty unsupported-claim report, and one method-failure note about line-numbering stability. Strict line-range review found all three candidates support-valid with warranted exact labels.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "enabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/chunked_source_grounding/PLANNING/live_llm_pilot_007/prompt_template.live_pilot_007.md",
+      "prompt_template_sha256": "ad8f12fb0fa35015b99e88ed5667738e31f93308425f18f65c154c098b41c655",
+      "config_sha256": "3e90c8b504372ad6e23be3258ad1c06a243cf60bec54de521c1cd332ffca4243",
+      "source_metadata": {
+        "source_ref": "raw_corpora_sha256:1d5e041e35b40b84",
+        "source_scope": "operator-authorized third source excerpt: volatility-regime and tool-selection teaching segment from the trading-strategy-part-2 transcript, locally wrapped at 50 characters as part of the recorded selection procedure",
+        "source_path_scope": "raw_corpora/selected/third_source_line_range_001/source.txt",
+        "source_origin_scope": "raw_corpora/trader_source_corpus/transcripts/trading-strategy-part-2-tuesday-9th-december-2025-9-30pm-utc.txt",
+        "source_file_sha256": "1d5e041e35b40b84526e1353277667c21f9b5a822fc2d8bc47b22a91b5c1ea31",
+        "source_file_word_count": 950,
+        "source_file_line_count": 106,
+        "raw_source_text_committed": false,
+        "excerpt_sha256": "1d5e041e35b40b84526e1353277667c21f9b5a822fc2d8bc47b22a91b5c1ea31",
+        "excerpt_word_count": 950
+      },
+      "token_metadata": {
+        "prompt_tokens": 1869,
+        "completion_tokens": 3515,
+        "reasoning_tokens": 2823,
+        "content_tokens": 692,
+        "total_tokens": 5384
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.005384,
+        "estimated_cost_usd_upper_bound": 0.005384,
+        "pricing_basis": "Conservative metadata-safe upper bound of $1 per million total tokens for budget containment; not billing authority."
+      },
+      "model_output_metadata": {
+        "artifact_type": "chunked_source_line_range_locator_candidate_proposal",
+        "raw_model_output_sha256": "7bbd27bd526a88ff72a84d65352eb070c51f80532c94a2cebc459f258462fa1f",
+        "raw_response_sha256": "23e75101e098a19a113c0912d7fe45908a034c2476e04326e8101d217371b214",
+        "raw_request_sha256": "db4fb738bd295d28155acfca6c633dd7e5e62b161e916cce2981c35f4ea52a8e",
+        "prompt_trace_sha256": "8e1c818796404d5b648dbeeaab35484bb02ccb141758c8f9b1f81d0ca5e9f4ac",
+        "model_call_succeeded": true,
+        "parsed_json_success": true,
+        "parse_error": null,
+        "finish_reason": "stop",
+        "model_output_truncated": false,
+        "expected_top_level_keys": [
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "emitted_top_level_keys": [
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "section_counts": {
+          "source_linked_claim_table": 3,
+          "line_range_locator_candidate_table": 3,
+          "unsupported_claim_report": 0,
+          "brief_method_failure_notes": 1
+        },
+        "entry_cap_violations": {},
+        "model_emitted_locator_label_counts": {
+          "exact": 3
+        },
+        "model_asked_to_emit_character_offsets": false,
+        "model_asked_to_emit_quote_hashes": false,
+        "model_emitted_disallowed_locator_fields": [],
+        "model_emitted_disallowed_fields_ignored": false
+      },
+      "local_postprocessing_metadata": {
+        "line_range_validation_completed": true,
+        "emitted_line_range_count": 3,
+        "emitted_line_range_support_valid_count": 3,
+        "character_offset_computation_attempted": true,
+        "quote_hash_computation_attempted": true,
+        "computed_character_offset_count": 3,
+        "computed_quote_hash_count": 3,
+        "offsets_and_hashes_computed_only_for": "the three accepted model-emitted ranges after strict line-range validation"
+      },
+      "trace_storage_boundary": {
+        "provider_request_trace": "provider_payloads/chunked_source_grounding_live_pilot_007/request.json",
+        "provider_response_trace": "provider_payloads/chunked_source_grounding_live_pilot_007/response.json",
+        "prompt_trace": "prompt_traces/chunked_source_grounding_live_pilot_007/prompt.txt",
+        "model_output_trace": "model_traces/chunked_source_grounding_live_pilot_007/model_output.txt",
+        "reasoning_trace": "model_traces/chunked_source_grounding_live_pilot_007/reasoning_content.txt",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "This record captures one admitted thinking-enabled line-range-first locator call only.",
+        "The zero-entry unsupported-claim report is plausible for three narrow claims but is not comprehensive hallucination filtering.",
+        "The source excerpt is ASR-degraded (sparse punctuation, garbled words); claim paraphrases normalized one garbled tool name, recorded in the strict review.",
+        "Line ranges refer to the locally wrapped 50-character excerpt; the wrapping procedure is part of the recorded selection metadata.",
+        "Method quality, trading correctness, strategy value, product readiness, and source-truth authority were not evaluated by this boundary record."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

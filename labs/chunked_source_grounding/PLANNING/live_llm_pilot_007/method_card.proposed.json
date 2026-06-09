@@ -1,0 +1,46 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "MethodCard",
+  "schema_version": "0.1.2",
+  "method_card": {
+    "method_id": "chunked_source_grounding_live_pilot_007_method",
+    "lab_id": "chunked_source_grounding",
+    "parent_question": "How can chunked/source-span LLM methods preserve source grounding while still supporting useful abstraction?",
+    "method_family": "chunked_source_grounded_llm_reader_proposed",
+    "intended_inputs": [
+      "operator-authorized third source excerpt: a 950-word volatility-regime and tool-selection teaching segment from a different transcript than sources one and two",
+      "metadata-safe source hash and source ref for the selected excerpt, with locally wrapped 50-character line structure recorded as part of selection",
+      "metadata-safe benchmark pack text_judgment_v0",
+      "the pilot 006 line-range-first locator contract unchanged",
+      "DeepSeek V4 Pro with thinking enabled and a reasoning-aware 12000-token cap",
+      "pre-recorded prompt and model configuration metadata"
+    ],
+    "intended_outputs": [
+      "chunked_source_line_range_locator_candidate_proposal",
+      "source-linked claim table",
+      "line-range locator candidates",
+      "locator confidence labels",
+      "character offsets after line-range validation",
+      "locally computed quote hashes from validated spans",
+      "unsupported-claim report",
+      "brief method-failure notes"
+    ],
+    "known_risks": [
+      "This is a proposed live LLM pilot planning record, not a completed run.",
+      "ASR degradation in the third source (missing punctuation, garbled words) may reduce claim faithfulness or make locator review harder.",
+      "Thinking mode ignored entry caps in long-context pilot 004; local validation must enforce caps.",
+      "The model may emit line ranges that are broad, nearby, off-by-one, or confidence-overstated rather than support-valid.",
+      "The model must not emit character offsets or quote hashes; local review computes them only after line-range validation.",
+      "Prompt or trace handling may accidentally include raw source material if the privacy boundary is not followed."
+    ],
+    "non_goals": [
+      "not a completed run",
+      "not research evidence",
+      "not a synthesis export",
+      "not broad judgment abstraction",
+      "not strategy validation",
+      "not product authority",
+      "not architecture or graduation evidence"
+    ]
+  }
+}

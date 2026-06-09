@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "EvaluationRecord",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_007_eval",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_007_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_live_pilot_007",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: one admitted DeepSeek V4 Pro call was made with thinking enabled per the Goal 15A admission update, stream=false, no tools, no model substitution, no retry, the approved third-source hash, and the 12000-token cap. The completion finished naturally with reasoning and content tokens recorded separately. The model emitted line-range locator candidates only, respected the entry caps, and did not emit character offsets or quote hashes; local offsets and quote hashes were computed only after strict line-range validation. Spend stayed far below the $3 cap. Raw source text, provider payloads, prompt traces, model traces, reasoning traces, and secrets are not committed. The output is proposal-only and method quality was not evaluated by this boundary record."
+  }
+}

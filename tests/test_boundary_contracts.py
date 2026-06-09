@@ -784,7 +784,12 @@ def test_registry_lists_exactly_the_labs_on_disk():
 
 def test_graduation_ledger_remains_evidence_disciplined():
     graduation = (ROOT / "GRADUATION_LEDGER.md").read_text()
-    assert "No graduated items." in graduation
+    # ADR 0003 recorded the first graduation; every graduated item must cite an
+    # existing ADR and state its non-graduating scope.
+    assert "GRAD-0001" in graduation
+    for adr in re.findall(r"docs/adr/\d{4}[a-z0-9-]+\.md", graduation):
+        assert (ROOT / adr).exists(), adr
+    assert "What did not graduate:" in graduation
     assert "## Current Non-Graduation Rule" in graduation
     assert "Fixture records are not evidence." in graduation
     assert "A proposal-only live pilot export set is not graduation evidence by itself." in (

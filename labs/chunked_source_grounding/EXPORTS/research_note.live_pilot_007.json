@@ -1,0 +1,42 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ResearchNote",
+  "research_note": {
+    "note_id": "chunked_source_grounding_live_pilot_007_note",
+    "lab_id": "chunked_source_grounding",
+    "experiment_ids": [
+      "chunked_source_grounding_live_pilot_007"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "The third-source line-range-first repeat completed naturally under the thinking-enabled configuration and produced the portfolio's cleanest locator result: three of three support-valid candidates with warranted exact labels and zero demotions, on an ASR-degraded source, within entry caps. Source-generality evidence for line-range-first is now recorded across a third source.",
+    "what_worked": [
+      "Line-range-first repeated on a third, messier source: 3/3 support-valid with tight boundaries and warranted exact labels.",
+      "Entry caps were respected under thinking mode in this narrow contract, unlike the broader grounded contract in long-context pilot 004.",
+      "The deterministic local-wrapping selection procedure (50-character textwrap over an unwrapped ASR transcript) produced line coordinates the model used accurately.",
+      "The model's single failure note independently identified line-numbering stability as the real dependency, matching the lab's own lesson that segmentation is a local responsibility.",
+      "Locator confidence showed spread (0.95) rather than pilot 004's flat 1.0."
+    ],
+    "what_failed": [
+      "No structural or locator failures occurred in this run; residual limitations are recorded rather than failures.",
+      "The zero-entry unsupported-claim report is not comprehensive hallucination filtering.",
+      "Claim paraphrases normalized an ASR garble without flagging it; acceptable here but a future contract could ask for explicit transcription-noise flags."
+    ],
+    "negative_results": [
+      "None in this run; the prior negative lessons (cap sizing for thinking mode, entry-cap softness in broad contracts) were applied rather than re-observed."
+    ],
+    "reusable_by_other_labs": [
+      "Deterministic local wrapping of unwrapped ASR transcripts (recorded width, recorded word offsets, hash after wrapping) is a workable selection procedure for line-range methods.",
+      "Narrow contracts appear to hold entry caps under thinking mode better than broad contracts; cap enforcement should still be local.",
+      "The line-range-first division of labor — model proposes ranges, local tooling validates then computes offsets and hashes — has now repeated across two labs, two contracts, three sources, and both thinking modes."
+    ],
+    "do_not_repeat": [
+      "Do not treat a 3/3 single-run result as more than one repetition; the graduation case rests on the accumulated record set, not this run alone.",
+      "Do not skip recording the wrapping procedure when selecting from unwrapped transcripts; line coordinates are meaningless without it.",
+      "Do not copy raw source text, raw model output, reasoning traces, provider payloads, or prompt traces into committed records or currentness docs."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

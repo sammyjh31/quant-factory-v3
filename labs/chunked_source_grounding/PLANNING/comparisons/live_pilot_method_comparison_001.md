@@ -147,4 +147,47 @@ Do not start the cross-model repeat or third-source repeat before the grounded t
 
 Fork 1: plan a cap-relieved grounded long-context repeat (Goal 14A planning packet, `long_context_judgment` pilot 003). It is the cheapest run that converts the 13C split result from confounded to interpretable, and its outcome decides between fork 2 and continuing single-pass work. Forks 3 and 4 remain queued behind it as the graduation-horizon evidence for line-range-first.
 
+Status note: this fork was executed under the milestone-4 directive as long-context pilots 003/004, followed by the third-source repeat as chunked pilot 007. See the Milestone-4 Evidence Thread section below, which owns the current state.
+
 This remains a lab-local method experiment. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
+
+## Milestone-4 Evidence Thread
+
+Goal 15C: milestone-4 decision review (supersedes the Goal 13D recommendation, which was executed)
+
+The operator set milestone 4: take line-range-first source grounding through the full evidence ladder to an ADR-approved graduation decision. Three evidence runs were executed under that directive, each with its own admission packet and reviews:
+
+| Run | Lab / contract | Source | Config | Result |
+| --- | --- | --- | --- | --- |
+| long-context pilot 003 | grounded long-context (broad contract) | second source | thinking on, 4000 cap | Bounded negative: reasoning consumed the entire shared output cap; empty content. Lesson: thinking caps must be sized for reasoning plus contract. |
+| long-context pilot 004 | grounded long-context (broad contract) | second source | thinking on, 12000 cap | Completed naturally. Strict review: 8/9 line ranges support-valid (vs 0/4 in pilot 002), abstraction breadth improved to three conditional principles over nine faithful claims. Caveats: entry caps ignored (nine claims vs four allowed), flat 1.0 confidence with five exact-label demotions, one off-by-one miss. |
+| chunked pilot 007 | line-range-first (narrow contract) | third source (ASR-degraded, locally wrapped) | thinking on, 12000 cap | Cleanest locator result in the portfolio: 3/3 support-valid, all exact labels warranted, zero demotions, entry caps respected, confidence 0.95 with spread. |
+
+### What the thread establishes
+
+The line-range-first division of labor — the model proposes line-range locator candidates only; local tooling validates ranges and computes character offsets and quote hashes only from validated spans — has now repeated across:
+
+* two labs and two contract families (narrow chunked locator contract; broad grounded long-context contract),
+* three sources (market-profile tutorial via the pilot 003/004 strict-review locator computations; pharm box-trades; ASR-degraded strategy transcript),
+* both thinking modes (pilot 006 thinking-off; pilots 004/007 thinking-on),
+* with negative-result analysis from chunked pilot 005 (model-emitted offsets/hashes are not evidence-valid), long-context pilot 002 (locator collapse under cap pressure), and long-context pilot 003 (reasoning consumes content-sized caps).
+
+### Known boundary conditions
+
+* All model-side evidence is from one model family (DeepSeek V4 Flash/Pro); model-family generality is untested and is recorded as an explicit limitation, not a claim.
+* Broad contracts under thinking mode ignored entry caps; cap enforcement is a local responsibility.
+* Thinking-enabled runs need caps sized for reasoning plus contract.
+* Emitted locator confidence is not an acceptance signal; strict review labels are.
+* Off-by-one near-misses occur; local validation must check, not trust, range boundaries.
+* Unwrapped sources need a recorded deterministic wrapping procedure before line coordinates mean anything.
+
+### Decision
+
+Nominate the line-range-first source locator workflow for graduation. The nomination, the operator decision, and the precise statement of what does and does not graduate are owned by:
+
+```text
+docs/adr/0003-graduate-line-range-first-locator-workflow.md
+GRADUATION_LEDGER.md
+```
+
+This comparison note records evidence and the nomination only. The ADR and ledger own the graduation decision. Nothing else in this note graduates. No validation, product evidence, strategy evidence, financial advice, or live-trading authority is created.

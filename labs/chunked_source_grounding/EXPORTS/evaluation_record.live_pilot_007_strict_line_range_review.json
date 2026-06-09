@@ -1,0 +1,25 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "chunked_source_grounding_live_pilot_007_strict_line_range_review",
+    "lab_id": "chunked_source_grounding",
+    "target_id": "chunked_source_grounding_live_pilot_007_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_strict_line_range_pilot_007",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.95,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "line_ranges_valid",
+      "line_range_labels_warranted",
+      "source_generality_repeat_succeeded",
+      "local_offsets_computable",
+      "quote_hashes_computable_locally",
+      "asr_garble_normalized_in_paraphrase"
+    ],
+    "comments": "Manual strict line-range review reusing the pilot 006 rubric: inspected the committed pilot 007 artifact and boundary review, the ignored local third-source excerpt (106 wrapped lines), and the ignored local model output trace. Counts: reviewed_line_range_candidate_count=3; line_range_support_valid_count=3; exact_count_model=3; strict_exact_count=3; overclaimed_exactness_count=0; entry_cap_violations=0. Locator details (accepted; offsets and quote hashes computed locally from accepted full-line spans only): SLC-001 range=30-33 local_char_offsets=1416-1610 line_span_sha256=9066abcda863eef0f7b92b49ba754b627771f01ef640bc05fbd7e74739c6e15f model_label=exact strict_label=exact (measure-not-guess volatility with ATR and range tools, directly stated in range); SLC-002 range=101-103 local_char_offsets=4849-4997 line_span_sha256=0fc2235c52391ed84d9d436e00448996d739d6478f94672f74453f3de0a5e06f model_label=exact strict_label=exact (keep-it-simple plus rule-of-three directly stated; the analysis-paralysis phrasing in the claim is supported by the lines immediately above the range, a minor boundary note that does not invalidate the cited support); SLC-003 range=64-68 local_char_offsets=3069-3309 line_span_sha256=38c70d28b63365fa358b92bb7fa7c80020bface01ebad9b9732770783367c243 model_label=exact strict_label=exact (essential-tools-for-edge-validation and ignore-everything-else directly stated). ASR note: the claim paraphrases normalized one garbled tool reference in the source (transcription noise around range-tool names); the normalization is reasonable and flagged here rather than treated as unsupported material. Locator confidences were 0.95 rather than flat 1.0. Comparison value: this is the cleanest locator result in the portfolio (3/3 with zero label demotions), achieved on the messiest source so far, under the thinking-enabled configuration, with entry caps respected, completing a line-range-first repeat across a third source, a second lab-config pairing, and both thinking modes. raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

@@ -3,7 +3,7 @@
 Status: portfolio graduation authority  
 Current phase: `milestone-4-first-graduation-candidate`
 
-No methods, labs, schemas, artifacts, product surfaces, research claims, evaluators, or architectures have graduated.
+One method pattern has graduated (GRAD-0001, by explicit operator decision and ADR 0003). No other methods, labs, schemas, artifacts, product surfaces, research claims, evaluators, or architectures have graduated.
 
 Planning packets, run admission updates, proposal-only live export sets, manual reviews, comparison notes, strict reviews, locator-thread decision reviews, and research plans do not affect graduation status by themselves.
 
@@ -12,8 +12,17 @@ Planning packets, run admission updates, proposal-only live export sets, manual 
 ## Current Graduation State
 
 ```text
-No graduated items.
+One graduated item: GRAD-0001.
 ```
+
+### GRAD-0001: line-range-first source locator workflow
+
+* Decided: 2026-06-09, operator decision under the milestone-4 goal directive.
+* Owning ADR: `docs/adr/0003-graduate-line-range-first-locator-workflow.md`
+* Evidence thread: `labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md` (Milestone-4 Evidence Thread section).
+* What graduated: the locator division of labor — models propose line-range locator candidates only; local tooling validates ranges before acceptance; character offsets and quote hashes are computed locally only from validated spans; line structure is a recorded local responsibility; emitted locator confidence is not an acceptance signal.
+* What did not graduate: any prompt, model, provider, configuration, lab, artifact type, schema change, benchmark, abstraction method, evaluation calibration, autonomous loop, product surface, or strategy claim.
+* Recorded limitations: single model family (DeepSeek V4) evidence; single reviewer lineage pending judge calibration; small-n repeated evidence (three positive runs plus reviewer-side computations across three sources, with three recorded negative results).
 
 ---
 
@@ -27,7 +36,7 @@ Graduation is a portfolio-level decision, not a lab-level decision.
 
 ## Current Non-Graduation Rule
 
-No item has graduated in the current portfolio phase.
+No item other than GRAD-0001 has graduated in the current portfolio phase.
 
 Fixture records are not evidence.
 
@@ -52,4 +61,4 @@ Future graduation will require at minimum:
 * explicit ADR,
 * and a clear statement of what is and is not graduating.
 
-This section is future-facing only.
+GRAD-0001 is the precedent for this shape: evidence thread in the owning comparison note, decision and boundaries in the ADR, status here.

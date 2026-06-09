@@ -26,7 +26,7 @@ How can long-context LLM methods extract reusable trading judgment from messy tr
 Current state:
 
 ```text
-active live-pilot lab with scaffold fixtures and two proposal-only live pilots: the pilot 001 baseline and the Goal 13C grounded-variant run, whose split result (strong abstraction, failed locators, contract overflow) has manual and strict review records
+active live-pilot lab with scaffold fixtures and four proposal-only live pilots: the pilot 001 baseline, the pilot 002 cap-constrained grounded split result, the pilot 003 thinking-cap bounded negative, and the pilot 004 grounded run (8/9 support-valid locators with improved abstraction breadth) that served as cross-method evidence in the milestone-4 thread
 ```
 
 Details live in the lab's `EXPORTS/` and `PLANNING/` directories.
@@ -48,7 +48,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-active live-pilot lab with scaffold fixtures and proposal-only live export and review records; the locator thread is provisionally paused following the Goal 13A decision review
+active live-pilot lab with scaffold fixtures and seven proposal-only live pilots; the locator thread concluded with the third-source line-range-first repeat (pilot 007, 3/3 support-valid) and its method lesson graduated as GRAD-0001 via ADR 0003
 ```
 
 Current details live in protocol export records and the lab-local comparison note:
