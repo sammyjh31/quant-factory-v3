@@ -6,17 +6,17 @@ V3 exists primarily to discover LLM-centered methodologies for turning messy tra
 
 ## Scaffold Phase
 
-The scaffold phase does not run live LLM calls.
+The completed scaffold phase did not run live LLM calls.
 
-This is intentional.
+This was intentional.
 
-The scaffold phase builds the harness needed to record, validate, evaluate, compare, and synthesize future LLM experiments.
+The scaffold phase built the harness needed to record, validate, evaluate, compare, and synthesize later LLM experiments.
 
 ---
 
-## Future LLM Methods
+## Candidate LLM Methods
 
-Future labs may experiment with:
+Labs may experiment with:
 
 - long-context LLM readers,
 - chunked source-grounded LLM readers,
@@ -35,9 +35,9 @@ This list is illustrative, not exhaustive.
 
 ---
 
-## What Future LLM Runs Must Record
+## What Live LLM Runs Must Record
 
-Every future live LLM run must record:
+Every live LLM run must record:
 
 - benchmark pack,
 - source scope,
@@ -59,7 +59,7 @@ Every future live LLM run must record:
 
 LLM outputs are proposals until evaluated.
 
-They do not create source truth, role support, data truth, validation, strategy evidence, financial advice, product authority, or architecture.
+They do not create source truth, role support, data truth, validation, strategy evidence, financial advice, product authority, live-trading authority, or architecture.
 
 ---
 
