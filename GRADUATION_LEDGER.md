@@ -1,7 +1,7 @@
 # Graduation Ledger
 
 Status: portfolio graduation authority  
-Current phase: `milestone-4-first-graduation-candidate`
+Current phase: `milestone-4-first-graduation-recorded`
 
 One method pattern has graduated (GRAD-0001, by explicit operator decision and ADR 0003). No other methods, labs, schemas, artifacts, product surfaces, research claims, evaluators, or architectures have graduated.
 

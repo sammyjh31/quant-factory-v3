@@ -4,7 +4,7 @@ Status: preliminary / non-authoritative comparison note
 
 This note is not a synthesis export, not a protocol object, and not portfolio authority.
 
-Only tiny pilots exist. No method has graduated. No winner is declared. No product, strategy, validation, financial-advice, live-trading, or architecture claim is made.
+Only tiny pilots exist. One locator workflow has graduated as GRAD-0001 by ADR 0003 and `GRADUATION_LEDGER.md`; this note records the evidence thread but does not own the graduation decision. No winner is declared. No product, strategy, validation, financial-advice, live-trading, or architecture claim is made.
 
 ## Why this file exists
 
@@ -22,8 +22,11 @@ This note compares only:
 - `chunked_source_grounding_live_pilot_005` (direct locator emission candidate)
 - `chunked_source_grounding_live_pilot_006` (line-range-first locator contract)
 - `long_context_judgment_live_pilot_002` (grounded long-context variant; split result: strong abstraction, failed locators, contract overflow)
+- `long_context_judgment_live_pilot_003` (thinking-cap bounded negative)
+- `long_context_judgment_live_pilot_004` (reasoning-aware grounded long-context recovery)
+- `chunked_source_grounding_live_pilot_007` (third-source line-range-first repeat)
 
-Per-pilot scores, failure tags, and review details live in the export records, including the manual content reviews and the strict span/locator/line-range review records for pilots 003 through 006.
+Per-pilot scores, failure tags, and review details live in the export records, including the manual content reviews and strict span/locator/line-range review records through the milestone-4 evidence thread.
 
 ## Comparison Axes
 

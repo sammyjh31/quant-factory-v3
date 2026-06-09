@@ -41,6 +41,9 @@ Manual content reviews (`manual_content_review`):
 
 ```text
 labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_003_manual_content_review.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_004_manual_content_review.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_manual_content_review.json
@@ -54,11 +57,14 @@ labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_003_strict_sp
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_004_strict_span_review.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_005_strict_locator_review.json
 labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_006_strict_line_range_review.json
+labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_007_strict_line_range_review.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_002_strict_line_range_review.json
+labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_004_strict_line_range_review.json
 ```
 
-That is nine human evaluation records across seven pilots and two labs. Future pilots (such as `long_context_judgment_live_pilot_002`) add to this inventory as their reviews complete.
+That is 15 human evaluation records across eleven pilots and two labs. Future pilots add to this inventory as their reviews complete.
 
-This inventory is small. The study must report agreement honestly at this sample size and must not claim statistical authority from nine records.
+This inventory is small. The study must report agreement honestly at this sample size and must not claim statistical authority from 15 records.
 
 ---
 

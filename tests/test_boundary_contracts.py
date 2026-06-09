@@ -129,6 +129,18 @@ def records_by_schema(schema_name: str):
     return [record for record in all_lab_export_records() if record["schema_name"] == schema_name]
 
 
+def manual_content_review_paths() -> list[Path]:
+    paths = []
+    for path in lab_export_paths(ROOT):
+        for record in iter_records(path):
+            if (
+                record["schema_name"] == "EvaluationRecord"
+                and record["evaluation"]["evaluator_type"] == "manual_content_review"
+            ):
+                paths.append(path)
+    return sorted(paths)
+
+
 def lab_dirs() -> list[Path]:
     return sorted(path for path in (ROOT / "labs").iterdir() if path.is_dir())
 
@@ -759,6 +771,7 @@ def test_currentness_docs_share_one_phase_and_route_to_existing_files():
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     phase_match = re.search(r"Current phase: `([a-z0-9-]+)`", portfolio)
     assert phase_match, "PORTFOLIO_CURRENT must declare the current phase"
+    assert phase_match.group(1) == "milestone-4-first-graduation-recorded"
     phase_line = phase_match.group(0)
 
     for name in ["README.md", "LAB_REGISTRY.md", "GRADUATION_LEDGER.md"]:
@@ -774,6 +787,38 @@ def test_currentness_docs_share_one_phase_and_route_to_existing_files():
             assert (ROOT / routed).exists(), (name, routed)
 
     assert "## Next Recommended Research Direction" in portfolio
+
+
+def test_graduation_comparison_note_has_no_pre_graduation_stale_claims():
+    comparison = (
+        ROOT
+        / "labs"
+        / "chunked_source_grounding"
+        / "PLANNING"
+        / "comparisons"
+        / "live_pilot_method_comparison_001.md"
+    ).read_text()
+    assert "No method has graduated." not in comparison
+    assert "GRAD-0001" in comparison
+    assert "docs/adr/0003-graduate-line-range-first-locator-workflow.md" in comparison
+    for run_id in [
+        "long_context_judgment_live_pilot_003",
+        "long_context_judgment_live_pilot_004",
+        "chunked_source_grounding_live_pilot_007",
+    ]:
+        assert run_id in comparison
+
+
+def test_judge_calibration_plan_inventory_matches_current_manual_reviews():
+    plan = (ROOT / "docs" / "research-plans" / "llm-judge-calibration-study.md").read_text()
+    paths = manual_content_review_paths()
+    assert len(paths) == 15
+    assert f"That is {len(paths)} human evaluation records" in plan
+    assert "nine human evaluation records" not in plan
+    assert "not claim statistical authority from nine records" not in plan
+    for path in paths:
+        relative_path = path.relative_to(ROOT).as_posix()
+        assert relative_path in plan
 
 
 def test_registry_lists_exactly_the_labs_on_disk():

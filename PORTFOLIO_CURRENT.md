@@ -1,7 +1,7 @@
 # Portfolio Current
 
 Status: portfolio currentness router
-Current phase: `milestone-4-first-graduation-candidate`
+Current phase: `milestone-4-first-graduation-recorded`
 Protocol version: `qf-v3-protocol-0.1`
 
 This file owns the current portfolio posture. It routes agents to current evidence surfaces, but it does not own lab results, method success claims, generated synthesis claims, or graduation decisions.
