@@ -1,0 +1,143 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ArtifactEnvelope",
+  "artifact": {
+    "artifact_id": "long_context_judgment_live_pilot_002_artifact",
+    "artifact_type": "grounded_long_context_judgment_proposal",
+    "lab_id": "long_context_judgment",
+    "method_id": "long_context_judgment_live_pilot_002_method",
+    "run_id": "long_context_judgment_live_pilot_002_run",
+    "source_refs": [
+      "raw_corpora_sha256:9f9e143429f5842a"
+    ],
+    "posture": {
+      "grounding_status": "source_linked",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "output_contract_overflow_truncated_final_section",
+      "emitted_line_ranges_failed_strict_support_validation",
+      "raw_output_local_only"
+    ],
+    "summary": "One admitted DeepSeek V4 Pro grounded long-context live pilot completed one non-streaming model call on the approved second-source excerpt. The output hit the 1600-token output cap (finish_reason=length) and the as-emitted JSON did not parse; all five contract sections were emitted and truncation landed inside the final string of the last method-failure note, so review used a local tail repair. Strict line-range review found zero of four emitted line ranges support-valid and supplied corrected locators after the fact.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "disabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/long_context_judgment/PLANNING/live_llm_pilot_002/prompt_template.live_pilot_002.md",
+      "prompt_template_sha256": "74f8e89a2e25942a2be20170fd6bb0c1e414d4216a18003915ea0214abc29024",
+      "config_sha256": "416028f9496cefee6284e6fed96440f8fef182afe878743ba3081f8733f951cb",
+      "source_metadata": {
+        "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+        "source_scope": "operator-approved second-source excerpt from the local pharm box-trades transcript, same as chunked_source_grounding pilots 004-006",
+        "source_path_scope": "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "source_origin_scope": "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt",
+        "source_file_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "source_file_word_count": 945,
+        "source_file_line_count": 140,
+        "excerpt_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "excerpt_word_count": 945,
+        "raw_source_text_committed": false
+      },
+      "token_metadata": {
+        "prompt_tokens": 2109,
+        "completion_tokens": 1600,
+        "total_tokens": 3709
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.003709,
+        "estimated_cost_usd_upper_bound": 0.003709,
+        "pricing_basis": "Conservative metadata-safe upper bound of $1 per million total tokens for budget containment; not billing authority."
+      },
+      "model_output_metadata": {
+        "artifact_type": "grounded_long_context_judgment_proposal",
+        "raw_model_output_sha256": "7159138ca3fc36a389f9f64aa2a1a44b6628d34d2760f2e608b1e08a7fe03c75",
+        "raw_response_sha256": "cc6a0f0a886d327a4f11b4cece110c61226e95f08ffbca82f4ee85562e3c7b03",
+        "raw_request_sha256": "59bc67350abf9cb2fc8678bbae85734d48bbb76f44862f1c89195bad2447d0e4",
+        "prompt_trace_sha256": "525611445154e7e8d1103eb8b3b8b88e2ab9707a921be2604b92da6100550de5",
+        "model_call_succeeded": true,
+        "parsed_json_success": false,
+        "parse_error": "unterminated string: output ended at the 1600-token cap inside the final method-failure-note description",
+        "finish_reason": "length",
+        "model_output_truncated": true,
+        "local_tail_repair_used_for_review": true,
+        "expected_top_level_keys": [
+          "judgment_principle_proposals",
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "emitted_top_level_keys": [
+          "judgment_principle_proposals",
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "section_counts_after_local_tail_repair": {
+          "judgment_principle_proposals": 2,
+          "source_linked_claim_table": 4,
+          "line_range_locator_candidate_table": 4,
+          "unsupported_claim_report": 2,
+          "brief_method_failure_notes": 2
+        },
+        "model_emitted_locator_label_counts": {
+          "exact": 3,
+          "approximate": 1
+        },
+        "model_asked_to_emit_character_offsets": false,
+        "model_asked_to_emit_quote_hashes": false,
+        "model_emitted_disallowed_locator_fields": [],
+        "model_emitted_disallowed_fields_ignored": false
+      },
+      "local_postprocessing_metadata": {
+        "line_range_validation_completed": true,
+        "emitted_line_range_support_valid_count": 0,
+        "emitted_line_range_count": 4,
+        "character_offset_computation_attempted": true,
+        "quote_hash_computation_attempted": true,
+        "computed_character_offset_count": 4,
+        "computed_quote_hash_count": 4,
+        "offsets_and_hashes_computed_only_for": "reviewer-corrected line ranges accepted during the strict line-range review, not for the rejected model-emitted ranges"
+      },
+      "trace_storage_boundary": {
+        "provider_request_trace": "provider_payloads/long_context_judgment_live_pilot_002/request.json",
+        "provider_response_trace": "provider_payloads/long_context_judgment_live_pilot_002/response.json",
+        "prompt_trace": "prompt_traces/long_context_judgment_live_pilot_002/prompt.txt",
+        "model_output_trace": "model_traces/long_context_judgment_live_pilot_002/model_output.txt",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "This record captures one admitted DeepSeek V4 Pro grounded long-context call only.",
+        "The grounded contract did not fit the 1600-token output cap: finish_reason=length and the as-emitted JSON did not parse, echoing the chunked pilot 001 contract-size failure as anticipated in the run admission update.",
+        "All five contract sections were emitted before truncation; the cut landed inside the final string of the second method-failure note, so substantive tables were complete and reviewable through a local tail repair.",
+        "Strict line-range review found zero of four emitted line ranges support-valid; corrected locators were supplied by the reviewer after the fact.",
+        "Cap pressure is a confound for the locator-quality result: the model was emitting against a hard output ceiling, so locator degradation cannot be fully attributed to the abstraction workload without a cap-relieved repeat.",
+        "Method quality, trading correctness, strategy value, product readiness, and source-truth authority were not evaluated by this boundary record.",
+        "Full output text remains in ignored local trace storage and is not a committed authority surface."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

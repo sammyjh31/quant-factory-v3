@@ -1,0 +1,22 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_002_manual_content_review",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_002_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_live_pilot_002",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.72,
+    "pass_fail": "pass",
+    "failure_tags": [
+      "output_contract_overflow",
+      "limited_breadth",
+      "locator_quality_deferred_to_strict_review"
+    ],
+    "comments": "Manual content review of the abstraction half only, performed against the locally repaired parse of the truncated output; strict locator judgment is owned by the separate strict line-range review. Abstraction quality was the strongest seen in this lab so far: both judgment principle proposals preserved the source's conditional logic (order-of-events condition on the failed-breakout principle; the box-must-pre-exist caveat; the post-close review practice framed as personal practice rather than rule), cited supporting claim ids as required, declared honest abstraction confidence, and stated their own compression limitations. All four source-linked claims were verified against the local source excerpt and are faithful paraphrases with real support present in the source. Both unsupported-claim reports identified genuine gaps (under-specified volume-profile box adjustments; price-action assessment rules referenced but not taught in the excerpt) without adding unsupported material. Caveats: only two of the allowed three principles were emitted and breadth stops at the failed-breakout and review-practice teachings, so coverage of the excerpt's judgment content is partial; the contract overflowed the output cap, truncating the final method-failure note; and grounding pressure plus cap pressure may have consumed budget that broader abstraction needed. Compared with pilot 001, conditionality preservation improved and generic-advice flattening did not appear; missing_context issues were smaller because the excerpt boundary was tighter. This review judges research utility only. Raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

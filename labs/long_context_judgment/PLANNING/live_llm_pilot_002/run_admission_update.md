@@ -1,12 +1,13 @@
 # Long Context Judgment Live Pilot 002 Run Admission Update
 
 Status: Goal 13B live-run admission update for pilot 002
+Historical status: pre-run admission record; current run status is owned by `labs/long_context_judgment/EXPORTS/run_record.live_pilot_002.json`.
 
-This admission update defines the executable preflight scope for exactly one tiny live LLM pilot run.
+This admission update defined the executable preflight scope for exactly one tiny live LLM pilot run.
 
-It does not by itself authorize execution. Execution requires a separate Goal 13C instruction.
+It did not by itself authorize execution. Execution required a separate Goal 13C instruction.
 
-Goal 13B itself does not execute the run. No export records exist for `long_context_judgment_live_pilot_002`.
+Goal 13B itself did not execute the run. The separately authorized Goal 13C run now has proposal-only export records for `long_context_judgment_live_pilot_002`.
 
 This update itself is not research evidence and not a synthesis export. It does not create a RunRecord, ArtifactEnvelope, EvaluationRecord, ResearchNote, generated synthesis claim, graduation status, or architecture.
 

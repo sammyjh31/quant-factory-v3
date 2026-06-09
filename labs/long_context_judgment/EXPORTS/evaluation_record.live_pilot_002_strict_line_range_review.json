@@ -1,0 +1,25 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "EvaluationRecord",
+  "schema_version": "0.1.2",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_002_strict_line_range_review",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_002_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_content_review_strict_line_range_pilot_002",
+    "evaluator_type": "manual_content_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 0.2,
+    "pass_fail": "fail",
+    "failure_tags": [
+      "line_ranges_not_support_valid",
+      "overclaimed_exactness",
+      "locator_quality_regression_vs_pilot_006",
+      "claims_grounded_but_mislocated",
+      "cap_pressure_confound",
+      "reviewer_supplied_corrected_locators"
+    ],
+    "comments": "Manual strict line-range review reusing the pilot 006 rubric: inspected the committed pilot 002 artifact and boundary review, the ignored local selected source excerpt (140 lines), and the ignored local model output trace via local tail repair. Counts: reviewed_line_range_candidate_count=4; line_range_support_valid_count=0; exact_count_model=3; approximate_count_model=1; overclaimed_exactness_count=3; mislocated_count=4. Every emitted range failed support validation because the content the claim describes sits outside or at the edge of the proposed range, while all four claims do have real support elsewhere in the excerpt: the claims are grounded but mislocated. Locator details (model-emitted, rejected): SLC-001 model_range=26-56 model_label=exact strict_label=broad support_valid=false reason=range includes ~20 preamble lines and ends immediately before the explicit likelihood-and-continuation statement; SLC-002 model_range=42-56 model_label=exact strict_label=missing support_valid=false reason=range covers scenario setup but not the trapped-buyer liquidation mechanism the claim asserts; SLC-003 model_range=36-41 model_label=exact strict_label=missing support_valid=false reason=range contains the general top/bottom rule, unrelated to the box-pre-existence caveat; SLC-004 model_range=65-73 model_label=approximate strict_label=missing support_valid=false reason=range contains trapped-long transcript repetition, not the post-close review practice. Reviewer-supplied corrected locators (accepted after validation, offsets and quote hashes computed locally from accepted full-line spans only): SLC-001 corrected_range=55-64 local_char_offsets=2134-2525 line_span_sha256=272d2adf1ae43c2ff39a0a8daafd09d728c74fdd8d3b4cb3a3b47544596762e2; SLC-002 corrected_range=65-87 local_char_offsets=2525-3367 line_span_sha256=0edaec4ae02d0b342f0da9077328058f0951d73300dac6e0fdf761a1d1fe2914; SLC-003 corrected_range=60-64 local_char_offsets=2302-2525 line_span_sha256=d08373908bd62ca2584eec6fb8f67b5d1ca61b510aca32656376052a7aed78ab; SLC-004 corrected_range=114-140 local_char_offsets=4155-4983 line_span_sha256=20f362e904f2a4de817917921d43814d1a6b8c34b17b7ffd00d46ac8711ab774. Comparison value: pilot 006's narrow line-range-first contract produced 3/3 support-valid ranges on the same source under the same rubric; this grounded long-context contract produced 0/4, a locator-quality regression coinciding with the addition of the judgment-abstraction workload. Confound: the model emitted against a hard 1600-token cap (finish_reason=length), so budget pressure rather than abstraction workload may explain part of the degradation; a cap-relieved repeat would disambiguate. raw source text and raw model output are not committed. This review is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture."
+  }
+}

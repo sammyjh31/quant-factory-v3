@@ -1,6 +1,7 @@
 # Long Context Judgment Live Pilot 002 Stop Condition
 
 Status: Goal 13B planning/admission record
+Historical status: pre-run admission record; current run status is owned by `labs/long_context_judgment/EXPORTS/run_record.live_pilot_002.json`.
 
 Goal 13B stops after admission packet creation and verification.
 

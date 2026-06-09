@@ -1,0 +1,47 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ResearchNote",
+  "research_note": {
+    "note_id": "long_context_judgment_live_pilot_002_note",
+    "lab_id": "long_context_judgment",
+    "experiment_ids": [
+      "long_context_judgment_live_pilot_002"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "The admitted grounded long-context pilot completed one DeepSeek V4 Pro call on the same excerpt as chunked pilots 004-006. The output hit the 1600-token cap and did not parse as emitted, but all five sections completed before truncation. Reviews split the comparison question: abstraction quality was the lab's strongest yet, while strict review found zero of four emitted line ranges support-valid even though all four claims have real support in the source.",
+    "what_worked": [
+      "Judgment principle proposals preserved conditional logic, cited supporting claim ids, declared abstraction confidence, and stated their own compression limitations.",
+      "All four source-linked claims were faithful paraphrases with genuine support present in the excerpt.",
+      "Unsupported-claim reports identified real specification gaps in the source without adding unsupported material.",
+      "The model emitted line ranges only and did not emit character offsets, quote hashes, or raw source text fields.",
+      "The committed records preserve provider/model, prompt/config, source-hash, token/cost, truncation, locator-validation, and trace-storage metadata without committing raw source or provider payloads."
+    ],
+    "what_failed": [
+      "The grounded contract did not fit the admitted 1600-token output cap: finish_reason=length and the as-emitted JSON did not parse, echoing the chunked pilot 001 contract-size failure.",
+      "Strict review found zero of four emitted line ranges support-valid; three were labeled exact anyway (overclaimed_exactness count 3).",
+      "Every claim was grounded but mislocated: the model described support accurately in its rationales while pointing the ranges at the wrong lines.",
+      "Locator quality regressed from 3/3 support-valid in chunked pilot 006 to 0/4 here on the same source under the same rubric."
+    ],
+    "negative_results": [
+      "A single-pass contract combining judgment abstraction with line-range locator duty degraded locator precision severely on this run, while abstraction quality stayed high.",
+      "Cap pressure is a recorded confound: the model emitted against a hard output ceiling, so the locator regression cannot be fully attributed to the abstraction workload without a cap-relieved repeat.",
+      "Grounded-but-mislocated is a distinct failure mode from hallucination: claim faithfulness survived while locator pointing failed, which suggests locator assignment may belong in a separate pass rather than inside the abstraction contract."
+    ],
+    "reusable_by_other_labs": [
+      "Separate the failure modes: claim faithfulness, locator pointing accuracy, and locator label honesty can move independently and should be reviewed as separate axes.",
+      "When a contract overflow truncates only the final section, a local tail repair can recover review value while the parse failure is still recorded as a contract-fit negative.",
+      "Reviewer-supplied corrected locators with locally computed offsets and hashes preserve comparison value even when every model-emitted range is rejected.",
+      "Budget contracts that add workload classes (abstraction plus locators) need output caps sized for the union, or an explicit priority order for which sections to complete first."
+    ],
+    "do_not_repeat": [
+      "Do not treat high-quality abstraction prose as evidence of locator quality; this run shows they can diverge completely.",
+      "Do not re-run a combined abstraction-plus-locator contract at the same output cap expecting different structural results; any repeat needs a new admission update with either a larger cap or a split contract.",
+      "Do not compute offsets or hashes from rejected model-emitted ranges.",
+      "Do not copy raw source text, raw model output, provider payloads, prompt traces, or generated synthesis metrics into currentness docs."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

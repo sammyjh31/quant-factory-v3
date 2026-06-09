@@ -112,13 +112,9 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Goal 13A locator-thread decision review is complete; the chunked locator thread is provisionally paused as a method lesson. Goal 13B grounded long-context variant planning is drafted as a proposed admission packet at:
+The Goal 13C grounded long-context run is complete with proposal-only export records under `labs/long_context_judgment/EXPORTS/`, and the Goal 13D decision review recorded a split, confounded result: abstraction quality held while emitted locators failed strict review under cap pressure.
 
-```text
-labs/long_context_judgment/PLANNING/live_llm_pilot_002/
-```
-
-The packet is planning only. The next proposed step is operator review of that packet and, if approved, a separately authorized Goal 13C execution instruction.
+The next proposed step is Goal 14A: plan a cap-relieved grounded long-context repeat (`long_context_judgment` pilot 003 admission packet) to remove the output-cap confound before any method conclusion.
 
 The owning comparison note is:
 

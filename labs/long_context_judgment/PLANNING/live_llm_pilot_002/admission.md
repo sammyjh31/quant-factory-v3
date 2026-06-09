@@ -1,6 +1,7 @@
 # Long Context Judgment Live Pilot 002 Admission Packet
 
 Status: Goal 13B proposed planning packet
+Historical status: pre-run admission record; current run status is owned by `labs/long_context_judgment/EXPORTS/run_record.live_pilot_002.json`.
 Lab: `long_context_judgment`
 Experiment: `long_context_judgment_live_pilot_002`
 

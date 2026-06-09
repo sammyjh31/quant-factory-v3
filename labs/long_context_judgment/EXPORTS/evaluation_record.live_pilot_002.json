@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "EvaluationRecord",
+  "evaluation": {
+    "evaluation_id": "long_context_judgment_live_pilot_002_eval",
+    "lab_id": "long_context_judgment",
+    "target_id": "long_context_judgment_live_pilot_002_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_live_pilot_002",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: one admitted DeepSeek V4 Pro call was made with thinking disabled, stream=false, no tools, no model substitution, no retry, and the approved source hash. The prompt asked for line-range locator candidates only; the prompt did not ask for character offsets or quote hashes. The output hit the admitted 1600-token output cap and the as-emitted JSON did not parse; per the locked run scope no retry was made because the call produced output. Spend stayed far below the $3 cap. Character offsets and quote hashes were computed locally only for reviewer-accepted corrected line ranges during the strict line-range review. Raw source text, provider payloads, prompt traces, model traces, and secrets are not committed. The output is proposal-only and method quality was not evaluated by this boundary record."
+  }
+}
