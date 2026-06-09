@@ -1,6 +1,7 @@
 # Long Context Judgment Live Pilot 003 Run Admission Update
 
 Status: Goal 14A live-run admission update for pilot 003
+Historical status: pre-run admission record; current run status is owned by `labs/long_context_judgment/EXPORTS/run_record.live_pilot_003.json`.
 
 This admission update defines the executable preflight scope for exactly one tiny live LLM pilot run. Execution requires the separately given Goal 14B instruction; the operator's milestone-4 goal directive supplies it for this evidence chain.
 
@@ -31,7 +32,7 @@ Same as pilot 002: `raw_corpora_sha256:9f9e143429f5842a`, excerpt SHA-256 `9f9e1
 ## Prompt Template
 
 Path: `labs/long_context_judgment/PLANNING/live_llm_pilot_003/prompt_template.live_pilot_003.md`
-SHA-256: `1ad7a5625086b952cc4f10de0c2dae10281293d6e162a8a9f13c9c0d80db393a`
+Prompt template SHA-256: `1ad7a5625086b952cc4f10de0c2dae10281293d6e162a8a9f13c9c0d80db393a`
 Message body verified byte-identical to the pilot 002 contract; placeholders only; no raw source text or secrets. System prompt source: the `System Message` section of the same file. The contract keeps the five pilot 002 sections and all pilot 002 exclusions, including no model-emitted character offsets or quote hashes.
 
 ## Canonical Model Config
@@ -59,7 +60,7 @@ Message body verified byte-identical to the pilot 002 contract; placeholders onl
 }
 ```
 
-Config SHA-256 (compact-sorted serialization): `9b1194ff8121ba8dbdb2afcab0c58b7b54aa5e566ef352fad160a8903745d1b9`
+Config SHA-256: `9b1194ff8121ba8dbdb2afcab0c58b7b54aa5e566ef352fad160a8903745d1b9`
 
 Sampling: provider defaults. The 4000-token cap covers the full completion including any reasoning tokens the provider counts against it; if the contract still truncates, that is a recordable negative result.
 
