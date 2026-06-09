@@ -149,6 +149,12 @@ CHUNKED_LINE_RANGE_LIVE_PILOT_EVALUATION_ID = (
 CHUNKED_LINE_RANGE_LIVE_PILOT_NOTE_ID = (
     "chunked_source_grounding_live_pilot_006_note"
 )
+CHUNKED_LINE_RANGE_STRICT_REVIEW_006_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_006_strict_line_range_review"
+)
+CHUNKED_LINE_RANGE_STRICT_REVIEW_006_EXPORT = (
+    "evaluation_record.live_pilot_006_strict_line_range_review.json"
+)
 LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
 LIVE_PILOT_ARTIFACT_ID = "long_context_judgment_live_pilot_001_artifact"
 LIVE_PILOT_EVALUATION_ID = "long_context_judgment_live_pilot_001_eval"
@@ -185,6 +191,17 @@ CHUNKED_SPAN_STRICT_REVIEW_004_EXPORT = (
 CHUNKED_LOCATOR_STRICT_REVIEW_005_EXPORT = (
     "evaluation_record.live_pilot_005_strict_locator_review.json"
 )
+EXPECTED_MANUAL_CONTENT_REVIEW_IDS = [
+    CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
+    CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+    CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
+    CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
+    CHUNKED_LINE_RANGE_STRICT_REVIEW_006_EVALUATION_ID,
+    LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
+]
 PROTOCOL_SCHEMA_NAMES = {
     "ArtifactEnvelope.schema.json",
     "BenchmarkPack.schema.json",
@@ -197,9 +214,12 @@ PROTOCOL_SCHEMA_NAMES = {
 }
 
 CURRENT_PHASE = "milestone-3-method-comparison-recorded"
-CURRENT_COMPLETED_STEP = "Goal 12C line-range-first locator pilot execution is complete"
+CURRENT_COMPLETED_STEP = (
+    "Goal 12D manual strict line-range review is complete for the "
+    "line-range-first locator pilot"
+)
 CURRENT_NEXT_STEP = (
-    "Goal 12D manual strict line-range review"
+    "Goal 12E local comparison note update"
 )
 ROUTER_LEDGER_PATTERNS = (
     r"labs/[^\s`]+/EXPORTS/(?:run_record|artifact_envelope|evaluation_record|research_note)"
@@ -1623,16 +1643,10 @@ def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_on
         for record in records_by_schema("EvaluationRecord")
         if record["evaluation"]["evaluator_type"] == "manual_content_review"
     ]
-    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
-        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
-        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
-        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
-        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-    ]
+    assert (
+        sorted(review["evaluation_id"] for review in manual_content_reviews)
+        == EXPECTED_MANUAL_CONTENT_REVIEW_IDS
+    )
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
     assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
     assert not list(export_dir.glob("research_note.*manual_content_review*.json"))
@@ -2116,16 +2130,10 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
         for record in records_by_schema("EvaluationRecord")
         if record["evaluation"]["evaluator_type"] == "manual_content_review"
     ]
-    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
-        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
-        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
-        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
-        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-    ]
+    assert (
+        sorted(review["evaluation_id"] for review in manual_content_reviews)
+        == EXPECTED_MANUAL_CONTENT_REVIEW_IDS
+    )
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
     assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
     assert not list(export_dir.glob("research_note.*manual_content_review*.json"))
@@ -2590,16 +2598,10 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
         for record in records_by_schema("EvaluationRecord")
         if record["evaluation"]["evaluator_type"] == "manual_content_review"
     ]
-    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
-        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
-        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
-        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
-        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-    ]
+    assert (
+        sorted(review["evaluation_id"] for review in manual_content_reviews)
+        == EXPECTED_MANUAL_CONTENT_REVIEW_IDS
+    )
 
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
@@ -3988,6 +3990,111 @@ def test_goal12c_line_range_first_live_export_set_is_protocol_valid_and_bounded(
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
+def test_goal12d_strict_line_range_review_records_support_validity_only():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    review_path = export_dir / CHUNKED_LINE_RANGE_STRICT_REVIEW_006_EXPORT
+    assert review_path.exists()
+
+    record = load_json(review_path)
+    validate_record(record)
+    assert record["protocol_version"] == "qf-v3-protocol-0.1"
+    assert record["schema_name"] == "EvaluationRecord"
+    assert record["schema_version"] == CURRENT_SCHEMA_VERSION
+
+    evaluation = record["evaluation"]
+    assert evaluation["evaluation_id"] == (
+        CHUNKED_LINE_RANGE_STRICT_REVIEW_006_EVALUATION_ID
+    )
+    assert evaluation["lab_id"] == "chunked_source_grounding"
+    assert evaluation["target_id"] == CHUNKED_LINE_RANGE_LIVE_PILOT_ARTIFACT_ID
+    assert evaluation["target_type"] == "artifact"
+    assert evaluation["evaluator_id"] == (
+        "manual_content_review_strict_line_range_pilot_006"
+    )
+    assert evaluation["evaluator_type"] == "manual_content_review"
+    assert evaluation["benchmark_pack_id"] == "text_judgment_v0"
+    assert evaluation["score"] == pytest.approx(0.88)
+    assert evaluation["pass_fail"] == "pass"
+    assert evaluation["failure_tags"] == [
+        "line_ranges_valid",
+        "line_range_first_improved",
+        "source_span_precision_repeated",
+        "local_offsets_computable",
+        "quote_hashes_computable_locally",
+        "line_range_labels_warranted",
+        "content_review_passed_with_caveats",
+    ]
+
+    comments = evaluation["comments"]
+    for required in [
+        "Manual strict line-range review only",
+        "reviewed_line_range_candidate_count=3",
+        "line_range_support_valid_count=3",
+        "local_offset_computable_count=3",
+        "local_quote_hash_computable_count=3",
+        "exact_count=2",
+        "approximate_count=1",
+        "broad_count=0",
+        "missing_count=0",
+        "overclaimed_exactness_count=0",
+        "line_range_first_improved_over_pilot_005=true",
+        "SLC-001 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "SLC-002 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "SLC-003 source_ref=raw_corpora_sha256:9f9e143429f5842a",
+        "model emitted line ranges only",
+        "local offsets and quote hashes were computed after line-range validation",
+        "raw source text and raw model output are not committed",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ),
+    ]:
+        assert required in comments
+    for quote_hash in [
+        "fc261f465e11a6f6d5e65f9675fb1fc30b5c56d79fe019f5e2b8b12f6c00595f",
+        "f473a277e72a588e3340b62a72dac5a0f6ce69b9215fe8625353d729b68f55d7",
+        "4035f470e3b237bfba5b2cb992b2a0016ade84d378ff3b3b794f80b12ddb9de6",
+    ]:
+        assert quote_hash in comments
+
+    review_text = review_path.read_text()
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "raw_source_text",
+        "raw_model_output",
+    ]:
+        assert forbidden not in review_text
+    assert not list(export_dir.glob("run_record.*strict_line_range_review*.json"))
+    assert not list(export_dir.glob("artifact_envelope.*strict_line_range_review*.json"))
+    assert not list(export_dir.glob("research_note.*strict_line_range_review*.json"))
+
+    manual_content_reviews = [
+        review["evaluation"]["evaluation_id"]
+        for review in records_by_schema("EvaluationRecord")
+        if review["evaluation"]["evaluator_type"] == "manual_content_review"
+    ]
+    assert (
+        CHUNKED_LINE_RANGE_STRICT_REVIEW_006_EVALUATION_ID in manual_content_reviews
+    )
+
+    readme = (ROOT / "README.md").read_text()
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
+        assert_currentness_routes_to_goal12c(currentness_doc)
+        assert "proposal-only" in currentness_doc
+        assert "run_record.live_pilot_006" not in currentness_doc
+    comparison_note = GOAL7G_COMPARISON_NOTE.read_text()
+    assert "Goal 12D manual strict line-range review" not in comparison_note
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
 def test_goal11d_strict_locator_review_records_coordinate_failure_only():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
     review_path = export_dir / CHUNKED_LOCATOR_STRICT_REVIEW_005_EXPORT
@@ -5157,16 +5264,10 @@ def test_goal9c_second_source_span_precision_content_review_is_bounded():
         for record in records_by_schema("EvaluationRecord")
         if record["evaluation"]["evaluator_type"] == "manual_content_review"
     ]
-    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
-        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
-        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
-        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
-        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-    ]
+    assert (
+        sorted(review["evaluation_id"] for review in manual_content_reviews)
+        == EXPECTED_MANUAL_CONTENT_REVIEW_IDS
+    )
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
     assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
     assert not list(export_dir.glob("research_note.*manual_content_review*.json"))
@@ -5273,16 +5374,10 @@ def test_goal8d_source_span_precision_manual_content_review_records_precision_re
         for record in records_by_schema("EvaluationRecord")
         if record["evaluation"]["evaluator_type"] == "manual_content_review"
     ]
-    assert sorted(review["evaluation_id"] for review in manual_content_reviews) == [
-        CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID,
-        CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-        CHUNKED_SPAN_STRICT_REVIEW_004_EVALUATION_ID,
-        CHUNKED_LOCATOR_STRICT_REVIEW_005_EVALUATION_ID,
-        LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID,
-    ]
+    assert (
+        sorted(review["evaluation_id"] for review in manual_content_reviews)
+        == EXPECTED_MANUAL_CONTENT_REVIEW_IDS
+    )
     assert not list(export_dir.glob("run_record.*manual_content_review*.json"))
     assert not list(export_dir.glob("artifact_envelope.*manual_content_review*.json"))
     assert not list(export_dir.glob("research_note.*manual_content_review*.json"))

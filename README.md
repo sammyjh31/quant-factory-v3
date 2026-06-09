@@ -104,7 +104,7 @@ See:
 * `docs/research-lifecycle.md`
 * `docs/live-llm-experiment-admission.md`
 
-Goal 12C line-range-first locator pilot execution is complete. The current next proposed step is Goal 12D manual strict line-range review.
+Goal 12D manual strict line-range review is complete for the line-range-first locator pilot. The current next proposed step is Goal 12E local comparison note update.
 
 The live records are proposal-only. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
