@@ -1,12 +1,12 @@
 # Chunked Source Grounding Live Pilot 006 Run Admission Update
 
-Status: Goal 12B live-run admission update for one future proposal-only pilot
+Status: Goal 12B live-run admission update for pilot 006
 
-This admission update defines the executable preflight scope for exactly one future tiny live LLM pilot run.
+This admission update defines the executable preflight scope for exactly one tiny live LLM pilot run.
 
 It does not by itself authorize execution. Execution requires a separate Goal 12C instruction.
 
-Goal 12B does not execute the run. No LLM call has been made for `chunked_source_grounding_live_pilot_006`.
+Goal 12B did not execute the run or create export records for `chunked_source_grounding_live_pilot_006`.
 
 This update itself is not research evidence and not a synthesis export. It does not create a RunRecord, ArtifactEnvelope, EvaluationRecord, ResearchNote, generated synthesis claim, graduation status, or architecture.
 

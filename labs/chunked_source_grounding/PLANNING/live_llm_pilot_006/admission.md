@@ -6,11 +6,11 @@ Experiment: `chunked_source_grounding_live_pilot_006`
 
 This is a proposed live LLM pilot planning record. It is not a completed run, not research evidence, and not a synthesis export.
 
-This is planning/admission only. No LLM call has been made.
+This packet was created as planning/admission only. Goal 12B did not make an LLM call.
 
 The planning packet is not research evidence, not a synthesis export, and not a method success claim. No method success is claimed.
 
-No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.
+This planning packet itself contains no RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote.
 
 Goal 12A planned a line-range-first locator contract. Goal 12B turns that plan into a contained live-run admission packet without executing the run.
 

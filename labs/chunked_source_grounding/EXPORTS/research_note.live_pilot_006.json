@@ -1,0 +1,45 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ResearchNote",
+  "research_note": {
+    "note_id": "chunked_source_grounding_live_pilot_006_note",
+    "lab_id": "chunked_source_grounding",
+    "experiment_ids": [
+      "chunked_source_grounding_live_pilot_006"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "The admitted line-range-first locator pilot completed one DeepSeek V4 Pro non-streaming call on the approved second-source excerpt. The model returned parseable JSON with line-range locator candidates and did not emit character offset or quote-hash fields. Strict line-range review is still pending.",
+    "what_worked": [
+      "DeepSeek V4 Pro with thinking disabled produced parseable compact JSON in one admitted line-range-first locator batch.",
+      "The output included the four expected top-level sections and three line-range locator candidates.",
+      "The model did not emit character offset fields, quote-hash fields, cryptographic hashes, or raw source text fields in the parsed JSON.",
+      "The committed records preserve provider/model, prompt/config, source-hash, token/cost, trace-storage, and line-range locator metadata without committing raw source or provider payloads."
+    ],
+    "what_failed": [
+      "No method success is claimed; line-range support correctness was not evaluated by this boundary review.",
+      "Manual strict line-range review has not yet judged whether exact, approximate, broad, or missing labels are warranted by the local source.",
+      "Local character offsets and quote hashes were intentionally not computed in Goal 12C because the line ranges have not yet passed strict review.",
+      "The run intentionally omitted broad judgment abstraction and cross-method comparison prose, so those dimensions remain outside this artifact."
+    ],
+    "negative_results": [
+      "A structurally complete line-range locator artifact is still proposal-only and does not validate trading claims or source interpretation quality.",
+      "Model-proposed line ranges are candidates until manually checked.",
+      "Deferred offsets and hashes preserve the Goal 12A/12B boundary but leave support validity unresolved until Goal 12D."
+    ],
+    "reusable_by_other_labs": [
+      "Artifact payloads can carry lab-local line-range locator candidate metadata without changing protocol.",
+      "Use model_asked_to_emit_character_offsets=false and model_asked_to_emit_quote_hashes=false when separating model locator proposals from local verification.",
+      "A future strict line-range review can compute offsets and hashes only after accepting candidate line ranges."
+    ],
+    "do_not_repeat": [
+      "Do not treat parseable JSON or line-range coordinates as method success before Goal 12D manual strict line-range review.",
+      "Do not ask the model to emit character offsets or cryptographic quote hashes in a line-range-first run.",
+      "Do not copy raw source text, raw model output, provider payloads, prompt traces, or generated synthesis metrics into currentness docs.",
+      "Do not substitute models or expand output contracts without a separate admission update."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

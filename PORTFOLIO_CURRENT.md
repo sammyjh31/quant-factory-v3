@@ -22,7 +22,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 12B live-run admission planning is complete. The next proposed step is Goal 12C execution of the admitted line-range-first locator pilot.
+The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 12C line-range-first locator pilot execution is complete. The next proposed step is Goal 12D manual strict line-range review.
 
 ---
 
@@ -36,7 +36,7 @@ Active federation labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, strict source-span re-review records, and an admitted line-range-first locator pilot. The next proposed fork is Goal 12C execution.
+   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, strict source-span re-review records, and one line-range-first locator live proposal export set. The next proposed fork is Goal 12D manual strict line-range review.
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -121,7 +121,7 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Goal 12B live-run admission planning is complete. The next proposed step is Goal 12C execution of the admitted line-range-first locator pilot.
+Goal 12C line-range-first locator pilot execution is complete. The next proposed step is Goal 12D manual strict line-range review.
 
 The owning comparison note is:
 
@@ -129,4 +129,4 @@ The owning comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The updated comparison note records that direct locator emission partly improves review because line ranges are useful, but char offsets are not yet accurate enough for canonical quote-hash support. Goal 12B admitted a line-range-first locator pilot without creating validation, graduation, architecture, or export records.
+The updated comparison note records that direct locator emission partly improves review because line ranges are useful, but char offsets are not yet accurate enough for canonical quote-hash support. Goal 12C created a proposal-only line-range-first locator export set without validation, graduation, architecture, or comparison-note update.

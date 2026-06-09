@@ -1,0 +1,176 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ArtifactEnvelope",
+  "artifact": {
+    "artifact_id": "chunked_source_grounding_live_pilot_006_artifact",
+    "artifact_type": "chunked_source_line_range_locator_candidate_proposal",
+    "lab_id": "chunked_source_grounding",
+    "method_id": "chunked_source_grounding_live_pilot_006_method",
+    "run_id": "chunked_source_grounding_live_pilot_006_run",
+    "source_refs": [
+      "raw_corpora_sha256:9f9e143429f5842a"
+    ],
+    "posture": {
+      "grounding_status": "source_linked",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "manual_strict_line_range_review_not_yet_completed",
+      "raw_output_local_only"
+    ],
+    "summary": "One admitted DeepSeek V4 Pro line-range-first locator live pilot completed one non-streaming model call on the approved second-source excerpt. The output parsed as compact JSON with line-range locator candidates; strict manual line-range review is still pending.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "disabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/chunked_source_grounding/PLANNING/live_llm_pilot_006/prompt_template.live_pilot_006.md",
+      "prompt_template_sha256": "4a3695f0af9dbf2013fd304bd571f4ec14f4b860ab683fad44cc9782b5a4467b",
+      "config_sha256": "3a1ed6ce1e3ecc5dc24cc3838e400676997b62c6a22081a6d0d220b2615f21e7",
+      "source_metadata": {
+        "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+        "source_scope": "operator-approved second-source excerpt from the local pharm box-trades transcript",
+        "source_path_scope": "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "source_origin_scope": "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt",
+        "source_file_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "source_file_word_count": 945,
+        "excerpt_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "excerpt_word_count": 945,
+        "raw_source_text_committed": false
+      },
+      "token_metadata": {
+        "prompt_tokens": 2473,
+        "completion_tokens": 612,
+        "total_tokens": 3085
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.003085,
+        "estimated_cost_usd_upper_bound": 0.003085,
+        "pricing_basis": "Conservative metadata-safe upper bound of $1 per million total tokens for budget containment; not billing authority."
+      },
+      "model_output_metadata": {
+        "artifact_type": "chunked_source_line_range_locator_candidate_proposal",
+        "raw_model_output_sha256": "f5e7800bbe45aa242b063c422d6c0b1be9748d155b8f8f091920e30c2745ba45",
+        "raw_response_sha256": "cc6cfd15dccbdf7583b5e4083cf1194ad82085500ac4e8de8b11a6094ec6e2ab",
+        "raw_request_sha256": "890f4a72a5b548da87f9c507672ebc2ffd5fff3ab5c3f434fd6796e4c6c05d33",
+        "prompt_trace_sha256": "c98706fd1e9cd8f4ad5b65d3c92805c6023ee07068a56a6ef40e1d17ae7899fd",
+        "model_call_succeeded": true,
+        "parsed_json_success": true,
+        "parse_error": null,
+        "finish_reason": "stop",
+        "model_output_truncated": false,
+        "expected_top_level_keys": [
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "expected_top_level_keys_detected": [
+          "source_linked_claim_table",
+          "line_range_locator_candidate_table",
+          "unsupported_claim_report",
+          "brief_method_failure_notes"
+        ],
+        "missing_expected_top_level_keys": [],
+        "parsed_output_counts": {
+          "source_linked_claim_table": 3,
+          "line_range_locator_candidate_table": 3,
+          "unsupported_claim_report": 0,
+          "brief_method_failure_notes": 0
+        },
+        "model_asked_to_emit_line_ranges": true,
+        "model_asked_to_emit_character_offsets": false,
+        "model_asked_to_emit_quote_hashes": false,
+        "model_emitted_line_range_locator_candidates": true,
+        "model_emitted_disallowed_locator_fields": [],
+        "model_emitted_character_offset_fields_ignored": false,
+        "model_emitted_quote_hash_fields_ignored": false,
+        "sanitized_output_summary": "The model returned parsed_json_success=True with 3 source-linked claim entries and 3 line-range locator candidates. Strict manual line-range review has not judged whether the proposed line ranges support the claims."
+      },
+      "line_range_locator_candidate_metadata": {
+        "line_range_candidates": [
+          {
+            "claim_id": "SLC-001",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 12,
+            "candidate_line_end": 18,
+            "locator_confidence": 0.95,
+            "locator_label": "exact",
+            "short_support_rationale": "Lines L013-L018 explicitly state a box is a range of consolidation preceding trend."
+          },
+          {
+            "claim_id": "SLC-002",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 33,
+            "candidate_line_end": 44,
+            "locator_confidence": 0.93,
+            "locator_label": "approximate",
+            "short_support_rationale": "Lines L034-L043 describe selling at top, buying at bottom, and preference for failed breakouts/breakdowns."
+          },
+          {
+            "claim_id": "SLC-003",
+            "source_ref": "raw_corpora_sha256:9f9e143429f5842a",
+            "candidate_line_start": 45,
+            "candidate_line_end": 64,
+            "locator_confidence": 0.91,
+            "locator_label": "exact",
+            "short_support_rationale": "Lines L046-L064 describe the look above and fail scenario and link it to downside break likelihood."
+          }
+        ],
+        "line_range_candidates_emitted_by_model": true,
+        "candidate_count": 3,
+        "locator_label_counts": {
+          "exact": 2,
+          "approximate": 1
+        },
+        "model_asked_to_emit_character_offsets": false,
+        "model_asked_to_emit_quote_hashes": false,
+        "model_emitted_disallowed_locator_fields": [],
+        "model_emitted_disallowed_fields_ignored": false
+      },
+      "local_postprocessing_metadata": {
+        "line_range_validation_completed": false,
+        "character_offset_computation_attempted": false,
+        "quote_hash_computation_attempted": false,
+        "computed_character_offset_count": 0,
+        "computed_quote_hash_count": 0,
+        "offsets_and_hashes_deferred_until": "Goal 12D manual strict line-range review"
+      },
+      "trace_storage_boundary": {
+        "provider_request_trace": "provider_payloads/chunked_source_grounding_live_pilot_006/request.json",
+        "provider_response_trace": "provider_payloads/chunked_source_grounding_live_pilot_006/response.json",
+        "prompt_trace": "prompt_traces/chunked_source_grounding_live_pilot_006/prompt.txt",
+        "model_output_trace": "model_traces/chunked_source_grounding_live_pilot_006/model_output.txt",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "This record captures one admitted DeepSeek V4 Pro line-range-first locator call only.",
+        "The prompt asked for line-range locator candidates only, not character offsets or quote hashes.",
+        "The model emitted line-range locator candidates but strict manual line-range review has not checked support validity.",
+        "Local character offsets and quote hashes were not computed during Goal 12C because line-range validation is deferred to Goal 12D.",
+        "Method quality, trading correctness, strategy value, product readiness, and source-truth authority were not evaluated by this boundary record.",
+        "Full output text remains in ignored local trace storage and is not a committed authority surface."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

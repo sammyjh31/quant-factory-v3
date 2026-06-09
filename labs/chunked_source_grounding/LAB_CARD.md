@@ -8,7 +8,7 @@ This lab explores chunked source-span readers for messy trader educational text.
 
 - scaffold fixtures, proposal-only live records, and manual reviews exist under the protocol boundary
 - detailed evidence lives in export records and the lab-local comparison note, not in this lab card
-- Goal 12B live-run admission planning is complete for the line-range-first locator pilot using the Goal 12A line-range-first locator contract
+- Goal 12C line-range-first locator pilot execution is complete, producing proposal-only live export records for Goal 12D strict review
 
 current details live in protocol export records and the comparison note:
 
@@ -18,11 +18,11 @@ labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_
 
 ## Current Active Research Thread
 
-Goal 12B live-run admission planning is complete for a line-range-first locator pilot using the Goal 12A line-range-first locator contract, based on the completed source-span locator candidate pilot and strict locator review.
+Goal 12C line-range-first locator pilot execution is complete for the Goal 12A line-range-first locator contract, based on the completed source-span locator candidate pilot and strict locator review.
 
 The current comparison read is that model-proposed line ranges reduced reviewer reconstruction, but char offsets did not align with the intended supporting spans. The computed quote hashes are mechanically valid but not evidence-valid support handles yet.
 
-The next proposed step is Goal 12C execution of the admitted line-range-first locator pilot.
+The next proposed step is Goal 12D manual strict line-range review.
 
 The current comparison note records the second-source source-span precision repeat as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
 

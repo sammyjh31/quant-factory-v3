@@ -93,6 +93,8 @@ GOAL11B_METHOD_ID = "chunked_source_grounding_live_pilot_005_method"
 GOAL11B_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_005"
 GOAL12B_METHOD_ID = "chunked_source_grounding_live_pilot_006_method"
 GOAL12B_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_006"
+GOAL12C_METHOD_ID = GOAL12B_METHOD_ID
+GOAL12C_EXPERIMENT_ID = GOAL12B_EXPERIMENT_ID
 CHUNKED_PRO_LIVE_PILOT_RUN_ID = "chunked_source_grounding_live_pilot_002_run"
 CHUNKED_PRO_LIVE_PILOT_ARTIFACT_ID = (
     "chunked_source_grounding_live_pilot_002_artifact"
@@ -134,6 +136,18 @@ CHUNKED_LOCATOR_LIVE_PILOT_EVALUATION_ID = (
 )
 CHUNKED_LOCATOR_LIVE_PILOT_NOTE_ID = (
     "chunked_source_grounding_live_pilot_005_note"
+)
+CHUNKED_LINE_RANGE_LIVE_PILOT_RUN_ID = (
+    "chunked_source_grounding_live_pilot_006_run"
+)
+CHUNKED_LINE_RANGE_LIVE_PILOT_ARTIFACT_ID = (
+    "chunked_source_grounding_live_pilot_006_artifact"
+)
+CHUNKED_LINE_RANGE_LIVE_PILOT_EVALUATION_ID = (
+    "chunked_source_grounding_live_pilot_006_eval"
+)
+CHUNKED_LINE_RANGE_LIVE_PILOT_NOTE_ID = (
+    "chunked_source_grounding_live_pilot_006_note"
 )
 LIVE_PILOT_RUN_ID = "long_context_judgment_live_pilot_001_run"
 LIVE_PILOT_ARTIFACT_ID = "long_context_judgment_live_pilot_001_artifact"
@@ -183,9 +197,9 @@ PROTOCOL_SCHEMA_NAMES = {
 }
 
 CURRENT_PHASE = "milestone-3-method-comparison-recorded"
-CURRENT_COMPLETED_STEP = "Goal 12B live-run admission planning is complete"
+CURRENT_COMPLETED_STEP = "Goal 12C line-range-first locator pilot execution is complete"
 CURRENT_NEXT_STEP = (
-    "Goal 12C execution of the admitted line-range-first locator pilot"
+    "Goal 12D manual strict line-range review"
 )
 ROUTER_LEDGER_PATTERNS = (
     r"labs/[^\s`]+/EXPORTS/(?:run_record|artifact_envelope|evaluation_record|research_note)"
@@ -731,6 +745,7 @@ def test_research_notes_and_llm_judge_placeholders_are_bounded():
             CHUNKED_SPAN_LIVE_PILOT_NOTE_ID,
             CHUNKED_SPAN_REPEAT_LIVE_PILOT_NOTE_ID,
             CHUNKED_LOCATOR_LIVE_PILOT_NOTE_ID,
+            CHUNKED_LINE_RANGE_LIVE_PILOT_NOTE_ID,
         }:
             assert disclaimer == LIVE_EVIDENCE_DISCLAIMER
         else:
@@ -3096,11 +3111,6 @@ def test_goal12b_line_range_first_live_admission_packet_is_contained_and_current
         {record["schema_name"] for record in planning_records}
     )
     assert "EXPORTS" not in GOAL12B_PILOT_DIR.parts
-    assert not list(
-        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
-            "*.live_pilot_006.json"
-        )
-    )
     assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
 
     admission = (GOAL12B_PILOT_DIR / "admission.md").read_text()
@@ -3122,8 +3132,11 @@ def test_goal12b_line_range_first_live_admission_packet_is_contained_and_current
     ]:
         assert required_heading in admission
     for required_guardrail in [
-        "This is planning/admission only. No LLM call has been made.",
-        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        "This packet was created as planning/admission only. Goal 12B did not make an LLM call.",
+        (
+            "This planning packet itself contains no RunRecord, ArtifactEnvelope, "
+            "EvaluationRecord, or ResearchNote."
+        ),
         "Goal 12A planned a line-range-first locator contract.",
         "Do not ask the model to emit character offsets.",
         "Do not ask the model to emit quote hashes.",
@@ -3171,7 +3184,7 @@ def test_goal12b_line_range_first_live_admission_packet_is_contained_and_current
     for required in [
         (
             "This admission update defines the executable preflight scope for exactly "
-            "one future tiny live LLM pilot run."
+            "one tiny live LLM pilot run."
         ),
         (
             "It does not by itself authorize execution. Execution requires a separate "
@@ -3757,6 +3770,221 @@ def test_goal11c_source_span_locator_live_export_set_is_protocol_valid_and_bound
         "Goal 11B admission planning is complete. The next proposed step is Goal 11C"
         not in portfolio
     )
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal12c_line_range_first_live_export_set_is_protocol_valid_and_bounded():
+    export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
+    live_exports = {
+        path.name: load_json(path) for path in export_dir.glob("*.live_pilot_006.json")
+    }
+    assert set(live_exports) == live_pilot_export_names("006")
+    for record in live_exports.values():
+        validate_record(record)
+
+    run = live_exports["run_record.live_pilot_006.json"]
+    artifact = live_exports["artifact_envelope.live_pilot_006.json"]
+    evaluation = live_exports["evaluation_record.live_pilot_006.json"]
+    note = live_exports["research_note.live_pilot_006.json"]
+
+    source_hash = sha256_file(GOAL9A_SOURCE_PATH)
+    source_ref = f"raw_corpora_sha256:{source_hash[:16]}"
+    prompt_template_path = GOAL12B_PILOT_DIR / "prompt_template.live_pilot_006.md"
+
+    assert run["schema_name"] == "RunRecord"
+    assert run["schema_version"] == CURRENT_SCHEMA_VERSION
+    assert run["run_record"] == {
+        "run_id": CHUNKED_LINE_RANGE_LIVE_PILOT_RUN_ID,
+        "lab_id": "chunked_source_grounding",
+        "experiment_id": GOAL12C_EXPERIMENT_ID,
+        "method_id": GOAL12C_METHOD_ID,
+        "benchmark_pack_id": "text_judgment_v0",
+        "source_refs": [source_ref],
+        "artifact_ids": [CHUNKED_LINE_RANGE_LIVE_PILOT_ARTIFACT_ID],
+        "evaluation_ids": [CHUNKED_LINE_RANGE_LIVE_PILOT_EVALUATION_ID],
+        "run_kind": "live_llm_pilot",
+        "outcome_polarity": "proposal_only",
+        "status": "live_recorded",
+    }
+
+    artifact_body = artifact["artifact"]
+    artifact_payload = artifact_body["payload"]
+    assert artifact_body["artifact_id"] == CHUNKED_LINE_RANGE_LIVE_PILOT_ARTIFACT_ID
+    assert artifact_body["artifact_type"] == (
+        "chunked_source_line_range_locator_candidate_proposal"
+    )
+    assert artifact_body["lab_id"] == "chunked_source_grounding"
+    assert artifact_body["method_id"] == GOAL12C_METHOD_ID
+    assert artifact_body["run_id"] == CHUNKED_LINE_RANGE_LIVE_PILOT_RUN_ID
+    assert artifact_body["source_refs"] == [source_ref]
+    assert artifact_body["posture"] == {
+        "grounding_status": "source_linked",
+        "review_status": "self_checked",
+        "readiness_status": "study_candidate",
+        "validation_status": "none",
+        "lifecycle_status": "active",
+    }
+    for blocker in [
+        "proposal_only_not_evaluated",
+        "manual_strict_line_range_review_not_yet_completed",
+        "raw_output_local_only",
+    ]:
+        assert blocker in artifact_body["blockers"]
+
+    assert artifact_payload["outcome_polarity"] == "proposal_only"
+    assert artifact_payload["proposal_only"] is True
+    assert artifact_payload["provider_id"] == "deepseek_api"
+    assert artifact_payload["api_format"] == "openai_compatible_chat_completions"
+    assert artifact_payload["base_url"] == "https://api.deepseek.com"
+    assert artifact_payload["model_id"] == "deepseek-v4-pro"
+    assert artifact_payload["requested_model_id"] == "deepseek-v4-pro"
+    assert artifact_payload["thinking"] == {"type": "disabled"}
+    assert artifact_payload["stream"] is False
+    assert artifact_payload["tool_routing"] == "none"
+    assert artifact_payload["prompt_template_path"] == (
+        "labs/chunked_source_grounding/PLANNING/live_llm_pilot_006/"
+        "prompt_template.live_pilot_006.md"
+    )
+    assert artifact_payload["prompt_template_sha256"] == sha256_file(
+        prompt_template_path
+    )
+    assert artifact_payload["config_sha256"] == (
+        "3a1ed6ce1e3ecc5dc24cc3838e400676997b62c6a22081a6d0d220b2615f21e7"
+    )
+    assert artifact_payload["source_metadata"] == {
+        "source_ref": source_ref,
+        "source_scope": (
+            "operator-approved second-source excerpt from the local pharm box-trades "
+            "transcript"
+        ),
+        "source_path_scope": (
+            "raw_corpora/selected/source_span_precision_repeat_001/source.txt"
+        ),
+        "source_origin_scope": (
+            "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt"
+        ),
+        "source_file_sha256": source_hash,
+        "source_file_word_count": 945,
+        "excerpt_sha256": source_hash,
+        "excerpt_word_count": 945,
+        "raw_source_text_committed": False,
+    }
+    assert artifact_payload["cost_metadata"]["budget_cap_usd"] == 3.0
+    assert artifact_payload["cost_metadata"]["estimated_cost_usd"] <= 3.0
+    assert artifact_payload["raw_source_text_committed"] is False
+    assert artifact_payload["raw_provider_payload_committed"] is False
+    assert artifact_payload["raw_prompt_trace_committed"] is False
+    assert artifact_payload["raw_model_trace_committed"] is False
+    assert artifact_payload["secrets_committed"] is False
+    assert "raw_source_text" not in artifact_payload
+    assert "provider_payload" not in artifact_payload
+    assert "api_key" not in json.dumps(artifact_payload).lower()
+
+    model_output_metadata = artifact_payload["model_output_metadata"]
+    assert model_output_metadata["model_call_succeeded"] is True
+    assert model_output_metadata["finish_reason"]
+    assert model_output_metadata["expected_top_level_keys"] == [
+        "source_linked_claim_table",
+        "line_range_locator_candidate_table",
+        "unsupported_claim_report",
+        "brief_method_failure_notes",
+    ]
+    assert model_output_metadata["model_asked_to_emit_line_ranges"] is True
+    assert model_output_metadata["model_asked_to_emit_character_offsets"] is False
+    assert model_output_metadata["model_asked_to_emit_quote_hashes"] is False
+    assert model_output_metadata["model_emitted_line_range_locator_candidates"] in {
+        False,
+        True,
+    }
+    assert "candidate_char_start" not in json.dumps(artifact_payload)
+    assert "candidate_char_end" not in json.dumps(artifact_payload)
+    assert "quote_hash_candidate" not in json.dumps(artifact_payload)
+
+    locator_metadata = artifact_payload["line_range_locator_candidate_metadata"]
+    assert locator_metadata["line_range_candidates_emitted_by_model"] in {False, True}
+    assert locator_metadata["candidate_count"] == len(
+        locator_metadata["line_range_candidates"]
+    )
+    assert locator_metadata["model_asked_to_emit_character_offsets"] is False
+    assert locator_metadata["model_asked_to_emit_quote_hashes"] is False
+    assert locator_metadata["model_emitted_disallowed_fields_ignored"] in {False, True}
+    for item in locator_metadata["line_range_candidates"]:
+        assert set(item) == {
+            "claim_id",
+            "source_ref",
+            "candidate_line_start",
+            "candidate_line_end",
+            "locator_confidence",
+            "locator_label",
+            "short_support_rationale",
+        }
+        assert item["source_ref"] == source_ref
+        assert item["locator_label"] in {"exact", "approximate", "broad", "missing"}
+
+    local_postprocessing = artifact_payload["local_postprocessing_metadata"]
+    assert local_postprocessing["line_range_validation_completed"] is False
+    assert local_postprocessing["character_offset_computation_attempted"] is False
+    assert local_postprocessing["quote_hash_computation_attempted"] is False
+    assert local_postprocessing["offsets_and_hashes_deferred_until"] == (
+        "Goal 12D manual strict line-range review"
+    )
+
+    assert evaluation["evaluation"]["evaluation_id"] == (
+        CHUNKED_LINE_RANGE_LIVE_PILOT_EVALUATION_ID
+    )
+    assert evaluation["evaluation"]["target_id"] == (
+        CHUNKED_LINE_RANGE_LIVE_PILOT_ARTIFACT_ID
+    )
+    assert evaluation["evaluation"]["evaluator_type"] == "manual_boundary_review"
+    assert evaluation["evaluation"]["pass_fail"] == "pass"
+    for required in [
+        "method quality was not evaluated",
+        "prompt asked for line-range locator candidates only",
+        "prompt did not ask for character offsets or quote hashes",
+        "character offsets and quote hashes are deferred until Goal 12D",
+        (
+            "raw source text, provider payloads, prompt traces, model traces, and "
+            "secrets are not committed"
+        ),
+    ]:
+        assert required in evaluation["evaluation"]["comments"]
+
+    research_note = note["research_note"]
+    assert research_note["note_id"] == CHUNKED_LINE_RANGE_LIVE_PILOT_NOTE_ID
+    assert research_note["experiment_ids"] == [GOAL12C_EXPERIMENT_ID]
+    assert research_note["benchmark_pack_ids"] == ["text_judgment_v0"]
+    assert research_note["evidence_disclaimer"] == LIVE_EVIDENCE_DISCLAIMER
+    assert any(
+        "No method success is claimed" in item for item in research_note["what_failed"]
+    )
+    assert any("Goal 12D" in item for item in research_note["do_not_repeat"])
+
+    combined_committed = "\n".join(
+        (export_dir / name).read_text()
+        for name in sorted(live_pilot_export_names("006"))
+    )
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "candidate_char_start",
+        "candidate_char_end",
+        "quote_hash_candidate",
+    ]:
+        assert forbidden not in combined_committed
+
+    readme = (ROOT / "README.md").read_text()
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
+        assert_currentness_routes_to_goal12c(currentness_doc)
+        assert "run_record.live_pilot_006" not in currentness_doc
+    comparison_note = GOAL7G_COMPARISON_NOTE.read_text()
+    assert "Goal 12D manual strict line-range review" not in comparison_note
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
