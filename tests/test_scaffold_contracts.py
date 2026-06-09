@@ -215,10 +215,10 @@ PROTOCOL_SCHEMA_NAMES = {
 
 CURRENT_PHASE = "milestone-3-method-comparison-recorded"
 CURRENT_COMPLETED_STEP = (
-    "Goal 12E local comparison note update is complete"
+    "Goal 13A locator-thread decision review is complete"
 )
 CURRENT_NEXT_STEP = (
-    "Goal 13A decision review / thread pause note"
+    "Goal 13B grounded long-context variant planning"
 )
 ROUTER_LEDGER_PATTERNS = (
     r"labs/[^\s`]+/EXPORTS/(?:run_record|artifact_envelope|evaluation_record|research_note)"
@@ -2318,9 +2318,11 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "product evidence, strategy evidence, financial advice, live-trading "
             "authority, graduation, or architecture."
         ),
-        f"{CURRENT_COMPLETED_STEP}. The next proposed step is {CURRENT_NEXT_STEP}.",
     ]:
         assert required in portfolio
+
+    assert CURRENT_COMPLETED_STEP in portfolio
+    assert CURRENT_NEXT_STEP in portfolio
 
     for removed_ledger_text in [
         "## Live LLM Experiment Status",
@@ -4163,8 +4165,91 @@ def test_goal12e_comparison_note_records_line_range_first_findings():
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
         assert_currentness_routes_to_goal12c(currentness_doc)
-        assert "Goal 12E local comparison note update is complete" in currentness_doc
-        assert "Goal 13A decision review / thread pause note" in currentness_doc
+        assert "Goal 12E local comparison note update is complete" not in currentness_doc
+        assert "Goal 13A decision review / thread pause note" not in currentness_doc
+        assert "run_record.live_pilot_006" not in currentness_doc
+
+    assert all("comparisons" not in path.parts for path in lab_export_paths(ROOT))
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
+    )
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal13a_comparison_note_records_locator_thread_decision_review():
+    comparisons_dir = (
+        ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "comparisons"
+    )
+    assert sorted(path.name for path in comparisons_dir.glob("*.md")) == [
+        "live_pilot_method_comparison_001.md"
+    ]
+
+    note = GOAL7G_COMPARISON_NOTE.read_text()
+    for required in [
+        "## Locator Thread Decision Review",
+        "Goal 13A: decision review / thread pause note",
+        "Decision: pause the chunked locator thread as a provisional method lesson.",
+        "This is a provisional pause, not graduation.",
+        (
+            "For chunked source-grounding, the strongest current locator pattern is: "
+            "ask the model for line ranges; compute offsets and quote hashes locally "
+            "after line-range validation."
+        ),
+        "What the thread tested",
+        "What the thread learned",
+        "What repeated across sources",
+        "What failed",
+        "What remains unresolved",
+        "What should not be done next",
+        "Candidate next forks",
+        "Recommended next fork",
+        (
+            "Can long-context preserve broader judgment abstraction while adopting "
+            "the source-grounding / line-range discipline learned from "
+            "chunked_source_grounding?"
+        ),
+        "Pause the chunked locator thread as a provisional method lesson.",
+        "Repeat line-range-first on a third source excerpt.",
+        "Compare against a stricter grounded long-context variant.",
+        "Calibrate manual line-range review reliability.",
+        "Activate another methodology thread later, such as recursive contextual meaning loop.",
+        "Do not activate the recursive contextual meaning loop yet.",
+        "Do not create graph infrastructure.",
+        "Do not promote line-range-first to architecture.",
+        "Do not create a protocol field for line ranges yet.",
+        (
+            "not validation, product evidence, strategy evidence, financial advice, "
+            "live-trading authority, graduation, or architecture"
+        ),
+    ]:
+        assert required in note
+
+    for stale_or_forbidden in [
+        "The next proposed step is Goal 13A: decision review / thread pause note.",
+        "Do not say the method graduated.",
+        "Do not say the method is validated.",
+        "Do not say this is architecture.",
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "generated synthesis metrics",
+        "validated trading",
+    ]:
+        assert stale_or_forbidden not in note
+
+    readme = (ROOT / "README.md").read_text()
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
+        assert_currentness_routes_to_goal12c(currentness_doc)
+        assert "Goal 13A locator-thread decision review is complete" in currentness_doc
+        assert "Goal 13B grounded long-context variant planning" in currentness_doc
         assert "run_record.live_pilot_006" not in currentness_doc
 
     assert all("comparisons" not in path.parts for path in lab_export_paths(ROOT))

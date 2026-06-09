@@ -93,6 +93,64 @@ Recommend pausing further locator-contract refinement until the portfolio choose
 3. start evaluator calibration for line-range review;
 4. return to another methodology lab only after closing the current locator thread.
 
-The next proposed step is Goal 13A: decision review / thread pause note.
+## Locator Thread Decision Review
+
+Goal 13A: decision review / thread pause note
+
+Decision: pause the chunked locator thread as a provisional method lesson.
+
+This is a provisional pause, not graduation.
+
+For chunked source-grounding, the strongest current locator pattern is: ask the model for line ranges; compute offsets and quote hashes locally after line-range validation.
+
+### What the thread tested
+
+The thread tested whether chunked/source-grounded LLM contracts could move from broad source-grounded claims toward reviewable source locator behavior. It moved through Flash output-contract failure, Pro narrowed source-grounding, source-span precision, second-source repetition, direct line/char locator emission, and finally a line-range-first locator contract.
+
+### What the thread learned
+
+Line-range-first is the strongest locator contract in this thread so far. The model should propose source line ranges; local review/tooling should validate those ranges and only then compute character offsets and quote hashes.
+
+### What repeated across sources
+
+Source-span precision improved on pilot 003 and repeated on pilot 004. The broader pattern is that narrower chunked contracts can preserve parseability and make source support more inspectable, but they still trade away broader judgment abstraction.
+
+### What failed
+
+The oversized Flash contract failed structurally. Direct line+char offset locator emission only partially improved the workflow: line ranges were useful, but model-proposed character offsets were not evidence-valid and quote hashes computed from those offsets were not support-valid.
+
+### What remains unresolved
+
+Line-range-first has not been repeated on a third source. Manual line-range review has not been calibrated across reviewers. Chunked source-grounding has not yet been compared against a stricter grounded long-context variant that tries to preserve broader judgment abstraction while requiring source-linked support.
+
+### What should not be done next
+
+Do not activate the recursive contextual meaning loop yet.
+
+Do not create graph infrastructure.
+
+Do not promote line-range-first to architecture.
+
+Do not create a protocol field for line ranges yet.
+
+Do not run another chunked pilot unless the new evidence need is explicit.
+
+### Candidate next forks
+
+1. Pause the chunked locator thread as a provisional method lesson.
+2. Repeat line-range-first on a third source excerpt.
+3. Compare against a stricter grounded long-context variant.
+4. Calibrate manual line-range review reliability.
+5. Activate another methodology thread later, such as recursive contextual meaning loop.
+
+### Recommended next fork
+
+The recommended next fork is to pause the chunked locator thread and plan a stricter grounded long-context variant.
+
+Comparison question:
+
+```text
+Can long-context preserve broader judgment abstraction while adopting the source-grounding / line-range discipline learned from chunked_source_grounding?
+```
 
 This remains a lab-local method experiment. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
