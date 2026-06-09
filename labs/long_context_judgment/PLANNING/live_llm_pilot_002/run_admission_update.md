@@ -191,7 +191,7 @@ Quote hashes are computed locally only from validated spans.
 }
 ```
 
-Config SHA-256: `15f08ce3818b7b9d0b61c6a2eebf92775a2b46d8556299f9369dec86735309a6`
+Config SHA-256: `416028f9496cefee6284e6fed96440f8fef182afe878743ba3081f8733f951cb`
 
 Sampling settings: provider defaults, with no temperature, top-p, presence-penalty, or frequency-penalty override.
 
