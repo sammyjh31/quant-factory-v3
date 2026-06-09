@@ -22,7 +22,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 12D manual strict line-range review is complete for the line-range-first locator pilot. The next proposed step is Goal 12E local comparison note update.
+The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 12E local comparison note update is complete. The next proposed step is Goal 13A decision review / thread pause note.
 
 ---
 
@@ -36,7 +36,7 @@ Active federation labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, strict source-span re-review records, and one strict line-range-first locator review. The next proposed fork is Goal 12E local comparison note update.
+   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, strict source-span re-review records, one strict line-range-first locator review, and an updated local comparison note. The next proposed fork is Goal 13A decision review / thread pause note.
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -68,7 +68,7 @@ Current preliminary read:
 - chunked/source-grounded methods have one bounded negative Flash result and later Pro results showing better parseability under narrower contracts;
 - source-span precision pattern repeated beyond the first source, while strict source-span re-review with canonical offsets found one overclaimed exactness caveat and broad segment refs / limited abstraction remain open tradeoffs.
 - the source-span locator candidate pilot produced proposal-only locator coordinates and locally computed quote hashes; strict manual locator review found useful line ranges but inaccurate char offsets, so the next line-range-first pilot tested locator granularity directly.
-- strict line-range-first review found support-valid line ranges and locally computable offsets/hashes after validation; the result remains proposal-only and has not yet been added to the comparison note.
+- strict line-range-first review found support-valid line ranges and locally computable offsets/hashes after validation; the updated comparison note recommends pausing locator-contract refinement until a decision review chooses the next bounded fork.
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -122,7 +122,7 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Goal 12D manual strict line-range review is complete for the line-range-first locator pilot. The next proposed step is Goal 12E local comparison note update.
+Goal 12E local comparison note update is complete. The next proposed step is Goal 13A decision review / thread pause note.
 
 The owning comparison note is:
 
@@ -130,4 +130,4 @@ The owning comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The updated comparison note records that direct locator emission partly improves review because line ranges are useful, but char offsets are not yet accurate enough for canonical quote-hash support. Goal 12D now adds a strict line-range-first review record, but the comparison note has not yet been updated with that finding.
+The updated comparison note records that line-range-first locator candidates are the stronger model-facing contract so far, while preserving proposal-only boundaries and the need for a decision review before another run.

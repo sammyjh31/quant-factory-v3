@@ -104,7 +104,7 @@ See:
 * `docs/research-lifecycle.md`
 * `docs/live-llm-experiment-admission.md`
 
-Goal 12D manual strict line-range review is complete for the line-range-first locator pilot. The current next proposed step is Goal 12E local comparison note update.
+Goal 12E local comparison note update is complete for the line-range-first locator thread. The current next proposed step is Goal 13A decision review / thread pause note.
 
 The live records are proposal-only. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 

@@ -215,11 +215,10 @@ PROTOCOL_SCHEMA_NAMES = {
 
 CURRENT_PHASE = "milestone-3-method-comparison-recorded"
 CURRENT_COMPLETED_STEP = (
-    "Goal 12D manual strict line-range review is complete for the "
-    "line-range-first locator pilot"
+    "Goal 12E local comparison note update is complete"
 )
 CURRENT_NEXT_STEP = (
-    "Goal 12E local comparison note update"
+    "Goal 13A decision review / thread pause note"
 )
 ROUTER_LEDGER_PATTERNS = (
     r"labs/[^\s`]+/EXPORTS/(?:run_record|artifact_envelope|evaluation_record|research_note)"
@@ -3321,8 +3320,9 @@ def test_goal12b_line_range_first_live_admission_packet_is_contained_and_current
     for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
         assert_currentness_routes_to_goal12c(currentness_doc)
         assert "run_record.live_pilot_006" not in currentness_doc
-    assert "Goal 12B live-run admission planning is complete" in comparison_note
-    assert "Goal 12C execution of the admitted line-range-first locator pilot" in (
+    assert "Goal 12A" in comparison_note
+    assert "line-range-first locator contract" in comparison_note
+    assert "Goal 12C execution of the admitted line-range-first locator pilot" not in (
         comparison_note
     )
     assert "current next proposed step is Goal 12B" not in portfolio
@@ -4091,7 +4091,86 @@ def test_goal12d_strict_line_range_review_records_support_validity_only():
         assert "proposal-only" in currentness_doc
         assert "run_record.live_pilot_006" not in currentness_doc
     comparison_note = GOAL7G_COMPARISON_NOTE.read_text()
-    assert "Goal 12D manual strict line-range review" not in comparison_note
+    assert "chunked_source_grounding_live_pilot_006" in comparison_note
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal12e_comparison_note_records_line_range_first_findings():
+    note = GOAL7G_COMPARISON_NOTE.read_text()
+
+    for required in [
+        "chunked_source_grounding_live_pilot_006",
+        "chunked_source_grounding_live_pilot_006_strict_line_range_review",
+        "score `0.88`",
+        "pass_fail `pass`",
+        "line-range candidates reviewed `3`",
+        "exact `2`",
+        "approximate `1`",
+        "broad `0`",
+        "missing `0`",
+        "overclaimed exactness `0`",
+        "local offsets computable `3/3`",
+        "local quote hashes computable `3/3`",
+        (
+            "line-range-first improved over pilot 005 by avoiding model-proposed "
+            "char offsets"
+        ),
+        (
+            "Ask the model for line ranges; let local review/tooling compute "
+            "offsets and quote hashes after validation."
+        ),
+        "pilot 006 shows line-range-first locator candidates are a better model-facing contract",
+        "local offset/hash computation after line-range validation is the stronger workflow",
+        "Recommend pausing further locator-contract refinement",
+        "repeat line-range-first on a third source excerpt",
+        "compare against a stricter grounded long-context variant",
+        "start evaluator calibration for line-range review",
+        "return to another methodology lab only after closing the current locator thread",
+        "Goal 13A: decision review / thread pause note",
+    ]:
+        assert required in note
+
+    for stale_or_forbidden in [
+        "The next proposed step is Goal 12C execution",
+        "Goal 12B live-run admission planning is complete",
+        "Goal 12C execution of the admitted line-range-first locator pilot",
+        (
+            "Goal 12D manual strict line-range review is complete for the "
+            "line-range-first locator pilot"
+        ),
+        "has not yet been added to the comparison note",
+        "the comparison note has not yet been updated with that finding",
+        "Do not say the method graduated.",
+        "Do not say the method is validated.",
+        "Do not say this is architecture.",
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "raw_source_text",
+        "raw_model_output",
+        "{{APPROVED_SOURCE_TEXT}}",
+        "wins",
+        "validated trading",
+        "generated synthesis metrics",
+    ]:
+        assert stale_or_forbidden not in note
+
+    readme = (ROOT / "README.md").read_text()
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
+        assert_currentness_routes_to_goal12c(currentness_doc)
+        assert "Goal 12E local comparison note update is complete" in currentness_doc
+        assert "Goal 13A decision review / thread pause note" in currentness_doc
+        assert "run_record.live_pilot_006" not in currentness_doc
+
+    assert all("comparisons" not in path.parts for path in lab_export_paths(ROOT))
+    assert synthesize_exports(root=ROOT)["record_count"] == sum(
+        1 for _ in all_lab_export_records()
+    )
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 

@@ -8,7 +8,7 @@ This lab explores chunked source-span readers for messy trader educational text.
 
 - scaffold fixtures, proposal-only live records, and manual reviews exist under the protocol boundary
 - detailed evidence lives in export records and the lab-local comparison note, not in this lab card
-- Goal 12D manual strict line-range review is complete for the line-range-first locator pilot, producing one proposal-only manual review export
+- Goal 12E local comparison note update is complete, incorporating the line-range-first locator finding without creating validation or architecture
 
 current details live in protocol export records and the comparison note:
 
@@ -18,13 +18,13 @@ labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_
 
 ## Current Active Research Thread
 
-Goal 12D manual strict line-range review is complete for the Goal 12A line-range-first locator contract, based on the completed source-span locator candidate pilot and strict locator review.
+Goal 12E local comparison note update is complete for the Goal 12A line-range-first locator contract thread, based on the completed source-span locator candidate pilot, strict locator review, and strict line-range review.
 
-The current review read is that line-range-first output produced support-valid line ranges and allowed local char offsets and hashes to be computed after validation, improving on the prior char offsets failure. This remains proposal-only evidence until the local comparison note is updated.
+The current comparison read is that line-range-first output produced support-valid line ranges and allowed local char offsets and hashes to be computed after validation, improving on the prior char offsets failure. This remains proposal-only evidence and does not validate or graduate the method.
 
-The next proposed step is Goal 12E local comparison note update.
+The next proposed step is Goal 13A decision review / thread pause note.
 
-The current comparison note records the second-source source-span precision repeat as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
+The current comparison note records the second-source source-span precision repeat and line-range-first locator finding as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
 
 The current comparison surface is:
 
