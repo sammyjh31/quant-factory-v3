@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "long_context_judgment_live_pilot_002",
+    "lab_id": "long_context_judgment",
+    "research_question": "Can a grounded long-context contract preserve broader judgment abstraction while requiring line-range source support for every source-linked claim?",
+    "hypothesis": "On the same selected second-source excerpt and text_judgment_v0 benchmark used by chunked_source_grounding pilots 004 through 006, a one-pass long-context contract that adds judgment principle proposals on top of the line-range-first locator discipline may recover the broader abstraction that the narrowed chunked contracts traded away, without losing line-range locator quality.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "long_context_judgment_live_pilot_002_method"
+    ],
+    "evaluation_plan": "Validate this proposed ExperimentCard and MethodCard against protocol schemas. After a separately authorized live run, create proposal-only export records and evaluate whether the grounded long-context contract produces judgment principle proposals that preserve conditional logic and cite source-linked claims, source-linked claims with reviewable line-range locator candidates, honest exact/approximate/broad/missing labels, unsupported-claim handling, and metadata-safe locally computed offsets and quote hashes only after line-range validation. The review must preserve comparison value against long_context_judgment_live_pilot_001 on abstraction quality and against chunked_source_grounding_live_pilot_006 on locator quality. Method quality, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "grounded_long_context_judgment_proposal"
+    ]
+  }
+}

@@ -26,7 +26,7 @@ How can long-context LLM methods extract reusable trading judgment from messy tr
 Current state:
 
 ```text
-active live-pilot lab with scaffold fixtures, proposal-only live export records, and manual review records
+active live-pilot lab with scaffold fixtures, proposal-only live export records, manual review records, and a drafted Goal 13B grounded-variant planning packet awaiting operator review
 ```
 
 Details live in the lab's `EXPORTS/` and `PLANNING/` directories.

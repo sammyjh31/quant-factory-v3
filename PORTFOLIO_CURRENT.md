@@ -112,10 +112,18 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Goal 13A locator-thread decision review is complete; the chunked locator thread is provisionally paused as a method lesson. The next proposed step is Goal 13B grounded long-context variant planning.
+Goal 13A locator-thread decision review is complete; the chunked locator thread is provisionally paused as a method lesson. Goal 13B grounded long-context variant planning is drafted as a proposed admission packet at:
+
+```text
+labs/long_context_judgment/PLANNING/live_llm_pilot_002/
+```
+
+The packet is planning only. The next proposed step is operator review of that packet and, if approved, a separately authorized Goal 13C execution instruction.
 
 The owning comparison note is:
 
 ```text
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
+
+Future method plans for LLM-judge calibration and an autonomous lab loop are recorded under `docs/research-plans/`. They are future plans only, not active labs, and do not change current portfolio work.

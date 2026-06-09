@@ -65,7 +65,7 @@ The oversized Flash contract failed structurally. Direct line+char offset locato
 
 ### What remains unresolved
 
-Line-range-first has not been repeated on a third source. Manual line-range review has not been calibrated across reviewers. Chunked source-grounding has not yet been compared against a stricter grounded long-context variant that tries to preserve broader judgment abstraction while requiring source-linked support.
+Line-range-first has not been repeated on a third source. Manual line-range review has not been calibrated across reviewers. Chunked source-grounding has not yet been compared against a stricter grounded long-context variant that tries to preserve broader judgment abstraction while requiring source-linked support. All pilots in this comparison used one model family (DeepSeek V4 Flash/Pro), so whether the line-range-first lesson is model-general or a DeepSeek contract-fit artifact is untested.
 
 ### What should not be done next
 
@@ -86,6 +86,7 @@ Do not run another chunked pilot unless the new evidence need is explicit.
 3. Compare against a stricter grounded long-context variant.
 4. Calibrate manual line-range review reliability.
 5. Activate another methodology thread later, such as recursive contextual meaning loop.
+6. Repeat line-range-first once under a different model family to test whether the locator lesson is model-general.
 
 ### Recommended next fork
 

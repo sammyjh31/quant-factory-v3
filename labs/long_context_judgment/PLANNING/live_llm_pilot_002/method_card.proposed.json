@@ -1,0 +1,49 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "MethodCard",
+  "schema_version": "0.1.2",
+  "method_card": {
+    "method_id": "long_context_judgment_live_pilot_002_method",
+    "lab_id": "long_context_judgment",
+    "parent_question": "How can long-context LLM methods extract reusable trading judgment from messy trader text?",
+    "method_family": "grounded_long_context_llm_reader_proposed",
+    "intended_inputs": [
+      "same selected second-source excerpt as chunked_source_grounding pilots 004, 005, and 006: the operator-approved local pharm box-trades excerpt",
+      "metadata-safe source hash and source ref for the selected excerpt",
+      "metadata-safe benchmark pack text_judgment_v0",
+      "the line-range-first locator lesson from the chunked_source_grounding Goal 13A decision review",
+      "DeepSeek V4 Pro with thinking disabled",
+      "pre-recorded prompt and model configuration metadata"
+    ],
+    "intended_outputs": [
+      "grounded_long_context_judgment_proposal",
+      "judgment principle proposals with supporting claim references",
+      "source-linked claim table",
+      "line-range locator candidates",
+      "locator confidence labels",
+      "character offsets after line-range validation",
+      "locally computed quote hashes from validated spans",
+      "unsupported-claim report",
+      "brief method-failure notes"
+    ],
+    "known_risks": [
+      "This is a proposed live LLM pilot planning record, not a completed run.",
+      "Requiring line-range support may flatten broader judgment back into narrow claims, repeating the limited_abstraction tradeoff instead of resolving it.",
+      "Broader abstraction may revert to generic advice or over_abstracted_teacher_intent when grounding pressure is added.",
+      "The combined contract is larger than pilot 006's contract and may not fit the output cap, repeating the chunked pilot 001 contract-size failure.",
+      "The model may still emit line ranges that are broad or nearby rather than support-valid.",
+      "The model must not emit character offsets; local review computes offsets only after accepting the line range.",
+      "The model must not be trusted to generate cryptographic hashes; quote hashes are computed locally only from validated spans.",
+      "Prompt or trace handling may accidentally include raw source material if the privacy boundary is not followed."
+    ],
+    "non_goals": [
+      "not a completed run",
+      "not research evidence",
+      "not a synthesis export",
+      "not a replacement for the chunked_source_grounding method family",
+      "not strategy validation",
+      "not product authority",
+      "not architecture or graduation evidence"
+    ]
+  }
+}
