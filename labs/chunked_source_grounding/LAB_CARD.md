@@ -6,13 +6,9 @@ This lab explores chunked source-span readers for messy trader educational text.
 
 ## Current Evidence State
 
-- scaffold fixture exports exist for protocol shape only
-- proposal-only live export records and manual reviews exist under `EXPORTS/`
-- one bounded negative result showed that an oversized Flash output contract can truncate before content review
-- narrowed Pro source-grounding runs produced complete parseable artifacts under proposal-only boundaries
-- the source-span precision repeat generalized to a second-source excerpt with caveats
-- strict source-span re-review records now add canonical offsets, line ranges, and quote hashes for pilots 003 and 004 without changing protocol
-- the source-span locator candidate pilot has produced a proposal-only export set, strict manual locator review found useful line ranges but inaccurate char offsets, and the comparison note now points to a line-range-first locator contract
+- scaffold fixtures, proposal-only live records, and manual reviews exist under the protocol boundary
+- detailed evidence lives in export records and the lab-local comparison note, not in this lab card
+- the current comparison note points to a line-range-first locator contract because line ranges were useful while char offsets and quote-hash support remained weak
 
 current details live in protocol export records and the comparison note:
 

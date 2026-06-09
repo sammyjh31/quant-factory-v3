@@ -89,39 +89,28 @@ Labs are intentionally not installable packages yet. They are isolated research 
 
 ## Current Phase
 
-Current phase: `milestone-2-live-pilot-recorded`
+Current phase: `milestone-3-method-comparison-recorded`
 
-The scaffold baseline is accepted. Milestone 2 now has proposal-only live LLM pilot export records and manual reviews under `labs/long_context_judgment/EXPORTS/` and `labs/chunked_source_grounding/EXPORTS/`.
+The scaffold baseline is accepted, and the portfolio has moved from isolated live-pilot recording into method-comparison work. README owns the project purpose, commands, and routing. It does not own pilot-level evidence or method conclusions.
 
-Detailed pilot-level evidence lives in protocol export records and lab-local comparison notes. Current portfolio posture is routed through `PORTFOLIO_CURRENT.md`, `LAB_REGISTRY.md`, and the active lab cards.
+Current status is routed through:
 
-The active comparison thread includes source-span precision and a second-source repeat, but the README does not own that evidence.
+See:
+
+* `PORTFOLIO_CURRENT.md`
+* `LAB_REGISTRY.md`
+* `labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md`
+* `docs/llm-experimentation-model.md`
+* `docs/research-lifecycle.md`
+* `docs/live-llm-experiment-admission.md`
+
+The current next proposed step is Goal 12A planning for a line-range-first locator contract.
 
 The live records are proposal-only. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
 Milestone one was not a limitation on V3’s ambition. It created the first safety and comparison harness.
 
-The accepted scaffold contains:
-
-* shared protocol schemas,
-* metadata-safe benchmark packs,
-* three starter lab skeletons,
-* positive and negative fixture records,
-* validation tools,
-* read-only synthesis,
-* currentness docs,
-* and tests proving the scaffold boundaries.
-
 Live-pilot planning packets remain under each lab's `PLANNING/` directory. Planning packets are not in `EXPORTS/`, are not imported by synthesis, and are not research evidence.
-
-The purpose of these live pilots is to prove that real model calls can be recorded, evaluated at the boundary, compared, and contained without turning output into truth.
-
-See:
-
-* `PORTFOLIO_CURRENT.md`
-* `docs/llm-experimentation-model.md`
-* `docs/research-lifecycle.md`
-* `docs/live-llm-experiment-admission.md`
 
 ---
 

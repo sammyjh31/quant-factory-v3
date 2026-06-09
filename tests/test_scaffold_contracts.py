@@ -131,13 +131,6 @@ LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
 )
 LIVE_PILOT_NOTE_ID = "long_context_judgment_live_pilot_001_note"
 LIVE_PILOT_SOURCE_REF_PREFIX = "raw_corpora_sha256:"
-LIVE_PILOT_POST_RUN_EXPORTS = {
-    "run_record.live_pilot_001.json",
-    "artifact_envelope.live_pilot_001.json",
-    "evaluation_record.live_pilot_001.json",
-    "research_note.live_pilot_001.json",
-}
-LIVE_PILOT_CONTENT_REVIEW_EXPORT = "evaluation_record.live_pilot_001_manual_content_review.json"
 CHUNKED_LIVE_PILOT_RUN_ID = "chunked_source_grounding_live_pilot_001_run"
 CHUNKED_LIVE_PILOT_ARTIFACT_ID = "chunked_source_grounding_live_pilot_001_artifact"
 CHUNKED_LIVE_PILOT_EVALUATION_ID = "chunked_source_grounding_live_pilot_001_eval"
@@ -145,50 +138,8 @@ CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
     "chunked_source_grounding_live_pilot_001_manual_content_review"
 )
 CHUNKED_LIVE_PILOT_NOTE_ID = "chunked_source_grounding_live_pilot_001_note"
-CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS = {
-    "run_record.live_pilot_001.json",
-    "artifact_envelope.live_pilot_001.json",
-    "evaluation_record.live_pilot_001.json",
-    "research_note.live_pilot_001.json",
-}
-CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
-    "evaluation_record.live_pilot_001_manual_content_review.json"
-)
-CHUNKED_PRO_LIVE_PILOT_POST_RUN_EXPORTS = {
-    "run_record.live_pilot_002.json",
-    "artifact_envelope.live_pilot_002.json",
-    "evaluation_record.live_pilot_002.json",
-    "research_note.live_pilot_002.json",
-}
-CHUNKED_SPAN_LIVE_PILOT_POST_RUN_EXPORTS = {
-    "run_record.live_pilot_003.json",
-    "artifact_envelope.live_pilot_003.json",
-    "evaluation_record.live_pilot_003.json",
-    "research_note.live_pilot_003.json",
-}
-CHUNKED_SPAN_REPEAT_LIVE_PILOT_POST_RUN_EXPORTS = {
-    "run_record.live_pilot_004.json",
-    "artifact_envelope.live_pilot_004.json",
-    "evaluation_record.live_pilot_004.json",
-    "research_note.live_pilot_004.json",
-}
-CHUNKED_LOCATOR_LIVE_PILOT_POST_RUN_EXPORTS = {
-    "run_record.live_pilot_005.json",
-    "artifact_envelope.live_pilot_005.json",
-    "evaluation_record.live_pilot_005.json",
-    "research_note.live_pilot_005.json",
-}
-CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
-    "evaluation_record.live_pilot_002_manual_content_review.json"
-)
-CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
-    "evaluation_record.live_pilot_003_manual_content_review.json"
-)
 CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EVALUATION_ID = (
     "chunked_source_grounding_live_pilot_004_manual_content_review"
-)
-CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT = (
-    "evaluation_record.live_pilot_004_manual_content_review.json"
 )
 CHUNKED_SPAN_STRICT_REVIEW_003_EVALUATION_ID = (
     "chunked_source_grounding_live_pilot_003_strict_span_review"
@@ -218,6 +169,38 @@ PROTOCOL_SCHEMA_NAMES = {
     "RunRecord.schema.json",
     "SourceRef.schema.json",
 }
+
+CURRENT_PHASE = "milestone-3-method-comparison-recorded"
+CURRENT_NEXT_STEP = "Goal 12A planning for a line-range-first locator contract"
+ROUTER_LEDGER_PATTERNS = (
+    r"labs/[^\s`]+/EXPORTS/(?:run_record|artifact_envelope|evaluation_record|research_note)"
+    r"\.live_pilot_\d+\.json",
+    r"evaluation_record\.live_pilot_\d+_manual_content_review\.json",
+    r"manual content review (?:failed|passed) for pilot \d+",
+    r"chunked_source_grounding_live_pilot_00[1-5]",
+)
+
+
+def assert_currentness_router_not_ledger(text: str):
+    assert "generated synthesis metrics" not in text.lower()
+    assert "provider_payload" not in text
+    assert "raw_source_text" not in text
+    assert "raw_model_output" not in text
+    for pattern in ROUTER_LEDGER_PATTERNS:
+        assert not re.search(pattern, text), pattern
+
+
+def live_pilot_export_names(pilot_number: str) -> set[str]:
+    return {
+        f"run_record.live_pilot_{pilot_number}.json",
+        f"artifact_envelope.live_pilot_{pilot_number}.json",
+        f"evaluation_record.live_pilot_{pilot_number}.json",
+        f"research_note.live_pilot_{pilot_number}.json",
+    }
+
+
+def manual_content_review_export_name(pilot_number: str) -> str:
+    return f"evaluation_record.live_pilot_{pilot_number}_manual_content_review.json"
 
 
 def load_json(path: Path):
@@ -585,7 +568,7 @@ def test_all_lab_exports_validate_and_include_positive_and_negative_fixtures():
     assert len(fixture_paths) == 3
     live_export_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
     assert {path.name for path in live_export_dir.glob("*.live_pilot_001.json")} == (
-        LIVE_PILOT_POST_RUN_EXPORTS
+        live_pilot_export_names("001")
     )
     for path in export_paths:
         records = list(iter_records(path))
@@ -950,7 +933,7 @@ def test_goal4_live_pilot_run_admission_update_preserves_admitted_scope():
     ]:
         assert expected_path in update
 
-    for expected_export in LIVE_PILOT_POST_RUN_EXPORTS:
+    for expected_export in live_pilot_export_names("001"):
         assert f"labs/long_context_judgment/EXPORTS/{expected_export}" in update
 
     summary = synthesize_exports(root=ROOT)
@@ -985,7 +968,7 @@ def test_goal4_live_pilot_run_admission_update_preserves_admitted_scope():
 def test_goal5_live_pilot_export_set_is_protocol_valid_and_bounded():
     export_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
     live_exports = {path.name: load_json(path) for path in export_dir.glob("*.live_pilot_001.json")}
-    assert set(live_exports) == LIVE_PILOT_POST_RUN_EXPORTS
+    assert set(live_exports) == live_pilot_export_names("001")
     for record in live_exports.values():
         validate_record(record)
 
@@ -1065,7 +1048,7 @@ def test_goal5_live_pilot_export_set_is_protocol_valid_and_bounded():
         path.read_text()
         for path in [
             export_dir / name
-            for name in sorted(LIVE_PILOT_POST_RUN_EXPORTS)
+            for name in sorted(live_pilot_export_names("001"))
         ]
     )
     for forbidden in [
@@ -1089,8 +1072,8 @@ def test_goal6_content_review_plan_is_planning_only_and_calibrates_evaluators():
         ).glob("*.schema.json")
     }
 
-    assert live_export_names == LIVE_PILOT_POST_RUN_EXPORTS
-    assert (export_dir / LIVE_PILOT_CONTENT_REVIEW_EXPORT).exists()
+    assert live_export_names == live_pilot_export_names("001")
+    assert (export_dir / manual_content_review_export_name("001")).exists()
     assert protocol_schema_names == PROTOCOL_SCHEMA_NAMES
 
     for required in [
@@ -1132,7 +1115,7 @@ def test_goal6_content_review_plan_is_planning_only_and_calibrates_evaluators():
 
 def test_goal6c_b_manual_content_review_export_is_single_bounded_and_current():
     export_dir = ROOT / "labs" / "long_context_judgment" / "EXPORTS"
-    content_review_path = export_dir / LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    content_review_path = export_dir / manual_content_review_export_name("001")
     assert content_review_path.exists()
 
     record = load_json(content_review_path)
@@ -1409,7 +1392,7 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
 def test_goal7b_chunked_source_grounding_live_export_set_is_protocol_valid_and_bounded():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
     live_exports = {path.name: load_json(path) for path in export_dir.glob("*.live_pilot_001.json")}
-    assert set(live_exports) == CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS
+    assert set(live_exports) == live_pilot_export_names("001")
     for record in live_exports.values():
         validate_record(record)
 
@@ -1528,7 +1511,7 @@ def test_goal7b_chunked_source_grounding_live_export_set_is_protocol_valid_and_b
         path.read_text()
         for path in [
             export_dir / name
-            for name in sorted(CHUNKED_LIVE_PILOT_POST_RUN_EXPORTS)
+            for name in sorted(live_pilot_export_names("001"))
         ]
     )
     for forbidden in [
@@ -1551,7 +1534,7 @@ def test_goal7b_chunked_source_grounding_live_export_set_is_protocol_valid_and_b
 
 def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_only():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
-    content_review_path = export_dir / CHUNKED_LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    content_review_path = export_dir / manual_content_review_export_name("001")
     assert content_review_path.exists()
 
     record = load_json(content_review_path)
@@ -1858,7 +1841,7 @@ def test_goal7d_deepseek_v4_pro_rerun_planning_packet_is_contained_and_narrower(
 def test_goal7e_deepseek_v4_pro_live_export_set_is_protocol_valid_and_bounded():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
     live_exports = {path.name: load_json(path) for path in export_dir.glob("*.live_pilot_002.json")}
-    assert set(live_exports) == CHUNKED_PRO_LIVE_PILOT_POST_RUN_EXPORTS
+    assert set(live_exports) == live_pilot_export_names("002")
     for record in live_exports.values():
         validate_record(record)
 
@@ -2013,7 +1996,7 @@ def test_goal7e_deepseek_v4_pro_live_export_set_is_protocol_valid_and_bounded():
         path.read_text()
         for path in [
             export_dir / name
-            for name in sorted(CHUNKED_PRO_LIVE_PILOT_POST_RUN_EXPORTS)
+            for name in sorted(live_pilot_export_names("002"))
         ]
     )
     for forbidden in [
@@ -2037,7 +2020,7 @@ def test_goal7e_deepseek_v4_pro_live_export_set_is_protocol_valid_and_bounded():
 
 def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
-    content_review_path = export_dir / CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    content_review_path = export_dir / manual_content_review_export_name("002")
     assert content_review_path.exists()
 
     record = load_json(content_review_path)
@@ -2128,14 +2111,13 @@ def test_goal7f_chunked_pro_manual_content_review_records_grounding_result_only(
 
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
-    readme = (ROOT / "README.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
-    for currentness_doc in [lab_registry, readme, lab_card]:
+    for currentness_doc in [lab_registry, lab_card]:
         assert "manual review" in currentness_doc.lower()
         assert "manual content review remains" not in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
     assert "manual reviews" in portfolio
-    assert CHUNKED_PRO_LIVE_PILOT_CONTENT_REVIEW_EXPORT not in portfolio
+    assert manual_content_review_export_name("002") not in portfolio
     assert "generated synthesis metrics" not in portfolio.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
@@ -2246,7 +2228,7 @@ def test_goal8e_comparison_note_includes_source_span_precision_without_authority
     assert "chunked_source_grounding_live_pilot_003" not in portfolio
     assert "chunked_source_grounding_live_pilot_004" not in portfolio
     assert "Goal 8E" not in portfolio
-    assert "live_pilot_method_comparison_001.md" not in readme
+    assert "live_pilot_method_comparison_001.md" in readme
     for currentness_doc in [portfolio, readme]:
         assert "generated synthesis metrics" not in currentness_doc.lower()
 
@@ -2288,39 +2270,20 @@ def test_portfolio_current_is_router_not_live_export_ledger():
         ),
         (
             "Goal 11E comparison-note update is complete. The next proposed step is "
-            "Goal 12A planning for a line-range-first locator contract."
+            f"{CURRENT_NEXT_STEP}."
         ),
     ]:
         assert required in portfolio
 
     for removed_ledger_text in [
         "## Live LLM Experiment Status",
-        "chunked_source_grounding_live_pilot_001",
-        "chunked_source_grounding_live_pilot_002",
-        "chunked_source_grounding_live_pilot_003",
-        "chunked_source_grounding_live_pilot_004",
         "The proposal-only live export set and manual content-review EvaluationRecord are:",
         "The chunked/source-grounded proposal-only live export set is:",
         "The DeepSeek V4 Pro proposal-only live export set is:",
-        "labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json",
-        "labs/long_context_judgment/EXPORTS/artifact_envelope.live_pilot_001.json",
-        "labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001.json",
-        "labs/long_context_judgment/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json",
-        "labs/long_context_judgment/EXPORTS/research_note.live_pilot_001.json",
-        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json",
-        "labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_001.json",
-        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001.json",
-        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_001_manual_content_review.json",
-        "labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_001.json",
-        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_002.json",
-        "labs/chunked_source_grounding/EXPORTS/artifact_envelope.live_pilot_002.json",
-        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002.json",
-        "labs/chunked_source_grounding/EXPORTS/evaluation_record.live_pilot_002_manual_content_review.json",
-        "labs/chunked_source_grounding/EXPORTS/research_note.live_pilot_002.json",
     ]:
         assert removed_ledger_text not in portfolio
 
-    assert "generated synthesis metrics" not in portfolio.lower()
+    assert_currentness_router_not_ledger(portfolio)
 
 
 def test_goal10a_source_span_evaluator_planning_packet_is_contained():
@@ -2458,7 +2421,7 @@ def test_goal10a_source_span_evaluator_planning_packet_is_contained():
     assert "Current phase: `milestone-3-method-comparison-recorded`" in portfolio
     assert "Current phase: `milestone-2-live-pilot-recorded`" not in portfolio
     assert "canonical offsets" in portfolio
-    assert "canonical offsets" in lab_card
+    assert "line-range-first locator contract" in lab_card
     for currentness_doc in [portfolio, lab_card]:
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_005" not in currentness_doc
@@ -2601,7 +2564,6 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert "strict source-span re-review" in currentness_doc
         assert "Goal 11E comparison-note update is complete" in currentness_doc
         assert "Goal 12A" in currentness_doc
         assert "line-range-first locator contract" in currentness_doc
@@ -3128,7 +3090,7 @@ def test_goal11c_source_span_locator_live_export_set_is_protocol_valid_and_bound
     live_exports = {
         path.name: load_json(path) for path in export_dir.glob("*.live_pilot_005.json")
     }
-    assert set(live_exports) == CHUNKED_LOCATOR_LIVE_PILOT_POST_RUN_EXPORTS
+    assert set(live_exports) == live_pilot_export_names("005")
     for record in live_exports.values():
         validate_record(record)
 
@@ -3289,7 +3251,7 @@ def test_goal11c_source_span_locator_live_export_set_is_protocol_valid_and_bound
 
     combined_committed = "\n".join(
         (export_dir / name).read_text()
-        for name in sorted(CHUNKED_LOCATOR_LIVE_PILOT_POST_RUN_EXPORTS)
+        for name in sorted(live_pilot_export_names("005"))
     )
     for forbidden in [
         "BEGIN RAW SOURCE",
@@ -3504,6 +3466,12 @@ def test_goal9e_currentness_docs_are_compressed_routers_not_ledgers():
     chunked_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
 
     assert "protocol-valid export records appropriate to their current phase" in readme
+    assert f"Current phase: `{CURRENT_PHASE}`" in readme
+    assert "Current phase: `milestone-2-live-pilot-recorded`" not in readme
+    assert "Goal 12A" in readme
+    assert "PORTFOLIO_CURRENT.md" in readme
+    assert "LAB_REGISTRY.md" in readme
+    assert "live_pilot_method_comparison_001.md" in readme
     assert "export fixture records through the protocol" not in readme
     assert "Only two installable packages exist in milestone one" not in readme
 
@@ -3531,37 +3499,24 @@ def test_goal9e_currentness_docs_are_compressed_routers_not_ledgers():
         "## Current Evidence State",
         "## Current Active Research Thread",
         "live_pilot_method_comparison_001.md",
-        "source-span precision repeat",
-        "bounded negative result",
+        "line-range-first locator contract",
         "proposal-only",
     ]:
         assert required in chunked_card
     assert "Current records:" not in chunked_card
+    for ledgerish_card_text in [
+        "one bounded negative result",
+        "narrowed Pro source-grounding runs",
+        "strict source-span re-review records now add",
+        "for pilots 003 and 004",
+    ]:
+        assert ledgerish_card_text not in chunked_card
 
     compressed_docs = [readme, portfolio, lab_registry, chunked_card]
     for doc in compressed_docs:
-        assert "generated synthesis metrics" not in doc.lower()
+        assert_currentness_router_not_ledger(doc)
         assert "manual content review has not been completed" not in doc
         assert "no model call or export records exist" not in doc
-        assert "provider_payload" not in doc
-        assert "raw_source_text" not in doc
-        assert "raw_model_output" not in doc
-
-    ledger_fragments = [
-        "labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json",
-        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json",
-        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_002.json",
-        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_003.json",
-        "labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_004.json",
-        "evaluation_record.live_pilot_004_manual_content_review.json",
-        "labs/chunked_source_grounding/PLANNING/live_llm_pilot_004/",
-        "manual content review failed for pilot 001 with score 0.2",
-        "manual content review passed for pilot 002 with caveats",
-        "manual content review passed for pilot 003 with caveats",
-        "manual content review passed for pilot 004 with caveats",
-    ]
-    for fragment in ledger_fragments:
-        assert all(fragment not in doc for doc in compressed_docs)
 
 
 def test_goal8b_source_span_precision_planning_packet_is_contained_and_current():
@@ -3776,9 +3731,10 @@ def test_goal8b_source_span_precision_planning_packet_is_contained_and_current()
     readme = (ROOT / "README.md").read_text()
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
-    for currentness_doc in [readme, portfolio, lab_registry]:
+    for currentness_doc in [portfolio, lab_registry]:
         assert "source-span precision" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert_currentness_router_not_ledger(readme)
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
@@ -4039,17 +3995,19 @@ def test_goal9a_second_source_span_precision_repeat_planning_packet_is_contained
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
-    for currentness_doc in [readme, portfolio, lab_registry, lab_card]:
+    for currentness_doc in [portfolio, lab_registry]:
         assert "second-source" in currentness_doc
         assert "source-span precision" in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    for router_doc in [readme, lab_card]:
+        assert_currentness_router_not_ledger(router_doc)
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
 def test_goal8c_source_span_precision_live_export_set_is_protocol_valid_and_bounded():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
     live_exports = {path.name: load_json(path) for path in export_dir.glob("*.live_pilot_003.json")}
-    assert set(live_exports) == CHUNKED_SPAN_LIVE_PILOT_POST_RUN_EXPORTS
+    assert set(live_exports) == live_pilot_export_names("003")
     for record in live_exports.values():
         validate_record(record)
 
@@ -4202,7 +4160,7 @@ def test_goal8c_source_span_precision_live_export_set_is_protocol_valid_and_boun
         path.read_text()
         for path in [
             export_dir / name
-            for name in sorted(CHUNKED_SPAN_LIVE_PILOT_POST_RUN_EXPORTS)
+            for name in sorted(live_pilot_export_names("003"))
         ]
     )
     for forbidden in [
@@ -4220,10 +4178,11 @@ def test_goal8c_source_span_precision_live_export_set_is_protocol_valid_and_boun
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     readme = (ROOT / "README.md").read_text()
-    for currentness_doc in [portfolio, lab_registry, readme]:
+    for currentness_doc in [portfolio, lab_registry]:
         assert "source-span precision" in currentness_doc
         assert "Goal 8C instruction" not in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    assert_currentness_router_not_ledger(readme)
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
@@ -4232,7 +4191,7 @@ def test_goal9b_second_source_span_precision_live_export_set_is_protocol_valid_a
     live_exports = {
         path.name: load_json(path) for path in export_dir.glob("*.live_pilot_004.json")
     }
-    assert set(live_exports) == CHUNKED_SPAN_REPEAT_LIVE_PILOT_POST_RUN_EXPORTS
+    assert set(live_exports) == live_pilot_export_names("004")
     for record in live_exports.values():
         validate_record(record)
 
@@ -4397,7 +4356,7 @@ def test_goal9b_second_source_span_precision_live_export_set_is_protocol_valid_a
         path.read_text()
         for path in [
             export_dir / name
-            for name in sorted(CHUNKED_SPAN_REPEAT_LIVE_PILOT_POST_RUN_EXPORTS)
+            for name in sorted(live_pilot_export_names("004"))
         ]
     )
     for forbidden in [
@@ -4416,20 +4375,22 @@ def test_goal9b_second_source_span_precision_live_export_set_is_protocol_valid_a
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     readme = (ROOT / "README.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
-    for currentness_doc in [portfolio, lab_registry, readme, lab_card]:
+    for currentness_doc in [portfolio, lab_registry]:
         assert "second-source" in currentness_doc
         assert "source-span precision" in currentness_doc
         assert "no model call or export records exist for that pilot yet" not in (
             currentness_doc
         )
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    for router_doc in [readme, lab_card]:
+        assert_currentness_router_not_ledger(router_doc)
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
 def test_goal9c_second_source_span_precision_content_review_is_bounded():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
     content_review_path = (
-        export_dir / CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT
+        export_dir / manual_content_review_export_name("004")
     )
     assert content_review_path.exists()
 
@@ -4533,7 +4494,7 @@ def test_goal9c_second_source_span_precision_content_review_is_bounded():
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     readme = (ROOT / "README.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
-    for currentness_doc in [lab_registry, readme, lab_card]:
+    for currentness_doc in [lab_registry]:
         assert "second-source" in currentness_doc
         assert "source-span precision" in currentness_doc
         assert "manual review" in currentness_doc.lower()
@@ -4541,8 +4502,10 @@ def test_goal9c_second_source_span_precision_content_review_is_bounded():
             currentness_doc
         )
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    for router_doc in [readme, lab_card]:
+        assert_currentness_router_not_ledger(router_doc)
     assert "second-source source-span precision repeat" in portfolio
-    assert CHUNKED_SPAN_REPEAT_LIVE_PILOT_CONTENT_REVIEW_EXPORT not in portfolio
+    assert manual_content_review_export_name("004") not in portfolio
     assert "Goal 9C" not in portfolio
     assert "generated synthesis metrics" not in portfolio.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
@@ -4550,7 +4513,7 @@ def test_goal9c_second_source_span_precision_content_review_is_bounded():
 
 def test_goal8d_source_span_precision_manual_content_review_records_precision_result_only():
     export_dir = ROOT / "labs" / "chunked_source_grounding" / "EXPORTS"
-    content_review_path = export_dir / CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EXPORT
+    content_review_path = export_dir / manual_content_review_export_name("003")
     assert content_review_path.exists()
 
     record = load_json(content_review_path)
@@ -4647,13 +4610,15 @@ def test_goal8d_source_span_precision_manual_content_review_records_precision_re
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     readme = (ROOT / "README.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
-    for currentness_doc in [lab_registry, readme, lab_card]:
+    for currentness_doc in [lab_registry]:
         assert "source-span precision" in currentness_doc
         assert "manual review" in currentness_doc.lower()
         assert "manual content review is still required" not in currentness_doc
         assert "generated synthesis metrics" not in currentness_doc.lower()
+    for router_doc in [readme, lab_card]:
+        assert_currentness_router_not_ledger(router_doc)
     assert "source-span precision" in portfolio
-    assert CHUNKED_SPAN_LIVE_PILOT_CONTENT_REVIEW_EXPORT not in portfolio
+    assert manual_content_review_export_name("003") not in portfolio
     assert "Goal 8D" not in portfolio
     assert "generated synthesis metrics" not in portfolio.lower()
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
@@ -4900,14 +4865,16 @@ def test_lab_cards_match_current_live_pilot_posture_without_stale_fixture_langua
         "## Current Evidence State",
         "## Current Active Research Thread",
         "live_pilot_method_comparison_001.md",
-        "bounded negative result",
-        "source-span precision repeat",
-        "second-source",
+        "line-range-first locator contract",
         "current details live in protocol export records and the comparison note",
     ]:
         assert required in chunked_card
     for removed_ledger_text in [
         "Current records:",
+        "one bounded negative result",
+        "narrowed Pro source-grounding runs",
+        "source-span precision repeat generalized",
+        "for pilots 003 and 004",
         "manual content review failed for pilot 001 with score 0.2",
         "manual content review passed for pilot 002 with caveats",
         "manual content review passed for pilot 003 with caveats",
