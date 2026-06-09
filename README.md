@@ -35,13 +35,13 @@ Labs may be methodologically weird. Exports must be boring.
 
 ## Why This Repo Exists
 
-The purpose of this repository is to create the first V3 federation scaffold.
+The purpose of this repository is to maintain the V3 federation harness: independent labs, a tiny shared protocol, benchmark packs, live-experiment admission guardrails, read-only synthesis, currentness routing, and tests.
 
-The scaffold does not try to answer the research questions yet. It creates the measurement and comparison harness needed before live LLM experiments begin.
+The original milestone-one scaffold did not try to answer the research questions. It created the measurement and comparison harness needed before live LLM experiments could begin.
 
-Milestone one proves that independent labs can publish comparable fixture records through a shared protocol, and that synthesis can read those records without becoming authority.
+Current work uses that harness for proposal-only live pilots, manual reviews, method comparisons, and bounded research planning without turning any single experiment into architecture.
 
-Future milestones will add real LLM method runs, model comparisons, source-grounding evaluations, multimodal experiments, graph-building experiments, product-output experiments, and cross-lab graduation reviews.
+Future milestones will add broader LLM method runs, model comparisons, source-grounding evaluations, multimodal experiments, graph-building experiments, product-output experiments, and cross-lab graduation reviews.
 
 ---
 
@@ -95,8 +95,6 @@ The scaffold baseline is accepted, and the portfolio has moved from isolated liv
 
 Current status is routed through:
 
-See:
-
 * `PORTFOLIO_CURRENT.md`
 * `LAB_REGISTRY.md`
 * `labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md`
@@ -138,7 +136,7 @@ This rule exists to keep V3 exploratory without recreating V2-style drift.
 
 ## Commands
 
-Expected day-one commands:
+Common verification commands:
 
 ```bash
 uv run pytest
