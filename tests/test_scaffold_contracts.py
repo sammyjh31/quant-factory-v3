@@ -64,6 +64,9 @@ GOAL12A_LINE_RANGE_CONTRACT_DIR = (
 GOAL11B_PILOT_DIR = (
     ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "live_llm_pilot_005"
 )
+GOAL12B_PILOT_DIR = (
+    ROOT / "labs" / "chunked_source_grounding" / "PLANNING" / "live_llm_pilot_006"
+)
 GOAL9A_SOURCE_PATH = (
     ROOT / "raw_corpora" / "selected" / "source_span_precision_repeat_001" / "source.txt"
 )
@@ -88,6 +91,8 @@ GOAL9A_METHOD_ID = "chunked_source_grounding_live_pilot_004_method"
 GOAL9A_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_004"
 GOAL11B_METHOD_ID = "chunked_source_grounding_live_pilot_005_method"
 GOAL11B_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_005"
+GOAL12B_METHOD_ID = "chunked_source_grounding_live_pilot_006_method"
+GOAL12B_EXPERIMENT_ID = "chunked_source_grounding_live_pilot_006"
 CHUNKED_PRO_LIVE_PILOT_RUN_ID = "chunked_source_grounding_live_pilot_002_run"
 CHUNKED_PRO_LIVE_PILOT_ARTIFACT_ID = (
     "chunked_source_grounding_live_pilot_002_artifact"
@@ -178,9 +183,9 @@ PROTOCOL_SCHEMA_NAMES = {
 }
 
 CURRENT_PHASE = "milestone-3-method-comparison-recorded"
-CURRENT_COMPLETED_STEP = "Goal 12A line-range-first locator contract planning is complete"
+CURRENT_COMPLETED_STEP = "Goal 12B live-run admission planning is complete"
 CURRENT_NEXT_STEP = (
-    "Goal 12B live-run admission planning for a line-range-first locator pilot"
+    "Goal 12C execution of the admitted line-range-first locator pilot"
 )
 ROUTER_LEDGER_PATTERNS = (
     r"labs/[^\s`]+/EXPORTS/(?:run_record|artifact_envelope|evaluation_record|research_note)"
@@ -200,10 +205,10 @@ def assert_currentness_router_not_ledger(text: str):
         assert not re.search(pattern, text), pattern
 
 
-def assert_currentness_routes_to_goal12b(text: str):
+def assert_currentness_routes_to_goal12c(text: str):
     assert CURRENT_COMPLETED_STEP in text
     assert CURRENT_NEXT_STEP in text
-    assert "line-range-first locator contract" in text
+    assert "line-range-first locator" in text
     assert "generated synthesis metrics" not in text.lower()
 
 
@@ -658,6 +663,9 @@ def test_run_records_link_required_protocol_ids():
         load_json(GOAL11B_PILOT_DIR / "method_card.proposed.json")["method_card"][
             "method_id"
         ],
+        load_json(GOAL12B_PILOT_DIR / "method_card.proposed.json")["method_card"][
+            "method_id"
+        ],
     }
     experiment_ids = {
         record["experiment_card"]["experiment_id"] for record in records_by_schema("ExperimentCard")
@@ -679,6 +687,9 @@ def test_run_records_link_required_protocol_ids():
             "experiment_card"
         ]["experiment_id"],
         load_json(GOAL11B_PILOT_DIR / "experiment_card.proposed.json")[
+            "experiment_card"
+        ]["experiment_id"],
+        load_json(GOAL12B_PILOT_DIR / "experiment_card.proposed.json")[
             "experiment_card"
         ]["experiment_id"],
     }
@@ -2578,7 +2589,7 @@ def test_goal10b_strict_span_manual_reviews_are_protocol_records_only():
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
     assert "The current next step is evaluator planning" not in portfolio
     assert "The active thread is source-span evaluator planning" not in lab_card
     assert "current next step is comparison-note compression" not in portfolio
@@ -2667,7 +2678,7 @@ def test_goal10c_comparison_note_compresses_strict_span_review_findings():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator candidate pilot" in currentness_doc
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
     assert "current next step is comparison-note compression" not in portfolio
     assert "The active thread is Goal 10C comparison-note compression" not in lab_card
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
@@ -2829,7 +2840,7 @@ def test_goal11a_source_span_locator_contract_planning_packet_is_contained():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
         assert "source-span locator candidate pilot" in currentness_doc
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
@@ -3002,9 +3013,305 @@ def test_goal12a_line_range_first_locator_contract_planning_packet_is_contained(
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
         assert "generated synthesis metrics" not in currentness_doc.lower()
         assert "run_record.live_pilot_006" not in currentness_doc
+    assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
+
+
+def test_goal12b_line_range_first_live_admission_packet_is_contained_and_current():
+    required_files = {
+        "admission.md",
+        "method_card.proposed.json",
+        "experiment_card.proposed.json",
+        "evaluator_plan.md",
+        "source_privacy_boundary.md",
+        "prompt_template.live_pilot_006.md",
+        "run_admission_update.md",
+        "stop_condition.md",
+    }
+    assert GOAL9A_SOURCE_PATH.exists()
+    source_text = GOAL9A_SOURCE_PATH.read_text()
+    source_word_count = len(source_text.split())
+    source_hash = sha256_file(GOAL9A_SOURCE_PATH)
+    source_ref = f"raw_corpora_sha256:{source_hash[:16]}"
+
+    assert GOAL12B_PILOT_DIR.exists()
+    assert {path.name for path in GOAL12B_PILOT_DIR.iterdir() if path.is_file()} == (
+        required_files
+    )
+
+    method_card = load_json(GOAL12B_PILOT_DIR / "method_card.proposed.json")
+    experiment_card = load_json(GOAL12B_PILOT_DIR / "experiment_card.proposed.json")
+    validate_record(method_card)
+    validate_record(experiment_card)
+
+    method = method_card["method_card"]
+    assert method_card["schema_name"] == "MethodCard"
+    assert method_card["schema_version"] == CURRENT_SCHEMA_VERSION
+    assert method["method_id"] == GOAL12B_METHOD_ID
+    assert method["lab_id"] == "chunked_source_grounding"
+    assert method["method_family"] == "chunked_source_grounded_llm_reader_proposed"
+    assert "line_range_locator_contract_001" in " ".join(method["intended_inputs"])
+    assert "same selected second-source excerpt as pilots 004 and 005" in " ".join(
+        method["intended_inputs"]
+    )
+    intended_outputs = " ".join(method["intended_outputs"])
+    assert "line-range locator candidates" in intended_outputs
+    assert "character offsets after line-range validation" in intended_outputs
+    assert "locally computed quote hashes from validated spans" in intended_outputs
+    assert "candidate_char_start" not in intended_outputs
+    assert "quote_hash_candidate" not in intended_outputs
+    assert "model must not emit character offsets" in " ".join(method["known_risks"])
+    assert "not a completed run" in method["non_goals"]
+    assert "not architecture or graduation evidence" in method["non_goals"]
+
+    experiment = experiment_card["experiment_card"]
+    assert experiment_card["schema_name"] == "ExperimentCard"
+    assert experiment_card["schema_version"] == CURRENT_SCHEMA_VERSION
+    assert experiment["experiment_id"] == GOAL12B_EXPERIMENT_ID
+    assert experiment["lab_id"] == "chunked_source_grounding"
+    assert experiment["benchmark_pack_ids"] == ["text_judgment_v0"]
+    assert experiment["method_ids"] == [GOAL12B_METHOD_ID]
+    assert experiment["expected_artifact_types"] == [
+        "chunked_source_line_range_locator_candidate_proposal"
+    ]
+    assert "reviewable line-range locator candidates directly" in (
+        experiment["research_question"]
+    )
+    assert "local review/tooling computes character offsets and quote hashes" in (
+        experiment["research_question"]
+    )
+    assert "line-range-first output contract" in experiment["evaluation_plan"]
+    assert "model-emitted character offsets" not in experiment["evaluation_plan"]
+
+    planning_records = [method_card, experiment_card]
+    forbidden_live_record_schemas = {
+        "RunRecord",
+        "ArtifactEnvelope",
+        "EvaluationRecord",
+        "ResearchNote",
+    }
+    assert forbidden_live_record_schemas.isdisjoint(
+        {record["schema_name"] for record in planning_records}
+    )
+    assert "EXPORTS" not in GOAL12B_PILOT_DIR.parts
+    assert not list(
+        (ROOT / "labs" / "chunked_source_grounding" / "EXPORTS").glob(
+            "*.live_pilot_006.json"
+        )
+    )
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
+
+    admission = (GOAL12B_PILOT_DIR / "admission.md").read_text()
+    for required_heading in [
+        "Hardening / Cleanup Discipline",
+        "Goal 12A Contract Reuse",
+        "Active Benchmark Pack",
+        "MethodCard",
+        "ExperimentCard",
+        "Evaluator Plan",
+        "Source / Privacy Boundary",
+        "Prompt / Template Hash Plan",
+        "Model / Config Recording Plan",
+        "Output Artifact Types",
+        "Negative-Result Value",
+        "Stop Condition",
+        "Budget / Secrets Handling",
+        "Proposal-Only Statement",
+    ]:
+        assert required_heading in admission
+    for required_guardrail in [
+        "This is planning/admission only. No LLM call has been made.",
+        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        "Goal 12A planned a line-range-first locator contract.",
+        "Do not ask the model to emit character offsets.",
+        "Do not ask the model to emit quote hashes.",
+        "local review/tooling computes character offsets only after line-range validation",
+        "quote hashes are computed locally only from validated spans",
+        "Do not add broad judgment abstraction notes.",
+        "Do not add full comparison commentary.",
+        "Do not ask for a product-like study card.",
+        "Do not add strategy, validation, trading advice, or playbook content.",
+    ]:
+        assert required_guardrail in admission
+
+    evaluator_plan = (GOAL12B_PILOT_DIR / "evaluator_plan.md").read_text()
+    for required in [
+        "schema_check",
+        "manual_boundary_review",
+        "manual_content_review",
+        "line-range locator candidates",
+        "exact | approximate | broad | missing",
+        "line range directly supports the claim",
+        "computed quote hash",
+        "overclaimed_exactness",
+        "no new evaluator type",
+    ]:
+        assert required in evaluator_plan
+
+    source_boundary = (GOAL12B_PILOT_DIR / "source_privacy_boundary.md").read_text()
+    for required in [
+        source_ref,
+        f"Full selected excerpt SHA-256: `{source_hash}`",
+        f"Selected excerpt word count: `{source_word_count}`",
+        "raw_corpora/selected/source_span_precision_repeat_001/source.txt",
+        "raw_corpora/trader_source_corpus/pharm/box trades_999923657.txt",
+        "same selected second-source excerpt as pilots 004 and 005",
+        "Do not commit raw source text.",
+        "Do not fall back to the full corpus path.",
+        "Character offsets are computed locally only after line-range validation.",
+        "Quote hashes are computed locally only from validated spans.",
+    ]:
+        assert required in source_boundary
+
+    update = (GOAL12B_PILOT_DIR / "run_admission_update.md").read_text()
+    prompt_template_path = GOAL12B_PILOT_DIR / "prompt_template.live_pilot_006.md"
+    prompt_template = prompt_template_path.read_text()
+    for required in [
+        (
+            "This admission update defines the executable preflight scope for exactly "
+            "one future tiny live LLM pilot run."
+        ),
+        (
+            "It does not by itself authorize execution. Execution requires a separate "
+            "Goal 12C instruction."
+        ),
+        "Provider: DeepSeek API",
+        "API format: OpenAI-compatible chat completions",
+        "Base URL: `https://api.deepseek.com`",
+        "Model: `deepseek-v4-pro`",
+        "Reasoning/thinking mode: non-thinking",
+        "Tool routing: tools disabled",
+        "Benchmark pack: `text_judgment_v0`",
+        "Lab: `labs/chunked_source_grounding`",
+        "Budget cap: `$3` hard maximum.",
+        "No retries unless the call fails before producing output.",
+        "Do not silently substitute `deepseek-v4-flash`, `deepseek-chat`, "
+        "`deepseek-reasoner`, or any other model.",
+        "Outputs from this experiment are proposals until evaluated.",
+        "No private/raw source material or provider payloads are committed.",
+        "Do not ask the model to emit `candidate_char_start`.",
+        "Do not ask the model to emit `candidate_char_end`.",
+        "Do not ask the model to emit quote hashes.",
+        "Local review/tooling computes character offsets only after line-range validation.",
+        "Quote hashes are computed locally only from validated spans.",
+        source_ref,
+        f"Selected excerpt word count: `{source_word_count}`",
+    ]:
+        assert required in update
+    assert "thinking" in update
+    assert '"type": "disabled"' in update
+    assert "one model-call batch" in update
+    assert "Do not fall back to the full corpus path." in update
+    assert "authorizes exactly one tiny live LLM pilot run" not in update
+
+    recorded_prompt_hash = re.search(r"Prompt template SHA-256: `([0-9a-f]{64})`", update)
+    assert recorded_prompt_hash
+    assert recorded_prompt_hash.group(1) == sha256_file(prompt_template_path)
+    assert "Prompt Template" in prompt_template
+    assert "{{APPROVED_SOURCE_TEXT}}" in prompt_template
+    assert "No raw source text is committed in this template." in prompt_template
+    assert "source_linked_claim_table" in prompt_template
+    assert "line_range_locator_candidate_table" in prompt_template
+    assert "unsupported_claim_report" in prompt_template
+    assert "brief_method_failure_notes" in prompt_template
+    for required_field in [
+        "claim_id",
+        "source_ref",
+        "candidate_line_start",
+        "candidate_line_end",
+        "locator_confidence",
+        "locator_label",
+        "short_support_rationale",
+        "exact | approximate | broad | missing",
+    ]:
+        assert required_field in prompt_template
+    for forbidden_field in [
+        '"candidate_char_start"',
+        '"candidate_char_end"',
+        "quote_hash_candidate",
+    ]:
+        assert forbidden_field not in prompt_template
+    assert "Do not emit `candidate_char_start`." in prompt_template
+    assert "Do not emit `candidate_char_end`." in prompt_template
+    assert "Do not emit quote hashes." in prompt_template
+    assert (
+        "Local review/tooling computes character offsets only after line-range validation."
+        in prompt_template
+    )
+    assert "Quote hashes are computed locally only from validated spans." in prompt_template
+    assert "judgment_abstraction_notes" not in prompt_template
+    assert "full comparison commentary" not in prompt_template
+    assert "study card" not in prompt_template.lower()
+
+    config_record = extract_json_block(update, "Canonical Model Config")
+    recorded_config_hash = re.search(r"Config SHA-256: `([0-9a-f]{64})`", update)
+    assert recorded_config_hash
+    assert recorded_config_hash.group(1) == canonical_json_hash(config_record)
+    assert config_record == {
+        "api_format": "openai_compatible_chat_completions",
+        "base_url": "https://api.deepseek.com",
+        "context_window_provider_limit": "1M",
+        "max_input_tokens": 12000,
+        "max_output_tokens": 900,
+        "model_id": "deepseek-v4-pro",
+        "provider_id": "deepseek_api",
+        "sampling": {
+            "frequency_penalty": None,
+            "presence_penalty": None,
+            "temperature": None,
+            "top_p": None,
+        },
+        "stream": False,
+        "thinking": {"type": "disabled"},
+        "tool_routing": "none",
+    }
+
+    stop_condition = (GOAL12B_PILOT_DIR / "stop_condition.md").read_text()
+    for required in [
+        "selected second-source excerpt is missing",
+        "source file is not ignored by git",
+        "source file is staged or tracked",
+        "`deepseek-v4-pro` is unavailable",
+        "the output contract expands beyond line-range locator candidates",
+        "the prompt asks the model to emit character offsets",
+        "the prompt asks the model to emit quote hashes",
+        "the run attempts to fall back to the full corpus path",
+    ]:
+        assert required in stop_condition
+
+    combined = "\n".join(path.read_text() for path in GOAL12B_PILOT_DIR.iterdir())
+    for forbidden in [
+        "BEGIN RAW SOURCE",
+        "DEEPSEEK_API_KEY=",
+        "sk-",
+        "\"api_key\"",
+        "\"provider_payload\"",
+        "quote_hash_candidate",
+        '"candidate_char_start"',
+        '"candidate_char_end"',
+    ]:
+        assert forbidden not in combined
+
+    summary = synthesize_exports(root=ROOT)
+    assert summary["record_count"] == sum(1 for _ in all_lab_export_records())
+    assert all("PLANNING" not in path.parts for path in lab_export_paths(ROOT))
+
+    readme = (ROOT / "README.md").read_text()
+    portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
+    lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
+    lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
+    comparison_note = GOAL7G_COMPARISON_NOTE.read_text()
+    for currentness_doc in [readme, portfolio, lab_card, lab_registry]:
+        assert_currentness_routes_to_goal12c(currentness_doc)
+        assert "run_record.live_pilot_006" not in currentness_doc
+    assert "Goal 12B live-run admission planning is complete" in comparison_note
+    assert "Goal 12C execution of the admitted line-range-first locator pilot" in (
+        comparison_note
+    )
+    assert "current next proposed step is Goal 12B" not in portfolio
+    assert "The next proposed step is Goal 12B" not in lab_card
     assert "No graduated items." in (ROOT / "GRADUATION_LEDGER.md").read_text()
 
 
@@ -3251,7 +3558,7 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     for currentness_doc in [portfolio, lab_card]:
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
         assert "run_record.live_pilot_005" not in currentness_doc
     assert "current next step is Goal 11A" not in portfolio
     assert "The active thread is Goal 11A" not in lab_card
@@ -3443,7 +3750,7 @@ def test_goal11c_source_span_locator_live_export_set_is_protocol_valid_and_bound
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [portfolio, lab_card, lab_registry]:
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
         assert "proposal-only" in currentness_doc
         assert "run_record.live_pilot_005" not in currentness_doc
     assert (
@@ -3545,7 +3852,7 @@ def test_goal11d_strict_locator_review_records_coordinate_failure_only():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [portfolio, lab_card, lab_registry]:
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
         assert "char offsets" in currentness_doc
         assert "proposal-only" in currentness_doc
         assert "run_record.live_pilot_005" not in currentness_doc
@@ -3612,7 +3919,7 @@ def test_goal11e_comparison_note_records_locator_findings_and_next_fork():
     lab_card = (ROOT / "labs" / "chunked_source_grounding" / "LAB_CARD.md").read_text()
     lab_registry = (ROOT / "LAB_REGISTRY.md").read_text()
     for currentness_doc in [portfolio, lab_card, lab_registry]:
-        assert_currentness_routes_to_goal12b(currentness_doc)
+        assert_currentness_routes_to_goal12c(currentness_doc)
         assert "proposal-only" in currentness_doc
         assert "run_record.live_pilot_005" not in currentness_doc
 

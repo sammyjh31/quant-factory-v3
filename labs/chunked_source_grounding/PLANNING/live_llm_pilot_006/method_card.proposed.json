@@ -1,0 +1,46 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "MethodCard",
+  "schema_version": "0.1.2",
+  "method_card": {
+    "method_id": "chunked_source_grounding_live_pilot_006_method",
+    "lab_id": "chunked_source_grounding",
+    "parent_question": "How can chunked/source-span LLM methods preserve source grounding while still supporting useful abstraction?",
+    "method_family": "chunked_source_grounded_llm_reader_proposed",
+    "intended_inputs": [
+      "same selected second-source excerpt as pilots 004 and 005: the operator-approved local pharm box-trades excerpt",
+      "metadata-safe source hash and source ref for the selected excerpt",
+      "metadata-safe benchmark pack text_judgment_v0",
+      "Goal 12A line_range_locator_contract_001 planning packet",
+      "DeepSeek V4 Pro with thinking disabled",
+      "pre-recorded prompt and model configuration metadata"
+    ],
+    "intended_outputs": [
+      "chunked_source_line_range_locator_candidate_proposal",
+      "source-linked claim table",
+      "line-range locator candidates",
+      "locator confidence labels",
+      "character offsets after line-range validation",
+      "locally computed quote hashes from validated spans",
+      "unsupported-claim report",
+      "brief method-failure notes"
+    ],
+    "known_risks": [
+      "This is a proposed live LLM pilot planning record, not a completed run.",
+      "The model may still emit line ranges that are broad or nearby rather than support-valid.",
+      "The model must not emit character offsets; local review computes offsets only after accepting the line range.",
+      "The model must not be trusted to generate cryptographic hashes; quote hashes are computed locally only from validated spans.",
+      "A compact line-range contract may preserve source grounding while losing broader abstraction.",
+      "Prompt or trace handling may accidentally include raw source material if the privacy boundary is not followed."
+    ],
+    "non_goals": [
+      "not a completed run",
+      "not research evidence",
+      "not a synthesis export",
+      "not broad judgment abstraction",
+      "not strategy validation",
+      "not product authority",
+      "not architecture or graduation evidence"
+    ]
+  }
+}

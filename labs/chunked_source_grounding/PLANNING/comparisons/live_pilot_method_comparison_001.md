@@ -77,6 +77,8 @@ The source-span locator candidate pilot supports a second narrow conclusion: dir
 
 Goal 12A planned the line-range-first locator contract at `labs/chunked_source_grounding/PLANNING/line_range_locator_contract_001/`, where the model emits line ranges and local review computes offsets/hashes only after line-range validation. The contract does not ask the model to produce quote hashes and does not treat character offsets as reliable until local review has validated the line-range support.
 
-The next proposed step is Goal 12B live-run admission planning for a line-range-first locator pilot. That admission step should reuse the Goal 12A contract without creating validation, graduation, architecture, or export evidence.
+Goal 12B live-run admission planning is complete for that line-range-first locator pilot. The admitted packet reuses the Goal 12A contract without creating validation, graduation, architecture, or export evidence.
+
+The next proposed step is Goal 12C execution of the admitted line-range-first locator pilot.
 
 This remains a lab-local method experiment. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
