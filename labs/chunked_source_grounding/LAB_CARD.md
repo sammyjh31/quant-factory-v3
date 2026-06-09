@@ -6,27 +6,14 @@ This lab explores chunked source-span readers for messy trader educational text.
 
 ## Current Evidence State
 
-- scaffold fixtures, proposal-only live records, and manual reviews exist under the protocol boundary
+- scaffold fixtures, proposal-only live records, and manual/strict reviews exist under the protocol boundary
 - detailed evidence lives in export records and the lab-local comparison note, not in this lab card
-- Goal 13A locator-thread decision review is complete, provisionally pausing locator-contract refinement without creating validation or architecture
-
-current details live in protocol export records and the comparison note:
-
-```text
-labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
-```
 
 ## Current Active Research Thread
 
-Goal 13A locator-thread decision review is complete for the Goal 12A line-range-first locator contract thread, based on the completed source-span locator candidate pilot, strict locator review, strict line-range review, and updated comparison note.
+The locator thread is provisionally paused as a method lesson following the Goal 13A decision review. The current method insight is to ask the model for line ranges and compute offsets and quote hashes locally after validation. This remains proposal-only evidence; it does not validate or graduate the method.
 
-The current comparison read is that line-range-first output produced support-valid line ranges and allowed local char offsets and hashes to be computed after validation, improving on the prior char offsets failure. The locator thread is provisionally paused as a method lesson; this remains proposal-only evidence and does not validate or graduate the method.
-
-The next proposed step is Goal 13B grounded long-context variant planning.
-
-The current comparison note records the second-source source-span precision repeat and line-range-first locator finding as proposal-only evidence. It does not validate the method, declare a winner, graduate anything, or create architecture.
-
-The current comparison surface is:
+The owning comparison surface is:
 
 ```text
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md

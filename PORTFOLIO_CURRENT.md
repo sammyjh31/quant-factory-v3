@@ -12,9 +12,7 @@ This file owns the current portfolio posture. It routes agents to current eviden
 
 QuantFactory V3 is a federated LLM-methodology research portfolio.
 
-The scaffold baseline has been accepted. The portfolio has completed one tiny method-comparison loop on `text_judgment_v0`, plus a second-source source-span precision repeat inside the active chunked/source-grounded lab.
-
-Detailed pilot-level evidence lives in protocol export records and lab-local comparison notes.
+The scaffold baseline has been accepted, and the portfolio has moved into method-comparison work. Detailed pilot-level evidence lives in protocol export records and lab-local comparison notes.
 
 The current local comparison note is:
 
@@ -22,7 +20,7 @@ The current local comparison note is:
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-The scaffold exists so live LLM experiments can be measured, compared, and contained. Goal 13A locator-thread decision review is complete for the line-range-first locator thread. The next proposed step is Goal 13B grounded long-context variant planning.
+The scaffold exists so live LLM experiments can be measured, compared, and contained.
 
 ---
 
@@ -36,7 +34,7 @@ Active federation labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: active live-pilot lab with proposal-only export records, manual and strict review records, source-span precision repeats, locator/line-range review records, and a locator-thread pause decision. The next proposed fork is grounded long-context planning.
+   - Current state: active live-pilot lab with proposal-only export and review records; the locator thread is provisionally paused.
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -60,11 +58,7 @@ Future candidate benchmark topics are listed under `benchmarks/future_candidates
 
 Scaffold fixture records are not real research evidence.
 
-The portfolio has completed one tiny method-comparison loop on `text_judgment_v0`.
-
-Currentness docs intentionally do not repeat per-pilot findings.
-
-The current proposal-only record set covers manual reviews, a bounded negative outcome, long-context judgment, chunked/source grounding, second-source source-span precision repeat work, canonical offsets / char offsets / quote-hash strict reviews, the source-span locator candidate pilot, the line-range-first locator contract and review, and decision-review routing. The owning comparison note summarizes the pilot-level read and records the current next proposed step.
+Proposal-only live pilot records exist across two labs, including bounded negative results, manual and strict reviews, and one completed method-comparison loop. Pilot-level findings live in export records and the owning comparison note; currentness docs intentionally do not repeat them.
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
@@ -118,12 +112,10 @@ GRADUATION_LEDGER.md
 
 ## Next Recommended Research Direction
 
-Goal 13A locator-thread decision review is complete for the line-range-first locator thread. The next proposed step is Goal 13B grounded long-context variant planning.
+Goal 13A locator-thread decision review is complete; the chunked locator thread is provisionally paused as a method lesson. The next proposed step is Goal 13B grounded long-context variant planning.
 
 The owning comparison note is:
 
 ```text
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
-
-The updated comparison note records that line-range-first locator candidates are the stronger model-facing contract so far, and recommends a provisional pause before grounded long-context planning.

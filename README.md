@@ -102,7 +102,7 @@ Current status is routed through:
 * `docs/research-lifecycle.md`
 * `docs/live-llm-experiment-admission.md`
 
-Goal 13A locator-thread decision review is complete for the line-range-first locator thread. The current next proposed step is Goal 13B grounded long-context variant planning.
+The current next proposed research step is owned by `PORTFOLIO_CURRENT.md`.
 
 The live records are proposal-only. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 

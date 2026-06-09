@@ -749,8 +749,10 @@ def test_synthesis_generated_output_discloses_sorting_and_metric_limits():
 
 
 def test_currentness_docs_route_without_ledgering():
-    for name in CURRENTNESS_ROUTER_DOCS:
-        assert_currentness_router_not_ledger((ROOT / name).read_text())
+    router_paths = [ROOT / name for name in CURRENTNESS_ROUTER_DOCS]
+    router_paths += [lab_dir / "LAB_CARD.md" for lab_dir in lab_dirs()]
+    for path in router_paths:
+        assert_currentness_router_not_ledger(path.read_text())
 
 
 def test_currentness_docs_share_one_phase_and_route_to_existing_files():
