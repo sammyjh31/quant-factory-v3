@@ -75,6 +75,8 @@ The source-span precision repeat supports one narrow conclusion: the pilot 003 p
 
 The source-span locator candidate pilot supports a second narrow conclusion: direct locator emission improved only partially over pilots 003/004. It reduced reviewer reconstruction when the model emitted usable line ranges, but it failed as a canonical character-offset and quote-hash-support workflow.
 
-The leading next step is Goal 12A: plan a line-range-first locator contract, where the model emits line ranges and local review computes offsets/hashes only after line-range validation. The contract should not ask the model to produce quote hashes and should not treat character offsets as reliable until local review has validated the line-range support.
+Goal 12A planned the line-range-first locator contract at `labs/chunked_source_grounding/PLANNING/line_range_locator_contract_001/`, where the model emits line ranges and local review computes offsets/hashes only after line-range validation. The contract does not ask the model to produce quote hashes and does not treat character offsets as reliable until local review has validated the line-range support.
+
+The next proposed step is Goal 12B live-run admission planning for a line-range-first locator pilot. That admission step should reuse the Goal 12A contract without creating validation, graduation, architecture, or export evidence.
 
 This remains a lab-local method experiment. It is not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.

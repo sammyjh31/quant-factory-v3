@@ -104,7 +104,7 @@ See:
 * `docs/research-lifecycle.md`
 * `docs/live-llm-experiment-admission.md`
 
-The current next proposed step is Goal 12A planning for a line-range-first locator contract.
+Goal 12A line-range-first locator contract planning is complete. The current next proposed step is Goal 12B live-run admission planning for a line-range-first locator pilot.
 
 The live records are proposal-only. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 
