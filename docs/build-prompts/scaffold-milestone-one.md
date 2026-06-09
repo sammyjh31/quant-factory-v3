@@ -1,6 +1,7 @@
 # Scaffold Milestone One Build Prompt
 
 Status: historical build brief / implementation prompt.
+Superseded by: README.md, PORTFOLIO_CURRENT.md, PROTOCOL_CURRENT.md, LAB_REGISTRY.md, GRADUATION_LEDGER.md, AGENTS.md overlays, and docs/live-llm-experiment-admission.md.
 This file is not project authority. Current authority lives in README.md, PORTFOLIO_CURRENT.md, PROTOCOL_CURRENT.md, LAB_REGISTRY.md, GRADUATION_LEDGER.md, AGENTS.md overlays, and the named docs listed by README.md.
 
 ---

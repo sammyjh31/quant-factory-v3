@@ -4,8 +4,8 @@
   "schema_version": "0.1.2",
   "benchmark_pack": {
     "benchmark_id": "visual_deictic_v0",
-    "title": "Visual Deictic Fixture Pack",
-    "purpose": "Metadata-safe scaffold pack for testing placeholder bindings between deictic transcript language and chart-frame context.",
+    "title": "Visual Deictic Benchmark Pack",
+    "purpose": "Metadata-safe benchmark pack for testing placeholder bindings between deictic transcript language and chart-frame context.",
     "source_refs": ["source_visual_deictic_placeholder"],
     "known_difficulty": "Deictic phrases require visual context and can hallucinate chart objects when frame binding is weak.",
     "known_failure_modes": [

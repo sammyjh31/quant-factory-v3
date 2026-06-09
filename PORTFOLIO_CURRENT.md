@@ -36,7 +36,7 @@ Active federation labs:
 
 2. `chunked_source_grounding`
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
-   - Current state: active live-pilot lab with proposal-only export records, manual reviews, a bounded negative Flash result, a Pro narrowed-contract result, a second-source source-span precision repeat, strict source-span re-review records, one strict line-range-first locator review, and a locator-thread pause decision. The next proposed fork is grounded long-context planning.
+   - Current state: active live-pilot lab with proposal-only export records, manual and strict review records, source-span precision repeats, locator/line-range review records, and a locator-thread pause decision. The next proposed fork is grounded long-context planning.
 
 3. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
@@ -62,13 +62,9 @@ Scaffold fixture records are not real research evidence.
 
 The portfolio has completed one tiny method-comparison loop on `text_judgment_v0`.
 
-Current preliminary read:
+Currentness docs intentionally do not repeat per-pilot findings.
 
-- long-context preserved broader judgment abstraction with missing-context and teacher-intent compression caveats;
-- chunked/source-grounded methods have one bounded negative Flash result and later Pro results showing better parseability under narrower contracts;
-- source-span precision pattern repeated beyond the first source, while strict source-span re-review with canonical offsets found one overclaimed exactness caveat and broad segment refs / limited abstraction remain open tradeoffs.
-- the source-span locator candidate pilot produced proposal-only locator coordinates and locally computed quote hashes; strict manual locator review found useful line ranges but inaccurate char offsets, so the next line-range-first pilot tested locator granularity directly.
-- strict line-range-first review found support-valid line ranges and locally computable offsets/hashes after validation; the decision review recommends pausing locator-contract refinement and planning a stricter grounded long-context variant.
+The current proposal-only record set covers manual reviews, a bounded negative outcome, long-context judgment, chunked/source grounding, second-source source-span precision repeat work, canonical offsets / char offsets / quote-hash strict reviews, the source-span locator candidate pilot, the line-range-first locator contract and review, and decision-review routing. The owning comparison note summarizes the pilot-level read and records the current next proposed step.
 
 These records are proposal-only research records. They are not validation, product evidence, strategy evidence, financial advice, live-trading authority, graduation, or architecture.
 

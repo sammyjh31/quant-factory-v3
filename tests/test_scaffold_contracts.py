@@ -227,6 +227,15 @@ ROUTER_LEDGER_PATTERNS = (
     r"manual content review (?:failed|passed) for pilot \d+",
     r"chunked_source_grounding_live_pilot_00[1-5]",
 )
+EXECUTED_LIVE_PILOT_PLANNING_OWNERS = (
+    (GOAL3_PILOT_DIR, "long_context_judgment", "001"),
+    (GOAL7A_PILOT_DIR, "chunked_source_grounding", "001"),
+    (GOAL7D_PILOT_DIR, "chunked_source_grounding", "002"),
+    (GOAL8B_PILOT_DIR, "chunked_source_grounding", "003"),
+    (GOAL9A_PILOT_DIR, "chunked_source_grounding", "004"),
+    (GOAL11B_PILOT_DIR, "chunked_source_grounding", "005"),
+    (GOAL12B_PILOT_DIR, "chunked_source_grounding", "006"),
+)
 
 
 def assert_currentness_router_not_ledger(text: str):
@@ -236,6 +245,12 @@ def assert_currentness_router_not_ledger(text: str):
     assert "raw_model_output" not in text
     for pattern in ROUTER_LEDGER_PATTERNS:
         assert not re.search(pattern, text), pattern
+
+
+def assert_historical_admission_doc(text: str, lab_id: str, pilot_number: str):
+    run_owner = f"labs/{lab_id}/EXPORTS/run_record.live_pilot_{pilot_number}.json"
+    assert "Historical status: pre-run admission record" in text
+    assert f"current run status is owned by `{run_owner}`" in text
 
 
 def assert_currentness_routes_to_goal12c(text: str):
@@ -594,6 +609,10 @@ def test_active_benchmark_packs_validate_and_preserve_v2_refs():
         record = load_json(path)
         validate_record(record)
         benchmark = record["benchmark_pack"]
+        assert "Fixture Pack" not in benchmark["title"]
+        assert "scaffold pack" not in benchmark["purpose"]
+        assert "Benchmark Pack" in benchmark["title"]
+        assert "metadata-safe benchmark pack" in benchmark["purpose"].lower()
         assert benchmark["v2_lesson_refs"]
         assert benchmark["metadata_safety"] == {
             "raw_source_material_included": False,
@@ -823,12 +842,32 @@ def test_synthesis_generated_output_discloses_sorting_and_metric_limits():
         "inspection only; ordering is not a ranking."
     )
     assert summary["metrics_note"] == (
-        "Counts are scaffold inspection aids only; they are not method authority, graduation "
+        "Counts are export inspection aids only; they are not method authority, graduation "
         "evidence, or portfolio decisions."
     )
     generated_markdown = (ROOT / "generated" / "synthesis_summary.md").read_text()
     assert summary["ordering_note"] in generated_markdown
     assert summary["metrics_note"] in generated_markdown
+
+
+def test_executed_live_pilot_admission_docs_are_marked_historical():
+    for pilot_dir, lab_id, pilot_number in EXECUTED_LIVE_PILOT_PLANNING_OWNERS:
+        assert (
+            ROOT
+            / "labs"
+            / lab_id
+            / "EXPORTS"
+            / f"run_record.live_pilot_{pilot_number}.json"
+        ).exists()
+        for filename in ["admission.md", "run_admission_update.md"]:
+            text = (pilot_dir / filename).read_text()
+            assert_historical_admission_doc(text, lab_id, pilot_number)
+            assert "This is planning/admission only. No LLM call has been made." not in text
+            assert (
+                "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists "
+                "for this pilot."
+            ) not in text
+            assert "one future tiny live LLM pilot run" not in text
 
 
 def test_generated_summaries_are_ignored_by_default():
@@ -1335,12 +1374,15 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
         assert required_heading in admission
     for required_guardrail in [
         "This is a proposed live LLM pilot planning record.",
-        "This is planning/admission only. No LLM call has been made.",
+        "Historical status: pre-run admission record; current run status is owned by",
         "Do not add around stale structure. Rework, replace, delete, or archive it.",
         "The planning packet is not research evidence",
         "not a synthesis export",
         "No method success is claimed.",
-        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        (
+            "This pre-run planning packet itself contains no RunRecord, "
+            "ArtifactEnvelope, EvaluationRecord, or ResearchNote."
+        ),
     ]:
         assert required_guardrail in admission
 
@@ -1370,11 +1412,11 @@ def test_goal7a_chunked_source_grounding_planning_packet_is_contained_and_curren
     prompt_template = prompt_template_path.read_text()
     for required in [
         (
-            "This admission update defines the executable preflight scope for exactly "
-            "one future tiny live LLM pilot run."
+            "This admission update defined the executable preflight scope for exactly "
+            "one tiny live LLM pilot run."
         ),
         (
-            "It does not by itself authorize execution. Execution requires a separate "
+            "It did not by itself authorize execution. Execution required a separate "
             "Goal 7B instruction."
         ),
         "Provider: DeepSeek API",
@@ -1642,6 +1684,9 @@ def test_goal7c_chunked_flash_manual_content_review_records_truncated_failure_on
         for record in records_by_schema("EvaluationRecord")
         if record["evaluation"]["evaluator_type"] == "manual_content_review"
     ]
+    assert "the comparison note has not yet been updated" not in "\n".join(
+        review["comments"] for review in manual_content_reviews
+    )
     assert (
         sorted(review["evaluation_id"] for review in manual_content_reviews)
         == EXPECTED_MANUAL_CONTENT_REVIEW_IDS
@@ -1759,11 +1804,14 @@ def test_goal7d_deepseek_v4_pro_rerun_planning_packet_is_contained_and_narrower(
     ]:
         assert required_heading in admission
     for required_guardrail in [
-        "This is planning/admission only. No LLM call has been made.",
+        "Historical status: pre-run admission record; current run status is owned by",
         "Do not add around stale structure. Rework, replace, delete, or archive it.",
         "does not replace the Flash pilot 001 record",
         "Flash pilot 001 produced a bounded negative result",
-        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        (
+            "This pre-run planning packet itself contains no RunRecord, "
+            "ArtifactEnvelope, EvaluationRecord, or ResearchNote."
+        ),
         "Do not request broad judgment abstraction notes in the same call.",
         "Do not request full comparison commentary in the same call.",
     ]:
@@ -1798,11 +1846,11 @@ def test_goal7d_deepseek_v4_pro_rerun_planning_packet_is_contained_and_narrower(
     prompt_template = prompt_template_path.read_text()
     for required in [
         (
-            "This admission update defines the executable preflight scope for exactly "
-            "one future tiny live LLM pilot run."
+            "This admission update defined the executable preflight scope for exactly "
+            "one tiny live LLM pilot run."
         ),
         (
-            "It does not by itself authorize execution. Execution requires a separate "
+            "It did not by itself authorize execution. Execution required a separate "
             "Goal 7E instruction."
         ),
         "Provider: DeepSeek API",
@@ -2312,7 +2360,7 @@ def test_portfolio_current_is_router_not_live_export_ledger():
             "Detailed pilot-level evidence lives in protocol export records and "
             "lab-local comparison notes."
         ),
-        "source-span precision pattern repeated beyond the first source",
+        "Currentness docs intentionally do not repeat per-pilot findings.",
         (
             "These records are proposal-only research records. They are not validation, "
             "product evidence, strategy evidence, financial advice, live-trading "
@@ -3135,9 +3183,9 @@ def test_goal12b_line_range_first_live_admission_packet_is_contained_and_current
     ]:
         assert required_heading in admission
     for required_guardrail in [
-        "This packet was created as planning/admission only. Goal 12B did not make an LLM call.",
+        "Historical status: pre-run admission record; current run status is owned by",
         (
-            "This planning packet itself contains no RunRecord, ArtifactEnvelope, "
+            "This pre-run planning packet itself contains no RunRecord, ArtifactEnvelope, "
             "EvaluationRecord, or ResearchNote."
         ),
         "Goal 12A planned a line-range-first locator contract.",
@@ -3186,11 +3234,11 @@ def test_goal12b_line_range_first_live_admission_packet_is_contained_and_current
     prompt_template = prompt_template_path.read_text()
     for required in [
         (
-            "This admission update defines the executable preflight scope for exactly "
+            "This admission update defined the executable preflight scope for exactly "
             "one tiny live LLM pilot run."
         ),
         (
-            "It does not by itself authorize execution. Execution requires a separate "
+            "It did not by itself authorize execution. Execution required a separate "
             "Goal 12C instruction."
         ),
         "Provider: DeepSeek API",
@@ -3418,8 +3466,11 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     ]:
         assert required_heading in admission
     for required_guardrail in [
-        "This is planning/admission only. No LLM call has been made.",
-        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        "Historical status: pre-run admission record; current run status is owned by",
+        (
+            "This pre-run planning packet itself contains no RunRecord, "
+            "ArtifactEnvelope, EvaluationRecord, or ResearchNote."
+        ),
         "Do not ask the model to emit quote hashes.",
         "local runner/reviewer computes quote hashes",
         "Do not add broad judgment abstraction notes.",
@@ -3460,11 +3511,11 @@ def test_goal11b_source_span_locator_live_admission_packet_is_contained_and_curr
     prompt_template = prompt_template_path.read_text()
     for required in [
         (
-            "This admission update defines the executable preflight scope for exactly "
-            "one future tiny live LLM pilot run."
+            "This admission update defined the executable preflight scope for exactly "
+            "one tiny live LLM pilot run."
         ),
         (
-            "It does not by itself authorize execution. Execution requires a separate "
+            "It did not by itself authorize execution. Execution required a separate "
             "Goal 11C instruction."
         ),
         "Provider: DeepSeek API",
@@ -4576,10 +4627,13 @@ def test_goal8b_source_span_precision_planning_packet_is_contained_and_current()
     ]:
         assert required_heading in admission
     for required_guardrail in [
-        "This is planning/admission only. No LLM call has been made.",
+        "Historical status: pre-run admission record; current run status is owned by",
         "Do not add around stale structure. Rework, replace, delete, or archive it.",
         "Goal 7G found broad_segment_refs and limited_abstraction caveats.",
-        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        (
+            "This pre-run planning packet itself contains no RunRecord, "
+            "ArtifactEnvelope, EvaluationRecord, or ResearchNote."
+        ),
         "Do not re-expand the output contract.",
         "Do not add broad judgment abstraction notes.",
         "Do not add full comparison commentary.",
@@ -4615,11 +4669,11 @@ def test_goal8b_source_span_precision_planning_packet_is_contained_and_current()
     prompt_template = prompt_template_path.read_text()
     for required in [
         (
-            "This admission update defines the executable preflight scope for exactly "
-            "one future tiny live LLM pilot run."
+            "This admission update defined the executable preflight scope for exactly "
+            "one tiny live LLM pilot run."
         ),
         (
-            "It does not by itself authorize execution. Execution requires a separate "
+            "It did not by itself authorize execution. Execution required a separate "
             "Goal 8C instruction."
         ),
         "Provider: DeepSeek API",
@@ -4824,12 +4878,15 @@ def test_goal9a_second_source_span_precision_repeat_planning_packet_is_contained
     ]:
         assert required_heading in admission
     for required_guardrail in [
-        "This is planning/admission only. No LLM call has been made.",
+        "Historical status: pre-run admission record; current run status is owned by",
         (
             "Goal 8E found source-span precision improved on pilot 003 but still "
             "needs a second-source repeat."
         ),
-        "No RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote exists for this pilot.",
+        (
+            "This pre-run planning packet itself contains no RunRecord, "
+            "ArtifactEnvelope, EvaluationRecord, or ResearchNote."
+        ),
         "Do not fall back to the full corpus path.",
         "Do not add broad judgment abstraction notes.",
         "Do not add full comparison commentary.",
@@ -4867,11 +4924,11 @@ def test_goal9a_second_source_span_precision_repeat_planning_packet_is_contained
     prompt_template = prompt_template_path.read_text()
     for required in [
         (
-            "This admission update defines the executable preflight scope for exactly "
-            "one future tiny live LLM pilot run."
+            "This admission update defined the executable preflight scope for exactly "
+            "one tiny live LLM pilot run."
         ),
         (
-            "It does not by itself authorize execution. Execution requires a separate "
+            "It did not by itself authorize execution. Execution required a separate "
             "Goal 9B instruction."
         ),
         "Provider: DeepSeek API",
@@ -5653,6 +5710,9 @@ def test_currentness_authority_surface_does_not_creep():
 
     assert not (ROOT / "MILESTONE_GUIDE.md").exists()
     assert "MILESTONE_GUIDE.md" not in build_prompt
+    assert "Superseded by:" in build_prompt
+    assert "README.md" in build_prompt
+    assert "PORTFOLIO_CURRENT.md" in build_prompt
     assert "Milestone 2" in lifecycle
     assert "Tiny Live LLM Pilot" in lifecycle
 
@@ -5861,6 +5921,30 @@ def test_lab_cards_match_current_live_pilot_posture_without_stale_fixture_langua
         "no validation, product authority, strategy evidence, financial advice, "
         "live-trading authority, graduation, or architecture"
     ) in visual_card
+
+
+def test_active_lab_research_questions_match_current_phase_without_fixture_only_claims():
+    long_context_question = (
+        ROOT / "labs" / "long_context_judgment" / "RESEARCH_QUESTION.md"
+    ).read_text()
+    chunked_question = (
+        ROOT / "labs" / "chunked_source_grounding" / "RESEARCH_QUESTION.md"
+    ).read_text()
+    visual_question = (
+        ROOT / "labs" / "visual_deictic_understanding" / "RESEARCH_QUESTION.md"
+    ).read_text()
+
+    for active_question in [long_context_question, chunked_question]:
+        assert "fixture records only" not in active_question
+        assert "No real method result exists yet." not in active_question
+        assert "proposal-only live pilot records" in active_question
+        assert (
+            "do not create validation, product authority, strategy evidence, financial "
+            "advice, live-trading authority, graduation, or architecture"
+        ) in active_question
+
+    assert "fixture records only" in visual_question
+    assert "No real method result exists yet." in visual_question
 
 
 def test_lab_readmes_and_package_metadata_match_current_phase_language():

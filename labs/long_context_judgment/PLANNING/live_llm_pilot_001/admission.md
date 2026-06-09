@@ -1,6 +1,7 @@
 # Live LLM Pilot 001 Admission Packet
 
 Status: proposed planning packet  
+Historical status: pre-run admission record; current run status is owned by `labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json`.
 Lab: `long_context_judgment`  
 Experiment: `long_context_judgment_live_pilot_001`
 

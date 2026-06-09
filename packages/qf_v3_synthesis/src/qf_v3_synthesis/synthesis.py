@@ -73,7 +73,7 @@ def _summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
             "inspection only; ordering is not a ranking."
         ),
         "metrics_note": (
-            "Counts are scaffold inspection aids only; they are not method authority, graduation "
+            "Counts are export inspection aids only; they are not method authority, graduation "
             "evidence, or portfolio decisions."
         ),
     }

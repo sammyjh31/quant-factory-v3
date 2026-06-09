@@ -1,6 +1,7 @@
 # Live LLM Pilot 001 Run Admission Update
 
 Status: Milestone 2 live-run admission update used for one completed proposal-only pilot
+Historical status: pre-run admission record; current run status is owned by `labs/long_context_judgment/EXPORTS/run_record.live_pilot_001.json`.
 
 This admission update authorized exactly one tiny live LLM pilot run under the stated scope.
 

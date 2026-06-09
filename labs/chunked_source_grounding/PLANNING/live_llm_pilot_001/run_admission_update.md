@@ -1,12 +1,13 @@
 # Chunked Source Grounding Live Pilot 001 Run Admission Update
 
-Status: Goal 7A live-run admission update for one future proposal-only pilot
+Status: Goal 7A live-run admission update for completed proposal-only pilot 001
+Historical status: pre-run admission record; current run status is owned by `labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_001.json`.
 
-This admission update defines the executable preflight scope for exactly one future tiny live LLM pilot run.
+This admission update defined the executable preflight scope for exactly one tiny live LLM pilot run.
 
-It does not by itself authorize execution. Execution requires a separate Goal 7B instruction.
+It did not by itself authorize execution. Execution required a separate Goal 7B instruction.
 
-Goal 7A does not execute the run. No LLM call has been made for `chunked_source_grounding_live_pilot_001`.
+Goal 7A itself did not execute the run. The separately authorized run now has proposal-only export records for `chunked_source_grounding_live_pilot_001`.
 
 This update itself is not research evidence and not a synthesis export. It does not create a RunRecord, ArtifactEnvelope, EvaluationRecord, ResearchNote, generated synthesis claim, graduation status, or architecture.
 

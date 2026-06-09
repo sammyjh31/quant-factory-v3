@@ -1,16 +1,17 @@
 # Chunked Source Grounding Live Pilot 006 Admission Packet
 
 Status: Goal 12B proposed planning packet
+Historical status: pre-run admission record; current run status is owned by `labs/chunked_source_grounding/EXPORTS/run_record.live_pilot_006.json`.
 Lab: `chunked_source_grounding`
 Experiment: `chunked_source_grounding_live_pilot_006`
 
 This is a proposed live LLM pilot planning record. It is not a completed run, not research evidence, and not a synthesis export.
 
-This packet was created as planning/admission only. Goal 12B did not make an LLM call.
+This packet was created before execution as planning/admission only.
 
 The planning packet is not research evidence, not a synthesis export, and not a method success claim. No method success is claimed.
 
-This planning packet itself contains no RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote.
+This pre-run planning packet itself contains no RunRecord, ArtifactEnvelope, EvaluationRecord, or ResearchNote.
 
 Goal 12A planned a line-range-first locator contract. Goal 12B turns that plan into a contained live-run admission packet without executing the run.
 

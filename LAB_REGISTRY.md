@@ -48,7 +48,7 @@ How can chunked/source-span LLM methods preserve source grounding while still su
 Current state:
 
 ```text
-active live-pilot lab with scaffold fixtures, proposal-only live export records, manual review records, one second-source source-span precision repeat, one strict locator review showing useful line ranges but inaccurate char offsets, one strict line-range-first locator review, and a locator-thread pause decision; Goal 13A locator-thread decision review is complete and the next proposed step is Goal 13B grounded long-context variant planning
+active live-pilot lab with scaffold fixtures, proposal-only live export records, manual and strict review records, second-source source-span precision repeats, source-span locator candidate pilot records, char offsets / quote-hash review records, line-range-first locator contract/review records, and a locator-thread pause decision; Goal 13A locator-thread decision review is complete and the next proposed step is Goal 13B grounded long-context variant planning
 ```
 
 Current details live in protocol export records and the lab-local comparison note:
