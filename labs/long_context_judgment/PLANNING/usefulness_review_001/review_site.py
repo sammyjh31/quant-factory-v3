@@ -11,6 +11,7 @@ Run:  python3 labs/long_context_judgment/PLANNING/usefulness_review_001/review_s
 This is an operator review instrument for the usefulness_review_001 experiment.
 It is planning tooling, not a lab method, not evidence, and not architecture.
 """
+# ruff: noqa: E501  — single-file web tool; embedded HTML/CSS/JS and card prose exceed the line limit by design
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
