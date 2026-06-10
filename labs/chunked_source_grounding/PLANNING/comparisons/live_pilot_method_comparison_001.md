@@ -30,6 +30,8 @@ Per-pilot scores, failure tags, and review details live in the export records, i
 
 ## Comparison Axes
 
+Status: this table is closed to new columns as of milestone 5 (eight columns is its readable limit). Later pilots are summarized in the Milestone-4 Evidence Thread table below and in their export records; future threads should add compact thread tables, not columns here.
+
 | Axis | Long-context pilot 001 | Chunked Flash pilot 001 | Chunked Pro pilot 002 | Chunked Pro pilot 003 | Chunked Pro pilot 004 | Chunked locator pilot 005 | Chunked line-range-first pilot 006 | Grounded long-context pilot 002 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | source grounding | Mostly specific span hints, but still affected by `missing_context`. | Not content-reviewable because truncation blocked source-grounding review. | Source-linked at a claim level; caveat: `broad_segment_refs` rather than canonical offsets. | Source-linked at tighter span-hint level for reviewed claims; strict review supplied canonical line/offset/hash locators after the fact. | Source-linked on a second excerpt; strict review supplied canonical line/offset/hash locators after the fact and found one overclaimed exactness case. | Line ranges were useful support regions; character offsets and quote hashes were not evidence-valid support handles. | Line ranges were support-valid; local offsets and quote hashes were computable after validation. | Claims were faithful with real support in the source, but all four emitted line ranges failed strict support validation; strict review supplied corrected locators after the fact. |

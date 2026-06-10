@@ -1,7 +1,7 @@
 # Lab Registry
 
 Status: lab currentness router  
-Current phase: `milestone-4-first-graduation-recorded`
+Current phase: `milestone-5-evaluation-calibration`
 
 This file lists labs, parent research questions, and phase-appropriate export status. It does not claim that any method works.
 
@@ -56,6 +56,28 @@ Current details live in protocol export records and the lab-local comparison not
 ```text
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
+
+### `llm_judge_calibration`
+
+Path:
+
+```text
+labs/llm_judge_calibration/
+```
+
+Parent research question:
+
+```text
+Can an LLM judge reproduce operator-lineage review verdicts on existing live-pilot artifacts, and on which review axes?
+```
+
+Current state:
+
+```text
+active live-pilot lab with scaffold fixtures and one completed proposal-only judge-agreement batch: both review axes assistive under pre-registered thresholds, zero sycophancy on negative controls
+```
+
+Details live in the lab's `EXPORTS/` and `PLANNING/` directories.
 
 ### `visual_deictic_understanding`
 

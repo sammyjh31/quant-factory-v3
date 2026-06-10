@@ -1,0 +1,45 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ResearchNote",
+  "research_note": {
+    "note_id": "llm_judge_calibration_live_pilot_001_note",
+    "lab_id": "llm_judge_calibration",
+    "experiment_ids": [
+      "llm_judge_calibration_live_pilot_001"
+    ],
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "summary": "First blinded judge-agreement batch: both review axes landed at assistive under pre-registered thresholds, with zero sycophancy on four negative controls and stable self-consistency. The decision-relevant texture: the judge tracked the human lineage almost exactly on GRAD-0001-pattern line-range artifacts and diverged on legacy span-hint artifacts and on truncation-handling policy, always in the harsher direction.",
+    "what_worked": [
+      "Pre-registration held end to end: trial set, blinding, metrics, and thresholds were fixed before the first call and applied mechanically afterward.",
+      "All four negative controls were correctly failed or flagged; no sycophancy was observed.",
+      "Both self-consistency probes were verdict-stable.",
+      "On the four line-range-anchored strict trials the judge matched human verdicts 4/4 with score gaps of at most 0.05 and 17/19 per-candidate support-validity matches.",
+      "Mechanical pre-checks (extracted spans per candidate) appear to be what anchors judge accuracy, consistent with the GRAD-0001 division of labor."
+    ],
+    "what_failed": [
+      "Content-review score calibration: mean gap 0.262 with the judge uniformly harsher; three judge-fail-versus-human-pass verdicts.",
+      "Strict review of span-hint artifacts: with no mechanical anchor the judge failed artifacts the human lineage passed (CH003, CH004), making legacy-artifact review non-delegable as-is.",
+      "Failure-tag vocabulary overlap was weak on agreeing trials; the judge reaches similar verdicts through differently named tags."
+    ],
+    "negative_results": [
+      "Neither axis reached delegable under the pre-registered thresholds; review delegation is not yet justified.",
+      "Truncation-handling policy is a human-judge divergence that thresholds cannot fix; the rubric must state explicitly whether reviewable-after-tail-repair artifacts pass or fail."
+    ],
+    "reusable_by_other_labs": [
+      "Anchor judges with mechanical pre-checks; judge accuracy concentrated exactly where extracted spans existed.",
+      "Pre-register thresholds before trials; the assistive result would have been temptingly upgradable otherwise.",
+      "Include known-negative artifacts in any judge trial set; sycophancy is unmeasurable without them.",
+      "Expect judges to be harsher than human reviewers who carry context about what a pilot was allowed to ignore; encode such policies in the rubric, not in reviewer memory."
+    ],
+    "do_not_repeat": [
+      "Do not cite the post-hoc line-range-subset observation as a delegable verdict; it requires its own pre-registered trial set.",
+      "Do not use judge verdicts as EvaluationRecords or review authority.",
+      "Do not average the two axes into one agreement number; the per-axis difference is the finding.",
+      "Do not copy raw judge outputs, prompts, or source text into committed records or currentness docs."
+    ],
+    "evidence_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+  }
+}

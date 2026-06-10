@@ -1,0 +1,21 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_name": "ExperimentCard",
+  "schema_version": "0.1.2",
+  "experiment_card": {
+    "experiment_id": "llm_judge_calibration_live_pilot_001",
+    "lab_id": "llm_judge_calibration",
+    "research_question": "Can a blinded LLM judge reproduce the operator-lineage manual content-review and strict line-range-review verdicts on the eleven existing pilots' artifacts, and on which review axes?",
+    "hypothesis": "Under the pre-registered blinding, trial set, and thresholds, the judge will reach at least assistive agreement on the strict line-range axis (which is anchored by mechanical span extraction) while the content-review axis is more likely to show score drift; negative controls will reveal whether sycophancy disqualifies either axis from delegation.",
+    "benchmark_pack_ids": [
+      "text_judgment_v0"
+    ],
+    "method_ids": [
+      "llm_judge_calibration_live_pilot_001_method"
+    ],
+    "evaluation_plan": "Validate the proposed cards against protocol schemas. After the separately authorized batch, compare judge outputs to the fifteen committed human evaluation records using the pre-registered metrics (verdict agreement, score gap within 0.15, failure-tag overlap, per-candidate support-validity and strict-label match where parseable, negative-control handling, self-consistency probes), then assign per-axis delegation labels strictly per the pre-registered thresholds. Commit only metadata-safe agreement statistics as a delegation-map artifact with boundary review. Judge verdicts never become EvaluationRecords and never override human review. Method quality of the reviewed pilots, trading validity, product readiness, strategy evidence, graduation, and architecture are not evaluated by this planning packet.",
+    "expected_artifact_types": [
+      "judge_agreement_delegation_map_proposal"
+    ]
+  }
+}

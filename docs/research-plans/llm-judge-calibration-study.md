@@ -1,11 +1,10 @@
 # LLM Judge Calibration Study
 
-Status: future method plan
+Status: activated method plan (milestone 5)
 Origin: operator direction to make evaluation automatable before any lab loop is automated
-Current state: not active lab, not protocol, not architecture, not current milestone, not export evidence, not graduation
-Candidate future lab: `labs/llm_judge_calibration/`
+Current state: activated by operator decision as `labs/llm_judge_calibration/`; current study status is owned by that lab's `PLANNING/` and `EXPORTS/` directories, not by this plan
 
-This document preserves a future V3 methodology plan. It is not current portfolio authority and does not change the active portfolio work.
+This document preserves the methodology plan as designed. The active lab owns current execution state; this plan is not portfolio authority.
 
 Related plan: [autonomous-lab-loop](autonomous-lab-loop.md). That plan's activation is explicitly gated on this study's results.
 

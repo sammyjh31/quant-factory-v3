@@ -600,7 +600,12 @@ def test_recorded_prompt_and_config_hashes_match_planning_files():
         prompt_template = planning_dir / f"prompt_template.live_pilot_{number}.md"
         assert recorded_prompt_hash.group(1) == sha256_file(prompt_template)
         assert payload["prompt_template_sha256"] == recorded_prompt_hash.group(1)
-        assert "{{APPROVED_SOURCE_TEXT}}" in prompt_template.read_text()
+        template_text = prompt_template.read_text()
+        # canonical source-text placeholder: plain or line-numbered variant
+        assert (
+            "{{APPROVED_SOURCE_TEXT}}" in template_text
+            or "{{NUMBERED_SOURCE_TEXT}}" in template_text
+        )
 
         recorded_config_hash = re.search(r"Config SHA-256: `([0-9a-f]{64})`", update)
         assert recorded_config_hash, (lab_id, number)
@@ -771,7 +776,7 @@ def test_currentness_docs_share_one_phase_and_route_to_existing_files():
     portfolio = (ROOT / "PORTFOLIO_CURRENT.md").read_text()
     phase_match = re.search(r"Current phase: `([a-z0-9-]+)`", portfolio)
     assert phase_match, "PORTFOLIO_CURRENT must declare the current phase"
-    assert phase_match.group(1) == "milestone-4-first-graduation-recorded"
+    assert phase_match.group(1) == "milestone-5-evaluation-calibration"
     phase_line = phase_match.group(0)
 
     for name in ["README.md", "LAB_REGISTRY.md", "GRADUATION_LEDGER.md"]:

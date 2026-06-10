@@ -1,0 +1,18 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "EvaluationRecord",
+  "evaluation": {
+    "evaluation_id": "llm_judge_calibration_live_pilot_001_eval",
+    "lab_id": "llm_judge_calibration",
+    "target_id": "llm_judge_calibration_live_pilot_001_artifact",
+    "target_type": "artifact",
+    "evaluator_id": "manual_boundary_review_live_pilot_001",
+    "evaluator_type": "manual_boundary_review",
+    "benchmark_pack_id": "text_judgment_v0",
+    "score": 1.0,
+    "pass_fail": "pass",
+    "failure_tags": [],
+    "comments": "Boundary review only: the admitted 17-trial batch ran exactly the pre-registered trial set with deepseek-v4-pro, thinking enabled, stream and tools disabled, no model substitution, and no mid-batch scope change. The blinding rule held: human evaluation records were never loaded into prompt assembly, the banned-string assertion ran before every call, and the one assertion incident (a false positive on the rubric's own schema key) occurred before any call and was corrected without weakening the rule. Spend (~$0.13 upper bound) stayed far below the $3 cap. Delegation labels were assigned strictly by the pre-registered thresholds; the line-range-subset observation is explicitly labeled post-hoc in the artifact. Judge prompts, outputs, and provider payloads remain in ignored local paths; no raw source text, judge verdict prose, or secrets are committed. Judge verdicts are not EvaluationRecords and do not override human review. The reviewed pilots' method quality was not evaluated by this boundary record."
+  }
+}

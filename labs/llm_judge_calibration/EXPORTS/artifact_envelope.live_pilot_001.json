@@ -1,0 +1,241 @@
+{
+  "protocol_version": "qf-v3-protocol-0.1",
+  "schema_version": "0.1.2",
+  "schema_name": "ArtifactEnvelope",
+  "artifact": {
+    "artifact_id": "llm_judge_calibration_live_pilot_001_artifact",
+    "artifact_type": "judge_agreement_delegation_map_proposal",
+    "lab_id": "llm_judge_calibration",
+    "method_id": "llm_judge_calibration_live_pilot_001_method",
+    "run_id": "llm_judge_calibration_live_pilot_001_run",
+    "source_refs": [
+      "raw_corpora_sha256:9f9e143429f5842a",
+      "raw_corpora_sha256:1d5e041e35b40b84"
+    ],
+    "posture": {
+      "grounding_status": "none",
+      "review_status": "self_checked",
+      "readiness_status": "study_candidate",
+      "validation_status": "none",
+      "lifecycle_status": "active"
+    },
+    "blockers": [
+      "proposal_only_not_evaluated",
+      "small_sample_fifteen_ground_truth_records",
+      "judge_and_artifacts_share_model_family",
+      "raw_judge_outputs_local_only"
+    ],
+    "summary": "Completed 17-trial blinded judge-agreement batch against 15 committed human evaluation records, under pre-registered blinding, trial set, metrics, and thresholds. Both review axes landed at assistive: content review 5/8 verdict matches, strict line-range review 5/7, all four negative controls correctly failed or flagged, both self-consistency probes verdict-stable. Post-hoc observation, clearly labeled as outside the pre-registration: on the four GRAD-0001-pattern line-range artifacts the judge matched human verdicts 4/4 with score gaps of at most 0.05 and 17/19 per-candidate support-validity matches; both strict disagreements were legacy span-hint artifacts with no mechanical anchor.",
+    "payload": {
+      "outcome_polarity": "proposal_only",
+      "proposal_only": true,
+      "provider_id": "deepseek_api",
+      "api_format": "openai_compatible_chat_completions",
+      "base_url": "https://api.deepseek.com",
+      "model_id": "deepseek-v4-pro",
+      "requested_model_id": "deepseek-v4-pro",
+      "thinking": {
+        "type": "enabled"
+      },
+      "stream": false,
+      "tool_routing": "none",
+      "prompt_template_path": "labs/llm_judge_calibration/PLANNING/live_llm_pilot_001/prompt_template.live_pilot_001.md",
+      "prompt_template_sha256": "df384c9162574d5a286790a78a2e9d56be58019af609c52f8e76f0a29ade383e",
+      "config_sha256": "8adecc066d879a1f7e45971178f84d33c35d5f52e58a0b3f1c060745a420b8ca",
+      "source_metadata": {
+        "source_scope": "the three previously approved excerpts and eleven pilots' local output traces; no new source material",
+        "raw_source_text_committed": false,
+        "excerpt_sha256": "9f9e143429f5842a9c03c95b1f7705d85fb664cf795c30919a582fa66b16fbb5",
+        "excerpt_word_count": 945,
+        "source_ref": "raw_corpora_sha256:9f9e143429f5842a"
+      },
+      "token_metadata": {
+        "trials_completed": 17,
+        "total_tokens": 127678
+      },
+      "cost_metadata": {
+        "budget_cap_usd": 3.0,
+        "estimated_cost_usd": 0.127678,
+        "estimated_cost_usd_upper_bound": 0.127678,
+        "pricing_basis": "Conservative metadata-safe upper bound of $1 per million total tokens for budget containment; not billing authority."
+      },
+      "blinding_metadata": {
+        "blinding_rule": "judge inputs were numbered source, raw artifact trace, mechanical pre-checks, and rubric only; human records never loaded into prompt assembly; banned-string assertion ran before every call",
+        "blinding_incident": "the initial banned-string list wrongly included the rubric's own pass_fail schema key and aborted before any call; the list was corrected to strings that occur only in human records, and no judge call was made before the fix",
+        "verdict_leakage_detected": false
+      },
+      "agreement_results": {
+        "pre_registered_thresholds_applied": true,
+        "content_review": {
+          "n_trials": 8,
+          "verdict_matches": 5,
+          "score_within_0p15": 4,
+          "mean_score_gap": 0.262,
+          "negative_controls_correctly_failed": true,
+          "self_consistency_verdict_stable": true,
+          "delegation": "assistive"
+        },
+        "strict_line_range_review": {
+          "n_trials": 7,
+          "verdict_matches": 5,
+          "score_within_0p15": 4,
+          "mean_score_gap": 0.296,
+          "negative_controls_correctly_failed": true,
+          "self_consistency_verdict_stable": true,
+          "delegation": "assistive"
+        },
+        "per_candidate_agreement_on_parseable_strict_trials": {
+          "trials": [
+            "CH006",
+            "CH007",
+            "LC002",
+            "LC004"
+          ],
+          "candidates_compared": 19,
+          "support_valid_matches": 17,
+          "strict_label_matches": 13
+        },
+        "post_hoc_observation_not_pre_registered": "On the four line-range-anchored (GRAD-0001-pattern) strict trials the judge matched human verdicts 4/4 with score gaps <= 0.05; both strict disagreements (CH003, CH004) were span-hint artifacts where mechanical extraction was unavailable, and both content disagreements with shared diagnostic tags (CH002 broad_segment_refs) were severity, not perception, differences. A pre-registered follow-up trial set is required before any delegable claim for that subset.",
+        "disagreement_pattern": "the judge is uniformly harsher than the human lineage: every verdict disagreement was judge-fail versus human-pass; truncation handling diverged on LC002 content (human reviewed past the tail truncation, judge scored it 0.0)"
+      },
+      "trial_table": [
+        {
+          "trial": "LC001_content",
+          "human": "pass/0.74",
+          "judge": "fail/0.4",
+          "verdict_match": false
+        },
+        {
+          "trial": "LC002_content",
+          "human": "pass/0.72",
+          "judge": "fail/0.0",
+          "verdict_match": false
+        },
+        {
+          "trial": "LC003_content",
+          "human": "fail/0.0",
+          "judge": "fail/0.0",
+          "verdict_match": true,
+          "negative_control": true
+        },
+        {
+          "trial": "LC004_content",
+          "human": "pass/0.84",
+          "judge": "pass/0.85",
+          "verdict_match": true
+        },
+        {
+          "trial": "CH001_content",
+          "human": "fail/0.2",
+          "judge": "fail/0.0",
+          "verdict_match": true,
+          "negative_control": true
+        },
+        {
+          "trial": "CH002_content",
+          "human": "pass/0.82",
+          "judge": "fail/0.2",
+          "verdict_match": false,
+          "shared_tags": [
+            "broad_segment_refs"
+          ]
+        },
+        {
+          "trial": "CH003_content",
+          "human": "pass/0.88",
+          "judge": "pass/0.95",
+          "verdict_match": true
+        },
+        {
+          "trial": "CH004_content",
+          "human": "pass/0.86",
+          "judge": "pass/1.0",
+          "verdict_match": true
+        },
+        {
+          "trial": "CH003_strict",
+          "human": "pass/0.88",
+          "judge": "fail/0.0",
+          "verdict_match": false,
+          "note": "span-hint artifact, no mechanical anchor"
+        },
+        {
+          "trial": "CH004_strict",
+          "human": "pass/0.82",
+          "judge": "fail/0.0",
+          "verdict_match": false,
+          "note": "span-hint artifact, no mechanical anchor"
+        },
+        {
+          "trial": "CH005_strict",
+          "human": "fail/0.58",
+          "judge": "fail/0.33",
+          "verdict_match": true,
+          "negative_control": true
+        },
+        {
+          "trial": "CH006_strict",
+          "human": "pass/0.88",
+          "judge": "pass/0.9",
+          "verdict_match": true,
+          "per_candidate": "3/3 support-valid match"
+        },
+        {
+          "trial": "CH007_strict",
+          "human": "pass/0.95",
+          "judge": "pass/1.0",
+          "verdict_match": true,
+          "per_candidate": "3/3 support-valid match"
+        },
+        {
+          "trial": "LC002_strict",
+          "human": "fail/0.2",
+          "judge": "fail/0.25",
+          "verdict_match": true,
+          "negative_control": true,
+          "per_candidate": "3/4 support-valid match"
+        },
+        {
+          "trial": "LC004_strict",
+          "human": "pass/0.8",
+          "judge": "pass/0.8",
+          "verdict_match": true,
+          "per_candidate": "8/9 support-valid match"
+        },
+        {
+          "trial": "CH006_strict_dup",
+          "human": "pass/0.88",
+          "judge": "pass/1.0",
+          "verdict_match": true,
+          "self_consistency_probe": true
+        },
+        {
+          "trial": "LC004_content_dup",
+          "human": "pass/0.84",
+          "judge": "pass/0.9",
+          "verdict_match": true,
+          "self_consistency_probe": true
+        }
+      ],
+      "trace_storage_boundary": {
+        "provider_response_traces": "provider_payloads/llm_judge_calibration_live_pilot_001/",
+        "judge_output_traces": "model_traces/llm_judge_calibration_live_pilot_001/",
+        "prompt_traces": "prompt_traces/llm_judge_calibration_live_pilot_001/",
+        "traces_committed": false
+      },
+      "raw_source_text_committed": false,
+      "raw_provider_payload_committed": false,
+      "raw_prompt_trace_committed": false,
+      "raw_model_trace_committed": false,
+      "secrets_committed": false,
+      "failure_or_limitation_notes": [
+        "Fifteen ground-truth records is a small sample; delegation labels are provisional by construction and reported as counts.",
+        "Judge and reviewed artifacts share a model family (DeepSeek V4); shared blind spots cannot be excluded by this study.",
+        "The human ground-truth lineage is operator-directed agent review, not multi-reviewer calibrated review.",
+        "The post-hoc line-range-subset observation is not a pre-registered result and must not be cited as a delegable verdict.",
+        "Judge verdicts are local trial data; they are not EvaluationRecords and never override human review."
+      ],
+      "boundary_disclaimer": "This is a proposal-only live LLM pilot record, not validation, product evidence, strategy evidence, financial advice, live-trading authority, or architecture."
+    }
+  }
+}

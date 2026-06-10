@@ -1,7 +1,7 @@
 # Portfolio Current
 
 Status: portfolio currentness router
-Current phase: `milestone-4-first-graduation-recorded`
+Current phase: `milestone-5-evaluation-calibration`
 Protocol version: `qf-v3-protocol-0.1`
 
 This file owns the current portfolio posture. It routes agents to current evidence surfaces, but it does not own lab results, method success claims, generated synthesis claims, or graduation decisions.
@@ -38,7 +38,11 @@ Active federation labs:
    - Parent question: How can chunked/source-span LLM methods preserve grounding while still supporting useful abstraction?
    - Current state: active live-pilot lab with seven proposal-only live pilots; the locator thread's method lesson graduated as GRAD-0001.
 
-3. `visual_deictic_understanding`
+3. `llm_judge_calibration`
+   - Parent question: Can an LLM judge reproduce operator-lineage review verdicts on existing live-pilot artifacts, and on which review axes?
+   - Current state: active live-pilot lab (milestone 5) with a pre-registered blinded judge-agreement study.
+
+4. `visual_deictic_understanding`
    - Parent question: How can multimodal or vision-language LLM workflows bind transcript/deictic language to visual chart context?
    - Current state: scaffold fixture exports only.
 
@@ -121,11 +125,14 @@ Milestone 4 is complete: the milestone-4 evidence thread (long-context pilots 00
 labs/chunked_source_grounding/PLANNING/comparisons/live_pilot_method_comparison_001.md
 ```
 
-Candidate next directions, in recorded priority order, all requiring operator selection:
+Milestone 5 (evaluation calibration, operator-selected) has run its first batch: the `llm_judge_calibration` lab completed the pre-registered 17-trial blinded judge-agreement study. Both review axes landed at `assistive` under the pre-registered thresholds, with zero sycophancy on four negative controls and stable self-consistency. Details are owned by `labs/llm_judge_calibration/EXPORTS/`.
 
-1. Cross-model-family repeat of line-range-first — the explicit limitation recorded in ADR 0003 and the highest-value robustness check on GRAD-0001.
-2. The LLM-judge calibration study (`docs/research-plans/llm-judge-calibration-study.md`) — the ground-truth inventory has grown to fifteen human evaluation records, and calibration gates the autonomous-lab-loop plan.
-3. A downstream-usefulness experiment — the first "useful for what?" question now that locator trust exists.
-4. The recursive contextual meaning loop plan, which can now build on graduated locator discipline.
+Open items, in recorded priority order:
 
-Future method plans for LLM-judge calibration and an autonomous lab loop are recorded under `docs/research-plans/`. They are future plans only, not active labs, and do not change current portfolio work.
+1. Operator usefulness review — the paired downstream experiment awaits the operator's answers at `labs/long_context_judgment/PLANNING/usefulness_review_001/operator_review_form.md`; those answers become the portfolio's first downstream-usefulness ground truth.
+2. A pre-registered follow-up judge trial set restricted to GRAD-0001-pattern artifacts — the first batch's post-hoc observation (4/4 verdict match, score gaps <= 0.05 on line-range-anchored trials) needs its own pre-registration before any delegable claim.
+3. Rubric policy fixes surfaced by the study: encode truncation-handling policy explicitly so judge and human apply the same rule.
+4. Cross-model-family repeat of line-range-first — the explicit limitation recorded in ADR 0003 (blocked on a second provider key or a local model).
+5. The recursive contextual meaning loop plan, building on graduated locator discipline.
+
+The autonomous-lab-loop plan under `docs/research-plans/` remains a future plan gated on calibration results; `assistive` does not satisfy its L2 entry requirement.

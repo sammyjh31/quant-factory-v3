@@ -1,0 +1,178 @@
+[
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "MethodCard",
+    "schema_version": "0.1.2",
+    "method_card": {
+      "method_id": "llm_judge_calibration_method_v0",
+      "lab_id": "llm_judge_calibration",
+      "parent_question": "Can an LLM judge reproduce operator-lineage review verdicts on existing live-pilot artifacts, and on which review axes?",
+      "method_family": "blinded_llm_judge_agreement_fixture",
+      "intended_inputs": ["blinded artifact trace placeholder", "approved source excerpt placeholder", "pre-registered rubric placeholder"],
+      "intended_outputs": ["judge_agreement_delegation_map_proposal", "per-axis agreement table placeholder"],
+      "known_risks": ["verdict leakage", "sycophantic agreement", "small-sample overconfidence"],
+      "non_goals": ["review authority", "new protocol evaluator type", "autonomous-loop activation", "product authority"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ExperimentCard",
+    "schema_version": "0.1.2",
+    "experiment_card": {
+      "experiment_id": "llm_judge_calibration_experiment_v0",
+      "lab_id": "llm_judge_calibration",
+      "research_question": "Can a blinded judge fixture record represent agreement-study output shapes for both agreement and disagreement outcomes?",
+      "hypothesis": "Agreement-study records can be represented with existing protocol objects without a judge evaluator type.",
+      "benchmark_pack_ids": ["text_judgment_v0"],
+      "method_ids": ["llm_judge_calibration_method_v0"],
+      "evaluation_plan": "Fixture assertion records positive (judge agrees with human ground truth) and negative (judge sycophancy detected) shapes.",
+      "expected_artifact_types": ["judge_agreement_delegation_map_proposal"]
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.2",
+    "run_record": {
+      "run_id": "llm_judge_calibration_run_positive",
+      "lab_id": "llm_judge_calibration",
+      "experiment_id": "llm_judge_calibration_experiment_v0",
+      "method_id": "llm_judge_calibration_method_v0",
+      "benchmark_pack_id": "text_judgment_v0",
+      "source_refs": ["source_judge_calibration_placeholder"],
+      "artifact_ids": ["llm_judge_calibration_artifact_positive"],
+      "evaluation_ids": ["llm_judge_calibration_eval_positive"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "positive_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "RunRecord",
+    "schema_version": "0.1.2",
+    "run_record": {
+      "run_id": "llm_judge_calibration_run_negative",
+      "lab_id": "llm_judge_calibration",
+      "experiment_id": "llm_judge_calibration_experiment_v0",
+      "method_id": "llm_judge_calibration_method_v0",
+      "benchmark_pack_id": "text_judgment_v0",
+      "source_refs": ["source_judge_calibration_placeholder"],
+      "artifact_ids": ["llm_judge_calibration_artifact_negative"],
+      "evaluation_ids": ["llm_judge_calibration_eval_negative"],
+      "run_kind": "scaffold_fixture",
+      "outcome_polarity": "negative_fixture",
+      "status": "fixture_recorded"
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.2",
+    "artifact": {
+      "artifact_id": "llm_judge_calibration_artifact_positive",
+      "artifact_type": "judge_agreement_delegation_map_proposal",
+      "lab_id": "llm_judge_calibration",
+      "method_id": "llm_judge_calibration_method_v0",
+      "run_id": "llm_judge_calibration_run_positive",
+      "source_refs": ["source_judge_calibration_placeholder"],
+      "posture": {
+        "grounding_status": "none",
+        "review_status": "self_checked",
+        "readiness_status": "unknown",
+        "validation_status": "none",
+        "lifecycle_status": "active"
+      },
+      "blockers": ["fixture_only_not_evidence"],
+      "summary": "Positive fixture shape: a delegation-map proposal in which judge verdicts matched human ground truth within pre-registered thresholds.",
+      "payload": {
+        "outcome_polarity": "positive_fixture",
+        "proposal_only": true,
+        "delegation_map_placeholder": {"strict_line_range_review": "delegable_placeholder"},
+        "raw_source_text_committed": false
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ArtifactEnvelope",
+    "schema_version": "0.1.2",
+    "artifact": {
+      "artifact_id": "llm_judge_calibration_artifact_negative",
+      "artifact_type": "judge_agreement_delegation_map_proposal",
+      "lab_id": "llm_judge_calibration",
+      "method_id": "llm_judge_calibration_method_v0",
+      "run_id": "llm_judge_calibration_run_negative",
+      "source_refs": ["source_judge_calibration_placeholder"],
+      "posture": {
+        "grounding_status": "none",
+        "review_status": "self_checked",
+        "readiness_status": "unknown",
+        "validation_status": "none",
+        "lifecycle_status": "active"
+      },
+      "blockers": ["fixture_only_not_evidence"],
+      "summary": "Negative fixture shape: a delegation-map proposal in which the judge passed a known-negative control, disqualifying the axis from delegation.",
+      "payload": {
+        "outcome_polarity": "negative_fixture",
+        "proposal_only": true,
+        "delegation_map_placeholder": {"content_review": "not_delegable_placeholder_sycophancy"},
+        "raw_source_text_committed": false
+      }
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.2",
+    "evaluation": {
+      "evaluation_id": "llm_judge_calibration_eval_positive",
+      "lab_id": "llm_judge_calibration",
+      "target_id": "llm_judge_calibration_artifact_positive",
+      "target_type": "artifact",
+      "evaluator_id": "fixture_assertion_judge_calibration",
+      "evaluator_type": "fixture_assertion",
+      "benchmark_pack_id": "text_judgment_v0",
+      "score": 1.0,
+      "pass_fail": "pass",
+      "failure_tags": [],
+      "comments": "Fixture assertion only: the positive delegation-map shape validates against protocol schemas. Not evidence."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "EvaluationRecord",
+    "schema_version": "0.1.2",
+    "evaluation": {
+      "evaluation_id": "llm_judge_calibration_eval_negative",
+      "lab_id": "llm_judge_calibration",
+      "target_id": "llm_judge_calibration_artifact_negative",
+      "target_type": "artifact",
+      "evaluator_id": "fixture_assertion_judge_calibration",
+      "evaluator_type": "fixture_assertion",
+      "benchmark_pack_id": "text_judgment_v0",
+      "score": 0.0,
+      "pass_fail": "fail",
+      "failure_tags": ["sycophantic_agreement_fixture"],
+      "comments": "Fixture assertion only: the negative sycophancy shape validates against protocol schemas. Not evidence."
+    }
+  },
+  {
+    "protocol_version": "qf-v3-protocol-0.1",
+    "schema_name": "ResearchNote",
+    "schema_version": "0.1.2",
+    "research_note": {
+      "note_id": "llm_judge_calibration_fixture_note",
+      "lab_id": "llm_judge_calibration",
+      "experiment_ids": ["llm_judge_calibration_experiment_v0"],
+      "benchmark_pack_ids": ["text_judgment_v0"],
+      "summary": "Fixture records prove that judge-agreement study outputs fit existing protocol objects without a new evaluator type. They are schema fixtures only, not evidence.",
+      "what_worked": ["Delegation-map shapes fit ArtifactEnvelope payload."],
+      "what_failed": ["Nothing; fixtures assert shape only."],
+      "negative_results": ["None; fixtures are not runs."],
+      "reusable_by_other_labs": ["Agreement studies can commit metadata-safe delegation maps without protocol changes."],
+      "do_not_repeat": ["Do not cite fixture records as evidence that any judge is calibrated."],
+      "evidence_disclaimer": "This is a scaffold fixture for protocol validation, not real research evidence."
+    }
+  }
+]
